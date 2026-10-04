@@ -1,4 +1,105 @@
 {
   "note": "ORIGINAL quatrains only. Never X posts, quote-posts or reposts. Add only after Chris approves. Schema in docs/PROPHECY-STYLE.md.",
-  "prophecies": []
+  "prophecies": [
+    {
+      "century": 1,
+      "number": 1,
+      "date": "2026-10-04",
+      "title": "The Yield Ascends",
+      "lines": [
+        "The ten-year scroll shall climb to heights unseen",
+        "Since two thousand two, when flip phones still were keen.",
+        "The wise shall flee to bonds, the bold to stocks.",
+        "And I shall hide my coins inside my socks."
+      ],
+      "about": "The 10-year Treasury yield hit its highest level since 2002 (5.25% on 9/29)",
+      "verdict": "hindsight"
+    },
+    {
+      "century": 1,
+      "number": 2,
+      "date": "2026-10-04",
+      "title": "Few Shall Be Hired",
+      "lines": [
+        "In autumn's month, few toilers shall be hired,",
+        "Yet merchants cheer as if their luck conspired.",
+        "Bad tidings make the market dance with glee.",
+        "I read the omens. None were meant for me."
+      ],
+      "about": "Only 29,000 jobs were added in September and stocks rose anyway",
+      "verdict": "hindsight"
+    },
+    {
+      "century": 1,
+      "number": 3,
+      "date": "2026-10-04",
+      "title": "The Black Blood",
+      "lines": [
+        "The black blood of the earth shall cross one hundred,",
+        "And every chariot's purse shall be well plundered.",
+        "I sold my horse to buy a modern car.",
+        "I should have kept the horse. It went as far."
+      ],
+      "about": "Oil briefly topped $100 a barrel this week",
+      "verdict": "hindsight"
+    },
+    {
+      "century": 1,
+      "number": 4,
+      "date": "2026-10-04",
+      "title": "The Forge That Eats Itself",
+      "lines": [
+        "The green forge that makes the thinking stones",
+        "Shall spend its gold to buy its very bones.",
+        "A snake that feeds upon its tail grows fat.",
+        "I tried this with my lunch. I do not recommend that."
+      ],
+      "about": "A chipmaker announced a $150 billion buyback of its own stock",
+      "verdict": "hindsight"
+    },
+    {
+      "century": 1,
+      "number": 5,
+      "date": "2026-10-04",
+      "title": "The Eagle's Scribes",
+      "lines": [
+        "On Wednesday next the Eagle's scribes shall speak,",
+        "And traders hang on every word they leak.",
+        "The market shall go up, then down, then wander.",
+        "This prophecy is final. I will ponder."
+      ],
+      "about": "The Fed releases its meeting minutes on Wednesday 10/7",
+      "verdict": "pending",
+      "resolves": "2026-10-07"
+    },
+    {
+      "century": 1,
+      "number": 6,
+      "date": "2026-10-04",
+      "title": "The Coin of Air",
+      "lines": [
+        "The coin of air shall rise with the harvest moon,",
+        "And men shall sing its praises far too soon.",
+        "I bought one sliver at the very peak.",
+        "It was a Tuesday. It has been a week."
+      ],
+      "about": "Bitcoin after a strong quarter",
+      "verdict": "pending",
+      "resolves": "2026-10-31"
+    },
+    {
+      "century": 1,
+      "number": 7,
+      "date": "2026-10-04",
+      "title": "The People's Gloom",
+      "lines": [
+        "The people's cheer shall sink to twelve-year lows,",
+        "And gloom shall follow everywhere coin goes.",
+        "Yet still they'll pay five coins for frothy bean.",
+        "I saw all this. I also bought a latte. Twice."
+      ],
+      "about": "Consumer confidence fell to its lowest level since 2014",
+      "verdict": "hindsight"
+    }
+  ]
 }
