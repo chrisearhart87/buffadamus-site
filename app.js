@@ -66,10 +66,15 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const arch = $('#prophecies'), teaser = $('#prophecy-teaser');
   if (arch || teaser) loadJSON('data/prophecies.json').then(data => {
-    const items = (data && data.prophecies || []).slice().sort((a, b) => b.n - a.n);
-    const card = p => `<article class="card prophecy"><span class="num">${roman(p.n)}</span>
-      <blockquote>${esc(p.text).replace(/ \/ /g, '<br>')}</blockquote>
-      <div class="meta">${new Date(p.date + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}${p.context ? ' · ' + esc(p.context) : ''}${p.url ? ` · <a href="${p.url}">View on X</a>` : ''}</div></article>`;
+    // Original quatrains only (never X posts or reposts). Schema: see docs/PROPHECY-STYLE.md
+    const items = (data && data.prophecies || []).slice().sort((a, b) => (b.century - a.century) || (b.number - a.number));
+    const verdicts = { pending: 'Pending', fulfilled: 'Fulfilled', muffed: 'Muffed it', hindsight: 'Prophesied after the fact' };
+    const fmtDate = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+    const card = p => `<article class="card prophecy"><span class="num">${roman(p.century)}.${p.number}</span>
+      ${p.title ? `<h3 style="margin-bottom:10px">${esc(p.title)}</h3>` : ''}
+      <blockquote>${(p.lines || []).map(esc).join('<br>')}</blockquote>
+      <div class="meta"><span class="verdict v-${esc(p.verdict || 'pending')}">${verdicts[p.verdict] || 'Pending'}</span>
+        Prophesied ${fmtDate(p.date)}${p.resolves ? ` · Judged ${fmtDate(p.resolves)}` : ''}${p.about ? ` · ${esc(p.about)}` : ''}${p.verdict_note ? `<br><em>${esc(p.verdict_note)}</em>` : ''}</div></article>`;
     if (arch) arch.innerHTML = items.length ? items.map(card).join('') : '<p class="empty">The scrolls are blank. For now.</p>';
     if (teaser) teaser.innerHTML = items.slice(0, 3).map(card).join('') || '<p class="empty">The first prophecies are being inked.</p>';
   });

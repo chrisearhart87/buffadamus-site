@@ -1,6 +1,4 @@
 {
-  "note": "One entry per approved, posted Buffadamus post. n = sequential number. Add only after the post is live.",
-  "prophecies": [
-    {"n": 1, "date": "2026-10-04", "text": "Inflation. They couldn't afford the colors anymore.", "context": "On McDonald's going from colorful to gray", "url": "https://x.com/Buffadamus/status/2106654020018532577"}
-  ]
+  "note": "ORIGINAL quatrains only. Never X posts, quote-posts or reposts. Add only after Chris approves. Schema in docs/PROPHECY-STYLE.md.",
+  "prophecies": []
 }
