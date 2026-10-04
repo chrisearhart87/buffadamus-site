@@ -89,7 +89,7 @@ table.log td{padding:12px 8px;border-bottom:1px solid var(--line);vertical-align
 .prophecy blockquote{margin:0 0 8px;font-size:21px;font-style:italic}
 .prophecy .meta{font-size:15px;color:var(--muted)}
 .verdict{display:inline-block;font-family:var(--display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border-radius:6px;margin-right:8px;border:1px solid currentColor;transform:rotate(-2deg)}
-.v-pending{color:var(--gold)}.v-fulfilled{color:#7fb46f}.v-muffed{color:#d0644a}.v-hindsight{color:#9fb3c8}
+.v-pending{color:var(--gold)}.v-fulfilled{color:#7fb46f}.v-muffed{color:#d0644a}
 
 /* merch */
 .merch .art{aspect-ratio:1/1;border-radius:12px;background:radial-gradient(circle at 50% 40%,#2a2019,#120d0a);display:flex;align-items:center;justify-content:center;font-size:84px;margin-bottom:14px;border:1px solid var(--line)}

@@ -68,7 +68,7 @@
   if (arch || teaser) loadJSON('data/prophecies.json').then(data => {
     // Original quatrains only (never X posts or reposts). Schema: see docs/PROPHECY-STYLE.md
     const items = (data && data.prophecies || []).slice().sort((a, b) => (b.century - a.century) || (b.number - a.number));
-    const verdicts = { pending: 'Pending', fulfilled: 'Fulfilled', muffed: 'Muffed it', hindsight: 'Prophesied after the fact' };
+    const verdicts = { pending: 'Pending', fulfilled: 'Fulfilled', muffed: 'Muffed it'};
     const fmtDate = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     const card = p => `<article class="card prophecy"><span class="num">${roman(p.century)}.${p.number}</span>
       ${p.title ? `<h3 style="margin-bottom:10px">${esc(p.title)}</h3>` : ''}
