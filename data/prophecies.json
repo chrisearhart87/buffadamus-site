@@ -30,6 +30,21 @@
       "about": "Bitcoin after a strong quarter",
       "verdict": "pending",
       "resolves": "2026-10-31"
+    },
+    {
+      "century": 1,
+      "number": 3,
+      "date": "2026-10-04",
+      "title": "The Legion of the Thinking Stone",
+      "lines": [
+        "A legion forms to guard the thinking stone,",
+        "And only clever minds may claim a throne.",
+        "When fourscore days and forty more are done,",
+        "Their scroll shall say: \"We need another one.\""
+      ],
+      "about": "The Super Intelligence Force's report is due in 120 days; the prophecy says it will call for more study",
+      "verdict": "pending",
+      "resolves": "2027-01-31"
     }
   ]
 }
