@@ -46,8 +46,8 @@ h3{font-family:var(--display);color:var(--gold);letter-spacing:.05em;font-size:2
 .quatrain{font-size:clamp(21px,3vw,26px);font-style:italic;line-height:1.6;margin:0 auto;max-width:620px;padding:28px 30px;background:linear-gradient(180deg,rgba(239,228,200,.06),rgba(239,228,200,.02));border:1px solid var(--line);border-radius:var(--radius);text-align:center}
 
 /* socials */
-.socials{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin-top:26px}
-.socials a{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 10px;border:1px solid var(--gold2);border-radius:12px;color:var(--parch);text-decoration:none;font-family:var(--display);font-weight:600;letter-spacing:.05em;font-size:15px;transition:background .15s,color .15s,transform .15s}
+.socials{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:26px auto 0;max-width:760px}
+.socials a{flex:0 1 170px;min-width:140px;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 10px;border:1px solid var(--gold2);border-radius:12px;color:var(--parch);text-decoration:none;font-family:var(--display);font-weight:600;letter-spacing:.05em;font-size:15px;transition:background .15s,color .15s,transform .15s}
 .socials a:hover{background:var(--gold);color:var(--velvet);transform:translateY(-2px)}
 .socials a.primary{background:var(--gold);color:var(--velvet)}
 
@@ -84,9 +84,10 @@ table.log td{padding:12px 8px;border-bottom:1px solid var(--line);vertical-align
 .share{font-size:15px}
 
 /* prophecies */
-.prophecy{position:relative;padding-left:72px}
-.prophecy .num{position:absolute;left:20px;top:22px;font-family:var(--display);font-weight:800;color:var(--gold);font-size:22px}
-.prophecy blockquote{margin:0 0 8px;font-size:21px;font-style:italic}
+.prophecy{position:relative;text-align:center;padding:28px 26px;width:100%;max-width:680px;margin:0 auto}
+.prophecy .num{display:block;font-family:var(--display);font-weight:800;color:var(--gold);font-size:22px;margin-bottom:6px}
+.prophecy blockquote{margin:0 0 12px;font-size:21px;font-style:italic;line-height:1.6}
+.prophecy-stack{display:grid;gap:18px;justify-items:center}
 .prophecy .meta{font-size:15px;color:var(--muted)}
 .verdict{display:inline-block;font-family:var(--display);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:3px 8px;border-radius:6px;margin-right:8px;border:1px solid currentColor;transform:rotate(-2deg)}
 .v-pending{color:var(--gold)}.v-fulfilled{color:#7fb46f}.v-muffed{color:#d0644a}
@@ -110,7 +111,7 @@ footer .fine{max-width:640px;margin:10px auto 0}
   .quatrain{font-size:17px;padding:20px 12px;line-height:1.7}
   .hero{min-height:78vh}
   .topnav .brand span{display:none}
-  .prophecy{padding-left:24px;padding-top:52px}
-  .prophecy .num{left:24px;top:18px}
+  .prophecy{padding:22px 16px}
+  .socials a{flex:1 1 140px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
