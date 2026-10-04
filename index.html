@@ -4,9 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Buffadamus - I see the future, then completely muff it</title>
-<meta name="description" content="Half Nostradamus, half Warren Buffett. Predicts the market's biggest dips, then buys crypto based on doggie tips. Parody. Not financial advice.">
+<meta name="description" content="Half Nostradamus, half Warren Buffett. Predicts the market's biggest dips, then buys crypto based on doggie tips. Home of the Hotdog Index. Parody. Not financial advice.">
+<meta name="theme-color" content="#0f0b09">
+<meta property="og:type" content="website">
 <meta property="og:title" content="Buffadamus">
-<meta property="og:description" content="I predict the market's biggest dips, then buy crypto based on doggie tips.">
+<meta property="og:description" content="I see the future - then completely muff it. Home of the Hotdog Index.">
 <meta property="og:image" content="https://buffadamus.com/og.jpg">
 <meta property="og:url" content="https://buffadamus.com/">
 <meta name="twitter:card" content="summary_large_image">
@@ -14,61 +16,136 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<style>
-:root{--ink:#2b2118;--gold:#c9a24b;--parch:#efe4c8;--velvet:#120e0c;--muted:#b9ab8c}
-*{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at top,#2a1f17 0%,var(--velvet) 60%);color:var(--parch);font-family:"EB Garamond",Georgia,serif;font-size:20px;line-height:1.5;min-height:100vh}
-main{max-width:720px;margin:0 auto;padding:48px 20px 32px;text-align:center}
-.avatar{width:180px;height:180px;border-radius:50%;border:4px solid var(--gold);box-shadow:0 8px 40px rgba(0,0,0,.6);object-fit:cover}
-h1{font-family:Cinzel,Georgia,serif;font-weight:800;color:var(--gold);letter-spacing:.08em;font-size:clamp(36px,8vw,56px);margin:20px 0 4px}
-.loc{color:var(--muted);font-style:italic;margin:0 0 24px}
-.quatrain{font-size:22px;font-style:italic;margin:0 auto 32px;padding:20px 24px;border-top:1px solid #4a3a2a;border-bottom:1px solid #4a3a2a;max-width:520px}
-.links{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 40px}
-.links a{display:block;padding:12px 10px;border:1px solid var(--gold);border-radius:10px;color:var(--parch);text-decoration:none;font-family:Cinzel,Georgia,serif;font-weight:600;letter-spacing:.04em;font-size:16px;transition:background .15s,color .15s}
-.links a:hover,.links a:focus{background:var(--gold);color:var(--velvet)}
-h2{font-family:Cinzel,Georgia,serif;color:var(--gold);font-size:24px;letter-spacing:.06em;margin:40px 0 8px}
-.hotdog{background:var(--parch);color:var(--ink);border-radius:12px;padding:20px 24px;margin:0 auto;max-width:560px}
-.hotdog b{font-family:Cinzel,Georgia,serif}
-.feed{margin:16px auto 0;max-width:560px;text-align:left}
-footer{color:var(--muted);font-size:15px;max-width:600px;margin:48px auto 0;padding:24px 20px 40px;border-top:1px solid #3a2d22;text-align:center}
-footer a{color:var(--muted)}
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="avatar.jpg" alt=""><span>BUFFADAMUS</span></a>
+    <nav aria-label="Site">
+      <a href="./" aria-current="page">Home</a>
+      <a href="hotdog-index.html">Hotdog Index</a>
+      <a href="prophecies.html">Prophecies</a>
+      <a href="merch.html">Merch</a>
+    </nav>
+  </div>
+</header>
+
 <main>
-  <img class="avatar" src="avatar.jpg" alt="Buffadamus in a black velvet cap and white lace ruff" width="180" height="180">
-  <h1>BUFFADAMUS</h1>
-  <p class="loc">Omaha, Francé 1555</p>
-  <p class="quatrain">I predict the market's biggest dips🐸<br>Then buy crypto based on🌭doggie tips.<br>Half Nostradamus🦋half Warren Buffett,<br>I see the future🍦then completely muff it<br>❤️</p>
+  <section class="hero" aria-label="Buffadamus">
+    <picture>
+      <source media="(max-width: 700px)" srcset="hero-tall.jpg">
+      <img src="hero-wide.jpg" alt="A woven tapestry of a 16th-century seer in a velvet cap holding a hotdog beside a globe, astrolabe and prophecy scroll">
+    </picture>
+    <div class="wrap">
+      <h1>BUFFADAMUS</h1>
+      <p class="tag">Half Nostradamus · Half Warren Buffett</p>
+      <p class="loc">Omaha, Francé 1555</p>
+    </div>
+  </section>
 
-  <nav class="links" aria-label="Buffadamus on social media">
-    <a href="https://x.com/Buffadamus">X</a>
-    <a href="https://www.instagram.com/buffadamus/">Instagram</a>
-    <a href="https://www.threads.com/@buffadamus">Threads</a>
-    <a href="https://www.youtube.com/@buffadamus">YouTube</a>
-    <a href="https://www.reddit.com/user/buffadamus/">Reddit</a>
-    <a href="https://www.pinterest.com/buffadamus/">Pinterest</a>
-    <a href="https://www.twitch.tv/buffadamus">Twitch</a>
-    <a href="https://linktr.ee/buffadamus">Linktree</a>
-  </nav>
+  <section class="center" style="padding-top:20px">
+    <div class="wrap">
+      <img class="medallion" src="avatar.jpg" alt="Buffadamus in a black velvet cap and white lace ruff" width="132" height="132">
+      <p class="quatrain">I predict the market's biggest dips🐸<br>Then buy crypto based on🌭doggie tips.<br>Half Nostradamus🦋half Warren Buffett,<br>I see the future🍦then completely muff it<br>❤️</p>
+      <nav class="socials" aria-label="Buffadamus on social media">
+        <a class="primary" href="https://x.com/Buffadamus">Follow on X</a>
+        <a href="https://www.instagram.com/buffadamus/">Instagram</a>
+        <a href="https://www.threads.com/@buffadamus">Threads</a>
+        <a href="https://www.youtube.com/@Buffadamus">YouTube</a>
+        <a href="https://www.reddit.com/user/buffadamus/">Reddit</a>
+        <a href="https://www.twitch.tv/buffadamus">Twitch</a>
+        <a href="https://www.pinterest.com/buffadamus/">Pinterest</a>
+        <a href="https://linktr.ee/buffadamus">Linktree</a>
+      </nav>
+    </div>
+  </section>
 
-  <h2>The Hotdog Index</h2>
-  <div class="hotdog">
-    <p>The only market indicator that matters.</p>
-    <p><b>Stock market up 4%?</b> That's 4% more hotdogs.<br><b>Stock market down 10%?</b> That's 10% less hotdogs.</p>
-    <p>Posted every market day on X.</p>
-  </div>
+  <div class="divider" aria-hidden="true"></div>
 
-  <h2>Latest Prophecies</h2>
-  <div class="feed">
-    <a class="twitter-timeline" data-theme="dark" data-height="700" data-chrome="noheader nofooter transparent" href="https://twitter.com/Buffadamus">Prophecies by @Buffadamus</a>
-  </div>
+  <section id="hotdog">
+    <div class="wrap grid2">
+      <div>
+        <p class="kicker">The only indicator that matters</p>
+        <h2>The Hotdog Index</h2>
+        <p>Forget the S&amp;P. Forget the Fed. Every market day, Buffadamus converts the stock market into the one unit everyone understands.</p>
+        <p><b>Market up 4%?</b> That's 4% more hotdogs.<br><b>Market down 10%?</b> That's 10% less hotdogs.</p>
+        <p><a class="btn ghost" href="hotdog-index.html">See the full history</a></p>
+      </div>
+      <div class="card parch">
+        <h3>Latest reading</h3>
+        <div id="hd-latest"><p class="muted">Consulting the grill...</p></div>
+        <hr style="border:none;border-top:1px solid #cdbb93;margin:18px 0">
+        <p class="muted" style="margin:0 0 4px;font-size:15px">Next reading in</p>
+        <div class="countdown" id="countdown" aria-live="off">--</div>
+        <p class="muted" style="margin:4px 0 0;font-size:15px" id="countdown-when"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="oracle" style="background:linear-gradient(180deg,transparent,rgba(29,51,70,.25),transparent)">
+    <div class="wrap">
+      <div class="card parch oracle" style="max-width:720px;margin:0 auto">
+        <div>
+          <p class="kicker" style="color:#8a6a28">Free prophecy. Worth every penny.</p>
+          <h2 style="margin-bottom:6px">Ask the Oracle</h2>
+          <p class="muted" style="margin:0">Type any question. Buffadamus will consult the stars, the hotdog and his dog.</p>
+        </div>
+        <form id="oracle-form">
+          <label class="sr" for="oracle-q">Your question</label>
+          <input id="oracle-q" maxlength="120" placeholder="Should I buy the dip?" autocomplete="off">
+          <button class="btn" type="submit">Consult</button>
+        </form>
+        <p class="answer" id="oracle-answer" aria-live="polite"></p>
+        <a class="share" id="oracle-share" href="#" target="_blank" rel="noopener" hidden>Share this prophecy on X</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="latest">
+    <div class="wrap">
+      <div class="center">
+        <p class="kicker">From the scrolls</p>
+        <h2>Recent Prophecies</h2>
+      </div>
+      <div id="prophecy-teaser" class="grid2" style="margin-top:20px"></div>
+      <p class="center" style="margin-top:22px"><a class="btn ghost" href="prophecies.html">The full archive</a></p>
+    </div>
+  </section>
+
+  <section id="feed">
+    <div class="wrap">
+      <div class="center"><p class="kicker">Live from X</p><h2>The Latest</h2></div>
+      <div class="feed">
+        <a class="twitter-timeline" data-theme="dark" data-height="640" data-chrome="noheader nofooter transparent" href="https://twitter.com/Buffadamus">Prophecies by @Buffadamus</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="merch-teaser">
+    <div class="wrap">
+      <div class="card" style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between">
+        <div style="flex:1 1 320px">
+          <span class="soon">Coming soon</span>
+          <h2 style="margin-bottom:6px">Wear the prophecy</h2>
+          <p class="lede" style="margin:0">Hotdog Index tees, "I foresaw this" mugs and a ruff for every occasion. Nothing is for sale yet. Get on the list and be first.</p>
+        </div>
+        <a class="btn" href="merch.html">Get notified</a>
+      </div>
+    </div>
+  </section>
 </main>
+
 <footer>
-  Buffadamus is a parody character. He is not Warren Buffett, not Nostradamus, and not affiliated with either. Nothing on this site or his accounts is financial advice. He is usually wrong. That is the point.<br><br>
-  <a href="mailto:hello@buffadamus.com">hello@buffadamus.com</a>
+  <div class="wrap">
+    <a href="mailto:hello@buffadamus.com">hello@buffadamus.com</a> · <a href="https://x.com/Buffadamus">@Buffadamus</a>
+    <p class="fine">Buffadamus is a parody character. He is not Warren Buffett, not Nostradamus, and not affiliated with either. Nothing on this site or his accounts is financial advice. He is usually wrong. That is the point.</p>
+    <p class="fine">© <span id="year">2026</span> Buffadamus</p>
+  </div>
 </footer>
+<script src="app.js" defer></script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>
 </html>

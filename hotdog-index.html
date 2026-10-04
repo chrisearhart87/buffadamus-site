@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Hotdog Index - Buffadamus</title>
+<meta name="description" content="The Hotdog Index: every market day, the stock market converted into hotdogs. Parody. Not financial advice.">
+<meta name="theme-color" content="#0f0b09">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Hotdog Index - Buffadamus">
+<meta property="og:description" content="I see the future - then completely muff it. Home of the Hotdog Index.">
+<meta property="og:image" content="https://buffadamus.com/og.jpg">
+<meta property="og:url" content="https://buffadamus.com/hotdog-index.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@Buffadamus">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="avatar.jpg" alt=""><span>BUFFADAMUS</span></a>
+    <nav aria-label="Site">
+      <a href="./">Home</a>
+      <a href="hotdog-index.html" aria-current="page">Hotdog Index</a>
+      <a href="prophecies.html">Prophecies</a>
+      <a href="merch.html">Merch</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="wrap">
+      <p class="kicker">Est. 2026 · Updated every market day</p>
+      <h1 style="font-size:clamp(38px,7vw,64px);text-align:left">The Hotdog Index</h1>
+      <p class="lede" style="font-size:21px">The Dow measures 30 companies. The S&amp;P measures 500. The Hotdog Index measures the only thing that matters: how many more hotdogs you can afford today than yesterday.</p>
+    </div>
+  </section>
+  <section style="padding-top:0">
+    <div class="wrap grid2">
+      <div class="card parch">
+        <h3>Latest reading</h3>
+        <div id="hd-latest"><p class="muted">Consulting the grill...</p></div>
+      </div>
+      <div class="card">
+        <h3>Next reading in</h3>
+        <div class="countdown" id="countdown">--</div>
+        <p class="lede" style="margin:4px 0 0;font-size:16px" id="countdown-when"></p>
+        <p class="lede" style="font-size:15px;margin-top:14px">Readings post on X after the 1:00 pm PT market close. Market holidays are a day off for the grill too.</p>
+      </div>
+    </div>
+  </section>
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2>The methodology</h2>
+      <div class="grid3">
+        <div class="card"><h3>1. Watch</h3><p class="lede" style="margin:0">Take the S&amp;P 500's close-to-close move for the day.</p></div>
+        <div class="card"><h3>2. Convert</h3><p class="lede" style="margin:0">One percent of stock market equals one percent of hotdogs. Peer review is pending.</p></div>
+        <div class="card"><h3>3. Proclaim</h3><p class="lede" style="margin:0">Announce it to the people. More hotdogs, or less hotdogs. Never fewer. Fewer is not a word Buffadamus knows.</p></div>
+      </div>
+    </div>
+  </section>
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2>History</h2>
+      <div class="card" style="overflow-x:auto">
+        <table class="log">
+          <thead><tr><th>Date</th><th>Move</th><th>Proclamation</th></tr></thead>
+          <tbody id="hd-log"><tr><td colspan="3" class="empty">Loading...</td></tr></tbody>
+        </table>
+      </div>
+      <p class="lede" style="font-size:15px;margin-top:12px">Numbers come from the S&amp;P 500 daily close and are recorded when each post goes live. This is a joke, not a data product. Please do not trade hotdogs.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="mailto:hello@buffadamus.com">hello@buffadamus.com</a> · <a href="https://x.com/Buffadamus">@Buffadamus</a>
+    <p class="fine">Buffadamus is a parody character. He is not Warren Buffett, not Nostradamus, and not affiliated with either. Nothing on this site or his accounts is financial advice. He is usually wrong. That is the point.</p>
+    <p class="fine">© <span id="year">2026</span> Buffadamus</p>
+  </div>
+</footer>
+<script src="app.js" defer></script>
+</body>
+</html>
