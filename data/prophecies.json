@@ -1,50 +1,51 @@
 {
-  "note": "ORIGINAL quatrains about things YET TO COME only (every entry needs a resolves date). Never X posts, reposts, or after-the-fact prophecies. Schema in docs/PROPHECY-STYLE.md.",
-  "prophecies": [
-    {
-      "century": 1,
-      "number": 1,
-      "date": "2026-10-04",
-      "title": "The Eagle's Scribes",
-      "lines": [
-        "On Wednesday next the Eagle's scribes shall speak,",
-        "And traders hang on every word they leak.",
-        "The market shall go up, then down, then wander.",
-        "This prophecy is final. I will ponder."
-      ],
-      "about": "The Fed releases its meeting minutes on Wednesday 10/7",
-      "verdict": "pending",
-      "resolves": "2026-10-07"
-    },
-    {
-      "century": 1,
-      "number": 2,
-      "date": "2026-10-04",
-      "title": "The Coin of Air",
-      "lines": [
-        "The coin of air shall rise with the harvest moon,",
-        "And men shall sing its praises far too soon.",
-        "I bought one sliver at the very peak.",
-        "It was a Tuesday. It has been a week."
-      ],
-      "about": "Bitcoin after a strong quarter",
-      "verdict": "pending",
-      "resolves": "2026-10-31"
-    },
-    {
-      "century": 1,
-      "number": 3,
-      "date": "2026-10-04",
-      "title": "The Legion of the Thinking Stone",
-      "lines": [
-        "A legion forms to guard the thinking stone,",
-        "And only clever minds may claim a throne.",
-        "When fourscore days and forty more are done,",
-        "Their scroll shall say: \"We need another one.\""
-      ],
-      "about": "The Super Intelligence Force's report is due in 120 days; the prophecy says it will call for more study",
-      "verdict": "pending",
-      "resolves": "2027-01-31"
-    }
-  ]
+ "note": "ORIGINAL quatrains about things YET TO COME only (every entry needs a resolves date). Never X posts, reposts, or after-the-fact prophecies. Schema in docs/PROPHECY-STYLE.md.",
+ "prophecies": [
+  {
+   "century": 1,
+   "number": 1,
+   "date": "2026-10-04",
+   "title": "The Eagle's Scribes",
+   "lines": [
+    "On Wednesday next the Eagle's scribes shall speak,",
+    "And traders hang on every word they leak.",
+    "The market shall go up, then down, then wander.",
+    "This prophecy is final. I will ponder."
+   ],
+   "about": "The Fed releases its meeting minutes on Wednesday 10/7",
+   "verdict": "fulfilled",
+   "resolves": "2026-10-07",
+   "verdict_note": "Fulfilled. Before the scribes spoke, the S&P 500 (SPY) sank to 773.61 like a monk who dropped his soup. Soon after they spoke at 11:00 PT it leapt to 779.10. Then it fell, shrugged and wandered home near 777, down 0.25%, about a quarter of a hotdog. Up, down, wander: three for three. Hold your applause. Send mustard."
+  },
+  {
+   "century": 1,
+   "number": 2,
+   "date": "2026-10-04",
+   "title": "The Coin of Air",
+   "lines": [
+    "The coin of air shall rise with the harvest moon,",
+    "And men shall sing its praises far too soon.",
+    "I bought one sliver at the very peak.",
+    "It was a Tuesday. It has been a week."
+   ],
+   "about": "Bitcoin after a strong quarter",
+   "verdict": "pending",
+   "resolves": "2026-10-31"
+  },
+  {
+   "century": 1,
+   "number": 3,
+   "date": "2026-10-04",
+   "title": "The Legion of the Thinking Stone",
+   "lines": [
+    "A legion forms to guard the thinking stone,",
+    "And only clever minds may claim a throne.",
+    "When fourscore days and forty more are done,",
+    "Their scroll shall say: \"We need another one.\""
+   ],
+   "about": "The Super Intelligence Force's report is due in 120 days; the prophecy says it will call for more study",
+   "verdict": "pending",
+   "resolves": "2027-01-31"
+  }
+ ]
 }
