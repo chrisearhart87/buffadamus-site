@@ -2,7 +2,7 @@
 (function () {
   const $ = (s, r = document) => r.querySelector(s);
 
-  // ---------- Next Hotdog Index reading: next weekday 1:00 pm Pacific (US market close) ----------
+  // ---------- Next Croissant Index reading: next weekday 1:00 pm Pacific (US market close) ----------
   function nextCloseUTC(now) {
     // Find "now" in America/Los_Angeles, step to the next weekday 13:00 PT.
     const fmt = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, weekday: 'short' });
@@ -28,10 +28,10 @@
     tick(); setInterval(tick, 1000);
   }
 
-  // ---------- Hotdog Index data ----------
+  // ---------- Croissant Index data ----------
   const phrase = pct => pct >= 0
-    ? `The stock market gained ${Math.abs(pct)}% today. That's ${Math.abs(pct)}% more hotdogs.`
-    : `The stock market lost ${Math.abs(pct)}% today. That's ${Math.abs(pct)}% less hotdogs.`;
+    ? `The stock market gained ${Math.abs(pct)}% today. That's ${Math.abs(pct)}% more croissants.`
+    : `The stock market lost ${Math.abs(pct)}% today. That's ${Math.abs(pct)}% less croissants.`;
 
   async function loadJSON(url) {
     try { const r = await fetch(url, { cache: 'no-store' }); if (!r.ok) throw 0; return await r.json(); }
@@ -39,7 +39,7 @@
   }
 
   const latest = $('#hd-latest'), log = $('#hd-log');
-  if (latest || log) loadJSON('data/hotdog.json').then(data => {
+  if (latest || log) loadJSON('data/croissant.json').then(data => {
     const rows = (data && data.readings || []).slice().sort((a, b) => b.date.localeCompare(a.date));
     if (latest) {
       if (!rows.length) {
@@ -57,7 +57,7 @@
       log.innerHTML = rows.map(r => `<tr>
         <td>${new Date(r.date + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</td>
         <td style="width:45%"><div class="bar ${r.pct < 0 ? 'down' : ''}" style="width:${Math.abs(r.pct) / max * 100}%"></div></td>
-        <td>${r.url ? `<a href="${r.url}">` : ''}${r.pct >= 0 ? '+' : '-'}${Math.abs(r.pct)}% ${r.pct >= 0 ? 'more' : 'less'} hotdogs${r.url ? '</a>' : ''}</td></tr>`).join('');
+        <td>${r.url ? `<a href="${r.url}">` : ''}${r.pct >= 0 ? '+' : '-'}${Math.abs(r.pct)}% ${r.pct >= 0 ? 'more' : 'less'} croissants${r.url ? '</a>' : ''}</td></tr>`).join('');
     }
   });
 
@@ -82,7 +82,7 @@
   // ---------- Ask the Oracle ----------
   const answers = [
     'The signs are clear. Unfortunately I am reading them upside down.',
-    'Yes. Or no. The hotdog has not decided.',
+    'Yes. Or no. The croissant has not decided.',
     'I foresee great fortune. For someone. Possibly not you.',
     'Ask again after the market closes. I am on lunch.',
     'The stars say hold. My dog says sell. I trust the dog.',
@@ -91,7 +91,7 @@
     'The candle flickered. That means something. I will think about it.',
     'Buy the dip. Unless it dips more. Then buy that dip.',
     'The future is uncertain. My past is also uncertain. I lost my notes.',
-    'My crystal ball shows a hotdog. It always shows a hotdog.',
+    'My crystal ball shows a croissant. It always shows a croissant.',
     'Absolutely. I am wrong about 80% of the time, so this is exciting.',
     'The quill wrote "maybe" and then fell asleep.',
     'Patience. The prophecy is still loading.',

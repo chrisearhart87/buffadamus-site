@@ -62,7 +62,7 @@ h3{font-family:var(--display);color:var(--gold);letter-spacing:.05em;font-size:2
 .btn.ghost{background:transparent;color:var(--gold)}
 .btn:hover{filter:brightness(1.08)}
 
-/* hotdog index */
+/* croissant index */
 .hd-big{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:8px 0 4px}
 .hd-num{font-family:var(--display);font-weight:800;font-size:clamp(44px,8vw,72px);line-height:1}
 .hd-num.up{color:var(--up)}.hd-num.down{color:var(--down)}
