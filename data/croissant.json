@@ -1,4 +1,91 @@
 {
-  "note": "One entry per posted Croissant Index reading. pct = S&P 500 close-to-close % for that date, as posted. Add only after the post is live.",
-  "readings": []
+ "note": "One entry per US market day. pct = SPY close-to-close % (S&P 500 proxy), 2 decimals. basket = 100 croissants held at the 2026-09-30 close. url = the live X post when one was made. Update with tools/croissant_update.py.",
+ "base": {
+  "date": "2026-09-30",
+  "close": 762.63,
+  "croissants": 100
+ },
+ "readings": [
+  {
+   "date": "2026-10-01",
+   "pct": 0.18,
+   "prev": 762.63,
+   "close": 763.99,
+   "source": "SPY close-to-close (S&P 500 proxy)",
+   "asof": "2026-10-13 21:50 PT (Massive aggs)",
+   "url": ""
+  },
+  {
+   "date": "2026-10-02",
+   "pct": 0.74,
+   "prev": 763.99,
+   "close": 769.64,
+   "source": "SPY close-to-close (S&P 500 proxy)",
+   "asof": "2026-10-13 21:50 PT (Massive aggs)",
+   "url": ""
+  },
+  {
+   "date": "2026-10-05",
+   "pct": 0.67,
+   "prev": 769.64,
+   "close": 774.83,
+   "source": "SPY close-to-close (S&P 500 proxy)",
+   "asof": "2026-10-13 21:50 PT (Massive aggs)",
+   "url": ""
+  },
+  {
+   "date": "2026-10-06",
+   "pct": 0.55,
+   "prev": 774.83,
+   "close": 779.09,
+   "source": "SPY close-to-close (S&P 500 proxy)",
+   "asof": "2026-10-13 21:50 PT (Massive aggs)",
+   "url": ""
+  },
+  {
+   "date": "2026-10-07",
+   "pct": -0.24,
+   "prev": 779.09,
+   "close": 777.22,
+   "source": "SPY close-to-close (S&P 500 proxy)",
+   "asof": "2026-10-13 21:50 PT (Massive aggs)",
+   "url": ""
+  },
+  {
+   "date": "2026-10-08",
+   "pct": -0.42,
+   "prev": 777.22,
+   "close": 773.93,
+   "source": "SPY close-to-close (S&P 500 proxy)",
+   "asof": "2026-10-13 21:50 PT (Massive aggs)",
+   "url": ""
+  },
+  {
+   "date": "2026-10-09",
+   "pct": 0.6,
+   "prev": 773.93,
+   "close": 778.57,
+   "source": "SPY close-to-close (S&P 500 proxy)",
+   "asof": "2026-10-13 21:50 PT (Massive aggs)",
+   "url": ""
+  },
+  {
+   "date": "2026-10-12",
+   "pct": -0.06,
+   "prev": 778.57,
+   "close": 778.1,
+   "source": "SPY close-to-close (S&P 500 proxy)",
+   "asof": "2026-10-13 21:50 PT (Massive aggs)",
+   "url": ""
+  },
+  {
+   "date": "2026-10-13",
+   "pct": -0.01,
+   "prev": 778.1,
+   "close": 778.01,
+   "source": "SPY close-to-close (S&P 500 proxy)",
+   "asof": "2026-10-13 21:50 PT (Massive aggs)",
+   "url": ""
+  }
+ ]
 }

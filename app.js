@@ -29,35 +29,61 @@
   }
 
   // ---------- Croissant Index data ----------
-  const phrase = pct => pct >= 0
-    ? `The stock market gained ${Math.abs(pct)}% today. That's ${Math.abs(pct)}% more croissants.`
-    : `The stock market lost ${Math.abs(pct)}% today. That's ${Math.abs(pct)}% less croissants.`;
+  const phrase = pct => { const a = Math.abs(pct).toFixed(2); return pct >= 0
+    ? `The stock market gained ${a}% today. That's ${a}% more croissants.`
+    : `The stock market lost ${a}% today. That's ${a}% less croissants.`; };
 
   async function loadJSON(url) {
     try { const r = await fetch(url, { cache: 'no-store' }); if (!r.ok) throw 0; return await r.json(); }
     catch { return null; }
   }
 
-  const latest = $('#hd-latest'), log = $('#hd-log');
-  if (latest || log) loadJSON('data/croissant.json').then(data => {
-    const rows = (data && data.readings || []).slice().sort((a, b) => b.date.localeCompare(a.date));
+  const fmtD = (d, o) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', o);
+  const latest = $('#hd-latest'), log = $('#hd-log'), chart = $('#ci-chart'), stats = $('#ci-stats');
+  if (latest || log || chart || stats) loadJSON('data/croissant.json').then(data => {
+    const asc = (data && data.readings || []).slice().sort((a, b) => a.date.localeCompare(b.date));
+    // Croissant Basket: 100 croissants held at the base close, compounded daily.
+    let basket = (data && data.base && data.base.croissants) || 100;
+    asc.forEach(r => { basket = basket * (1 + r.pct / 100); r.basket = basket; });
+    const rows = asc.slice().reverse();
+    const sign = p => (p >= 0 ? '+' : '-') + Math.abs(p).toFixed(2) + '%';
     if (latest) {
       if (!rows.length) {
-        latest.innerHTML = '<p class="muted">The first official reading arrives after the next market close. The Oracle is warming up the grill.</p>';
+        latest.innerHTML = '<p class="muted">The first official reading arrives after the next market close. The oven is warming up.</p>';
       } else {
         const r = rows[0], cls = r.pct >= 0 ? 'up' : 'down';
-        latest.innerHTML = `<div class="hd-big"><span class="hd-num ${cls}">${r.pct >= 0 ? '+' : '-'}${Math.abs(r.pct)}%</span><span class="muted">${new Date(r.date + 'T12:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</span></div>
+        latest.innerHTML = `<div class="hd-big"><span class="hd-num ${cls}">${sign(r.pct)}</span><span class="muted">${fmtD(r.date, { weekday: 'long', month: 'long', day: 'numeric' })}</span></div>
           <p style="font-size:21px;margin:6px 0">${phrase(r.pct)}</p>
-          ${r.url ? `<p class="muted" style="font-size:15px"><a href="${r.url}" style="color:inherit">See the post on X</a> · Source: ${r.source || 'S&P 500 close-to-close'}</p>` : ''}`;
+          <p class="muted" style="font-size:15px;margin:0">Croissant Basket: <b>${r.basket.toFixed(2)}</b> croissants${r.url ? ` · <a href="${r.url}" style="color:inherit">See the post on X</a>` : ''}</p>`;
       }
     }
+    if (stats && asc.length) {
+      const ups = asc.filter(r => r.pct >= 0).length, best = asc.reduce((a, b) => b.pct > a.pct ? b : a), worst = asc.reduce((a, b) => b.pct < a.pct ? b : a);
+      let streak = 0; const dir = rows[0].pct >= 0; for (const r of rows) { if ((r.pct >= 0) === dir) streak++; else break; }
+      const cell = (k, v, s) => `<div class="stat"><span class="k">${k}</span><span class="v">${v}</span><span class="s">${s}</span></div>`;
+      stats.innerHTML = cell('Croissant Basket', rows[0].basket.toFixed(2), 'from 100 on Sep 30') +
+        cell('Streak', `${streak} ${dir ? 'up' : 'down'}`, streak > 1 ? 'days in a row' : 'day') +
+        cell('Best day', sign(best.pct), fmtD(best.date, { month: 'short', day: 'numeric' })) +
+        cell('Worst day', sign(worst.pct), fmtD(worst.date, { month: 'short', day: 'numeric' })) +
+        cell('Days up', `${ups} of ${asc.length}`, 'the dog takes credit');
+    }
+    if (chart && asc.length) {
+      const W = 640, H = 150, pad = 12, n = asc.length, max = Math.max(...asc.map(r => Math.abs(r.pct)), 0.5);
+      const bw = Math.max(4, (W - pad * 2) / n - 4), mid = H / 2;
+      const bars = asc.map((r, i) => {
+        const h = Math.abs(r.pct) / max * (mid - pad), x = pad + i * ((W - pad * 2) / n) + 2, y = r.pct >= 0 ? mid - h : mid;
+        return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(h, 1.5).toFixed(1)}" rx="2" class="${r.pct >= 0 ? 'b-up' : 'b-down'}"><title>${fmtD(r.date, { month: 'short', day: 'numeric' })}: ${sign(r.pct)}</title></rect>`;
+      }).join('');
+      chart.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Daily Croissant Index moves"><line x1="${pad}" x2="${W - pad}" y1="${mid}" y2="${mid}" class="axis"/>${bars}</svg>`;
+    }
     if (log) {
-      if (!rows.length) { log.innerHTML = '<tr><td colspan="3" class="empty">No readings yet. History begins with the first post.</td></tr>'; return; }
-      const max = Math.max(...rows.map(r => Math.abs(r.pct)), 1);
+      if (!rows.length) { log.innerHTML = '<tr><td colspan="4" class="empty">No readings yet. History begins with the first post.</td></tr>'; return; }
+      const max = Math.max(...rows.map(r => Math.abs(r.pct)), 0.5);
       log.innerHTML = rows.map(r => `<tr>
-        <td>${new Date(r.date + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</td>
-        <td style="width:45%"><div class="bar ${r.pct < 0 ? 'down' : ''}" style="width:${Math.abs(r.pct) / max * 100}%"></div></td>
-        <td>${r.url ? `<a href="${r.url}">` : ''}${r.pct >= 0 ? '+' : '-'}${Math.abs(r.pct)}% ${r.pct >= 0 ? 'more' : 'less'} croissants${r.url ? '</a>' : ''}</td></tr>`).join('');
+        <td>${fmtD(r.date, { month: 'short', day: 'numeric', year: 'numeric' })}</td>
+        <td style="width:34%"><div class="bar ${r.pct < 0 ? 'down' : ''}" style="width:${Math.abs(r.pct) / max * 100}%"></div></td>
+        <td>${r.url ? `<a href="${r.url}">` : ''}${sign(r.pct)} ${r.pct >= 0 ? 'more' : 'less'} croissants${r.url ? '</a>' : ''}</td>
+        <td>${r.basket.toFixed(2)}</td></tr>`).join('');
     }
   });
 
@@ -75,6 +101,13 @@
       <blockquote>${(p.lines || []).map(esc).join('<br>')}</blockquote>
       <div class="meta"><span class="verdict v-${esc(p.verdict || 'pending')}">${verdicts[p.verdict] || 'Pending'}</span>
         Prophesied ${fmtDate(p.date)}${p.resolves ? ` · Judged ${fmtDate(p.resolves)}` : ''}${p.about ? ` · ${esc(p.about)}` : ''}${p.verdict_note ? `<br><em>${esc(p.verdict_note)}</em>` : ''}</div></article>`;
+    const sb = $('#scoreboard');
+    if (sb) {
+      const c = v => items.filter(p => (p.verdict || 'pending') === v).length, f = c('fulfilled'), m = c('muffed'), judged = f + m;
+      const acc = judged ? Math.round(f / judged * 100) + '%' : 'TBD';
+      sb.innerHTML = [['Fulfilled', f], ['Muffed it', m], ['Pending', c('pending')], ['Accuracy', acc]].map(([k, v]) => `<div class="stat"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('') +
+        `<p class="muted sbnote">${judged ? `Sample size: ${judged}. Statisticians call this "not a sample". Buffadamus calls it a perfect record.` : 'No verdicts yet.'}</p>`;
+    }
     if (arch) arch.innerHTML = items.length ? items.map(card).join('') : '<p class="empty">The scrolls are blank. For now.</p>';
     if (teaser) teaser.innerHTML = items.slice(0, 3).map(card).join('') || '<p class="empty">The first prophecies are being inked.</p>';
   });
@@ -114,6 +147,57 @@
       }, 250);
     });
   }
+
+
+  // ---------- Ask the Dog ----------
+  const dogs = [
+    ['The dog barked twice.', 'Two barks. A strong yes. Or the mailman.'],
+    ['The dog sat on the business section.', 'He is bearish on reading.'],
+    ['The dog ate the croissant.', 'The Croissant Index has fallen 100%.'],
+    ['The dog rolled over.', 'A reversal. Analysts will call it the Dog Roll.'],
+    ['The dog stared at the wall for nine minutes.', 'He is also waiting for the Fed.'],
+    ['The dog brought me one sock.', 'Half a position. He is hedging.'],
+    ['The dog wagged at the green candles.', 'He likes the green ones. He is colorblind.'],
+    ['The dog yawned.', 'Low volatility expected.'],
+    ['The dog chased his own tail.', 'This is what day trading looks like.'],
+    ['The dog fell asleep.', 'Hold.'],
+    ['The dog buried something in the garden.', 'Gold, or a sandwich. Both are stores of value.'],
+    ['The dog sneezed.', 'Bless him. The prophecy is unclear.'],
+    ['The dog walked out of the room.', 'He does not answer questions about crypto.'],
+    ['The dog looked at me, then at the treat jar.', 'There is a fee for this service.'],
+    ['The dog howled at the screen.', 'Someone bought the top. It was me.'],
+  ];
+  const dform = $('#dog-form');
+  if (dform) {
+    const act = $('#dog-act'), read = $('#dog-read'), share = $('#dog-share'), face = $('#dog-face');
+    let last = -1;
+    dform.addEventListener('submit', e => {
+      e.preventDefault();
+      const q = $('#dog-q').value.trim();
+      let i; do { i = Math.floor(Math.random() * dogs.length); } while (i === last && dogs.length > 1); last = i;
+      act.classList.remove('show'); read.classList.remove('show'); face && face.classList.add('think');
+      setTimeout(() => { face && face.classList.remove('think'); act.textContent = dogs[i][0]; act.classList.add('show'); }, 700);
+      setTimeout(() => {
+        read.textContent = 'Buffadamus reads it: ' + dogs[i][1]; read.classList.add('show');
+        const text = (q ? `I asked Buffadamus's dog: "${q.slice(0, 80)}"\n` : '') + `${dogs[i][0]} ${dogs[i][1]}`;
+        share.href = 'https://x.com/intent/post?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent('https://buffadamus.com/dog.html') + '&via=Buffadamus';
+        share.hidden = false;
+      }, 1500);
+    });
+  }
+
+  // ---------- Glossary ----------
+  const gl = $('#glossary');
+  if (gl) loadJSON('data/glossary.json').then(data => {
+    const terms = (data && data.terms || []).slice().sort((a, b) => a.term.localeCompare(b.term));
+    const draw = f => {
+      const list = terms.filter(t => !f || (t.term + ' ' + t.def).toLowerCase().includes(f));
+      gl.innerHTML = list.length ? list.map(t => `<div class="card term" id="${esc(t.term.toLowerCase().replace(/[^a-z0-9]+/g, '-'))}"><h3>${esc(t.term)}</h3><p>${esc(t.def)}</p>
+        <a class="share" target="_blank" rel="noopener" href="https://x.com/intent/post?text=${encodeURIComponent(t.term + ': ' + t.def)}&url=${encodeURIComponent('https://buffadamus.com/glossary.html')}&via=Buffadamus">Share</a></div>`).join('') : '<p class="empty">That word has not been invented yet.</p>';
+    };
+    draw('');
+    const gq = $('#gloss-q'); if (gq) gq.addEventListener('input', () => draw(gq.value.trim().toLowerCase()));
+  });
 
   // footer year
   const y = $('#year'); if (y) y.textContent = new Date().getFullYear();
