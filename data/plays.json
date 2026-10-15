@@ -1,0 +1,81 @@
+{
+ "note": "Buffadamus paper-trade ledger. Written only by tools/desk.py (add / update). Rules in docs/DESK.md. Paper trades for entertainment, not financial advice.",
+ "bank": {
+  "start": 10000,
+  "croissant_usd": 4.0,
+  "stake_shares": 1000,
+  "stake_option": 250,
+  "since": "2026-10-15"
+ },
+ "plays": [
+  {
+   "session": "2026-10-15",
+   "published": "2026-10-14 21:45 PT",
+   "kind": "shares",
+   "side": "long",
+   "ticker": "XLV",
+   "name": "Health Care Select Sector SPDR (S&P 500 health care stocks)",
+   "instrument": "XLV",
+   "entry_rule": "Market open, Thu Oct 15",
+   "ref_price": 173.96,
+   "stop": 170.4,
+   "target": 181.0,
+   "max_days": 5,
+   "headline": "Hide in the hospital: long health care",
+   "thesis": [
+    "Rotation: after the hot CPI, money left tech (XLK -2.98%) for defensives. XLV rose 2.53% on 11.8M shares, 1.4x its 8.5M average.",
+    "Trend: closed at $173.96, above its 50-day ($169.41) and 200-day ($157.28) averages. RSI 52 leaves room before overbought.",
+    "Catalysts inside the 5-session window: ISRG reports Oct 20 after the close; TMO, ABT, DHR and ELV report Oct 21 before the open."
+   ],
+   "risks": [
+    "PPI and retail sales land at 5:30 am PT Thursday and can flip the rate story before the open.",
+    "A tech rebound would pull money back out of defensives.",
+    "The 52-week high at $176.60 is resistance, and a stop does not protect against an overnight gap."
+   ],
+   "facts": {
+    "Close Oct 14": "$173.96 (+2.53%)",
+    "ATR (14 days)": "$2.41",
+    "50-day average": "$169.41",
+    "200-day average": "$157.28",
+    "RSI (14)": "52.1",
+    "52-week range": "$141.36 - $176.60",
+    "Volume Oct 14": "11.8M vs 8.5M avg",
+    "Fund assets": "$45.0B",
+    "Dividend yield": "1.53% (next ex-date Dec 21)"
+   },
+   "dog": "The dog lay down in front of the medicine cabinet and refused to move. In dog, that is a strong buy.",
+   "sources": [
+    "Massive daily bars 2026-10-14",
+    "Robinhood fundamentals + technicals 2026-10-14",
+    "Robinhood earnings calendar",
+    "TheStreet market wrap 2026-10-14"
+   ],
+   "rr": 1.98,
+   "id": "P001",
+   "status": "pending",
+   "stake": 1000
+  }
+ ],
+ "summary": {
+  "bank": 10000,
+  "realized": 0,
+  "unrealized": 0,
+  "plays": 1,
+  "closed": 0,
+  "open": 0,
+  "pending": 1,
+  "void": 0,
+  "wins": 0,
+  "losses": 0,
+  "win_rate": null,
+  "avg_win": null,
+  "avg_loss": null,
+  "best": null,
+  "worst": null,
+  "vs_spy": null,
+  "streak": null,
+  "usd": 40000.0,
+  "updated": "2026-10-15 04:17 PT"
+ },
+ "equity": []
+}

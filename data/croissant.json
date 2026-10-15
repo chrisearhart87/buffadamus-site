@@ -93,7 +93,7 @@
    "prev": 778.01,
    "close": 769.6,
    "source": "SPY close-to-close (S&P 500 proxy)",
-   "asof": "2026-10-14 13:27 PT (Massive aggs)",
+   "asof": "2026-10-14 21:40 PT (Massive grouped daily)",
    "url": ""
   }
  ]

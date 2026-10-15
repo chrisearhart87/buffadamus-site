@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trading Desk - Buffadamus</title>
+<meta name="description" content="One paper-trade play a day with the stop and target written in, a Croissant Bank scoreboard, the market close, and the economic and earnings calendars. Parody. Not financial advice.">
+<meta name="theme-color" content="#0f0b09">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Trading Desk - Buffadamus">
+<meta property="og:description" content="One paper-trade play a day with the stop and target written in, a Croissant Bank scoreboard, the market close, and the economic and earnings calendars. Parody. Not financial advice.">
+<meta property="og:image" content="https://buffadamus.com/og.jpg">
+<meta property="og:url" content="https://buffadamus.com/desk.html">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@Buffadamus">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=202610142230">
+</head>
+<body>
+<header class="topnav">
+  <div class="wrap">
+    <a class="brand" href="./"><img src="avatar.jpg" alt=""><span>BUFFADAMUS</span></a>
+    <nav aria-label="Site">
+      <a href="./">Home</a>
+      <a href="desk.html" aria-current="page">Trading Desk</a>
+      <a href="prophecies.html">Prophecies</a>
+      <a href="dog.html">Ask the Dog</a>
+      <a href="glossary.html">Glossary</a>
+      <a href="merch.html">Merch</a>
+      <a href="about.html">About</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section>
+    <div class="wrap">
+      <p class="kicker">The Oracle's Trading Desk · paper trades, real prices</p>
+      <h1 style="font-size:clamp(38px,7vw,64px);text-align:left">Trading Desk</h1>
+      <p class="lede" style="font-size:21px">One play every market day, with the stop loss and take profit written in before the open. Every play is paper traded and kept on the record, winners and losers, and the profit or loss is paid in croissants.</p>
+      <p class="lede" style="font-size:15px">Entertainment from a parody character. Not financial advice. Paper trades only. He is usually wrong; the ledger proves it either way.</p>
+    </div>
+  </section>
+
+  <section style="padding-top:0" id="play">
+    <div class="wrap"><div id="todays-play"><p class="empty">Consulting the stars...</p></div></div>
+  </section>
+
+  <section style="padding-top:0" id="bank">
+    <div class="wrap">
+      <p class="kicker">The scoreboard</p>
+      <h2>The Croissant Bank</h2>
+      <p class="lede">Started with 10,000 croissants on Oct 15, 2026. 1 croissant = $4.00 of paper money. Each stock play stakes 1,000 croissants and each option play stakes 250. Every play is compared with simply buying the S&amp;P 500 (SPY) on the same days.</p>
+      <div id="bank-stats" class="stats"></div>
+      <div class="grid2" style="align-items:start">
+        <div class="card"><h3>Bank over time</h3><div id="equity" class="chart"></div></div>
+        <div class="card" id="ci-tile"></div>
+      </div>
+      <div class="card" style="overflow-x:auto;margin-top:18px">
+        <h3>Every play, on the record</h3>
+        <table class="log"><thead><tr><th>Play</th><th>Day</th><th>What</th><th>Entry</th><th>Exit</th><th>Move</th><th>Croissants</th><th>Status</th></tr></thead><tbody id="ledger"></tbody></table>
+        <p class="fineprint" id="bank-updated"></p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0" id="market">
+    <div class="wrap">
+      <div id="mkt-head"></div>
+      <div id="mkt-indices" class="stats"></div>
+      <div class="grid2" style="align-items:start">
+        <div class="card"><h3>What moved the market</h3><ul id="mkt-notes" class="notes"></ul></div>
+        <div class="card"><h3>Sectors</h3><div id="mkt-sectors"></div></div>
+      </div>
+      <h3 style="margin-top:22px">Rates, commodities and crypto</h3>
+      <div id="mkt-macro" class="stats"></div>
+      <div class="card"><div id="mkt-movers" class="grid2" style="gap:18px"></div></div>
+      <p class="fineprint" id="mkt-sources"></p>
+    </div>
+  </section>
+
+  <section style="padding-top:0" id="calendar">
+    <div class="wrap grid2" style="align-items:start">
+      <div class="card" style="overflow-x:auto"><h3>Economic calendar</h3><p class="fineprint" style="margin-top:0"><span class="imp i-high"></span>high <span class="imp i-medium"></span>medium <span class="imp i-low"></span>low impact. Times Pacific.</p><table class="log econ"><tbody id="econ"></tbody></table></div>
+      <div class="card"><h3>Earnings calendar</h3><div id="earnings"></div></div>
+    </div>
+  </section>
+
+  <section style="padding-top:0" id="rules">
+    <div class="wrap">
+      <h2>House rules</h2>
+      <div class="grid3">
+        <div class="card"><h3>1. Written in ink</h3><p class="lede" style="margin:0">Each play is published the evening before with its entry, stop loss, take profit and maximum hold. Nothing is changed after it is published.</p></div>
+        <div class="card"><h3>2. No hindsight</h3><p class="lede" style="margin:0">Entry is the next opening price. If a stop and a target are both touched in one day, the stop counts. A gap past a level fills at the open. A play that opens beyond its levels is void.</p></div>
+        <div class="card"><h3>3. Big names only</h3><p class="lede" style="margin:0">Large, heavily traded US stocks and ETFs, or their listed options. No penny stocks, no small coins, no promotions, no paid picks. Options are bought, never sold.</p></div>
+      </div>
+      <p class="fineprint" style="margin-top:16px">Buffadamus is a parody character. These are hypothetical paper trades published for entertainment and education. They are not personalized advice, not a recommendation to buy or sell anything, and past paper results do not predict anything. Trading, and especially options, can lose money quickly. Do your own research or talk to a licensed professional.</p>
+    </div>
+  </section>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <a href="mailto:hello@buffadamus.com">hello@buffadamus.com</a> · <a href="https://x.com/Buffadamus">@Buffadamus</a> · <a href="about.html">About &amp; press</a>
+    <p class="fine">Buffadamus is a parody character. He is not Warren Buffett, not Nostradamus, and not affiliated with either. Nothing on this site or his accounts is financial advice. He is usually wrong. That is the point.</p>
+    <p class="fine">© <span id="year">2026</span> Buffadamus</p>
+  </div>
+</footer>
+<script src="desk.js?v=202610142230" defer></script>
+<script src="app.js?v=202610142230" defer></script>
+</body>
+</html>

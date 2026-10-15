@@ -1,0 +1,745 @@
+{
+ "note": "Trading Desk snapshot. Rewritten every market day by the after-close task. Every number carries its source in 'sources'.",
+ "asof": "2026-10-14",
+ "updated": "2026-10-14 21:50 PT",
+ "headline": "Hot CPI sends yields up and tech down; health care and staples catch the bid",
+ "indices": [
+  {
+   "name": "S&P 500",
+   "level": 7718.94,
+   "pct": -1.11,
+   "etf": "SPY",
+   "etf_close": 769.6
+  },
+  {
+   "name": "Nasdaq Composite",
+   "level": 26692.87,
+   "pct": -1.88,
+   "etf": "QQQ",
+   "etf_close": 728.95
+  },
+  {
+   "name": "Dow Jones",
+   "level": 51621.48,
+   "pct": -0.09,
+   "etf": "DIA",
+   "etf_close": 515.63
+  },
+  {
+   "name": "Russell 2000",
+   "level": 2729.53,
+   "pct": -1.93,
+   "etf": "IWM",
+   "etf_close": 271.37
+  }
+ ],
+ "macro": [
+  {
+   "name": "10-year Treasury",
+   "value": "5.28%",
+   "note": "+6 bp after CPI (CNBC via TheStreet)"
+  },
+  {
+   "name": "2-year Treasury",
+   "value": "4.79%",
+   "note": "Oct 13 (Massive)"
+  },
+  {
+   "name": "Volatility (VIXY)",
+   "value": "$16.53",
+   "pct": 3.18
+  },
+  {
+   "name": "Gold (GLD)",
+   "value": "$375.99",
+   "pct": -1.49
+  },
+  {
+   "name": "Silver (SLV)",
+   "value": "$50.22",
+   "pct": -6.11
+  },
+  {
+   "name": "Oil (USO)",
+   "value": "$153.56",
+   "pct": 0.31
+  },
+  {
+   "name": "Bitcoin (IBIT)",
+   "value": "$46.24",
+   "pct": -1.89
+  },
+  {
+   "name": "Dollar (UUP)",
+   "value": "$29.12",
+   "pct": 0.34
+  }
+ ],
+ "sectors": [
+  {
+   "name": "Health care",
+   "etf": "XLV",
+   "pct": 2.53
+  },
+  {
+   "name": "Staples",
+   "etf": "XLP",
+   "pct": 2.22
+  },
+  {
+   "name": "Energy",
+   "etf": "XLE",
+   "pct": 0.64
+  },
+  {
+   "name": "Materials",
+   "etf": "XLB",
+   "pct": -0.1
+  },
+  {
+   "name": "Utilities",
+   "etf": "XLU",
+   "pct": -0.36
+  },
+  {
+   "name": "Financials",
+   "etf": "XLF",
+   "pct": -0.55
+  },
+  {
+   "name": "Discretionary",
+   "etf": "XLY",
+   "pct": -0.77
+  },
+  {
+   "name": "Real estate",
+   "etf": "XLRE",
+   "pct": -0.81
+  },
+  {
+   "name": "Industrials",
+   "etf": "XLI",
+   "pct": -0.97
+  },
+  {
+   "name": "Communication",
+   "etf": "XLC",
+   "pct": -1.3
+  },
+  {
+   "name": "Technology",
+   "etf": "XLK",
+   "pct": -2.98
+  },
+  {
+   "name": "Semiconductors",
+   "etf": "SMH",
+   "pct": -3.98
+  }
+ ],
+ "movers": {
+  "note": "US stocks over $10 with more than $1.5B traded; leveraged ETFs excluded",
+  "up": [
+   {
+    "t": "UNH",
+    "pct": 4.73,
+    "close": 395.62
+   },
+   {
+    "t": "MRNA",
+    "pct": 4.65,
+    "close": 226.3
+   },
+   {
+    "t": "LLY",
+    "pct": 3.62,
+    "close": 1208.74
+   },
+   {
+    "t": "WMT",
+    "pct": 3.46,
+    "close": 116.16
+   },
+   {
+    "t": "ABBV",
+    "pct": 3.32,
+    "close": 283.48
+   },
+   {
+    "t": "COST",
+    "pct": 2.87,
+    "close": 982.0
+   }
+  ],
+  "down": [
+   {
+    "t": "CRWV",
+    "pct": -15.46,
+    "close": 65.78
+   },
+   {
+    "t": "IREN",
+    "pct": -12.18,
+    "close": 30.56
+   },
+   {
+    "t": "DELL",
+    "pct": -11.27,
+    "close": 507.93
+   },
+   {
+    "t": "NBIS",
+    "pct": -10.08,
+    "close": 186.01
+   },
+   {
+    "t": "CRDO",
+    "pct": -9.62,
+    "close": 179.23
+   },
+   {
+    "t": "LITE",
+    "pct": -9.28,
+    "close": 896.33
+   }
+  ]
+ },
+ "notes": [
+  {
+   "text": "September CPI ran hot: 3.7% a year vs 3.6% expected (+0.6% on the month, as expected). Core 2.6% vs 2.5% expected, +0.3% on the month vs +0.2%.",
+   "src": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-14-2026"
+  },
+  {
+   "text": "Rate-hike bets lifted the 10-year yield about 6 bp to 5.28%, and growth and small caps paid: Nasdaq -1.88%, Russell 2000 -1.93%, while the Dow finished flat.",
+   "src": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-14-2026"
+  },
+  {
+   "text": "Tech was the worst sector (-3.0%) and semis fell 4%. AI infrastructure took the hardest hits: CoreWeave -15.5%, Dell -11.3% after a Barclays downgrade to Equal Weight.",
+   "src": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-14-2026"
+  },
+  {
+   "text": "Money hid in defensives: health care +2.5% and staples +2.2%, led by UnitedHealth +4.7%, Eli Lilly +3.6% and Walmart +3.5%.",
+   "src": "Massive daily bars 2026-10-14"
+  },
+  {
+   "text": "Bank earnings were mixed: BlackRock rose on a beat; Bank of America fell on a profit drop and a regulatory penalty over $1.2B; State Street fell on a revenue miss.",
+   "src": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-14-2026"
+  }
+ ],
+ "econ": [
+  {
+   "date": "2026-10-15",
+   "time_pt": "05:30",
+   "event": "Producer Price Index (Sep)",
+   "importance": "high",
+   "detail": "Wholesale inflation; follows today's hot CPI",
+   "src": "https://www.bls.gov/schedule/2026/10_sched_list.htm"
+  },
+  {
+   "date": "2026-10-15",
+   "time_pt": "05:30",
+   "event": "Retail Sales (Sep, advance)",
+   "importance": "high",
+   "detail": "Consumer spending read",
+   "src": "https://fedratecalc.com/us-economic-calendar/october-2026/"
+  },
+  {
+   "date": "2026-10-15",
+   "time_pt": "05:30",
+   "event": "Initial jobless claims (weekly)",
+   "importance": "medium",
+   "detail": "Every Thursday",
+   "src": "https://www.dol.gov/ui/data.pdf"
+  },
+  {
+   "date": "2026-10-16",
+   "time_pt": "05:30",
+   "event": "Import and export prices (Sep)",
+   "importance": "low",
+   "detail": "",
+   "src": "https://www.bls.gov/schedule/2026/10_sched_list.htm"
+  },
+  {
+   "date": "2026-10-20",
+   "time_pt": "07:00",
+   "event": "State employment and unemployment (Sep)",
+   "importance": "low",
+   "detail": "",
+   "src": "https://www.bls.gov/schedule/2026/10_sched_list.htm"
+  },
+  {
+   "date": "2026-10-22",
+   "time_pt": "05:30",
+   "event": "Initial jobless claims (weekly)",
+   "importance": "medium",
+   "detail": "Every Thursday",
+   "src": "https://www.dol.gov/ui/data.pdf"
+  },
+  {
+   "date": "2026-10-28",
+   "time_pt": "11:00",
+   "event": "FOMC rate decision",
+   "importance": "high",
+   "detail": "Press conference 11:30 PT. Prediction markets ~81% hold (Oct 13).",
+   "src": "https://www.federalreserve.gov/monetarypolicy/fomccalendars.htm"
+  },
+  {
+   "date": "2026-10-29",
+   "time_pt": "05:30",
+   "event": "GDP, Q3 advance estimate",
+   "importance": "high",
+   "detail": "",
+   "src": "https://fedratecalc.com/us-economic-calendar/october-2026/"
+  },
+  {
+   "date": "2026-10-29",
+   "time_pt": "05:30",
+   "event": "PCE inflation + personal income (Sep)",
+   "importance": "high",
+   "detail": "The Fed's preferred inflation gauge",
+   "src": "https://fedratecalc.com/us-economic-calendar/october-2026/"
+  },
+  {
+   "date": "2026-10-29",
+   "time_pt": "05:30",
+   "event": "Initial jobless claims (weekly)",
+   "importance": "medium",
+   "detail": "Every Thursday",
+   "src": "https://www.dol.gov/ui/data.pdf"
+  },
+  {
+   "date": "2026-10-30",
+   "time_pt": "05:30",
+   "event": "Employment Cost Index (Q3)",
+   "importance": "medium",
+   "detail": "Wage pressure",
+   "src": "https://www.bls.gov/schedule/2026/10_sched_list.htm"
+  }
+ ],
+ "earnings": {
+  "note": "Large caps only. Dates from the Robinhood earnings calendar (company-verified); am = before the open, pm = after the close.",
+  "items": [
+   {
+    "date": "2026-10-15",
+    "when": "am",
+    "t": "TSM",
+    "name": "Taiwan Semiconductor",
+    "eps_est": 4.45
+   },
+   {
+    "date": "2026-10-15",
+    "when": "am",
+    "t": "SCHW",
+    "name": "Charles Schwab",
+    "eps_est": 1.66
+   },
+   {
+    "date": "2026-10-15",
+    "when": "am",
+    "t": "PNC",
+    "name": "PNC Financial",
+    "eps_est": 4.91
+   },
+   {
+    "date": "2026-10-15",
+    "when": "am",
+    "t": "BNY",
+    "name": "BNY",
+    "eps_est": 2.26
+   },
+   {
+    "date": "2026-10-15",
+    "when": "am",
+    "t": "PLD",
+    "name": "Prologis",
+    "eps_est": 1.58
+   },
+   {
+    "date": "2026-10-20",
+    "when": "am",
+    "t": "GE",
+    "name": "GE Aerospace",
+    "eps_est": 2.0
+   },
+   {
+    "date": "2026-10-20",
+    "when": "am",
+    "t": "RTX",
+    "name": "RTX",
+    "eps_est": 1.77
+   },
+   {
+    "date": "2026-10-20",
+    "when": "pm",
+    "t": "NFLX",
+    "name": "Netflix",
+    "eps_est": 0.82
+   },
+   {
+    "date": "2026-10-20",
+    "when": "pm",
+    "t": "ISRG",
+    "name": "Intuitive Surgical",
+    "eps_est": 2.54
+   },
+   {
+    "date": "2026-10-20",
+    "when": "pm",
+    "t": "COF",
+    "name": "Capital One",
+    "eps_est": 5.49
+   },
+   {
+    "date": "2026-10-21",
+    "when": "am",
+    "t": "TMO",
+    "name": "Thermo Fisher",
+    "eps_est": 6.4
+   },
+   {
+    "date": "2026-10-21",
+    "when": "am",
+    "t": "ABT",
+    "name": "Abbott",
+    "eps_est": 1.42
+   },
+   {
+    "date": "2026-10-21",
+    "when": "am",
+    "t": "DHR",
+    "name": "Danaher",
+    "eps_est": 1.92
+   },
+   {
+    "date": "2026-10-21",
+    "when": "am",
+    "t": "ELV",
+    "name": "Elevance Health",
+    "eps_est": 4.69
+   },
+   {
+    "date": "2026-10-21",
+    "when": "am",
+    "t": "PM",
+    "name": "Philip Morris",
+    "eps_est": 2.33
+   },
+   {
+    "date": "2026-10-21",
+    "when": "am",
+    "t": "NEE",
+    "name": "NextEra Energy",
+    "eps_est": 1.18
+   },
+   {
+    "date": "2026-10-21",
+    "when": "am",
+    "t": "T",
+    "name": "AT&T",
+    "eps_est": 0.6
+   },
+   {
+    "date": "2026-10-21",
+    "when": "pm",
+    "t": "TSLA",
+    "name": "Tesla",
+    "eps_est": 0.41
+   },
+   {
+    "date": "2026-10-21",
+    "when": "pm",
+    "t": "META",
+    "name": "Meta Platforms",
+    "eps_est": 6.21
+   },
+   {
+    "date": "2026-10-21",
+    "when": "pm",
+    "t": "IBM",
+    "name": "IBM",
+    "eps_est": 2.87
+   },
+   {
+    "date": "2026-10-21",
+    "when": "pm",
+    "t": "TXN",
+    "name": "Texas Instruments",
+    "eps_est": 2.41
+   },
+   {
+    "date": "2026-10-21",
+    "when": "pm",
+    "t": "LRCX",
+    "name": "Lam Research",
+    "eps_est": 2.18
+   },
+   {
+    "date": "2026-10-21",
+    "when": "pm",
+    "t": "URI",
+    "name": "United Rentals",
+    "eps_est": 13.94
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "PG",
+    "name": "Procter & Gamble",
+    "eps_est": 1.89
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "LMT",
+    "name": "Lockheed Martin",
+    "eps_est": 7.52
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "UNP",
+    "name": "Union Pacific",
+    "eps_est": 3.47
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "HON",
+    "name": "Honeywell",
+    "eps_est": 2.17
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "BX",
+    "name": "Blackstone",
+    "eps_est": 1.3
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "VLO",
+    "name": "Valero",
+    "eps_est": 20.91
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "SPOT",
+    "name": "Spotify",
+    "eps_est": 3.12
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "AAL",
+    "name": "American Airlines",
+    "eps_est": -0.32
+   },
+   {
+    "date": "2026-10-22",
+    "when": "pm",
+    "t": "WDC",
+    "name": "Western Digital",
+    "eps_est": 4.06
+   },
+   {
+    "date": "2026-10-22",
+    "when": "pm",
+    "t": "NEM",
+    "name": "Newmont",
+    "eps_est": 1.93
+   },
+   {
+    "date": "2026-10-23",
+    "when": "am",
+    "t": "AXP",
+    "name": "American Express",
+    "eps_est": 4.57
+   },
+   {
+    "date": "2026-10-26",
+    "when": "am",
+    "t": "VZ",
+    "name": "Verizon",
+    "eps_est": 1.28
+   },
+   {
+    "date": "2026-10-26",
+    "when": "pm",
+    "t": "CDNS",
+    "name": "Cadence Design",
+    "eps_est": 1.96
+   },
+   {
+    "date": "2026-10-27",
+    "when": "am",
+    "t": "BA",
+    "name": "Boeing",
+    "eps_est": -0.18
+   },
+   {
+    "date": "2026-10-27",
+    "when": "am",
+    "t": "KO",
+    "name": "Coca-Cola",
+    "eps_est": 0.88
+   },
+   {
+    "date": "2026-10-27",
+    "when": "am",
+    "t": "GLW",
+    "name": "Corning",
+    "eps_est": 0.88
+   },
+   {
+    "date": "2026-10-27",
+    "when": "am",
+    "t": "FCX",
+    "name": "Freeport-McMoRan",
+    "eps_est": 0.81
+   },
+   {
+    "date": "2026-10-27",
+    "when": "am",
+    "t": "SOFI",
+    "name": "SoFi",
+    "eps_est": 0.17
+   },
+   {
+    "date": "2026-10-27",
+    "when": "am",
+    "t": "JCI",
+    "name": "Johnson Controls",
+    "eps_est": 1.56
+   },
+   {
+    "date": "2026-10-27",
+    "when": "pm",
+    "t": "V",
+    "name": "Visa",
+    "eps_est": 3.43
+   },
+   {
+    "date": "2026-10-27",
+    "when": "pm",
+    "t": "HOOD",
+    "name": "Robinhood",
+    "eps_est": 0.55
+   },
+   {
+    "date": "2026-10-27",
+    "when": "pm",
+    "t": "NXPI",
+    "name": "NXP Semiconductors",
+    "eps_est": 4.04
+   },
+   {
+    "date": "2026-10-27",
+    "when": "pm",
+    "t": "STX",
+    "name": "Seagate",
+    "eps_est": 7.32
+   },
+   {
+    "date": "2026-10-27",
+    "when": "pm",
+    "t": "TER",
+    "name": "Teradyne",
+    "eps_est": 2.05
+   },
+   {
+    "date": "2026-10-28",
+    "when": "am",
+    "t": "GEV",
+    "name": "GE Vernova",
+    "eps_est": 4.02
+   },
+   {
+    "date": "2026-10-28",
+    "when": "am",
+    "t": "VRT",
+    "name": "Vertiv",
+    "eps_est": 1.83
+   },
+   {
+    "date": "2026-10-28",
+    "when": "am",
+    "t": "BSX",
+    "name": "Boston Scientific",
+    "eps_est": 0.75
+   },
+   {
+    "date": "2026-10-28",
+    "when": "am",
+    "t": "APH",
+    "name": "Amphenol",
+    "eps_est": 0.73
+   },
+   {
+    "date": "2026-10-28",
+    "when": "am",
+    "t": "PSX",
+    "name": "Phillips 66",
+    "eps_est": 11.55
+   },
+   {
+    "date": "2026-10-28",
+    "when": "pm",
+    "t": "MSFT",
+    "name": "Microsoft",
+    "eps_est": 4.72
+   },
+   {
+    "date": "2026-10-28",
+    "when": "pm",
+    "t": "GOOGL",
+    "name": "Alphabet",
+    "eps_est": 3.01
+   },
+   {
+    "date": "2026-10-28",
+    "when": "pm",
+    "t": "NOW",
+    "name": "ServiceNow",
+    "eps_est": 0.93
+   },
+   {
+    "date": "2026-10-28",
+    "when": "pm",
+    "t": "KLAC",
+    "name": "KLA",
+    "eps_est": 1.18
+   },
+   {
+    "date": "2026-10-28",
+    "when": "pm",
+    "t": "TMUS",
+    "name": "T-Mobile US",
+    "eps_est": 2.9
+   },
+   {
+    "date": "2026-10-28",
+    "when": "pm",
+    "t": "FTNT",
+    "name": "Fortinet",
+    "eps_est": 0.84
+   },
+   {
+    "date": "2026-10-28",
+    "when": "pm",
+    "t": "CVNA",
+    "name": "Carvana",
+    "eps_est": 0.45
+   }
+  ]
+ },
+ "sources": [
+  "Massive grouped daily bars 2026-10-13 and 2026-10-14 (ETF and stock closes, % changes)",
+  "Massive treasury yields",
+  "TheStreet market wrap 2026-10-14",
+  "BLS release schedule October 2026",
+  "Federal Reserve FOMC calendar",
+  "Robinhood earnings calendar (pulled 2026-10-14)"
+ ]
+}
