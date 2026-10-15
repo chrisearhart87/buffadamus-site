@@ -63,7 +63,7 @@
           ${Object.entries(p.facts || {}).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
           ${p.dog ? `<p class="dog">🐕 ${esc(p.dog)}</p>` : ''}</div>
       </div>
-      <p class="fine">Paper trade for entertainment, not financial advice. Sources: ${esc((p.sources || []).join('; '))}. <a href="${share}" target="_blank" rel="noopener">Share on X</a></p>
+      <p class="fine">Paper trade for entertainment, not financial advice. Sources: ${esc((p.sources || []).join('; '))}. ${p.x_url ? `<a href="${esc(p.x_url)}" target="_blank" rel="noopener">See the post on X</a> or ` : ''}<a href="${share}" target="_blank" rel="noopener">share it</a></p>
     </article>`;
   }
 
