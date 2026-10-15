@@ -124,7 +124,7 @@
         `<p class="muted sbnote">${judged ? `Sample size: ${judged}. Statisticians call this "not a sample". Buffadamus calls it a perfect record.` : 'No verdicts yet.'}</p>`;
     }
     if (arch) arch.innerHTML = items.length ? items.map(card).join('') : '<p class="empty">The scrolls are blank. For now.</p>';
-    if (teaser) teaser.innerHTML = [...items.filter(p => (p.verdict || 'pending') !== 'pending').slice(0, 1), ...items.filter(p => (p.verdict || 'pending') === 'pending').slice(0, 1)].map(card).join('') || '<p class="empty">The first prophecies are being inked.</p>';
+    if (teaser) teaser.innerHTML = [...items.filter(p => (p.verdict || 'pending') !== 'pending').slice(0, 1), ...items.filter(p => (p.verdict || 'pending') === 'pending').sort((x, y) => String(x.resolves || '9').localeCompare(String(y.resolves || '9')))].slice(0, 3).map(card).join('') || '<p class="empty">The first prophecies are being inked.</p>';
   });
 
   // ---------- Ask the Oracle ----------

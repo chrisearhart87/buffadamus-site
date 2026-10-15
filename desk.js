@@ -66,7 +66,8 @@
           ${Object.entries(p.facts || {}).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>
           ${p.dog ? `<p class="dog">🐕 ${esc(p.dog)}</p>` : ''}</div>
       </div>
-      <p class="fine">Paper trade for entertainment, not financial advice. Sources: ${esc((p.sources || []).join('; '))}. ${p.x_url ? `<a href="${esc(p.x_url)}" target="_blank" rel="noopener">See the post on X</a> or ` : ''}<a href="${share}" target="_blank" rel="noopener">share it</a></p>
+      <p class="fine links">${p.x_url ? `<a href="${esc(p.x_url)}" target="_blank" rel="noopener">See the post on X</a> · ` : ''}<a href="${share}" target="_blank" rel="noopener">Share this play on X</a></p>
+      <p class="fine">Paper trade for entertainment, not financial advice. Sources: ${esc((p.sources || []).join('; '))}.</p>
     </article>`;
   }
 
@@ -183,10 +184,10 @@
       const lg = $('#ledger');
       if (lg) lg.innerHTML = plays.length ? plays.slice().reverse().map(p => `<tr><td>${esc(p.id)}</td><td>${fmtD(p.session, { month: 'short', day: 'numeric' })}</td>
         <td><b>$${esc(p.ticker)}</b> <small>${p.kind === 'option' ? esc(p.option.type) + ' ' + money(p.option.strike, 0) : esc(p.side)}</small></td>
-        <td>${cro(p.stake || 0)} 🥐</td><td>${p.entry ? lv(p, p.entry.price) : WAITS}</td><td>${p.exit ? lv(p, p.exit.price) : p.mark ? lv(p, p.mark.price) + ' <small>now</small>' : WAITS}</td>
+        <td>${cro(p.stake || 0)} 🥐</td>${p.status === 'pending' ? `<td colspan="6" class="pendrow">Waits for the opening bell on ${fmtD(p.session)}. Entry, exit and croissants are filled in after that session closes.</td></tr>` : `<td>${p.entry ? lv(p, p.entry.price) : WAITS}</td><td>${p.exit ? lv(p, p.exit.price) : p.mark ? lv(p, p.mark.price) + ' <small>now</small>' : WAITS}</td>
         <td class="${cls(p.ret_pct)}">${p.ret_pct != null ? sgn(p.ret_pct) : WAITS}</td><td class="${cls(p.croissants)}">${p.croissants != null ? sgnC(p.croissants) : WAITS}</td>
         <td class="${cls(p.vs_spy_croissants)}">${p.vs_spy_croissants != null ? sgnC(p.vs_spy_croissants) : WAITS}</td>
-        <td>${esc(statusLabel(p))}${p.exit ? `<br><small>${esc(p.exit.reason)}</small>` : ''}</td></tr>`).join('') : '<tr><td colspan="10" class="lbl">No plays yet. The stars are being consulted.</td></tr>';
+        <td>${esc(statusLabel(p))}${p.exit ? `<br><small>${esc(p.exit.reason)}</small>` : ''}</td></tr>`}`).join('') : '<tr><td colspan="10" class="lbl">No plays yet. The stars are being consulted.</td></tr>';
       labelTable('table.ledger');
     }
     // ----- market -----

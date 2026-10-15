@@ -78,7 +78,7 @@ footer .fine{font-size:15px}
 .teaser-play svg{width:100%;height:auto;display:block}
 .teaser-play .px{fill:none;stroke:#3b2d20;stroke-width:1.8}.teaser-play .lv{stroke-width:1.2;stroke-dasharray:5 4}
 .teaser-play .lv.stop{stroke:#a23d26}.teaser-play .lv.tgt{stroke:#2f7a63}
-.teaser-play text{font-family:var(--serif);font-size:12px;fill:#5a4632}
+.teaser-play text{font-family:var(--serif);font-size:13px;fill:#5a4632}
 
 /* static X post cards */
 .posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
@@ -122,3 +122,19 @@ footer .fine{font-size:15px}
 @media (max-width:700px){.posts{grid-template-columns:1fr}.intro p.bio{text-align:left}.teaser-play .levels b{font-size:17px}}
 .teaser-play .levels b{white-space:nowrap}
 .parch-band .fineprint{color:#6b5a44!important}
+
+/* ===== pass 2 (2026-10-15): one card style for prophecies, brighter fine print ===== */
+:root{--muted:#ddd0b0}
+.prophecy.card{background:#f6eedb;border:1px solid #d6c59c;color:var(--ink);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.prophecy .num{color:#8a6a28}
+.prophecy h3{color:#3a2a19}
+.prophecy blockquote{color:#2b2118}
+.prophecy .meta,.parch-band .prophecy .meta{color:#5f4b36}
+.prophecy .meta em{color:#4a3a2a}
+.prophecy a,.prophecy .share{color:#7a5a1c}
+.prophecy .v-pending{color:#8a6a28}.prophecy .v-fulfilled{color:#2f6e2b}.prophecy .v-muffed{color:#9a3420}
+.stat .k{color:var(--gold)}
+footer,footer a{color:#e2d6b8}
+.hero::after{background:linear-gradient(180deg,rgba(15,11,9,.15) 0%,rgba(15,11,9,0) 30%,rgba(15,11,9,.35) 62%,rgba(15,11,9,.92) 88%,var(--velvet) 100%)}
+.hero h1{text-shadow:0 2px 0 #1a120c,0 6px 30px rgba(0,0,0,.9)}
+.intro .medallion{width:220px;height:220px}@media (max-width:700px){.intro .medallion{width:180px;height:180px}}
