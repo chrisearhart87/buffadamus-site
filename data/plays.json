@@ -1,11 +1,24 @@
 {
- "note": "Buffadamus paper-trade ledger. Written only by tools/desk.py (add / update). Rules in docs/DESK.md. Paper trades for entertainment, not financial advice.",
+ "note": "Buffadamus paper-trade ledger. Written only by tools/desk.py (add / update). Rules and guard rails in docs/DESK.md. Paper trades for entertainment, not financial advice.",
  "bank": {
   "start": 10000,
   "croissant_usd": 4.0,
   "stake_shares": 1000,
   "stake_option": 250,
-  "since": "2026-10-15"
+  "since": "2026-10-15",
+  "risk": {
+   "risk_per_play_pct": 1.0,
+   "max_stake_pct": 25,
+   "max_option_stake_pct": 2.5,
+   "max_open_plays": 4,
+   "max_open_risk_pct": 4.0,
+   "max_gross_pct": 80,
+   "daily_loss_halt_pct": 2.0,
+   "weekly_drawdown_halt_pct": 5.0,
+   "hard_stop_pct": 15.0,
+   "max_options_per_week": 2,
+   "max_same_sector_open": 2
+  }
  },
  "plays": [
   {
@@ -53,7 +66,9 @@
    "rr": 1.98,
    "id": "P001",
    "status": "pending",
-   "stake": 1000
+   "stake": 2500.0,
+   "risk_at_stop": 51.2,
+   "sector": "Health care"
   }
  ],
  "summary": {
@@ -75,7 +90,12 @@
   "vs_spy": null,
   "streak": null,
   "usd": 40000.0,
-  "updated": "2026-10-15 04:17 PT"
+  "updated": "2026-10-14 21:45 PT"
  },
- "equity": []
+ "equity": [],
+ "equity_daily": [],
+ "guard": {
+  "status": "ok",
+  "checked": "2026-10-14 21:45 PT"
+ }
 }

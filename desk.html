@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trading Desk - Buffadamus</title>
-<meta name="description" content="One paper-trade play a day with the stop and target written in, a Croissant Bank scoreboard, the market close, and the economic and earnings calendars. Parody. Not financial advice.">
+<meta name="description" content="One paper-trade play a day with the stop and target written in, a Croissant Bank scoreboard with guard rails, fear and greed, market breadth, index indicators, the yield curve, and the economic and earnings calendars. Parody. Not financial advice.">
 <meta name="theme-color" content="#0f0b09">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Trading Desk - Buffadamus">
@@ -18,9 +18,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=202610142230">
+<link rel="stylesheet" href="style.css?v=202610142245">
+<link rel="stylesheet" href="desk.css?v=202610142245">
 </head>
-<body>
+<body class="desk">
 <header class="topnav">
   <div class="wrap">
     <a class="brand" href="./"><img src="avatar.jpg" alt=""><span>BUFFADAMUS</span></a>
@@ -36,71 +37,92 @@
   </div>
 </header>
 <main>
-  <section>
+  <section class="mast">
     <div class="wrap">
-      <p class="kicker">The Oracle's Trading Desk · paper trades, real prices</p>
-      <h1 style="font-size:clamp(38px,7vw,64px);text-align:left">Trading Desk</h1>
-      <p class="lede" style="font-size:21px">One play every market day, with the stop loss and take profit written in before the open. Every play is paper traded and kept on the record, winners and losers, and the profit or loss is paid in croissants.</p>
-      <p class="lede" style="font-size:15px">Entertainment from a parody character. Not financial advice. Paper trades only. He is usually wrong; the ledger proves it either way.</p>
+      <h1>The Trading Desk</h1>
+      <p>One play every market day, stop and target written in before the open. Every result goes on the record and is paid in croissants.</p>
+      <p class="asof" id="asof"></p>
+      <div class="tape" id="tape"></div>
     </div>
   </section>
 
-  <section style="padding-top:0" id="play">
-    <div class="wrap"><div id="todays-play"><p class="empty">Consulting the stars...</p></div></div>
+  <section class="hero2-wrap">
+    <div class="wrap hero2">
+      <div id="todays-play"><p class="empty">Consulting the stars...</p></div>
+      <div class="panel astro" id="astro"></div>
+    </div>
   </section>
 
-  <section style="padding-top:0" id="bank">
+  <section class="band" id="breadth">
     <div class="wrap">
-      <p class="kicker">The scoreboard</p>
-      <h2>The Croissant Bank</h2>
-      <p class="lede">Started with 10,000 croissants on Oct 15, 2026. 1 croissant = $4.00 of paper money. Each stock play stakes 1,000 croissants and each option play stakes 250. Every play is compared with simply buying the S&amp;P 500 (SPY) on the same days.</p>
-      <div id="bank-stats" class="stats"></div>
-      <div class="grid2" style="align-items:start">
-        <div class="card"><h3>Bank over time</h3><div id="equity" class="chart"></div></div>
-        <div class="card" id="ci-tile"></div>
-      </div>
-      <div class="card" style="overflow-x:auto;margin-top:18px">
-        <h3>Every play, on the record</h3>
-        <table class="log"><thead><tr><th>Play</th><th>Day</th><th>What</th><th>Entry</th><th>Exit</th><th>Move</th><th>Croissants</th><th>Status</th></tr></thead><tbody id="ledger"></tbody></table>
-        <p class="fineprint" id="bank-updated"></p>
+      <h2 class="sec">How many ships rose with the tide</h2>
+      <p class="sec-sub">Market breadth: whether the whole market moved, or only a few giants.</p>
+      <div class="breadth">
+        <div class="panel" id="breadth-split"></div>
+        <div class="panel" id="breadth-rings"></div>
       </div>
     </div>
   </section>
 
-  <section style="padding-top:0" id="market">
+  <section class="band" id="instruments">
     <div class="wrap">
-      <div id="mkt-head"></div>
-      <div id="mkt-indices" class="stats"></div>
-      <div class="grid2" style="align-items:start">
-        <div class="card"><h3>What moved the market</h3><ul id="mkt-notes" class="notes"></ul></div>
-        <div class="card"><h3>Sectors</h3><div id="mkt-sectors"></div></div>
-      </div>
-      <h3 style="margin-top:22px">Rates, commodities and crypto</h3>
-      <div id="mkt-macro" class="stats"></div>
-      <div class="card"><div id="mkt-movers" class="grid2" style="gap:18px"></div></div>
-      <p class="fineprint" id="mkt-sources"></p>
+      <h2 class="sec">The instruments</h2>
+      <p class="sec-sub">Trend, momentum and stretch for the four big index funds. Green dots mean the price sits above its 20, 50 and 200-day averages.</p>
+      <div class="panel inst-wrap"><table class="inst"><thead><tr><th>Fund</th><th>Close</th><th>Day</th><th>Trend 20 / 50 / 200</th><th>RSI (14)</th><th>MACD</th><th>ADX</th><th>Bollinger %B</th><th>Daily range</th><th>Off the high</th></tr></thead><tbody id="inst"></tbody></table></div>
     </div>
   </section>
 
-  <section style="padding-top:0" id="calendar">
-    <div class="wrap grid2" style="align-items:start">
-      <div class="card" style="overflow-x:auto"><h3>Economic calendar</h3><p class="fineprint" style="margin-top:0"><span class="imp i-high"></span>high <span class="imp i-medium"></span>medium <span class="imp i-low"></span>low impact. Times Pacific.</p><table class="log econ"><tbody id="econ"></tbody></table></div>
-      <div class="card"><h3>Earnings calendar</h3><div id="earnings"></div></div>
+  <section class="band" id="sectors">
+    <div class="wrap twin">
+      <div><h2 class="sec">Where the money went</h2><p class="sec-sub">Sector funds, today's move.</p><div class="heat" id="heat"></div></div>
+      <div><h2 class="sec">The price of time</h2><p class="sec-sub" id="curve-sub">US Treasury yield curve.</p><div class="panel curve" id="curve"></div><div class="macro" id="macro"></div></div>
     </div>
   </section>
 
-  <section style="padding-top:0" id="rules">
+  <section class="band" id="news">
+    <div class="wrap twin">
+      <div><h2 class="sec">What moved the market</h2><ul class="notes2" id="notes"></ul></div>
+      <div><h2 class="sec">Biggest movers</h2><p class="sec-sub" id="movers-note"></p><div class="movers" id="movers"></div></div>
+    </div>
+  </section>
+
+  <section class="band" id="bank">
     <div class="wrap">
-      <h2>House rules</h2>
-      <div class="grid3">
-        <div class="card"><h3>1. Written in ink</h3><p class="lede" style="margin:0">Each play is published the evening before with its entry, stop loss, take profit and maximum hold. Nothing is changed after it is published.</p></div>
-        <div class="card"><h3>2. No hindsight</h3><p class="lede" style="margin:0">Entry is the next opening price. If a stop and a target are both touched in one day, the stop counts. A gap past a level fills at the open. A play that opens beyond its levels is void.</p></div>
-        <div class="card"><h3>3. Big names only</h3><p class="lede" style="margin:0">Large, heavily traded US stocks and ETFs, or their listed options. No penny stocks, no small coins, no promotions, no paid picks. Options are bought, never sold.</p></div>
+      <h2 class="sec">The Croissant Bank</h2>
+      <p class="sec-sub">Paper money, real prices. Started with 10,000 croissants on Oct 15, 2026; one croissant is $4.00.</p>
+      <div class="bank">
+        <div class="panel" id="bank-card"></div>
+        <div class="panel eq" id="equity"></div>
       </div>
-      <p class="fineprint" style="margin-top:16px">Buffadamus is a parody character. These are hypothetical paper trades published for entertainment and education. They are not personalized advice, not a recommendation to buy or sell anything, and past paper results do not predict anything. Trading, and especially options, can lose money quickly. Do your own research or talk to a licensed professional.</p>
+      <div class="panel" style="margin-top:18px;overflow-x:auto">
+        <table class="ledger"><thead><tr><th>Play</th><th>Day</th><th>Position</th><th>Stake</th><th>Entry</th><th>Exit</th><th>Move</th><th>Croissants</th><th>vs S&amp;P</th><th>Result</th></tr></thead><tbody id="ledger"></tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="calendar">
+    <div class="wrap">
+      <h2 class="sec">The fortnight ahead</h2>
+      <p class="sec-sub">Economic releases (times Pacific; red = market-moving) and large-company earnings (solid = before the open, dashed = after the close).</p>
+      <div class="cal" id="cal"></div>
+      <p class="fine" id="cal-src"></p>
+    </div>
+  </section>
+
+  <section class="band" id="rules">
+    <div class="wrap rules">
+      <div><h3>Written in ink</h3><p>Each play is published after the close with its entry, stop loss, take profit and a five-session limit. Entry is the next opening price. A gap through a level fills at the open, and if both levels are touched in one day the stop counts. Nothing is edited after publishing.</p></div>
+      <div><h3>The treasury guard</h3><ul>
+        <li>No play risks more than 1% of the bank at its stop, and no stock play is bigger than 25% of the bank.</li>
+        <li>Options are bought only, at most 2.5% of the bank each and two a week.</li>
+        <li>At most 4 plays open, 4% of the bank at risk, two per sector.</li>
+        <li>A 2% losing day sits out the next session. A 5% slide in five sessions pauses new plays until Monday. A 15% loss stops the desk until a human resets it.</li></ul></div>
+      <div><h3>Big names only</h3><p>Large, heavily traded US stocks and funds, or their listed options. No penny stocks, coins, promotions or paid picks.</p>
+        <p class="fine">Buffadamus is a parody character. These are hypothetical paper trades for entertainment and education, not personalized advice or a recommendation to buy or sell anything. Past paper results predict nothing. Options can lose value fast.</p></div>
     </div>
   </section>
 </main>
+
 
 
 <footer>
@@ -110,7 +132,7 @@
     <p class="fine">© <span id="year">2026</span> Buffadamus</p>
   </div>
 </footer>
-<script src="desk.js?v=202610142230" defer></script>
-<script src="app.js?v=202610142230" defer></script>
+<script src="desk.js?v=202610142245" defer></script>
+<script src="app.js?v=202610142245" defer></script>
 </body>
 </html>
