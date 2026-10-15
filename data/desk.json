@@ -1,245 +1,225 @@
 {
  "note": "Trading Desk snapshot. Rewritten every market day by the after-close task. Every number carries its source in 'sources'.",
- "asof": "2026-10-14",
- "updated": "2026-10-14 22:30 PT",
- "headline": "Hot CPI sends yields up and tech down; health care and staples catch the bid",
+ "asof": "2026-10-15",
+ "updated": "2026-10-15 14:50 PT",
+ "headline": "Hot PPI, lower yields: the Dow jumps 1.1% as money rotates out of chips into health care and software",
  "indices": [
   {
    "name": "S&P 500",
-   "level": 7718.94,
-   "pct": -1.11,
+   "level": 7744.06,
+   "pct": 0.33,
    "etf": "SPY",
-   "etf_close": 769.6,
-   "src": "Robinhood SPX quote; % TheStreet"
+   "etf_close": 771.79,
+   "src": "Robinhood SPX quote; % ts2.tech wrap"
   },
   {
    "name": "Nasdaq 100",
-   "level": 29950.82,
-   "pct": -1.97,
+   "level": 29935.59,
+   "pct": -0.05,
    "etf": "QQQ",
-   "etf_close": 728.95,
-   "src": "Robinhood NDX quote; % from QQQ"
+   "etf_close": 728.0,
+   "src": "Robinhood NDX quote; % vs Oct 14 NDX quote"
   },
   {
    "name": "Dow Jones",
-   "level": 51621.48,
-   "pct": -0.09,
+   "level": 52177.69,
+   "pct": 1.08,
    "etf": "DIA",
-   "etf_close": 515.63,
-   "src": "TheStreet"
+   "etf_close": 521.18,
+   "src": "ts2.tech market wrap"
   },
   {
    "name": "Russell 2000",
-   "level": 2729.53,
-   "pct": -1.93,
+   "level": 2767.27,
+   "pct": 1.38,
    "etf": "IWM",
-   "etf_close": 271.37,
-   "src": "TheStreet"
+   "etf_close": 275.08,
+   "src": "ts2.tech market wrap"
   }
  ],
  "macro": [
   {
    "name": "Gold (GLD)",
-   "value": "$375.99",
-   "pct": -1.49
+   "value": "$382.71",
+   "pct": 1.79
   },
   {
    "name": "Silver (SLV)",
-   "value": "$50.22",
-   "pct": -6.11
+   "value": "$51.92",
+   "pct": 3.39
   },
   {
    "name": "Oil (USO)",
-   "value": "$153.56",
-   "pct": 0.31
+   "value": "$157.31",
+   "pct": 2.44
   },
   {
    "name": "Bitcoin (IBIT)",
-   "value": "$46.24",
-   "pct": -1.89
+   "value": "$46.59",
+   "pct": 0.76
   },
   {
    "name": "Dollar (UUP)",
-   "value": "$29.12",
-   "pct": 0.34
+   "value": "$29.00",
+   "pct": -0.41
   }
  ],
  "sectors": [
   {
    "name": "Health care",
    "etf": "XLV",
-   "pct": 2.53
-  },
-  {
-   "name": "Staples",
-   "etf": "XLP",
-   "pct": 2.22
-  },
-  {
-   "name": "Energy",
-   "etf": "XLE",
-   "pct": 0.64
+   "pct": 1.86
   },
   {
    "name": "Materials",
    "etf": "XLB",
-   "pct": -0.1
-  },
-  {
-   "name": "Utilities",
-   "etf": "XLU",
-   "pct": -0.36
-  },
-  {
-   "name": "Financials",
-   "etf": "XLF",
-   "pct": -0.55
+   "pct": 1.79
   },
   {
    "name": "Discretionary",
    "etf": "XLY",
-   "pct": -0.77
-  },
-  {
-   "name": "Real estate",
-   "etf": "XLRE",
-   "pct": -0.81
-  },
-  {
-   "name": "Industrials",
-   "etf": "XLI",
-   "pct": -0.97
+   "pct": 1.71
   },
   {
    "name": "Communication",
    "etf": "XLC",
-   "pct": -1.3
+   "pct": 1.46
+  },
+  {
+   "name": "Financials",
+   "etf": "XLF",
+   "pct": 1.38
+  },
+  {
+   "name": "Real estate",
+   "etf": "XLRE",
+   "pct": 1.21
+  },
+  {
+   "name": "Staples",
+   "etf": "XLP",
+   "pct": 0.72
+  },
+  {
+   "name": "Industrials",
+   "etf": "XLI",
+   "pct": 0.51
+  },
+  {
+   "name": "Utilities",
+   "etf": "XLU",
+   "pct": -0.17
   },
   {
    "name": "Technology",
    "etf": "XLK",
-   "pct": -2.98
+   "pct": -0.65
   },
   {
    "name": "Semiconductors",
    "etf": "SMH",
-   "pct": -3.98
+   "pct": -1.04
+  },
+  {
+   "name": "Energy",
+   "etf": "XLE",
+   "pct": -1.58
   }
  ],
  "movers": {
   "note": "US stocks over $10 with more than $1.5B traded; leveraged ETFs excluded",
   "up": [
    {
-    "t": "UNH",
-    "pct": 4.73,
-    "close": 395.62
+    "t": "IONQ",
+    "pct": 9.33,
+    "close": 34.35
    },
    {
-    "t": "MRNA",
-    "pct": 4.65,
-    "close": 226.3
+    "t": "COIN",
+    "pct": 6.32,
+    "close": 183.81
    },
    {
-    "t": "LLY",
-    "pct": 3.62,
-    "close": 1208.74
+    "t": "NOW",
+    "pct": 6.14,
+    "close": 148.57
    },
    {
-    "t": "WMT",
-    "pct": 3.46,
-    "close": 116.16
+    "t": "CRWV",
+    "pct": 5.94,
+    "close": 69.69
    },
    {
-    "t": "ABBV",
-    "pct": 3.32,
-    "close": 283.48
+    "t": "MSTR",
+    "pct": 5.62,
+    "close": 151.29
    },
    {
-    "t": "COST",
-    "pct": 2.87,
-    "close": 982.0
+    "t": "NKE",
+    "pct": 5.21,
+    "close": 37.14
    }
   ],
   "down": [
    {
-    "t": "CRWV",
-    "pct": -15.46,
-    "close": 65.78
-   },
-   {
-    "t": "IREN",
-    "pct": -12.18,
-    "close": 30.56
+    "t": "HPE",
+    "pct": -7.1,
+    "close": 58.63
    },
    {
     "t": "DELL",
-    "pct": -11.27,
-    "close": 507.93
+    "pct": -6.8,
+    "close": 473.39
    },
    {
-    "t": "NBIS",
-    "pct": -10.08,
-    "close": 186.01
+    "t": "RKLB",
+    "pct": -6.64,
+    "close": 55.25
    },
    {
-    "t": "CRDO",
-    "pct": -9.62,
-    "close": 179.23
+    "t": "ANET",
+    "pct": -5.04,
+    "close": 185.58
    },
    {
-    "t": "LITE",
-    "pct": -9.28,
-    "close": 896.33
+    "t": "COHR",
+    "pct": -4.83,
+    "close": 250.6
+   },
+   {
+    "t": "TER",
+    "pct": -4.52,
+    "close": 343.21
    }
   ]
  },
  "notes": [
   {
-   "text": "September CPI ran hot: 3.7% a year vs 3.6% expected (+0.6% on the month, as expected). Core 2.6% vs 2.5% expected, +0.3% on the month vs +0.2%.",
-   "src": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-14-2026"
+   "text": "Wholesale inflation ran hot: September PPI +1.3% on the month vs +0.5% expected and +6.3% a year vs 5.3%. Core PPI +0.7% vs +0.3%.",
+   "src": "https://investrade.com/market-review-october-15-2026"
   },
   {
-   "text": "Rate-hike bets lifted the 10-year yield about 6 bp to 5.28%, and growth and small caps paid: Nasdaq -1.88%, Russell 2000 -1.93%, while the Dow finished flat.",
-   "src": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-14-2026"
+   "text": "Retail sales beat on the headline (+0.8% vs +0.3% expected) but the control group missed (+0.1% vs +0.3%). Jobless claims 199K vs 200K expected.",
+   "src": "https://investrade.com/market-review-october-15-2026"
   },
   {
-   "text": "Tech was the worst sector (-3.0%) and semis fell 4%. AI infrastructure took the hardest hits: CoreWeave -15.5%, Dell -11.3% after a Barclays downgrade to Equal Weight.",
-   "src": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-14-2026"
+   "text": "Yields fell anyway: the 10-year dropped about 9 bp to 5.10%. The Dow gained 1.08% and the Russell 2000 1.38%; about seven in ten S&P 500 stocks rose.",
+   "src": "https://ts2.tech/en/dow-jumps-1-1-russell-2000-rises-1-4-as-broad-rotation-beats-tech/"
   },
   {
-   "text": "Money hid in defensives: health care +2.5% and staples +2.2%, led by UnitedHealth +4.7%, Eli Lilly +3.6% and Walmart +3.5%.",
-   "src": "Massive daily bars 2026-10-14"
+   "text": "Software bounced while chip equipment sank: ServiceNow +6.1%, Salesforce +4.6%, Adobe +4.6%; Applied Materials -3.7%, Lam -3.3%, HPE -7.1%, Dell -6.8%.",
+   "src": "Massive daily bars 2026-10-15"
   },
   {
-   "text": "Bank earnings were mixed: BlackRock rose on a beat; Bank of America fell on a profit drop and a regulatory penalty over $1.2B; State Street fell on a revenue miss.",
-   "src": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-14-2026"
+   "text": "TSMC fell 1.8% despite a record quarter (profit +68.7% a year) as its gross margin slipped to 66.4%. CoreWeave reversed a 9.5% morning drop to close +5.9%.",
+   "src": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-15-2026"
+  },
+  {
+   "text": "Health care led again: XLV +1.86% to a record, with Eli Lilly +3.6% and Thermo Fisher +3.5%.",
+   "src": "Massive daily bars 2026-10-15"
   }
  ],
  "econ": [
-  {
-   "date": "2026-10-15",
-   "time_pt": "05:30",
-   "event": "Producer Price Index (Sep)",
-   "importance": "high",
-   "detail": "Wholesale inflation; follows today's hot CPI",
-   "src": "https://www.bls.gov/schedule/2026/10_sched_list.htm"
-  },
-  {
-   "date": "2026-10-15",
-   "time_pt": "05:30",
-   "event": "Retail Sales (Sep, advance)",
-   "importance": "high",
-   "detail": "Consumer spending read",
-   "src": "https://fedratecalc.com/us-economic-calendar/october-2026/"
-  },
-  {
-   "date": "2026-10-15",
-   "time_pt": "05:30",
-   "event": "Initial jobless claims (weekly)",
-   "importance": "medium",
-   "detail": "Every Thursday",
-   "src": "https://www.dol.gov/ui/data.pdf"
-  },
   {
    "date": "2026-10-16",
    "time_pt": "05:30",
@@ -247,6 +227,14 @@
    "importance": "low",
    "detail": "",
    "src": "https://www.bls.gov/schedule/2026/10_sched_list.htm"
+  },
+  {
+   "date": "2026-10-16",
+   "time_pt": "06:15",
+   "event": "Industrial production + capacity utilization (Sep)",
+   "importance": "medium",
+   "detail": "Factory output read",
+   "src": "https://ts2.tech/en/dow-jumps-1-1-russell-2000-rises-1-4-as-broad-rotation-beats-tech/"
   },
   {
    "date": "2026-10-20",
@@ -309,39 +297,11 @@
   "note": "Large caps only. Dates from the Robinhood earnings calendar (company-verified); am = before the open, pm = after the close.",
   "items": [
    {
-    "date": "2026-10-15",
+    "date": "2026-10-16",
     "when": "am",
-    "t": "TSM",
-    "name": "Taiwan Semiconductor",
-    "eps_est": 4.45
-   },
-   {
-    "date": "2026-10-15",
-    "when": "am",
-    "t": "SCHW",
-    "name": "Charles Schwab",
-    "eps_est": 1.66
-   },
-   {
-    "date": "2026-10-15",
-    "when": "am",
-    "t": "PNC",
-    "name": "PNC Financial",
-    "eps_est": 4.91
-   },
-   {
-    "date": "2026-10-15",
-    "when": "am",
-    "t": "BNY",
-    "name": "BNY",
-    "eps_est": 2.26
-   },
-   {
-    "date": "2026-10-15",
-    "when": "am",
-    "t": "PLD",
-    "name": "Prologis",
-    "eps_est": 1.58
+    "t": "TRV",
+    "name": "Travelers",
+    "eps_est": 7.32
    },
    {
     "date": "2026-10-20",
@@ -353,6 +313,13 @@
    {
     "date": "2026-10-20",
     "when": "am",
+    "t": "NOC",
+    "name": "Northrop Grumman",
+    "eps_est": 7.17
+   },
+   {
+    "date": "2026-10-20",
+    "when": "am",
     "t": "RTX",
     "name": "RTX",
     "eps_est": 1.77
@@ -360,9 +327,16 @@
    {
     "date": "2026-10-20",
     "when": "pm",
-    "t": "NFLX",
-    "name": "Netflix",
-    "eps_est": 0.82
+    "t": "CB",
+    "name": "Chubb",
+    "eps_est": 6.72
+   },
+   {
+    "date": "2026-10-20",
+    "when": "pm",
+    "t": "COF",
+    "name": "Capital One",
+    "eps_est": 5.49
    },
    {
     "date": "2026-10-20",
@@ -374,16 +348,9 @@
    {
     "date": "2026-10-20",
     "when": "pm",
-    "t": "COF",
-    "name": "Capital One",
-    "eps_est": 5.49
-   },
-   {
-    "date": "2026-10-21",
-    "when": "am",
-    "t": "TMO",
-    "name": "Thermo Fisher",
-    "eps_est": 6.4
+    "t": "NFLX",
+    "name": "Netflix",
+    "eps_est": 0.82
    },
    {
     "date": "2026-10-21",
@@ -391,6 +358,13 @@
     "t": "ABT",
     "name": "Abbott",
     "eps_est": 1.42
+   },
+   {
+    "date": "2026-10-21",
+    "when": "am",
+    "t": "CME",
+    "name": "CME Group",
+    "eps_est": 2.97
    },
    {
     "date": "2026-10-21",
@@ -409,16 +383,16 @@
    {
     "date": "2026-10-21",
     "when": "am",
-    "t": "PM",
-    "name": "Philip Morris",
-    "eps_est": 2.33
+    "t": "NEE",
+    "name": "NextEra Energy",
+    "eps_est": 1.18
    },
    {
     "date": "2026-10-21",
     "when": "am",
-    "t": "NEE",
-    "name": "NextEra Energy",
-    "eps_est": 1.18
+    "t": "PM",
+    "name": "Philip Morris",
+    "eps_est": 2.33
    },
    {
     "date": "2026-10-21",
@@ -429,17 +403,10 @@
    },
    {
     "date": "2026-10-21",
-    "when": "pm",
-    "t": "TSLA",
-    "name": "Tesla",
-    "eps_est": 0.41
-   },
-   {
-    "date": "2026-10-21",
-    "when": "pm",
-    "t": "META",
-    "name": "Meta Platforms",
-    "eps_est": 6.21
+    "when": "am",
+    "t": "TMO",
+    "name": "Thermo Fisher",
+    "eps_est": 6.4
    },
    {
     "date": "2026-10-21",
@@ -451,16 +418,30 @@
    {
     "date": "2026-10-21",
     "when": "pm",
-    "t": "TXN",
-    "name": "Texas Instruments",
-    "eps_est": 2.41
+    "t": "LRCX",
+    "name": "Lam Research",
+    "eps_est": 2.18
    },
    {
     "date": "2026-10-21",
     "when": "pm",
-    "t": "LRCX",
-    "name": "Lam Research",
-    "eps_est": 2.18
+    "t": "META",
+    "name": "Meta Platforms",
+    "eps_est": 6.21
+   },
+   {
+    "date": "2026-10-21",
+    "when": "pm",
+    "t": "TSLA",
+    "name": "Tesla",
+    "eps_est": 0.41
+   },
+   {
+    "date": "2026-10-21",
+    "when": "pm",
+    "t": "TXN",
+    "name": "Texas Instruments",
+    "eps_est": 2.41
    },
    {
     "date": "2026-10-21",
@@ -470,32 +451,18 @@
     "eps_est": 13.94
    },
    {
-    "date": "2026-10-22",
-    "when": "am",
-    "t": "PG",
-    "name": "Procter & Gamble",
-    "eps_est": 1.89
+    "date": "2026-10-21",
+    "when": "pm",
+    "t": "WCN",
+    "name": "Waste Connections",
+    "eps_est": 1.52
    },
    {
     "date": "2026-10-22",
     "when": "am",
-    "t": "LMT",
-    "name": "Lockheed Martin",
-    "eps_est": 7.52
-   },
-   {
-    "date": "2026-10-22",
-    "when": "am",
-    "t": "UNP",
-    "name": "Union Pacific",
-    "eps_est": 3.47
-   },
-   {
-    "date": "2026-10-22",
-    "when": "am",
-    "t": "HON",
-    "name": "Honeywell",
-    "eps_est": 2.17
+    "t": "AAL",
+    "name": "American Airlines",
+    "eps_est": -0.32
    },
    {
     "date": "2026-10-22",
@@ -507,9 +474,37 @@
    {
     "date": "2026-10-22",
     "when": "am",
-    "t": "VLO",
-    "name": "Valero",
-    "eps_est": 20.91
+    "t": "CMCSA",
+    "name": "Comcast",
+    "eps_est": 0.99
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "HBAN",
+    "name": "Huntington Bancshares",
+    "eps_est": 0.38
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "LMT",
+    "name": "Lockheed Martin",
+    "eps_est": 7.52
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "NOK",
+    "name": "Nokia",
+    "eps_est": 0.08
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "PG",
+    "name": "Procter & Gamble",
+    "eps_est": 1.89
    },
    {
     "date": "2026-10-22",
@@ -521,16 +516,37 @@
    {
     "date": "2026-10-22",
     "when": "am",
-    "t": "AAL",
-    "name": "American Airlines",
-    "eps_est": -0.32
+    "t": "TSCO",
+    "name": "Tractor Supply",
+    "eps_est": 0.4
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "TTMI",
+    "name": "TTM Technologies",
+    "eps_est": 1.23
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "UNP",
+    "name": "Union Pacific",
+    "eps_est": 3.47
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "VLO",
+    "name": "Valero",
+    "eps_est": 20.91
    },
    {
     "date": "2026-10-22",
     "when": "pm",
-    "t": "WDC",
-    "name": "Western Digital",
-    "eps_est": 4.06
+    "t": "BE",
+    "name": "Bloom Energy",
+    "eps_est": 0.65
    },
    {
     "date": "2026-10-22",
@@ -538,6 +554,13 @@
     "t": "NEM",
     "name": "Newmont",
     "eps_est": 1.93
+   },
+   {
+    "date": "2026-10-22",
+    "when": "pm",
+    "t": "WDC",
+    "name": "Western Digital",
+    "eps_est": 4.06
    },
    {
     "date": "2026-10-23",
@@ -561,25 +584,32 @@
     "eps_est": 1.96
    },
    {
+    "date": "2026-10-26",
+    "when": "pm",
+    "t": "CLS",
+    "name": "Celestica",
+    "eps_est": 2.96
+   },
+   {
+    "date": "2026-10-26",
+    "when": "pm",
+    "t": "FIX",
+    "name": "Comfort Systems",
+    "eps_est": 12.73
+   },
+   {
+    "date": "2026-10-26",
+    "when": "pm",
+    "t": "WELL",
+    "name": "Welltower",
+    "eps_est": 0.83
+   },
+   {
     "date": "2026-10-27",
     "when": "am",
     "t": "BA",
     "name": "Boeing",
     "eps_est": -0.18
-   },
-   {
-    "date": "2026-10-27",
-    "when": "am",
-    "t": "KO",
-    "name": "Coca-Cola",
-    "eps_est": 0.88
-   },
-   {
-    "date": "2026-10-27",
-    "when": "am",
-    "t": "GLW",
-    "name": "Corning",
-    "eps_est": 0.88
    },
    {
     "date": "2026-10-27",
@@ -591,9 +621,16 @@
    {
     "date": "2026-10-27",
     "when": "am",
-    "t": "SOFI",
-    "name": "SoFi",
-    "eps_est": 0.17
+    "t": "GLW",
+    "name": "Corning",
+    "eps_est": 0.88
+   },
+   {
+    "date": "2026-10-27",
+    "when": "am",
+    "t": "HLT",
+    "name": "Hilton",
+    "eps_est": 2.35
    },
    {
     "date": "2026-10-27",
@@ -604,16 +641,37 @@
    },
    {
     "date": "2026-10-27",
-    "when": "pm",
-    "t": "V",
-    "name": "Visa",
-    "eps_est": 3.43
+    "when": "am",
+    "t": "KO",
+    "name": "Coca-Cola",
+    "eps_est": 0.88
+   },
+   {
+    "date": "2026-10-27",
+    "when": "am",
+    "t": "SHW",
+    "name": "Sherwin-Williams",
+    "eps_est": 3.69
+   },
+   {
+    "date": "2026-10-27",
+    "when": "am",
+    "t": "SOFI",
+    "name": "SoFi Technologies",
+    "eps_est": 0.17
+   },
+   {
+    "date": "2026-10-27",
+    "when": "am",
+    "t": "SPGI",
+    "name": "S&P Global",
+    "eps_est": 4.42
    },
    {
     "date": "2026-10-27",
     "when": "pm",
     "t": "HOOD",
-    "name": "Robinhood",
+    "name": "Robinhood Markets",
     "eps_est": 0.55
    },
    {
@@ -638,25 +696,39 @@
     "eps_est": 2.05
    },
    {
-    "date": "2026-10-28",
-    "when": "am",
-    "t": "GEV",
-    "name": "GE Vernova",
-    "eps_est": 4.02
+    "date": "2026-10-27",
+    "when": "pm",
+    "t": "V",
+    "name": "Visa",
+    "eps_est": 3.43
+   },
+   {
+    "date": "2026-10-27",
+    "when": "pm",
+    "t": "WM",
+    "name": "Waste Management",
+    "eps_est": 2.18
    },
    {
     "date": "2026-10-28",
     "when": "am",
-    "t": "VRT",
-    "name": "Vertiv",
-    "eps_est": 1.83
+    "t": "ADP",
+    "name": "ADP",
+    "eps_est": 2.77
    },
    {
     "date": "2026-10-28",
     "when": "am",
-    "t": "BSX",
-    "name": "Boston Scientific",
-    "eps_est": 0.75
+    "t": "AEP",
+    "name": "American Electric Power",
+    "eps_est": 1.93
+   },
+   {
+    "date": "2026-10-28",
+    "when": "am",
+    "t": "AON",
+    "name": "Aon",
+    "eps_est": 3.31
    },
    {
     "date": "2026-10-28",
@@ -668,44 +740,65 @@
    {
     "date": "2026-10-28",
     "when": "am",
+    "t": "FLEX",
+    "name": "Flex",
+    "eps_est": 1.04
+   },
+   {
+    "date": "2026-10-28",
+    "when": "am",
+    "t": "GEV",
+    "name": "GE Vernova",
+    "eps_est": 4.02
+   },
+   {
+    "date": "2026-10-28",
+    "when": "am",
+    "t": "PAG",
+    "name": "Penske Automotive",
+    "eps_est": 3.38
+   },
+   {
+    "date": "2026-10-28",
+    "when": "am",
     "t": "PSX",
     "name": "Phillips 66",
     "eps_est": 11.55
    },
    {
     "date": "2026-10-28",
-    "when": "pm",
-    "t": "MSFT",
-    "name": "Microsoft",
-    "eps_est": 4.72
+    "when": "am",
+    "t": "TEL",
+    "name": "TE Connectivity",
+    "eps_est": 3.07
+   },
+   {
+    "date": "2026-10-28",
+    "when": "am",
+    "t": "VRT",
+    "name": "Vertiv",
+    "eps_est": 1.83
    },
    {
     "date": "2026-10-28",
     "when": "pm",
-    "t": "GOOGL",
-    "name": "Alphabet",
-    "eps_est": 3.01
+    "t": "CVNA",
+    "name": "Carvana",
+    "eps_est": 0.45
    },
    {
     "date": "2026-10-28",
     "when": "pm",
-    "t": "NOW",
-    "name": "ServiceNow",
-    "eps_est": 0.93
+    "t": "EBAY",
+    "name": "eBay",
+    "eps_est": 1.35
    },
    {
     "date": "2026-10-28",
     "when": "pm",
-    "t": "KLAC",
-    "name": "KLA",
-    "eps_est": 1.18
-   },
-   {
-    "date": "2026-10-28",
-    "when": "pm",
-    "t": "TMUS",
-    "name": "T-Mobile US",
-    "eps_est": 2.9
+    "t": "EQIX",
+    "name": "Equinix",
+    "eps_est": 9.28
    },
    {
     "date": "2026-10-28",
@@ -717,26 +810,264 @@
    {
     "date": "2026-10-28",
     "when": "pm",
-    "t": "CVNA",
-    "name": "Carvana",
-    "eps_est": 0.45
+    "t": "GOOGL",
+    "name": "Alphabet",
+    "eps_est": 3.01
+   },
+   {
+    "date": "2026-10-28",
+    "when": "pm",
+    "t": "KLAC",
+    "name": "KLA",
+    "eps_est": 1.18
+   },
+   {
+    "date": "2026-10-28",
+    "when": "pm",
+    "t": "MSFT",
+    "name": "Microsoft",
+    "eps_est": 4.72
+   },
+   {
+    "date": "2026-10-28",
+    "when": "pm",
+    "t": "NOW",
+    "name": "ServiceNow",
+    "eps_est": 0.93
+   },
+   {
+    "date": "2026-10-28",
+    "when": "pm",
+    "t": "TMUS",
+    "name": "T-Mobile US",
+    "eps_est": 2.9
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "BMY",
+    "name": "Bristol-Myers Squibb",
+    "eps_est": 1.41
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "CAT",
+    "name": "Caterpillar",
+    "eps_est": 6.94
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "CCC",
+    "name": "CCC Intelligent Solutions",
+    "eps_est": 0.1
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "CRH",
+    "name": "CRH",
+    "eps_est": 2.12
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "HWM",
+    "name": "Howmet Aerospace",
+    "eps_est": 1.37
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "ICE",
+    "name": "Intercontinental Exchange",
+    "eps_est": 1.95
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "LHX",
+    "name": "L3Harris",
+    "eps_est": 3.05
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "LIN",
+    "name": "Linde",
+    "eps_est": 4.52
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "LLY",
+    "name": "Eli Lilly",
+    "eps_est": 7.23
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "MA",
+    "name": "Mastercard",
+    "eps_est": 5.15
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "MO",
+    "name": "Altria",
+    "eps_est": 1.51
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "MRK",
+    "name": "Merck",
+    "eps_est": 2.1
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "PWR",
+    "name": "Quanta Services",
+    "eps_est": 4.93
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "SHEL",
+    "name": "Shell",
+    "eps_est": 3.37
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "STM",
+    "name": "STMicroelectronics",
+    "eps_est": 0.41
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "TT",
+    "name": "Trane Technologies",
+    "eps_est": 4.73
+   },
+   {
+    "date": "2026-10-29",
+    "when": "pm",
+    "t": "AMZN",
+    "name": "Amazon",
+    "eps_est": 1.96
+   },
+   {
+    "date": "2026-10-29",
+    "when": "pm",
+    "t": "AXTI",
+    "name": "AXT Inc",
+    "eps_est": 0.31
+   },
+   {
+    "date": "2026-10-29",
+    "when": "pm",
+    "t": "COIN",
+    "name": "Coinbase",
+    "eps_est": -0.2
+   },
+   {
+    "date": "2026-10-29",
+    "when": "pm",
+    "t": "GILD",
+    "name": "Gilead Sciences",
+    "eps_est": 2.18
+   },
+   {
+    "date": "2026-10-29",
+    "when": "pm",
+    "t": "ILMN",
+    "name": "Illumina",
+    "eps_est": 1.36
+   },
+   {
+    "date": "2026-10-29",
+    "when": "pm",
+    "t": "INTC",
+    "name": "Intel",
+    "eps_est": 0.37
+   },
+   {
+    "date": "2026-10-29",
+    "when": "pm",
+    "t": "MDLZ",
+    "name": "Mondelez",
+    "eps_est": 0.71
+   },
+   {
+    "date": "2026-10-29",
+    "when": "pm",
+    "t": "MPWR",
+    "name": "Monolithic Power",
+    "eps_est": 7.48
+   },
+   {
+    "date": "2026-10-29",
+    "when": "pm",
+    "t": "MSTR",
+    "name": "Strategy",
+    "eps_est": 15.56
+   },
+   {
+    "date": "2026-10-29",
+    "when": "pm",
+    "t": "RDDT",
+    "name": "Reddit",
+    "eps_est": 1.32
+   },
+   {
+    "date": "2026-10-29",
+    "when": "pm",
+    "t": "SBUX",
+    "name": "Starbucks",
+    "eps_est": 0.7
+   },
+   {
+    "date": "2026-10-29",
+    "when": "pm",
+    "t": "SNDK",
+    "name": "Sandisk",
+    "eps_est": 46.06
+   },
+   {
+    "date": "2026-10-29",
+    "when": "pm",
+    "t": "SYK",
+    "name": "Stryker",
+    "eps_est": 3.56
+   },
+   {
+    "date": "2026-10-29",
+    "when": "pm",
+    "t": "TWLO",
+    "name": "Twilio",
+    "eps_est": 1.32
    }
   ]
  },
  "sources": [
   "Robinhood index quotes (SPX, NDX, VIX), scanner (S&P 500 breadth) and daily historicals (indicators)",
-  "Massive grouped daily bars 2026-10-13 and 2026-10-14 (ETF and stock closes, % changes)",
-  "Massive treasury yields",
-  "TheStreet market wrap 2026-10-14",
+  "Massive grouped daily bars 2026-10-14 and 2026-10-15 (ETF and stock closes, % changes)",
+  "Massive treasury yields (latest row Oct 13)",
+  "ts2.tech and Investrade market wraps 2026-10-15; TheStreet live blog 2026-10-15",
   "BLS release schedule October 2026",
   "Federal Reserve FOMC calendar",
-  "Robinhood earnings calendar (pulled 2026-10-14)",
+  "Robinhood earnings calendar (pulled 2026-10-15)",
   "CNN Fear & Greed (reference reading)"
  ],
  "vix": {
-  "value": 16.87,
-  "pct": null,
-  "src": "Robinhood VIX quote, 2026-10-14 16:15 ET"
+  "value": 16.46,
+  "pct": -2.43,
+  "src": "Robinhood VIX quote, 2026-10-15 16:15 ET"
  },
  "curve": {
   "date": "2026-10-13",
@@ -774,178 +1105,174 @@
   ]
  },
  "breadth": {
-  "universe": "S&P 500 members, Robinhood scanner at the Oct 14 close: 287 of 497 above the 20-day, 174 of 497 above the 50-day, 238 of 497 above the 200-day average.",
-  "pct20": 57.7,
-  "pct50": 35.0,
-  "pct200": 47.9,
-  "highs": 17,
-  "lows": 10,
-  "adv": 1113,
-  "dec": 3023,
-  "unch": 65,
-  "upvol_b": 255.1,
-  "downvol_b": 782.8,
-  "adv_universe": "Rising vs falling: 4,201 US-listed stocks and funds over $5 with more than $5M traded (Massive daily bars, Oct 14 vs Oct 13)."
+  "universe": "S&P 500 members, Robinhood scanner at the Oct 15 close: 346 of 497 above the 20-day, 218 of 497 above the 50-day, 257 of 497 above the 200-day average.",
+  "pct20": 69.6,
+  "pct50": 43.9,
+  "pct200": 51.7,
+  "highs": 25,
+  "lows": 1,
+  "adv": 3189,
+  "dec": 995,
+  "unch": 32,
+  "upvol_b": 647.5,
+  "downvol_b": 471.9,
+  "adv_universe": "Rising vs falling: 4,216 US-listed stocks and funds over $5 with more than $5M traded (Massive daily bars, Oct 15 vs Oct 14)."
  },
  "fng": {
   "oracle": {
-   "score": 55,
-   "rating": "Neutral",
+   "score": 61,
+   "rating": "Greed",
    "components": [
     {
      "name": "Market momentum",
-     "value": "S&P +2.5% vs 125-day avg",
-     "score": 62,
-     "rating": "Greed"
-    },
-    {
-     "name": "Stock price strength",
-     "value": "17 new 52-wk highs vs 10 lows",
-     "score": 63,
-     "rating": "Greed"
-    },
-    {
-     "name": "Stock price breadth",
-     "value": "35% of S&P 500 above 50-day",
-     "score": 35,
-     "rating": "Fear"
-    },
-    {
-     "name": "Market volatility",
-     "value": "VIXY -5.8% vs 50-day avg",
+     "value": "S&P +2.7% vs 125-day avg",
      "score": 64,
      "rating": "Greed"
     },
     {
+     "name": "Stock price strength",
+     "value": "25 new 52-wk highs vs 1 lows",
+     "score": 96,
+     "rating": "Extreme greed"
+    },
+    {
+     "name": "Stock price breadth",
+     "value": "44% of S&P 500 above 50-day",
+     "score": 44,
+     "rating": "Fear"
+    },
+    {
+     "name": "Market volatility",
+     "value": "VIXY -6.2% vs 50-day avg",
+     "score": 65,
+     "rating": "Greed"
+    },
+    {
      "name": "Safe haven demand",
-     "value": "Stocks +4.5 pts vs Treasuries (20 days)",
-     "score": 68,
+     "value": "Stocks +3.4 pts vs Treasuries (20 days)",
+     "score": 64,
      "rating": "Greed"
     },
     {
      "name": "Junk bond demand",
-     "value": "High yield -0.93 pts vs Treasuries (20 days)",
-     "score": 36,
+     "value": "High yield -1.03 pts vs Treasuries (20 days)",
+     "score": 34,
      "rating": "Fear"
     }
    ],
    "method": "Seven equal-weight gauges scored 0-100, modelled on CNN Fear & Greed. Bands: 0-24 extreme fear, 25-44 fear, 45-55 neutral, 56-75 greed, 76-100 extreme greed."
   },
   "cnn": {
-   "score": 44.6,
+   "score": 32.3,
    "rating": "Fear",
-   "prev_close": 44.7,
-   "week": 42.1,
-   "month": 31.0,
-   "year": 28.3,
-   "asof": "2026-10-14",
+   "prev_close": 32.3,
+   "week": 39.8,
+   "month": 28.0,
+   "year": 27.4,
+   "asof": "2026-10-15",
    "src": "https://edition.cnn.com/markets/fear-and-greed"
   }
  },
  "indicators": [
   {
    "t": "SPY",
-   "date": "2026-10-14",
-   "close": 769.6,
-   "chg": -1.08,
-   "chg5": -0.98,
-   "chg20": 2.06,
-   "ytd": 12.86,
-   "rsi": 49.6,
-   "macd": 3.008,
-   "macd_sig": 2.702,
-   "macd_hist": 0.306,
-   "sma20": 770.65,
-   "sma50": 768.57,
-   "sma200": 724.21,
-   "pct_b": 0.45,
-   "atr_pct": 0.84,
-   "adx": 9.4,
-   "di_plus": 25.2,
-   "di_minus": 33.6,
+   "date": "2026-10-15",
+   "close": 771.79,
+   "chg": 0.28,
+   "chg5": -0.28,
+   "chg20": 1.21,
+   "ytd": 13.18,
+   "rsi": 51.8,
+   "macd": 2.675,
+   "macd_sig": 2.697,
+   "macd_hist": -0.022,
+   "sma20": 771.11,
+   "sma50": 768.61,
+   "sma200": 724.63,
+   "pct_b": 0.53,
+   "atr_pct": 0.85,
+   "adx": 10.0,
+   "di_plus": 22.9,
+   "di_minus": 33.0,
    "hi52": 781.62,
    "lo52": 629.28,
-   "from_hi": -1.54
+   "from_hi": -1.26
   },
   {
    "t": "QQQ",
-   "date": "2026-10-14",
-   "close": 728.95,
-   "chg": -1.97,
-   "chg5": -3.8,
-   "chg20": 3.44,
-   "ytd": 18.66,
-   "rsi": 44.7,
-   "macd": 6.005,
-   "macd_sig": 8.075,
-   "macd_hist": -2.07,
-   "sma20": 742.55,
-   "sma50": 726.66,
-   "sma200": 673.92,
-   "pct_b": 0.18,
-   "atr_pct": 1.29,
-   "adx": 13.7,
-   "di_plus": 23.0,
-   "di_minus": 36.8,
+   "date": "2026-10-15",
+   "close": 728.0,
+   "chg": -0.13,
+   "chg5": -2.62,
+   "chg20": 1.55,
+   "ytd": 18.51,
+   "rsi": 44.1,
+   "macd": 4.335,
+   "macd_sig": 7.327,
+   "macd_hist": -2.992,
+   "sma20": 743.1,
+   "sma50": 726.87,
+   "sma200": 674.46,
+   "pct_b": 0.1,
+   "atr_pct": 1.34,
+   "adx": 15.1,
+   "di_plus": 20.6,
+   "di_minus": 41.1,
    "hi52": 762.86,
    "lo52": 555.6,
-   "from_hi": -4.45
+   "from_hi": -4.57
   },
   {
    "t": "IWM",
-   "date": "2026-10-14",
-   "close": 271.37,
-   "chg": -1.93,
-   "chg5": -2.28,
-   "chg20": -4.42,
-   "ytd": 10.24,
-   "rsi": 28.2,
-   "macd": -3.857,
-   "macd_sig": -3.603,
-   "macd_hist": -0.254,
-   "sma20": 280.51,
-   "sma50": 290.12,
-   "sma200": 277.41,
-   "pct_b": -0.14,
+   "date": "2026-10-15",
+   "close": 275.08,
+   "chg": 1.37,
+   "chg5": -0.9,
+   "chg20": -3.63,
+   "ytd": 11.75,
+   "rsi": 37.3,
+   "macd": -3.835,
+   "macd_sig": -3.649,
+   "macd_hist": -0.186,
+   "sma20": 279.99,
+   "sma50": 289.63,
+   "sma200": 277.54,
+   "pct_b": 0.16,
    "atr_pct": 1.34,
-   "adx": 40.1,
-   "di_plus": 13.2,
-   "di_minus": 43.7,
+   "adx": 40.8,
+   "di_plus": 13.5,
+   "di_minus": 40.0,
    "hi52": 305.18,
    "lo52": 228.9,
-   "from_hi": -11.08
+   "from_hi": -9.86
   },
   {
    "t": "DIA",
-   "date": "2026-10-14",
-   "close": 515.63,
-   "chg": -0.11,
-   "chg5": 0.9,
-   "chg20": 0.08,
-   "ytd": 7.3,
-   "rsi": 47.4,
-   "macd": -2.34,
-   "macd_sig": -3.376,
-   "macd_hist": 1.037,
-   "sma20": 514.34,
-   "sma50": 525.01,
-   "sma200": 503.96,
-   "pct_b": 0.6,
-   "atr_pct": 0.96,
-   "adx": 20.2,
-   "di_plus": 26.7,
-   "di_minus": 28.4,
+   "date": "2026-10-15",
+   "close": 521.18,
+   "chg": 1.08,
+   "chg5": 1.86,
+   "chg20": 0.55,
+   "ytd": 8.45,
+   "rsi": 55.0,
+   "macd": -1.659,
+   "macd_sig": -3.033,
+   "macd_hist": 1.374,
+   "sma20": 514.48,
+   "sma50": 524.58,
+   "sma200": 504.15,
+   "pct_b": 1.0,
+   "atr_pct": 0.97,
+   "adx": 19.2,
+   "di_plus": 29.5,
+   "di_minus": 25.9,
    "hi52": 546.75,
    "lo52": 450.44,
-   "from_hi": -5.69
+   "from_hi": -4.68
   }
  ],
  "series": {
   "SPY": [
-   [
-    "2026-04-10",
-    679.46
-   ],
    [
     "2026-04-13",
     686.1
@@ -1461,13 +1788,13 @@
    [
     "2026-10-14",
     769.6
+   ],
+   [
+    "2026-10-15",
+    771.79
    ]
   ],
   "QQQ": [
-   [
-    "2026-04-10",
-    611.07
-   ],
    [
     "2026-04-13",
     617.39
@@ -1983,13 +2310,13 @@
    [
     "2026-10-14",
     728.95
+   ],
+   [
+    "2026-10-15",
+    728.0
    ]
   ],
   "IWM": [
-   [
-    "2026-04-10",
-    261.3
-   ],
    [
     "2026-04-13",
     265.07
@@ -2505,13 +2832,13 @@
    [
     "2026-10-14",
     271.37
+   ],
+   [
+    "2026-10-15",
+    275.08
    ]
   ],
   "DIA": [
-   [
-    "2026-04-10",
-    479.25
-   ],
    [
     "2026-04-13",
     482.13
@@ -3027,13 +3354,13 @@
    [
     "2026-10-14",
     515.63
+   ],
+   [
+    "2026-10-15",
+    521.18
    ]
   ],
   "XLV": [
-   [
-    "2026-04-10",
-    147.31
-   ],
    [
     "2026-04-13",
     147.97
@@ -3549,13 +3876,13 @@
    [
     "2026-10-14",
     173.96
+   ],
+   [
+    "2026-10-15",
+    177.19
    ]
   ],
   "TLT": [
-   [
-    "2026-04-10",
-    86.49
-   ],
    [
     "2026-04-13",
     86.75
@@ -4071,13 +4398,13 @@
    [
     "2026-10-14",
     78.89
+   ],
+   [
+    "2026-10-15",
+    79.97
    ]
   ],
   "VIXY": [
-   [
-    "2026-04-10",
-    29.75
-   ],
    [
     "2026-04-13",
     28.62
@@ -4593,6 +4920,532 @@
    [
     "2026-10-14",
     16.53
+   ],
+   [
+    "2026-10-15",
+    16.4
+   ]
+  ],
+  "MSFT": [
+   [
+    "2026-04-13",
+    384.37
+   ],
+   [
+    "2026-04-14",
+    393.11
+   ],
+   [
+    "2026-04-15",
+    411.22
+   ],
+   [
+    "2026-04-16",
+    420.26
+   ],
+   [
+    "2026-04-17",
+    422.79
+   ],
+   [
+    "2026-04-20",
+    418.07
+   ],
+   [
+    "2026-04-21",
+    424.16
+   ],
+   [
+    "2026-04-22",
+    432.92
+   ],
+   [
+    "2026-04-23",
+    415.75
+   ],
+   [
+    "2026-04-24",
+    424.62
+   ],
+   [
+    "2026-04-27",
+    424.82
+   ],
+   [
+    "2026-04-28",
+    429.25
+   ],
+   [
+    "2026-04-29",
+    424.46
+   ],
+   [
+    "2026-04-30",
+    407.78
+   ],
+   [
+    "2026-05-01",
+    414.44
+   ],
+   [
+    "2026-05-04",
+    413.62
+   ],
+   [
+    "2026-05-05",
+    411.38
+   ],
+   [
+    "2026-05-06",
+    413.96
+   ],
+   [
+    "2026-05-07",
+    420.77
+   ],
+   [
+    "2026-05-08",
+    415.12
+   ],
+   [
+    "2026-05-11",
+    412.66
+   ],
+   [
+    "2026-05-12",
+    407.77
+   ],
+   [
+    "2026-05-13",
+    405.21
+   ],
+   [
+    "2026-05-14",
+    409.43
+   ],
+   [
+    "2026-05-15",
+    421.92
+   ],
+   [
+    "2026-05-18",
+    423.54
+   ],
+   [
+    "2026-05-19",
+    417.42
+   ],
+   [
+    "2026-05-20",
+    421.06
+   ],
+   [
+    "2026-05-21",
+    419.09
+   ],
+   [
+    "2026-05-22",
+    418.57
+   ],
+   [
+    "2026-05-26",
+    416.03
+   ],
+   [
+    "2026-05-27",
+    412.67
+   ],
+   [
+    "2026-05-28",
+    426.99
+   ],
+   [
+    "2026-05-29",
+    450.24
+   ],
+   [
+    "2026-06-01",
+    460.52
+   ],
+   [
+    "2026-06-02",
+    441.31
+   ],
+   [
+    "2026-06-03",
+    427.34
+   ],
+   [
+    "2026-06-04",
+    428.05
+   ],
+   [
+    "2026-06-05",
+    416.67
+   ],
+   [
+    "2026-06-08",
+    411.74
+   ],
+   [
+    "2026-06-09",
+    403.41
+   ],
+   [
+    "2026-06-10",
+    397.36
+   ],
+   [
+    "2026-06-11",
+    390.34
+   ],
+   [
+    "2026-06-12",
+    390.74
+   ],
+   [
+    "2026-06-15",
+    399.76
+   ],
+   [
+    "2026-06-16",
+    393.83
+   ],
+   [
+    "2026-06-17",
+    378.91
+   ],
+   [
+    "2026-06-18",
+    379.4
+   ],
+   [
+    "2026-06-22",
+    367.34
+   ],
+   [
+    "2026-06-23",
+    373.94
+   ],
+   [
+    "2026-06-24",
+    365.46
+   ],
+   [
+    "2026-06-25",
+    352.83
+   ],
+   [
+    "2026-06-26",
+    372.97
+   ],
+   [
+    "2026-06-29",
+    368.57
+   ],
+   [
+    "2026-06-30",
+    373.02
+   ],
+   [
+    "2026-07-01",
+    384.28
+   ],
+   [
+    "2026-07-02",
+    390.49
+   ],
+   [
+    "2026-07-06",
+    386.74
+   ],
+   [
+    "2026-07-07",
+    388.84
+   ],
+   [
+    "2026-07-08",
+    383.34
+   ],
+   [
+    "2026-07-09",
+    384.36
+   ],
+   [
+    "2026-07-10",
+    385.1
+   ],
+   [
+    "2026-07-13",
+    390.99
+   ],
+   [
+    "2026-07-14",
+    384.93
+   ],
+   [
+    "2026-07-15",
+    395.63
+   ],
+   [
+    "2026-07-16",
+    401.1
+   ],
+   [
+    "2026-07-17",
+    393.82
+   ],
+   [
+    "2026-07-20",
+    402.29
+   ],
+   [
+    "2026-07-21",
+    397.75
+   ],
+   [
+    "2026-07-22",
+    390.34
+   ],
+   [
+    "2026-07-23",
+    381.58
+   ],
+   [
+    "2026-07-24",
+    381.7
+   ],
+   [
+    "2026-07-27",
+    389.1
+   ],
+   [
+    "2026-07-28",
+    393.35
+   ],
+   [
+    "2026-07-29",
+    390.54
+   ],
+   [
+    "2026-07-30",
+    451.1
+   ],
+   [
+    "2026-07-31",
+    464.72
+   ],
+   [
+    "2026-08-03",
+    487.65
+   ],
+   [
+    "2026-08-04",
+    492.81
+   ],
+   [
+    "2026-08-05",
+    487.46
+   ],
+   [
+    "2026-08-06",
+    499.86
+   ],
+   [
+    "2026-08-07",
+    499.99
+   ],
+   [
+    "2026-08-10",
+    506.06
+   ],
+   [
+    "2026-08-11",
+    503.81
+   ],
+   [
+    "2026-08-12",
+    492.43
+   ],
+   [
+    "2026-08-13",
+    496.88
+   ],
+   [
+    "2026-08-14",
+    495.4
+   ],
+   [
+    "2026-08-17",
+    480.35
+   ],
+   [
+    "2026-08-18",
+    481.63
+   ],
+   [
+    "2026-08-19",
+    484.31
+   ],
+   [
+    "2026-08-20",
+    481.15
+   ],
+   [
+    "2026-08-21",
+    483.24
+   ],
+   [
+    "2026-08-24",
+    487.31
+   ],
+   [
+    "2026-08-25",
+    491.71
+   ],
+   [
+    "2026-08-26",
+    496.37
+   ],
+   [
+    "2026-08-27",
+    505.06
+   ],
+   [
+    "2026-08-28",
+    513.53
+   ],
+   [
+    "2026-08-31",
+    507.29
+   ],
+   [
+    "2026-09-01",
+    501.02
+   ],
+   [
+    "2026-09-02",
+    496.82
+   ],
+   [
+    "2026-09-03",
+    510.12
+   ],
+   [
+    "2026-09-04",
+    499.7
+   ],
+   [
+    "2026-09-08",
+    493.95
+   ],
+   [
+    "2026-09-09",
+    491.65
+   ],
+   [
+    "2026-09-10",
+    492.44
+   ],
+   [
+    "2026-09-11",
+    495.63
+   ],
+   [
+    "2026-09-14",
+    505.41
+   ],
+   [
+    "2026-09-15",
+    497.12
+   ],
+   [
+    "2026-09-16",
+    490.3
+   ],
+   [
+    "2026-09-17",
+    497.75
+   ],
+   [
+    "2026-09-18",
+    493.78
+   ],
+   [
+    "2026-09-21",
+    501.61
+   ],
+   [
+    "2026-09-22",
+    498.0
+   ],
+   [
+    "2026-09-23",
+    500.59
+   ],
+   [
+    "2026-09-24",
+    497.93
+   ],
+   [
+    "2026-09-25",
+    516.17
+   ],
+   [
+    "2026-09-28",
+    509.22
+   ],
+   [
+    "2026-09-29",
+    508.96
+   ],
+   [
+    "2026-09-30",
+    512.9
+   ],
+   [
+    "2026-10-01",
+    512.8
+   ],
+   [
+    "2026-10-02",
+    517.53
+   ],
+   [
+    "2026-10-05",
+    525.18
+   ],
+   [
+    "2026-10-06",
+    529.3
+   ],
+   [
+    "2026-10-07",
+    529.76
+   ],
+   [
+    "2026-10-08",
+    522.61
+   ],
+   [
+    "2026-10-09",
+    535.07
+   ],
+   [
+    "2026-10-12",
+    541.15
+   ],
+   [
+    "2026-10-13",
+    543.45
+   ],
+   [
+    "2026-10-14",
+    533.69
+   ],
+   [
+    "2026-10-15",
+    539.44
    ]
   ]
  }

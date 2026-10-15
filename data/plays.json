@@ -65,20 +65,81 @@
    ],
    "rr": 1.98,
    "id": "P001",
-   "status": "pending",
+   "status": "open",
    "stake": 2500.0,
    "risk_at_stop": 51.2,
    "sector": "Health care",
-   "x_url": "https://x.com/Buffadamus/status/2110602435320562164"
+   "x_url": "https://x.com/Buffadamus/status/2110602435320562164",
+   "entry": {
+    "date": "2026-10-15",
+    "price": 176.43
+   },
+   "mark": {
+    "date": "2026-10-15",
+    "price": 177.19,
+    "session": 1
+   },
+   "ret_pct": 0.43,
+   "croissants": 10.8
+  },
+  {
+   "session": "2026-10-16",
+   "published": "2026-10-15 14:45 PT",
+   "kind": "shares",
+   "side": "long",
+   "ticker": "MSFT",
+   "name": "Microsoft",
+   "sector": "Technology",
+   "instrument": "MSFT",
+   "entry_rule": "Market open, Fri Oct 16",
+   "ref_price": 539.44,
+   "stop": 524.5,
+   "target": 566.5,
+   "max_days": 5,
+   "headline": "Software over chips: long Microsoft",
+   "thesis": [
+    "Rotation inside tech: software bounced while chips sank. ServiceNow +6.1%, Salesforce +4.6% and Adobe +4.6%, against semis (SMH) -1.0%. MSFT rose 1.08% to $539.44 on 23.6M shares vs a 20.8M average.",
+    "Trend: above its 20-day ($516.37), 50-day ($503.91) and 200-day ($434.78) averages, with higher closes from $490.30 on Sep 16. RSI 62 leaves room before overbought.",
+    "Room to the high: 2.6% under the 52-week high of $553.72. Analysts: 56 buy, 3 hold, 0 sell, mean target $593.20. Earnings are Oct 28, after the 5-session window."
+   ],
+   "risks": [
+    "Wholesale inflation ran hot (PPI +6.3% a year) and the 10-year sits near 5.1%; a rate scare hits long-duration tech first.",
+    "The AI trade is wobbling: semis fell for a seventh straight session, and a spillover into AI software would hit MSFT.",
+    "The $553.72 52-week high is resistance, and a stop does not protect against an overnight gap."
+   ],
+   "facts": {
+    "Close Oct 15": "$539.44 (+1.08%)",
+    "ATR (14 days)": "$11.56",
+    "20-day average": "$516.37",
+    "50-day average": "$503.91",
+    "200-day average": "$434.78",
+    "RSI (14)": "62.4",
+    "52-week range": "$349.20 - $553.72",
+    "Volume Oct 15": "23.6M vs 20.8M avg",
+    "Market cap / P/E": "$4.0T / 29.7",
+    "Next earnings": "Oct 28 after the close (ex-dividend Nov 19)"
+   },
+   "dog": "The dog walked past the chip bowl, sat on the keyboard and opened a spreadsheet. In dog, that is a strong buy.",
+   "sources": [
+    "Massive daily bars 2026-10-15",
+    "Robinhood fundamentals, technicals (Oct 14 close) and analyst ratings 2026-10-15",
+    "Robinhood earnings calendar (pulled 2026-10-15)",
+    "Investrade market review 2026-10-15"
+   ],
+   "rr": 1.81,
+   "stake": 2500.0,
+   "risk_at_stop": 69.2,
+   "id": "P002",
+   "status": "pending"
   }
  ],
  "summary": {
   "bank": 10000,
   "realized": 0,
-  "unrealized": 0,
-  "plays": 1,
+  "unrealized": 10.8,
+  "plays": 2,
   "closed": 0,
-  "open": 0,
+  "open": 1,
   "pending": 1,
   "void": 0,
   "wins": 0,
@@ -91,12 +152,17 @@
   "vs_spy": null,
   "streak": null,
   "usd": 40000.0,
-  "updated": "2026-10-14 21:45 PT"
+  "updated": "2026-10-15 14:16 PT"
  },
  "equity": [],
- "equity_daily": [],
+ "equity_daily": [
+  {
+   "d": "2026-10-15",
+   "bank": 10010.8
+  }
+ ],
  "guard": {
   "status": "ok",
-  "checked": "2026-10-14 21:45 PT"
+  "checked": "2026-10-15 14:16 PT"
  }
 }
