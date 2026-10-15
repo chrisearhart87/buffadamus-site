@@ -205,7 +205,7 @@
   const pl = $('#posts');
   if (pl) loadJSON('data/posts.json').then(data => {
     const ps = (data && data.posts || []).slice(0, 4);
-    pl.innerHTML = ps.length ? ps.map(p => `<article class="post"><div class="who"><img src="avatar-engraved.jpg" alt="" width="40" height="40"><span><b>Buffadamus</b><br>@Buffadamus · ${fmtD(p.date, { month: 'short', day: 'numeric' })}</span></div>
+    pl.innerHTML = ps.length ? ps.map(p => `<article class="post"><div class="who"><img src="avatar.jpg" alt="" width="40" height="40"><span><b>Buffadamus</b><br>@Buffadamus · ${fmtD(p.date, { month: 'short', day: 'numeric' })}</span></div>
       <p>${esc(p.text)}</p><a class="view" href="${esc(p.url)}" target="_blank" rel="noopener">View on X</a></article>`).join('')
       : '<p class="empty">The town crier is resting his voice. <a href="https://x.com/Buffadamus">See @Buffadamus on X</a>.</p>';
   });
