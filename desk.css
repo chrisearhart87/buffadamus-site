@@ -187,3 +187,28 @@ body.desk main{padding-bottom:30px}
 @media (prefers-reduced-motion:no-preference){
   .desk .needle{transition:transform 1.4s cubic-bezier(.2,.8,.2,1)}
 }
+
+/* ---------- almanac polish (2026-10-14) ---------- */
+body.desk{--mute:#cbbd9c}
+.desk .lbl{font-size:15.5px}
+.desk .src{font-size:14px}
+.desk main .fine{font-size:14.5px}
+.desk .comp small{font-size:14px}
+.desk .cal .ev{font-size:15px}
+.desk .cal .er span{font-size:13.5px}
+.desk .pchart text,.desk .eq text{font-size:13px}
+.desk .wait{font-style:italic;font-weight:400;font-family:var(--serif);font-size:15px;color:var(--mute)}
+.desk .idle-line{font-style:italic;color:var(--brass2);margin:14px 0 0;font-size:17px}
+.desk .empty-play{padding:26px}
+@media (max-width:700px){
+  .desk .inst-wrap{overflow:visible}
+  .desk table.inst thead,.desk table.ledger thead{display:none}
+  .desk table.inst,.desk table.inst tbody,.desk table.ledger,.desk table.ledger tbody{display:block}
+  .desk table.inst tr,.desk table.ledger tr{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;padding:14px 4px;border-bottom:1px solid var(--rule)}
+  .desk table.inst td,.desk table.ledger td{display:flex;flex-direction:column;gap:2px;padding:0;border:none;white-space:normal}
+  .desk table.inst td::before,.desk table.ledger td::before{content:attr(data-label);font-style:italic;font-size:14px;color:var(--mute);font-family:var(--serif);font-weight:400}
+  .desk table.inst td.sym,.desk table.ledger td:first-child{grid-column:1/-1;font-size:22px}
+  .desk table.inst td.sym::before,.desk table.ledger td:first-child::before{display:none}
+  .desk table.ledger td[colspan]{grid-column:1/-1}
+  .desk table.ledger td[colspan]::before{display:none}
+}

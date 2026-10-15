@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Buffadamus - I see the future, then completely muff it</title>
-<meta name="description" content="Visiting from the year 1555. Half Warren Buffett, Half Nostradamus. I like 🥐 croissants and I have a dog. I post the Croissant Index daily. It is very loud here. Parody. Not financial advice.">
+<meta name="description" content="Visiting from the year 1555. Half Warren Buffett, Half Nostradamus. I like 🥐 croissants and I have a dog. It is very loud here. Parody. Not financial advice.">
 <meta name="theme-color" content="#0f0b09">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Buffadamus">
@@ -18,13 +18,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=202610142245">
+<link rel="stylesheet" href="style.css?v=202610142359">
+<link rel="stylesheet" href="almanac.css?v=202610142359">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 <header class="topnav">
   <div class="wrap">
-    <a class="brand" href="./"><img src="avatar.jpg" alt=""><span>BUFFADAMUS</span></a>
-    <nav aria-label="Site">
+    <a class="brand" href="./"><img src="avatar-engraved.jpg" alt=""><span>BUFFADAMUS</span></a>
+    <button class="navtoggle" type="button" aria-controls="sitenav" aria-expanded="false" aria-label="Menu"><span></span></button>
+    <nav id="sitenav" aria-label="Site">
       <a href="./" aria-current="page">Home</a>
       <a href="desk.html">Trading Desk</a>
       <a href="prophecies.html">Prophecies</a>
@@ -49,44 +52,44 @@
     </div>
   </section>
 
-  <section class="center" style="padding-top:20px">
-    <div class="wrap">
-      <img class="medallion" src="avatar-lg.jpg" alt="Buffadamus in a black velvet cap and white lace ruff" width="240" height="240">
-      <p class="quatrain">Visiting from the year 1555. Half Warren Buffett, Half Nostradamus. I like 🥐 croissants and I have a dog. I post the Croissant Index daily. It is very loud here.</p>
-      <nav class="socials" aria-label="Buffadamus on social media">
-        <a class="primary" href="https://x.com/Buffadamus">Follow on X</a>
-        <a href="https://www.instagram.com/buffadamus/">Instagram</a>
-        <a href="https://www.threads.com/@buffadamus">Threads</a>
-        <a href="https://www.youtube.com/@Buffadamus">YouTube</a>
-        <a href="https://www.reddit.com/user/buffadamus/">Reddit</a>
-        <a href="https://www.twitch.tv/buffadamus">Twitch</a>
-        <a href="https://www.pinterest.com/buffadamus/">Pinterest</a>
-        <a href="https://linktr.ee/buffadamus">Linktree</a>
-      </nav>
+  <section class="intro-sec reveal">
+    <div class="wrap intro">
+      <img class="medallion" src="portrait-engraved.jpg" alt="An engraving of Buffadamus in a velvet cap and lace ruff" width="200" height="200">
+      <div>
+        <p class="bio dropcap">Visiting from the year 1555. Half Warren Buffett, Half Nostradamus. I like 🥐 croissants and I have a dog. It is very loud here.</p>
+        <p style="margin:0 0 14px"><a class="btn" href="https://x.com/Buffadamus">Follow on X</a></p>
+        <nav class="linkrow" aria-label="Buffadamus on social media">
+          <a href="https://www.instagram.com/buffadamus/">Instagram</a>
+          <a href="https://www.threads.com/@buffadamus">Threads</a>
+          <a href="https://www.youtube.com/@Buffadamus">YouTube</a>
+          <a href="https://www.reddit.com/user/buffadamus/">Reddit</a>
+          <a href="https://www.twitch.tv/buffadamus">Twitch</a>
+          <a href="https://www.pinterest.com/buffadamus/">Pinterest</a>
+          <a href="https://linktr.ee/buffadamus">Linktree</a>
+        </nav>
+      </div>
     </div>
   </section>
 
-  <div class="divider" aria-hidden="true"></div>
-
-  <section id="desk-teaser">
-    <div class="wrap grid2" style="align-items:stretch">
+  <section id="desk-teaser" class="parch-band reveal">
+    <div class="wrap grid2" style="align-items:start">
       <div>
         <p class="kicker">The Trading Desk</p>
         <h2>One play a day. Written in ink.</h2>
         <p>Every market day Buffadamus publishes one paper trade, a stock or an option, with the stop loss and take profit set before the open. Every result goes on the record and is paid in croissants.</p>
-        <p>Plus the market close, the economic calendar and the earnings calendar, all in one place.</p>
+        <p>Plus the market close, breadth, fear and greed, and the economic and earnings calendars.</p>
         <p><a class="btn" href="desk.html">Open the Trading Desk</a></p>
-        <div class="card" id="ci-tile" style="margin-top:14px"></div>
+        <div class="card" id="ci-tile" style="margin-top:14px"><div class="skel"><i></i><i></i></div></div>
       </div>
-      <div class="card parch" id="play-teaser"><p class="muted">Consulting the stars...</p></div>
+      <div class="card" id="play-teaser"><div class="skel"><i></i><i></i><i></i></div></div>
     </div>
   </section>
 
-  <section id="oracle" style="background:linear-gradient(180deg,transparent,rgba(29,51,70,.25),transparent)">
+  <section id="oracle" class="reveal">
     <div class="wrap">
       <div class="card parch oracle" style="max-width:720px;margin:0 auto">
         <div>
-          <p class="kicker" style="color:#8a6a28">Free prophecy. Worth every penny.</p>
+          <p class="kicker" style="color:#7a5a1c">Free prophecy. Worth every penny.</p>
           <h2 style="margin-bottom:6px">Ask the Oracle</h2>
           <p class="muted" style="margin:0">Type any question. Buffadamus will consult the stars, the croissant and his dog.</p>
         </div>
@@ -95,40 +98,44 @@
           <input id="oracle-q" maxlength="120" placeholder="Should I buy the dip?" autocomplete="off">
           <button class="btn" type="submit">Consult</button>
         </form>
-        <p class="answer" id="oracle-answer" aria-live="polite"></p>
-        <a class="share" id="oracle-share" href="#" target="_blank" rel="noopener" hidden>Share this prophecy on X</a>
+        <p class="answer idle show" id="oracle-answer" aria-live="polite">The candle is lit and the quill is wet. Ask, and the stars will answer. Probably wrongly.</p>
+        <a class="share" id="oracle-share" href="https://x.com/intent/post?text=I%20consulted%20the%20Oracle%20of%201555.&amp;url=https%3A%2F%2Fbuffadamus.com&amp;via=Buffadamus" target="_blank" rel="noopener">Share the Oracle on X</a>
       </div>
     </div>
   </section>
 
-  <section id="latest">
+  <div class="flourish" aria-hidden="true"></div>
+
+  <section id="latest" class="parch-band reveal">
     <div class="wrap">
       <div class="center">
         <p class="kicker">From the scrolls</p>
         <h2>Recent Prophecies</h2>
         <p class="lede">Original quatrains, numbered and judged. Most will be muffed.</p>
       </div>
-      <div id="prophecy-teaser" class="prophecy-stack" style="margin-top:20px"></div>
+      <div class="stats" id="scoreboard" style="max-width:720px;margin:18px auto"></div>
+      <div id="prophecy-teaser" class="prophecy-stack" style="margin-top:10px"><div class="card prophecy"><div class="skel"><i></i><i></i><i></i></div></div></div>
       <p class="center" style="margin-top:22px"><a class="btn ghost" href="prophecies.html">The full archive</a></p>
     </div>
   </section>
 
-  <section id="feed">
+  <section id="feed" class="reveal">
     <div class="wrap">
-      <div class="center"><p class="kicker">Live from X</p><h2>The Latest Posts</h2></div>
-      <div class="feed">
-        <a class="twitter-timeline" data-theme="dark" data-height="640" data-chrome="noheader nofooter transparent" href="https://twitter.com/Buffadamus">Posts by @Buffadamus</a>
-      </div>
+      <div class="center"><p class="kicker">From X</p><h2>The Latest Posts</h2></div>
+      <div class="posts" id="posts"><div class="post"><div class="skel"><i></i><i></i><i></i></div></div><div class="post"><div class="skel"><i></i><i></i><i></i></div></div></div>
+      <p class="center" style="margin-top:20px"><a class="btn ghost" href="https://x.com/Buffadamus">Everything on X</a></p>
     </div>
   </section>
 
-  <section id="merch-teaser">
+  <div class="flourish" aria-hidden="true"></div>
+
+  <section id="merch-teaser" class="reveal">
     <div class="wrap">
       <div class="card" style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between">
         <div style="flex:1 1 320px">
           <span class="soon">Coming soon</span>
           <h2 style="margin-bottom:6px">Wear the prophecy</h2>
-          <p class="lede" style="margin:0">Croissant Index tees, "I foresaw this" mugs and a ruff for every occasion. Nothing is for sale yet. Get on the list and be first.</p>
+          <p class="lede" style="margin:0">Croissant tees, "I foresaw this" mugs and a ruff for every occasion. Nothing is for sale yet. Get on the list and be first.</p>
         </div>
         <a class="btn" href="merch.html">Get notified</a>
       </div>
@@ -143,8 +150,7 @@
     <p class="fine">© <span id="year">2026</span> Buffadamus</p>
   </div>
 </footer>
-<script src="desk.js?v=202610142245" defer></script>
-<script src="app.js?v=202610142245" defer></script>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<script src="desk.js?v=202610142359" defer></script>
+<script src="app.js?v=202610142359" defer></script>
 </body>
 </html>

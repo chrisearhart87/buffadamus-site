@@ -18,14 +18,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=202610142245">
-<link rel="stylesheet" href="desk.css?v=202610142245">
+<link rel="stylesheet" href="style.css?v=202610142359">
+<link rel="stylesheet" href="desk.css?v=202610142359">
+<link rel="stylesheet" href="almanac.css?v=202610142359">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body class="desk">
 <header class="topnav">
   <div class="wrap">
-    <a class="brand" href="./"><img src="avatar.jpg" alt=""><span>BUFFADAMUS</span></a>
-    <nav aria-label="Site">
+    <a class="brand" href="./"><img src="avatar-engraved.jpg" alt=""><span>BUFFADAMUS</span></a>
+    <button class="navtoggle" type="button" aria-controls="sitenav" aria-expanded="false" aria-label="Menu"><span></span></button>
+    <nav id="sitenav" aria-label="Site">
       <a href="./">Home</a>
       <a href="desk.html" aria-current="page">Trading Desk</a>
       <a href="prophecies.html">Prophecies</a>
@@ -48,7 +51,7 @@
 
   <section class="hero2-wrap">
     <div class="wrap hero2">
-      <div id="todays-play"><p class="empty">Consulting the stars...</p></div>
+      <div id="todays-play"><div class="panel empty-play"><div class="skel"><i></i><i></i><i></i></div></div></div>
       <div class="panel astro" id="astro"></div>
     </div>
   </section>
@@ -132,7 +135,7 @@
     <p class="fine">© <span id="year">2026</span> Buffadamus</p>
   </div>
 </footer>
-<script src="desk.js?v=202610142245" defer></script>
-<script src="app.js?v=202610142245" defer></script>
+<script src="desk.js?v=202610142359" defer></script>
+<script src="app.js?v=202610142359" defer></script>
 </body>
 </html>

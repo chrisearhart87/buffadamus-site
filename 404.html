@@ -18,13 +18,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css?v=202610142230">
+<link rel="stylesheet" href="/style.css?v=202610142359">
+<link rel="stylesheet" href="almanac.css?v=202610142359">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 <header class="topnav">
   <div class="wrap">
     <a class="brand" href="/"><img src="/avatar.jpg" alt=""><span>BUFFADAMUS</span></a>
-    <nav aria-label="Site">
+    <button class="navtoggle" type="button" aria-controls="sitenav" aria-expanded="false" aria-label="Menu"><span></span></button>
+    <nav id="sitenav" aria-label="Site">
       <a href="./">Home</a>
       <a href="desk.html">Trading Desk</a>
       <a href="prophecies.html">Prophecies</a>
@@ -54,6 +57,6 @@
     <p class="fine">© <span id="year">2026</span> Buffadamus</p>
   </div>
 </footer>
-<script src="/app.js?v=202610142230" defer></script>
+<script src="/app.js?v=202610142359" defer></script>
 </body>
 </html>

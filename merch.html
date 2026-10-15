@@ -18,13 +18,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=202610142230">
+<link rel="stylesheet" href="style.css?v=202610142359">
+<link rel="stylesheet" href="almanac.css?v=202610142359">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 <header class="topnav">
   <div class="wrap">
-    <a class="brand" href="./"><img src="avatar.jpg" alt=""><span>BUFFADAMUS</span></a>
-    <nav aria-label="Site">
+    <a class="brand" href="./"><img src="avatar-engraved.jpg" alt=""><span>BUFFADAMUS</span></a>
+    <button class="navtoggle" type="button" aria-controls="sitenav" aria-expanded="false" aria-label="Menu"><span></span></button>
+    <nav id="sitenav" aria-label="Site">
       <a href="./">Home</a>
       <a href="desk.html">Trading Desk</a>
       <a href="prophecies.html">Prophecies</a>
@@ -48,12 +51,12 @@
   </section>
   <section style="padding-top:0">
     <div class="wrap grid3 merch">
-      <div class="card"><div class="art" aria-hidden="true">🥐</div><h3>Croissant Index Tee</h3><p class="lede" style="margin:0">"Stock market up 1%. That's 1% more croissants." Front and back.</p></div>
-      <div class="card"><div class="art" aria-hidden="true">☕</div><h3>"I Foresaw This" Mug</h3><p class="lede" style="margin:0">For mornings when the market opens red and you knew it all along. You did not.</p></div>
-      <div class="card"><div class="art" aria-hidden="true">🪶</div><h3>The Ruff</h3><p class="lede" style="margin:0">A tasteful lace neck ruff for earnings calls. Starching not included. Neither is a handmaiden.</p></div>
-      <div class="card"><div class="art" aria-hidden="true">🐸</div><h3>Dip Frog Sticker Pack</h3><p class="lede" style="margin:0">Frog, croissant, butterfly, ice cream and heart. The full prophecy, in vinyl.</p></div>
-      <div class="card"><div class="art" aria-hidden="true">📜</div><h3>Prophecy Scroll Print</h3><p class="lede" style="margin:0">The original quatrain on parchment-style paper. Frame it. Regret it later.</p></div>
-      <div class="card"><div class="art" aria-hidden="true">🧢</div><h3>Velvet Cap</h3><p class="lede" style="margin:0">The official headwear of being confidently wrong since 1555.</p></div>
+      <div class="card"><div class="art" aria-hidden="true" data-n="I"></div><h3>Croissant Index Tee</h3><p class="lede" style="margin:0">"Stock market up 1%. That's 1% more croissants." Front and back.</p></div>
+      <div class="card"><div class="art" aria-hidden="true" data-n="II"></div><h3>"I Foresaw This" Mug</h3><p class="lede" style="margin:0">For mornings when the market opens red and you knew it all along. You did not.</p></div>
+      <div class="card"><div class="art" aria-hidden="true" data-n="III"></div><h3>The Ruff</h3><p class="lede" style="margin:0">A tasteful lace neck ruff for earnings calls. Starching not included. Neither is a handmaiden.</p></div>
+      <div class="card"><div class="art" aria-hidden="true" data-n="IV"></div><h3>Dip Frog Sticker Pack</h3><p class="lede" style="margin:0">Frog, croissant, butterfly, ice cream and heart. The full prophecy, in vinyl.</p></div>
+      <div class="card"><div class="art" aria-hidden="true" data-n="V"></div><h3>Prophecy Scroll Print</h3><p class="lede" style="margin:0">The original quatrain on parchment-style paper. Frame it. Regret it later.</p></div>
+      <div class="card"><div class="art" aria-hidden="true" data-n="VI"></div><h3>Velvet Cap</h3><p class="lede" style="margin:0">The official headwear of being confidently wrong since 1555.</p></div>
     </div>
   </section>
 </main>
@@ -65,6 +68,6 @@
     <p class="fine">© <span id="year">2026</span> Buffadamus</p>
   </div>
 </footer>
-<script src="app.js?v=202610142230" defer></script>
+<script src="app.js?v=202610142359" defer></script>
 </body>
 </html>

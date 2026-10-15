@@ -12,6 +12,9 @@
   const fmtD = (d, o = { weekday: 'short', month: 'short', day: 'numeric' }) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', o);
   const lv = (p, v) => '$' + nf(v);
   const statusLabel = p => ({ pending: 'Fills at the open, ' + fmtD(p.session), open: 'Open', closed: 'Closed', void: 'Void, no trade' }[p.status] || p.status);
+  const WAIT = '<span class="wait">after the first session</span>', WAITS = '<span class="wait">soon</span>';
+  const labelTable = sel => { const t = document.querySelector(sel); if (!t) return; const h = [...t.querySelectorAll('thead th')].map(x => x.textContent);
+    t.querySelectorAll('tbody tr').forEach(r => [...r.children].forEach((td, i) => { if (h[i] && !td.hasAttribute('colspan')) td.setAttribute('data-label', h[i]); })); };
   const VERD = '#4fa38a', CINN = '#c4553b', BRASS = '#c9a24e';
 
   function spark(series, w = 160, h = 30) {
@@ -144,27 +147,47 @@
       const tp = $('#todays-play');
       if (tp) tp.innerHTML = today ? playCard(today, bank, series[today.ticker]) : '<p class="lbl">The first play is being prophesied.</p>';
       const teaser = $('#play-teaser');
-      if (teaser && today) teaser.innerHTML = `<p class="kicker" style="color:#8a6a28">Today's play: ${esc(statusLabel(today))}</p>
-        <h2 style="margin:0 0 4px">$${esc(today.ticker)}</h2><p style="margin:0 0 10px">${esc(today.headline)}</p>
-        <div class="levels mini"><div><span>Stop</span><b class="down">${lv(today, today.stop)}</b></div><div><span>Target</span><b class="up">${lv(today, today.target)}</b></div><div><span>Bank</span><b>${cro(S.bank != null ? S.bank : bank.start)} 🥐</b></div></div>`;
+      if (teaser && today) {
+        const ss = (series[today.ticker] || []).slice(-40);
+        let mini = '';
+        if (ss.length > 4) {
+          const W = 420, H = 120, L = 4, R = 84, T = 8, B = 8, vals = ss.map(x => x[1]).concat([today.stop, today.target]);
+          const mn = Math.min(...vals), mx = Math.max(...vals), pd = (mx - mn) * 0.08, lo = mn - pd, hi = mx + pd;
+          const X = i => L + i * (W - L - R) / (ss.length - 1), Y = v => T + (hi - v) / (hi - lo) * (H - T - B);
+          const ln = (v, c, t) => `<line class="lv ${c}" x1="${L}" x2="${W - R + 2}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text x="${W - R + 6}" y="${(Y(v) + 4).toFixed(1)}">${t} ${nf(v)}</text>`;
+          mini = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(today.ticker)} closes for the last ${ss.length} sessions with the stop and target"><path class="px" d="${ss.map((x, i) => (i ? 'L' : 'M') + X(i).toFixed(1) + ',' + Y(x[1]).toFixed(1)).join(' ')}"/>${ln(today.target, 'tgt', 'Target')}${ln(today.stop, 'stop', 'Stop')}</svg>`;
+        }
+        const why = (today.thesis || [])[0];
+        teaser.innerHTML = `<div class="teaser-play"><p class="kicker" style="margin:0">Today's play: ${esc(statusLabel(today))}</p>
+          <div style="display:flex;gap:14px;align-items:baseline;flex-wrap:wrap"><span class="tk">$${esc(today.ticker)}</span><span class="muted">${today.kind === 'option' ? 'Option, bought' : today.side === 'short' ? 'Short the shares' : 'Buy the shares'}</span></div>
+          <p style="margin:0;font-size:19px">${esc(today.headline)}</p>
+          <div class="levels mini"><div><span>Stop</span><b class="down">${lv(today, today.stop)}</b></div><div><span>Target</span><b class="up">${lv(today, today.target)}</b></div><div><span>Stake</span><b>${cro(today.stake || 0)} 🥐</b></div></div>
+          ${mini}
+          ${why ? `<ul><li>${esc(why)}</li></ul>` : ''}
+          <p class="muted" style="margin:0;font-size:16px">Bank: ${cro(S.bank != null ? S.bank : bank.start)} 🥐. Reward to risk ${Number(today.rr).toFixed(2)} to 1, ${today.max_days}-session limit.</p>
+          <p style="margin:0"><a class="btn" href="desk.html">See the full play</a></p>
+          <p class="fineprint" style="margin:0">Paper trade for entertainment, not financial advice.</p></div>`;
+      }
       const daily = P.equity_daily || [], nowBank = daily.length ? daily[daily.length - 1].bank : (S.bank != null ? S.bank : bank.start);
       const g = P.guard || { status: 'ok' };
       const gtxt = { ok: 'Treasury guard: all clear. New plays allowed.', paused: 'Treasury guard: paused. ' + (g.reason || ''), halted: 'Treasury guard: halted. ' + (g.reason || '') }[g.status] || '';
       const bc = $('#bank-card');
       if (bc) bc.innerHTML = `<div class="lbl">Bank today, open plays marked at the close</div><div class="big">${cro(nowBank)} 🥐</div>
         <div class="usd">${money(nowBank * bank.croissant_usd, 0)} of paper money, <span class="${cls(nowBank - bank.start)}">${sgnC(nowBank - bank.start)} since the start</span></div>
-        <div class="kv"><div><i>Win rate</i><b>${S.win_rate != null ? S.win_rate + '%' : '-'}</b></div><div><i>Against the S&amp;P</i><b class="${cls(S.vs_spy)}">${sgnC(S.vs_spy)}</b></div>
-          <div><i>Average win</i><b>${S.avg_win != null ? sgnC(S.avg_win) : '-'}</b></div><div><i>Average loss</i><b>${S.avg_loss != null ? sgnC(S.avg_loss) : '-'}</b></div>
+        <div class="kv"><div><i>Win rate</i><b>${S.win_rate != null ? S.win_rate + '%' : WAIT}</b></div><div><i>Against the S&amp;P</i><b class="${cls(S.vs_spy)}">${S.vs_spy != null ? sgnC(S.vs_spy) : WAIT}</b></div>
+          <div><i>Average win</i><b>${S.avg_win != null ? sgnC(S.avg_win) : WAIT}</b></div><div><i>Average loss</i><b>${S.avg_loss != null ? sgnC(S.avg_loss) : WAIT}</b></div>
           <div><i>Plays</i><b>${plays.length}</b></div><div><i>Open or waiting</i><b>${(S.open || 0) + (S.pending || 0)}</b></div></div>
+        ${S.win_rate == null ? '<p class="idle-line">The ledger opens after the first session. The quill is sharpened.</p>' : ''}
         <div class="guard ${esc(g.status)}"><i></i><span>${esc(gtxt)}</span></div>`;
       const eq = $('#equity'); if (eq) eq.innerHTML = `<div class="lbl" style="margin-bottom:6px">The bank, every session</div>` + equityChart(daily, bank.start);
       const lg = $('#ledger');
       if (lg) lg.innerHTML = plays.length ? plays.slice().reverse().map(p => `<tr><td>${esc(p.id)}</td><td>${fmtD(p.session, { month: 'short', day: 'numeric' })}</td>
         <td><b>$${esc(p.ticker)}</b> <small>${p.kind === 'option' ? esc(p.option.type) + ' ' + money(p.option.strike, 0) : esc(p.side)}</small></td>
-        <td>${cro(p.stake || 0)} 🥐</td><td>${p.entry ? lv(p, p.entry.price) : '-'}</td><td>${p.exit ? lv(p, p.exit.price) : p.mark ? lv(p, p.mark.price) + ' <small>now</small>' : '-'}</td>
-        <td class="${cls(p.ret_pct)}">${p.ret_pct != null ? sgn(p.ret_pct) : '-'}</td><td class="${cls(p.croissants)}">${p.croissants != null ? sgnC(p.croissants) : '-'}</td>
-        <td class="${cls(p.vs_spy_croissants)}">${p.vs_spy_croissants != null ? sgnC(p.vs_spy_croissants) : '-'}</td>
-        <td>${esc(statusLabel(p))}${p.exit ? `<br><small>${esc(p.exit.reason)}</small>` : ''}</td></tr>`).join('') : '<tr><td colspan="10" class="lbl">No plays yet.</td></tr>';
+        <td>${cro(p.stake || 0)} 🥐</td><td>${p.entry ? lv(p, p.entry.price) : WAITS}</td><td>${p.exit ? lv(p, p.exit.price) : p.mark ? lv(p, p.mark.price) + ' <small>now</small>' : WAITS}</td>
+        <td class="${cls(p.ret_pct)}">${p.ret_pct != null ? sgn(p.ret_pct) : WAITS}</td><td class="${cls(p.croissants)}">${p.croissants != null ? sgnC(p.croissants) : WAITS}</td>
+        <td class="${cls(p.vs_spy_croissants)}">${p.vs_spy_croissants != null ? sgnC(p.vs_spy_croissants) : WAITS}</td>
+        <td>${esc(statusLabel(p))}${p.exit ? `<br><small>${esc(p.exit.reason)}</small>` : ''}</td></tr>`).join('') : '<tr><td colspan="10" class="lbl">No plays yet. The stars are being consulted.</td></tr>';
+      labelTable('table.ledger');
     }
     // ----- market -----
     if (D) {
@@ -201,6 +224,7 @@
           <td><span class="hist" style="width:${hw}px;background:${i.macd_hist >= 0 ? VERD : CINN}"></span>${i.macd_hist >= 0 ? 'rising' : 'falling'}</td>
           <td>${i.adx != null ? nf(i.adx, 0) : '-'} <span class="lbl">${adxT}</span></td><td>${i.pct_b != null ? nf(i.pct_b) : '-'}</td>
           <td>${i.atr_pct != null ? nf(i.atr_pct) + '%' : '-'}</td><td class="${cls(i.from_hi)}">${sgn(i.from_hi)}</td></tr>`; }).join('');
+      labelTable('table.inst');
       const heat = $('#heat');
       if (heat) heat.innerHTML = (D.sectors || []).map(s => `<div style="background:${heatColor(s.pct)}" title="${esc(s.etf)}"><b>${sgn(s.pct)}</b><span>${esc(s.name)}</span></div>`).join('');
       const cv = $('#curve');

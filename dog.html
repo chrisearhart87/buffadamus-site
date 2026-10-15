@@ -18,13 +18,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=202610142230">
+<link rel="stylesheet" href="style.css?v=202610142359">
+<link rel="stylesheet" href="almanac.css?v=202610142359">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
 <header class="topnav">
   <div class="wrap">
-    <a class="brand" href="./"><img src="avatar.jpg" alt=""><span>BUFFADAMUS</span></a>
-    <nav aria-label="Site">
+    <a class="brand" href="./"><img src="avatar-engraved.jpg" alt=""><span>BUFFADAMUS</span></a>
+    <button class="navtoggle" type="button" aria-controls="sitenav" aria-expanded="false" aria-label="Menu"><span></span></button>
+    <nav id="sitenav" aria-label="Site">
       <a href="./">Home</a>
       <a href="desk.html">Trading Desk</a>
       <a href="prophecies.html">Prophecies</a>
@@ -46,15 +49,15 @@
   <section style="padding-top:0">
     <div class="wrap">
       <div class="card parch dog" style="max-width:720px;margin:0 auto">
-        <div class="dog-face" id="dog-face" aria-hidden="true">🐕</div>
+        <img class="dog-portrait" id="dog-face" src="dog-engraved.jpg" alt="An engraving of Buffadamus's dog, a golden retriever in a waistcoat and bow tie" width="240" height="240">
         <form id="dog-form">
           <label class="sr" for="dog-q">Your question for the dog</label>
           <input id="dog-q" maxlength="100" placeholder="Is it a good time to buy croissants?" autocomplete="off">
           <button class="btn" type="submit">Ask the dog</button>
         </form>
-        <p class="answer" id="dog-act" aria-live="polite"></p>
-        <p class="answer" id="dog-read" aria-live="polite" style="font-style:normal;font-size:20px"></p>
-        <a class="share" id="dog-share" href="#" target="_blank" rel="noopener" hidden>Share the dog's call on X</a>
+        <p class="answer idle show" id="dog-act" aria-live="polite">The dog is awake. One ear is up. He is ready.</p>
+        <p class="answer show" id="dog-read" aria-live="polite" style="font-style:normal;font-size:20px">Ask him anything. He answers in barks and Buffadamus translates.</p>
+        <a class="share" id="dog-share" href="https://x.com/intent/post?text=I%20asked%20Buffadamus%27s%20dog%20for%20financial%20advice.&amp;url=https%3A%2F%2Fbuffadamus.com%2Fdog.html&amp;via=Buffadamus" target="_blank" rel="noopener">Share the dog on X</a>
       </div>
       <p class="lede" style="margin:22px auto 0;text-align:center;font-size:16px">The dog is not a licensed adviser. He is not licensed for anything. He is a dog.</p>
     </div>
@@ -68,6 +71,6 @@
     <p class="fine">© <span id="year">2026</span> Buffadamus</p>
   </div>
 </footer>
-<script src="app.js?v=202610142230" defer></script>
+<script src="app.js?v=202610142359" defer></script>
 </body>
 </html>

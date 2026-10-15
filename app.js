@@ -2,6 +2,20 @@
 (function () {
   const $ = (s, r = document) => r.querySelector(s);
 
+  // ---------- mobile menu ----------
+  const nt = $('.navtoggle'), nv = $('#sitenav');
+  if (nt && nv) {
+    nt.addEventListener('click', () => { const o = nv.classList.toggle('open'); nt.setAttribute('aria-expanded', o); });
+    nv.addEventListener('click', e => { if (e.target.tagName === 'A') { nv.classList.remove('open'); nt.setAttribute('aria-expanded', false); } });
+  }
+
+  // ---------- gentle fade-ins (content stays visible without JS) ----------
+  const rv = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
+    rv.forEach(el => io.observe(el));
+  } else rv.forEach(el => el.classList.add('in'));
+
   // ---------- Next Croissant Index reading: next weekday 1:00 pm Pacific (US market close) ----------
   function nextCloseUTC(now) {
     // Find "now" in America/Los_Angeles, step to the next weekday 13:00 PT.
@@ -100,7 +114,8 @@
       ${p.title ? `<h3 style="margin-bottom:10px">${esc(p.title)}</h3>` : ''}
       <blockquote>${(p.lines || []).map(esc).join('<br>')}</blockquote>
       <div class="meta"><span class="verdict v-${esc(p.verdict || 'pending')}">${verdicts[p.verdict] || 'Pending'}</span>
-        Prophesied ${fmtDate(p.date)}${p.resolves ? ` · Judged ${fmtDate(p.resolves)}` : ''}${p.about ? ` · ${esc(p.about)}` : ''}${p.verdict_note ? `<br><em>${esc(p.verdict_note)}</em>` : ''}</div></article>`;
+        Prophesied ${fmtDate(p.date)}${p.resolves ? ` · Judged ${fmtDate(p.resolves)}` : ''}${p.about ? ` · ${esc(p.about)}` : ''}${p.verdict_note ? `<br><em>${esc(p.verdict_note)}</em>` : ''}
+        <br><a class="share" target="_blank" rel="noopener" href="https://x.com/intent/post?text=${encodeURIComponent(`Prophecy ${roman(p.century)}.${p.number}${p.title ? ', ' + p.title : ''}:\n` + (p.lines || []).join('\n'))}&url=${encodeURIComponent('https://buffadamus.com/prophecies.html')}&via=Buffadamus">Share this prophecy on X</a></div></article>`;
     const sb = $('#scoreboard');
     if (sb) {
       const c = v => items.filter(p => (p.verdict || 'pending') === v).length, f = c('fulfilled'), m = c('muffed'), judged = f + m;
@@ -109,7 +124,7 @@
         `<p class="muted sbnote">${judged ? `Sample size: ${judged}. Statisticians call this "not a sample". Buffadamus calls it a perfect record.` : 'No verdicts yet.'}</p>`;
     }
     if (arch) arch.innerHTML = items.length ? items.map(card).join('') : '<p class="empty">The scrolls are blank. For now.</p>';
-    if (teaser) teaser.innerHTML = items.slice(0, 3).map(card).join('') || '<p class="empty">The first prophecies are being inked.</p>';
+    if (teaser) teaser.innerHTML = [...items.filter(p => (p.verdict || 'pending') !== 'pending').slice(0, 1), ...items.filter(p => (p.verdict || 'pending') === 'pending').slice(0, 1)].map(card).join('') || '<p class="empty">The first prophecies are being inked.</p>';
   });
 
   // ---------- Ask the Oracle ----------
@@ -140,10 +155,10 @@
       out.classList.remove('show');
       setTimeout(() => {
         out.textContent = answers[i];
-        out.classList.add('show');
+        out.classList.remove('idle'); out.classList.add('show');
         const text = (q ? `I asked Buffadamus: "${q.slice(0, 90)}"\nHe said: ` : 'Buffadamus has spoken: ') + `"${answers[i]}"`;
-        share.href = 'https://x.com/intent/post?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent('https://buffadamus.com');
-        share.hidden = false;
+        share.href = 'https://x.com/intent/post?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent('https://buffadamus.com') + '&via=Buffadamus';
+        share.textContent = 'Share this prophecy on X';
       }, 250);
     });
   }
@@ -176,15 +191,24 @@
       const q = $('#dog-q').value.trim();
       let i; do { i = Math.floor(Math.random() * dogs.length); } while (i === last && dogs.length > 1); last = i;
       act.classList.remove('show'); read.classList.remove('show'); face && face.classList.add('think');
-      setTimeout(() => { face && face.classList.remove('think'); act.textContent = dogs[i][0]; act.classList.add('show'); }, 700);
+      setTimeout(() => { face && face.classList.remove('think'); act.textContent = dogs[i][0]; act.classList.remove('idle'); act.classList.add('show'); }, 700);
       setTimeout(() => {
         read.textContent = 'Buffadamus reads it: ' + dogs[i][1]; read.classList.add('show');
         const text = (q ? `I asked Buffadamus's dog: "${q.slice(0, 80)}"\n` : '') + `${dogs[i][0]} ${dogs[i][1]}`;
         share.href = 'https://x.com/intent/post?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent('https://buffadamus.com/dog.html') + '&via=Buffadamus';
-        share.hidden = false;
+        share.textContent = "Share the dog's call on X";
       }, 1500);
     });
   }
+
+  // ---------- Latest posts (static copies of live X posts) ----------
+  const pl = $('#posts');
+  if (pl) loadJSON('data/posts.json').then(data => {
+    const ps = (data && data.posts || []).slice(0, 4);
+    pl.innerHTML = ps.length ? ps.map(p => `<article class="post"><div class="who"><img src="avatar-engraved.jpg" alt="" width="40" height="40"><span><b>Buffadamus</b><br>@Buffadamus · ${fmtD(p.date, { month: 'short', day: 'numeric' })}</span></div>
+      <p>${esc(p.text)}</p><a class="view" href="${esc(p.url)}" target="_blank" rel="noopener">View on X</a></article>`).join('')
+      : '<p class="empty">The town crier is resting his voice. <a href="https://x.com/Buffadamus">See @Buffadamus on X</a>.</p>';
+  });
 
   // ---------- Glossary ----------
   const gl = $('#glossary');
