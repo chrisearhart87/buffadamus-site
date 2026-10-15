@@ -109,7 +109,7 @@
     if (D) {
       const h = $('#mkt-head'); if (h) h.innerHTML = `<p class="kicker">Market close · ${fmtD(D.asof, { weekday: 'long', month: 'long', day: 'numeric' })}</p><h2>${esc(D.headline)}</h2>`;
       const ix = $('#mkt-indices');
-      if (ix) ix.innerHTML = D.indices.map(i => tile(esc(i.name), i.level.toLocaleString('en-US', { maximumFractionDigits: 2 }), `<span class="${cls(i.pct)}">${sgn(i.pct)}</span> · ${esc(i.etf)} ${money(i.etf_close)}`)).join('');
+      if (ix) ix.innerHTML = D.indices.map(i => tile(esc(i.name), i.level != null ? i.level.toLocaleString('en-US', { maximumFractionDigits: 2 }) : esc(i.etf) + ' ' + money(i.etf_close), `<span class="${cls(i.pct)}">${sgn(i.pct)}</span>${i.level != null ? ` · ${esc(i.etf)} ${money(i.etf_close)}` : ''}`)).join('');
       const mc = $('#mkt-macro');
       if (mc) mc.innerHTML = D.macro.map(m => tile(esc(m.name), esc(m.value), m.pct != null ? `<span class="${cls(m.pct)}">${sgn(m.pct)}</span>` : esc(m.note || ''))).join('');
       const sc = $('#mkt-sectors');
