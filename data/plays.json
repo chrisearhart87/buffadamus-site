@@ -75,12 +75,12 @@
     "price": 176.43
    },
    "mark": {
-    "date": "2026-10-15",
-    "price": 177.19,
-    "session": 1
+    "date": "2026-10-16",
+    "price": 176.71,
+    "session": 2
    },
-   "ret_pct": 0.43,
-   "croissants": 10.8
+   "ret_pct": 0.16,
+   "croissants": 4.0
   },
   {
    "session": "2026-10-16",
@@ -130,39 +130,111 @@
    "stake": 2500.0,
    "risk_at_stop": 69.2,
    "id": "P002",
+   "status": "closed",
+   "entry": {
+    "date": "2026-10-16",
+    "price": 541.31
+   },
+   "exit": {
+    "date": "2026-10-16",
+    "price": 524.5,
+    "reason": "Stop loss"
+   },
+   "ret_pct": -3.11,
+   "croissants": -77.6,
+   "spy_ret_pct": -1.29,
+   "vs_spy_croissants": -45.3
+  },
+  {
+   "session": "2026-10-19",
+   "published": "2026-10-16 14:20 PT",
+   "kind": "shares",
+   "side": "long",
+   "ticker": "XLE",
+   "name": "Energy Select Sector SPDR Fund",
+   "sector": "Energy",
+   "instrument": "XLE",
+   "entry_rule": "Market open, Mon Oct 19",
+   "ref_price": 68.24,
+   "stop": 66.0,
+   "target": 72.3,
+   "max_days": 5,
+   "headline": "Oil up, tech down: long energy at a 52-week high",
+   "thesis": [
+    "Relative strength: on a day the S&P 500 fell 1.09% and tech dropped about 3%, XLE rose 2.52% to $68.24, a 52-week closing high, on 37.5M shares vs a 29.6M two-week average. Top holdings ExxonMobil (+2.46%) and Chevron (+2.59%) also hit 52-week highs.",
+    "Trend: above its 20-day ($63.72), 50-day ($63.33) and 200-day ($57.50) averages, up 11.0% from the $61.50 close on Sep 30 and 60% above the 52-week low of $42.64.",
+    "Catalyst and calendar: Brent tested $110 a barrel midday and USO rose 2.83%. The fund has no earnings and its next ex-dividend date is Dec 21; ExxonMobil and Chevron report Oct 30, after the 5-session window."
+   ],
+   "risks": [
+    "The oil spike is headline-driven; a quick pullback in crude would hit XLE first.",
+    "Stretched: 7.1% above its 20-day average after an 11% run in 12 sessions. Breakouts on a red tape can fade fast.",
+    "A broad selloff can drag everything down, and a stop does not protect against an overnight gap."
+   ],
+   "facts": {
+    "Close Oct 16": "$68.24 (+2.52%), 52-week closing high",
+    "ATR (14 days)": "$1.28",
+    "20-day average": "$63.72",
+    "50-day average": "$63.33",
+    "200-day average": "$57.50",
+    "RSI (14)": "63.3 (Oct 15)",
+    "52-week range": "$42.64 - $68.29",
+    "Volume Oct 16": "37.5M vs 29.6M avg",
+    "Fund size / yield": "$44.7B / 2.34%",
+    "Next ex-dividend": "Dec 21 (no fund earnings)"
+   },
+   "dog": "The dog walked past the chip bowl again, lay down on the gas bill and refused to move. In dog, that is a strong buy.",
+   "sources": [
+    "Massive daily bars 2026-10-16 (XLE, USO, XOM, CVX, S&P 500 ETF)",
+    "Robinhood fundamentals 2026-10-16 and technicals (Oct 15 close: ATR, RSI, 20/50/200-day)",
+    "Robinhood earnings calendar (pulled 2026-10-16)",
+    "TheStreet market wrap 2026-10-16: https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-oct-16-2026"
+   ],
+   "rr": 1.81,
+   "stake": 2480.0,
+   "risk_at_stop": 81.4,
+   "id": "P003",
    "status": "pending"
   }
  ],
  "summary": {
-  "bank": 10000,
-  "realized": 0,
-  "unrealized": 10.8,
+  "bank": 9922.4,
+  "realized": -77.6,
+  "unrealized": 4.0,
   "plays": 2,
-  "closed": 0,
+  "closed": 1,
   "open": 1,
-  "pending": 1,
+  "pending": 0,
   "void": 0,
   "wins": 0,
-  "losses": 0,
-  "win_rate": null,
+  "losses": 1,
+  "win_rate": 0,
   "avg_win": null,
-  "avg_loss": null,
-  "best": null,
-  "worst": null,
-  "vs_spy": null,
-  "streak": null,
-  "usd": 40000.0,
-  "updated": "2026-10-15 14:16 PT"
+  "avg_loss": -77.6,
+  "best": "P002",
+  "worst": "P002",
+  "vs_spy": -45.3,
+  "streak": "1 loss",
+  "usd": 39689.6,
+  "updated": "2026-10-16 14:09 PT"
  },
- "equity": [],
+ "equity": [
+  {
+   "d": "2026-10-16",
+   "bank": 9922.4
+  }
+ ],
  "equity_daily": [
   {
    "d": "2026-10-15",
    "bank": 10010.8
+  },
+  {
+   "d": "2026-10-16",
+   "bank": 9926.4
   }
  ],
  "guard": {
   "status": "ok",
-  "checked": "2026-10-15 14:16 PT"
+  "checked": "2026-10-16 14:09 PT"
  }
 }
