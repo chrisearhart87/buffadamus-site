@@ -75,12 +75,12 @@
     "price": 176.43
    },
    "mark": {
-    "date": "2026-10-16",
-    "price": 176.71,
-    "session": 2
+    "date": "2026-10-19",
+    "price": 175.65,
+    "session": 3
    },
-   "ret_pct": 0.16,
-   "croissants": 4.0
+   "ret_pct": -0.44,
+   "croissants": -11.1
   },
   {
    "session": "2026-10-16",
@@ -193,17 +193,78 @@
    "stake": 2480.0,
    "risk_at_stop": 81.4,
    "id": "P003",
+   "status": "open",
+   "entry": {
+    "date": "2026-10-19",
+    "price": 67.95
+   },
+   "mark": {
+    "date": "2026-10-19",
+    "price": 67.8,
+    "session": 1
+   },
+   "ret_pct": -0.22,
+   "croissants": -5.5
+  },
+  {
+   "session": "2026-10-20",
+   "published": "2026-10-19 14:15 PT",
+   "kind": "shares",
+   "side": "long",
+   "ticker": "AMZN",
+   "name": "Amazon.com",
+   "sector": "Consumer discretionary",
+   "instrument": "AMZN",
+   "entry_rule": "Market open, Tue Oct 20",
+   "ref_price": 262.45,
+   "stop": 254.0,
+   "target": 278.0,
+   "max_days": 5,
+   "headline": "Amazon's upgrade-day breakout: long AMZN",
+   "thesis": [
+    "Catalyst with volume: AMZN rose 4.98% to $262.45 on Oct 19 after Morgan Stanley raised its price target to $350, on 54.8M shares vs a 34.5M two-week average, while the S&P 500 gained only 0.41%.",
+    "Breakout: the $262.45 close is the highest since Aug 28 and tops the $245.96-$262.43 closing range of the past seven weeks. It reclaimed the 20-day ($253.23) and 50-day ($257.08) averages and sits 8% above the 200-day ($242.73). Above the range, the stock traded $265-$284 in early August.",
+    "Calendar and consensus: no dividend, and earnings are Oct 29 after the close, after the 5-session window ends Oct 26. Analysts: 69 buy, 2 hold, 0 sell, mean target $332.96."
+   ],
+   "risks": [
+    "Big-tech earnings land mid-hold: Tesla and Meta report Wednesday Oct 21 after the close, and a bad reaction can drag every megacap.",
+    "Upgrade pops often fade, and the stock stalled near $263-$264 twice this month (Oct 9 and Oct 12 highs of $262.80 and $263.70).",
+    "The tape is fearful: CNN Fear & Greed read 17.9 (extreme fear) and only 43% of S&P 500 members are above their 50-day average. A gap can skip the stop."
+   ],
+   "facts": {
+    "Close Oct 19": "$262.45 (+4.98%), highest close since Aug 28",
+    "Volume Oct 19": "54.8M vs 34.5M 2-week avg",
+    "ATR (14 days)": "$5.95 (Oct 16)",
+    "20-day average": "$253.23 (Oct 16)",
+    "50-day average": "$257.08 (Oct 16)",
+    "200-day average": "$242.73 (Oct 16)",
+    "RSI (14)": "45.0 (Oct 16)",
+    "52-week range": "$196.00 - $287.20",
+    "Analysts": "69 buy / 2 hold / 0 sell, mean target $332.96",
+    "Next earnings / P/E": "Oct 29 after the close / 20.1"
+   },
+   "dog": "The dog dragged an empty delivery box to the front door and sat in it for an hour. In dog, that is a five-day strong buy.",
+   "sources": [
+    "Massive daily bars 2026-10-19 (AMZN, S&P 500 ETF) and AMZN daily aggs since Apr 2026",
+    "Robinhood fundamentals 2026-10-19, technicals (Oct 16 close: ATR, RSI, 20/50/200-day), analyst ratings (updated 2026-10-03)",
+    "Robinhood earnings calendar (pulled 2026-10-19)",
+    "TheStreet market wrap 2026-10-19: https://www.thestreet.com/stock-market-today/stock-market-today-oct-19-2026-nasdaq-futures-climb-as-tech-rebound-from-sell-off"
+   ],
+   "rr": 1.84,
+   "stake": 2470.0,
+   "risk_at_stop": 79.5,
+   "id": "P004",
    "status": "pending"
   }
  ],
  "summary": {
   "bank": 9922.4,
   "realized": -77.6,
-  "unrealized": 4.0,
-  "plays": 2,
+  "unrealized": -16.6,
+  "plays": 4,
   "closed": 1,
-  "open": 1,
-  "pending": 0,
+  "open": 2,
+  "pending": 1,
   "void": 0,
   "wins": 0,
   "losses": 1,
@@ -215,7 +276,7 @@
   "vs_spy": -45.3,
   "streak": "1 loss",
   "usd": 39689.6,
-  "updated": "2026-10-16 14:09 PT"
+  "updated": "2026-10-19 14:15 PT"
  },
  "equity": [
   {
@@ -231,10 +292,14 @@
   {
    "d": "2026-10-16",
    "bank": 9926.4
+  },
+  {
+   "d": "2026-10-19",
+   "bank": 9905.9
   }
  ],
  "guard": {
   "status": "ok",
-  "checked": "2026-10-16 14:09 PT"
+  "checked": "2026-10-19 14:15 PT"
  }
 }

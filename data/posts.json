@@ -1,7 +1,13 @@
 {
-  "updated": "2026-10-16 14:30 PT",
+  "updated": "2026-10-19 14:15 PT",
   "note": "Static copies of live @Buffadamus posts, newest first. Source: content/posted/LOG.md. Refreshed by the 2:07 pm PT desk task.",
   "posts": [
+    {
+      "id": "DIRECT-0942",
+      "date": "2026-10-16",
+      "text": "Me and my $gme options this month",
+      "url": "https://x.com/Buffadamus/status/2111135608668291522"
+    },
     {
       "id": "P001",
       "date": "2026-10-14",
@@ -19,12 +25,6 @@
       "date": "2026-10-08",
       "text": "Roads? Where we're going, we don't need roads $GME",
       "url": "https://x.com/Buffadamus/status/2108390437371445660"
-    },
-    {
-      "id": "M3",
-      "date": "2026-10-08",
-      "text": "The Fed released its minutes yesterday.\nStill no word on the seconds.\nWhat are they hiding.",
-      "url": "https://x.com/Buffadamus/status/2108364958396506210"
     }
   ]
 }

@@ -113,6 +113,15 @@
    "source": "SPY close-to-close (S&P 500 proxy)",
    "asof": "2026-10-16 13:00 PT (Massive grouped daily)",
    "url": ""
+  },
+  {
+   "date": "2026-10-19",
+   "pct": 0.42,
+   "prev": 763.25,
+   "close": 766.48,
+   "source": "SPY close-to-close (S&P 500 proxy)",
+   "asof": "2026-10-19 14:10 PT (Massive grouped daily)",
+   "url": ""
   }
  ]
 }
