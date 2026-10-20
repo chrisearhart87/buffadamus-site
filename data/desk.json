@@ -1,233 +1,225 @@
 {
  "note": "Trading Desk snapshot. Rewritten every market day by the after-close task. Every number carries its source in 'sources'.",
- "asof": "2026-10-19",
- "updated": "2026-10-19 14:15 PT",
- "headline": "Tech bounces: the Nasdaq gains 1.1% on memory chips and Amazon, but decliners still beat advancers 2,304 to 1,647",
+ "asof": "2026-10-20",
+ "updated": "2026-10-20 14:16 PT",
+ "headline": "Rotation day: the Dow gains 1.0% and the Russell 2000 1.65% as health care hits a record, while the Nasdaq ends flat",
  "indices": [
   {
    "name": "S&P 500",
-   "level": 7690.73,
-   "pct": 0.41,
+   "level": 7712.57,
+   "pct": 0.28,
    "etf": "SPY",
-   "etf_close": 766.48,
-   "src": "Robinhood SPX quote; % TradingKey close wrap"
+   "etf_close": 769.05,
+   "src": "Robinhood SPX quote; % Vistap Global close wrap"
   },
   {
    "name": "Nasdaq 100",
-   "level": 29529.34,
-   "pct": 1.17,
+   "level": 29490.28,
+   "pct": -0.13,
    "etf": "QQQ",
-   "etf_close": 718.36,
-   "src": "Robinhood NDX quote; % vs Oct 16 NDX quote"
+   "etf_close": 717.63,
+   "src": "Robinhood NDX quote; % vs Oct 19 NDX quote"
   },
   {
    "name": "Dow Jones",
-   "level": 51966.03,
-   "pct": -0.07,
+   "level": 52495.88,
+   "pct": 1.02,
    "etf": "DIA",
-   "etf_close": 518.92,
-   "src": "TradingKey close wrap"
+   "etf_close": 524.36,
+   "src": "Vistap Global close wrap"
   },
   {
    "name": "Russell 2000",
-   "level": null,
-   "pct": null,
+   "level": 2773.41,
+   "pct": 1.65,
    "etf": "IWM",
-   "etf_close": 271.28,
-   "src": "No reliable close in a named wrap today; IWM close from Massive"
+   "etf_close": 275.78,
+   "src": "Vistap Global close wrap"
   }
  ],
  "macro": [
   {
    "name": "Gold (GLD)",
-   "value": "$379.69",
-   "pct": -0.61
+   "value": "$377.65",
+   "pct": -0.54
   },
   {
    "name": "Silver (SLV)",
-   "value": "$51.54",
-   "pct": 0.06
+   "value": "$52.12",
+   "pct": 1.13
   },
   {
    "name": "Oil (USO)",
-   "value": "$160.81",
-   "pct": -0.59
+   "value": "$160.61",
+   "pct": -0.12
   },
   {
    "name": "Bitcoin (IBIT)",
-   "value": "$46.30",
-   "pct": 0.33
+   "value": "$46.71",
+   "pct": 0.89
   },
   {
    "name": "Dollar (UUP)",
-   "value": "$29.00",
-   "pct": 0.28
+   "value": "$28.90",
+   "pct": -0.34
   }
  ],
  "sectors": [
   {
-   "name": "Discretionary",
-   "etf": "XLY",
-   "pct": 1.78
-  },
-  {
-   "name": "Semiconductors",
-   "etf": "SMH",
-   "pct": 1.61
-  },
-  {
-   "name": "Technology",
-   "etf": "XLK",
-   "pct": 1.36
-  },
-  {
-   "name": "Materials",
-   "etf": "XLB",
-   "pct": 0.06
-  },
-  {
-   "name": "Communication",
-   "etf": "XLC",
-   "pct": -0.21
-  },
-  {
-   "name": "Staples",
-   "etf": "XLP",
-   "pct": -0.47
-  },
-  {
    "name": "Health care",
    "etf": "XLV",
-   "pct": -0.6
-  },
-  {
-   "name": "Energy",
-   "etf": "XLE",
-   "pct": -0.64
-  },
-  {
-   "name": "Industrials",
-   "etf": "XLI",
-   "pct": -0.64
-  },
-  {
-   "name": "Financials",
-   "etf": "XLF",
-   "pct": -0.83
+   "pct": 2.37
   },
   {
    "name": "Real estate",
    "etf": "XLRE",
-   "pct": -1.16
+   "pct": 1.7
   },
   {
    "name": "Utilities",
    "etf": "XLU",
-   "pct": -2.01
+   "pct": 1.26
+  },
+  {
+   "name": "Financials",
+   "etf": "XLF",
+   "pct": 1.2
+  },
+  {
+   "name": "Discretionary",
+   "etf": "XLY",
+   "pct": 0.91
+  },
+  {
+   "name": "Staples",
+   "etf": "XLP",
+   "pct": 0.62
+  },
+  {
+   "name": "Materials",
+   "etf": "XLB",
+   "pct": 0.55
+  },
+  {
+   "name": "Energy",
+   "etf": "XLE",
+   "pct": 0.25
+  },
+  {
+   "name": "Communication",
+   "etf": "XLC",
+   "pct": 0.09
+  },
+  {
+   "name": "Industrials",
+   "etf": "XLI",
+   "pct": 0.07
+  },
+  {
+   "name": "Technology",
+   "etf": "XLK",
+   "pct": -0.28
+  },
+  {
+   "name": "Semiconductors",
+   "etf": "SMH",
+   "pct": -0.38
   }
  ],
  "movers": {
   "note": "US stocks over $10 with more than $1.5B traded; leveraged ETFs excluded",
   "up": [
    {
-    "t": "WDC",
-    "pct": 6.09,
-    "close": 352.21
-   },
-   {
-    "t": "SNDK",
-    "pct": 5.53,
-    "close": 1371.12
-   },
-   {
-    "t": "AMZN",
-    "pct": 4.98,
-    "close": 262.45
-   },
-   {
-    "t": "SKHY",
-    "pct": 4.67,
-    "close": 142.87
-   },
-   {
-    "t": "PLTR",
-    "pct": 4.36,
-    "close": 194.15
+    "t": "BRZE",
+    "pct": 51.7,
+    "close": 45.57
    },
    {
     "t": "MRNA",
-    "pct": 4.07,
-    "close": 226.89
+    "pct": 6.69,
+    "close": 242.08
+   },
+   {
+    "t": "MSTR",
+    "pct": 4.93,
+    "close": 142.72
+   },
+   {
+    "t": "LLY",
+    "pct": 3.49,
+    "close": 1283.66
+   },
+   {
+    "t": "WDC",
+    "pct": 3.44,
+    "close": 364.32
+   },
+   {
+    "t": "UNH",
+    "pct": 3.04,
+    "close": 419.26
    }
   ],
   "down": [
    {
-    "t": "MDT",
-    "pct": -2.09,
-    "close": 92.77
+    "t": "SE",
+    "pct": -9.09,
+    "close": 80.43
    },
    {
-    "t": "JPM",
-    "pct": -1.82,
-    "close": 333.53
+    "t": "GM",
+    "pct": -6.84,
+    "close": 77.09
    },
    {
-    "t": "BAC",
-    "pct": -1.64,
-    "close": 50.39
+    "t": "IREN",
+    "pct": -4.0,
+    "close": 26.62
    },
    {
-    "t": "MRK",
-    "pct": -1.59,
-    "close": 143.63
+    "t": "GE",
+    "pct": -3.67,
+    "close": 299.87
    },
    {
-    "t": "TMO",
-    "pct": -1.54,
-    "close": 679.38
+    "t": "LRCX",
+    "pct": -3.21,
+    "close": 263.45
    },
    {
-    "t": "GEV",
-    "pct": -1.39,
-    "close": 908.44
+    "t": "KLAC",
+    "pct": -2.8,
+    "close": 161.74
    }
   ]
  },
  "notes": [
   {
-   "text": "Tech bounced after last week's AI selloff: the S&P 500 rose 0.41% to 7,690.73 and the Nasdaq Composite 1.11% to 26,430.89, while the Dow slipped 0.07% to 51,966.03.",
-   "src": "https://www.tradingkey.com/analysis/stocks/us-stocks/262224387-us-stock-market-close-nasdaq-rise-memory-micron-sandisk-tradingkey"
+   "text": "Money rotated out of megacap tech: the Dow rose 1.02% to 52,495.88 and the Russell 2000 1.65% to 2,773.41, while the S&P 500 added 0.28% to 7,712.57 and the Nasdaq Composite slipped 0.02% to 26,424.82.",
+   "src": "https://vistapglobal.com/stock-market-today-october-20-2026-dow-gains-530-points-small-caps-lead-as-housing-weakens-amwl-brze-crm-docs-eprx-gm-lly-modd-noc-nvda-ser-spcx-tsla-wmt/"
   },
   {
-   "text": "Memory and storage led: Western Digital +6.1%, SanDisk +5.5%, SK Hynix +4.7%, Seagate +3.4%, Micron +3.0%. The Philadelphia Semiconductor Index rose 1.61%.",
-   "src": "https://www.tradingkey.com/analysis/stocks/us-stocks/262224387-us-stock-market-close-nasdaq-rise-memory-micron-sandisk-tradingkey"
+   "text": "Health care led and the XLV fund closed at a record: XLV +2.37%, Eli Lilly +3.49%, UnitedHealth +3.04%, Moderna +6.69%. Real estate (+1.70%) and utilities (+1.26%) also beat the market; tech (XLK) fell 0.28%.",
+   "src": "https://investrade.com/market-review-october-20-2026/"
   },
   {
-   "text": "Amazon jumped 5.0% after Morgan Stanley raised its price target to $350. Tesla +3.8% and Palantir +4.4% ahead of a heavy earnings week (Tesla and Meta report Wednesday after the close).",
-   "src": "https://www.thestreet.com/stock-market-today/stock-market-today-oct-19-2026-nasdaq-futures-climb-as-tech-rebound-from-sell-off"
+   "text": "Earnings beats did not save the industrials: GM fell 6.84% despite adjusted EPS of $3.70 and a $20B buyback, and GE fell 3.67% after raising its 2026 EPS outlook to $8.00-$8.10.",
+   "src": "https://investrade.com/market-review-october-20-2026/"
   },
   {
-   "text": "A narrow rally: among US stocks over $5 with more than $5M traded, 2,304 fell and 1,647 rose. Utilities lost 2.0%, real estate 1.2%, JPMorgan 1.8% and Bank of America 1.6%.",
-   "src": "Massive daily bars 2026-10-19 vs 2026-10-16"
+   "text": "Salesforce agreed to buy Braze for $47.50 a share in cash, about $5.66B; Braze jumped 51.7% to $45.57.",
+   "src": "https://investrade.com/market-review-october-20-2026/"
   },
   {
-   "text": "Oil swung on reports of Houthi attacks on Saudi targets; the USO oil fund closed 0.6% lower and gold (GLD) fell 0.6%.",
-   "src": "https://www.thestreet.com/stock-market-today/stock-market-today-oct-19-2026-nasdaq-futures-climb-as-tech-rebound-from-sell-off"
+   "text": "A broad rally: among US stocks over $5 with more than $5M traded, 2,990 rose and 991 fell, and 22 S&P 500 members touched a 52-week high vs 1 at a low.",
+   "src": "Massive daily bars 2026-10-20 vs 2026-10-19; Robinhood scanner"
   },
   {
-   "text": "Volatility eased: the VIX fell 7.8% from 19.99 to 18.44.",
-   "src": "Robinhood VIX quotes 2026-10-16 and 2026-10-19"
+   "text": "Oil eased: WTI settled at $101.79 (-1.8%) after touching a six-month high, and the 10-year Treasury yield fell 1.9 bp to 5.116%.",
+   "src": "https://investrade.com/market-review-october-20-2026/"
   }
  ],
  "econ": [
-  {
-   "date": "2026-10-20",
-   "time_pt": "07:00",
-   "event": "State employment and unemployment (Sep)",
-   "importance": "low",
-   "detail": "",
-   "src": "https://www.bls.gov/schedule/2026/10_sched_list.htm"
-  },
   {
    "date": "2026-10-22",
    "time_pt": "05:30",
@@ -235,6 +227,46 @@
    "importance": "medium",
    "detail": "Every Thursday",
    "src": "https://www.dol.gov/ui/data.pdf"
+  },
+  {
+   "date": "2026-10-22",
+   "time_pt": "07:00",
+   "event": "Leading economic indicators (Sep)",
+   "importance": "low",
+   "detail": "",
+   "src": "https://www.scotiabank.com/ca/en/about/economics/economics-publications/post.other-publications.calendar-of-economic-release-dates.calendar-of-economic-release-dates--october-2026-.html"
+  },
+  {
+   "date": "2026-10-23",
+   "time_pt": "07:00",
+   "event": "UMich consumer sentiment (Oct final)",
+   "importance": "medium",
+   "detail": "Includes inflation expectations",
+   "src": "https://www.scotiabank.com/ca/en/about/economics/economics-publications/post.other-publications.calendar-of-economic-release-dates.calendar-of-economic-release-dates--october-2026-.html"
+  },
+  {
+   "date": "2026-10-27",
+   "time_pt": "05:30",
+   "event": "Durable goods orders (Sep)",
+   "importance": "medium",
+   "detail": "",
+   "src": "https://www.scotiabank.com/ca/en/about/economics/economics-publications/post.other-publications.calendar-of-economic-release-dates.calendar-of-economic-release-dates--october-2026-.html"
+  },
+  {
+   "date": "2026-10-27",
+   "time_pt": "07:00",
+   "event": "Consumer confidence (Oct)",
+   "importance": "medium",
+   "detail": "Conference Board",
+   "src": "https://www.scotiabank.com/ca/en/about/economics/economics-publications/post.other-publications.calendar-of-economic-release-dates.calendar-of-economic-release-dates--october-2026-.html"
+  },
+  {
+   "date": "2026-10-27",
+   "time_pt": "07:00",
+   "event": "New home sales (Sep)",
+   "importance": "low",
+   "detail": "",
+   "src": "https://www.scotiabank.com/ca/en/about/economics/economics-publications/post.other-publications.calendar-of-economic-release-dates.calendar-of-economic-release-dates--october-2026-.html"
   },
   {
    "date": "2026-10-28",
@@ -275,67 +307,19 @@
    "importance": "medium",
    "detail": "Wage pressure",
    "src": "https://www.bls.gov/schedule/2026/10_sched_list.htm"
+  },
+  {
+   "date": "2026-10-30",
+   "time_pt": "06:45",
+   "event": "Chicago PMI (Oct)",
+   "importance": "low",
+   "detail": "",
+   "src": "https://www.scotiabank.com/ca/en/about/economics/economics-publications/post.other-publications.calendar-of-economic-release-dates.calendar-of-economic-release-dates--october-2026-.html"
   }
  ],
  "earnings": {
   "note": "Large caps only. Dates from the Robinhood earnings calendar (company-verified); am = before the open, pm = after the close.",
   "items": [
-   {
-    "date": "2026-10-20",
-    "when": "am",
-    "t": "GE",
-    "name": "GE Aerospace",
-    "eps_est": 2.01
-   },
-   {
-    "date": "2026-10-20",
-    "when": "am",
-    "t": "GM",
-    "name": "General Motors",
-    "eps_est": 3.61
-   },
-   {
-    "date": "2026-10-20",
-    "when": "am",
-    "t": "MSCI",
-    "name": "MSCI",
-    "eps_est": 5.01
-   },
-   {
-    "date": "2026-10-20",
-    "when": "am",
-    "t": "RTX",
-    "name": "RTX",
-    "eps_est": 1.78
-   },
-   {
-    "date": "2026-10-20",
-    "when": "pm",
-    "t": "COF",
-    "name": "Capital One",
-    "eps_est": 5.49
-   },
-   {
-    "date": "2026-10-20",
-    "when": "pm",
-    "t": "ISRG",
-    "name": "Intuitive Surgical",
-    "eps_est": 2.54
-   },
-   {
-    "date": "2026-10-20",
-    "when": "pm",
-    "t": "NFLX",
-    "name": "Netflix",
-    "eps_est": 0.82
-   },
-   {
-    "date": "2026-10-20",
-    "when": "pm",
-    "t": "SPCX",
-    "name": "SpaceX",
-    "eps_est": 0.16
-   },
    {
     "date": "2026-10-21",
     "when": "am",
@@ -356,6 +340,20 @@
     "t": "DHR",
     "name": "Danaher",
     "eps_est": 1.92
+   },
+   {
+    "date": "2026-10-21",
+    "when": "am",
+    "t": "ELV",
+    "name": "Elevance Health",
+    "eps_est": 4.69
+   },
+   {
+    "date": "2026-10-21",
+    "when": "am",
+    "t": "MCO",
+    "name": "Moody's",
+    "eps_est": 4.25
    },
    {
     "date": "2026-10-21",
@@ -409,6 +407,13 @@
    {
     "date": "2026-10-21",
     "when": "pm",
+    "t": "SAP",
+    "name": "SAP",
+    "eps_est": 2.03
+   },
+   {
+    "date": "2026-10-21",
+    "when": "pm",
     "t": "TSLA",
     "name": "Tesla",
     "eps_est": 0.4
@@ -418,7 +423,28 @@
     "when": "pm",
     "t": "TXN",
     "name": "Texas Instruments",
-    "eps_est": 2.41
+    "eps_est": 2.42
+   },
+   {
+    "date": "2026-10-21",
+    "when": "pm",
+    "t": "URI",
+    "name": "United Rentals",
+    "eps_est": 13.97
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "AAL",
+    "name": "American Airlines",
+    "eps_est": -0.32
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
+    "t": "BX",
+    "name": "Blackstone",
+    "eps_est": 1.29
    },
    {
     "date": "2026-10-22",
@@ -458,6 +484,13 @@
    {
     "date": "2026-10-22",
     "when": "am",
+    "t": "UNP",
+    "name": "Union Pacific",
+    "eps_est": 3.47
+   },
+   {
+    "date": "2026-10-22",
+    "when": "am",
     "t": "VLO",
     "name": "Valero Energy",
     "eps_est": 21.01
@@ -468,6 +501,13 @@
     "t": "BE",
     "name": "Bloom Energy",
     "eps_est": 0.65
+   },
+   {
+    "date": "2026-10-22",
+    "when": "pm",
+    "t": "FIX",
+    "name": "Comfort Systems USA",
+    "eps_est": 12.76
    },
    {
     "date": "2026-10-22",
@@ -489,6 +529,13 @@
     "t": "VZ",
     "name": "Verizon",
     "eps_est": 1.27
+   },
+   {
+    "date": "2026-10-26",
+    "when": "pm",
+    "t": "CLS",
+    "name": "Celestica",
+    "eps_est": 2.95
    },
    {
     "date": "2026-10-27",
@@ -514,6 +561,13 @@
    {
     "date": "2026-10-27",
     "when": "am",
+    "t": "HCA",
+    "name": "HCA Healthcare",
+    "eps_est": 6.65
+   },
+   {
+    "date": "2026-10-27",
+    "when": "am",
     "t": "HLT",
     "name": "Hilton",
     "eps_est": 2.35
@@ -528,9 +582,16 @@
    {
     "date": "2026-10-27",
     "when": "am",
-    "t": "PYPL",
-    "name": "PayPal",
-    "eps_est": 1.31
+    "t": "SOFI",
+    "name": "SoFi Technologies",
+    "eps_est": 0.17
+   },
+   {
+    "date": "2026-10-27",
+    "when": "am",
+    "t": "SPGI",
+    "name": "S&P Global",
+    "eps_est": 4.42
    },
    {
     "date": "2026-10-27",
@@ -568,11 +629,18 @@
     "eps_est": 3.43
    },
    {
+    "date": "2026-10-27",
+    "when": "pm",
+    "t": "WM",
+    "name": "Waste Management",
+    "eps_est": 2.18
+   },
+   {
     "date": "2026-10-28",
     "when": "am",
-    "t": "APH",
-    "name": "Amphenol",
-    "eps_est": 0.73
+    "t": "ADP",
+    "name": "ADP",
+    "eps_est": 2.77
    },
    {
     "date": "2026-10-28",
@@ -591,6 +659,13 @@
    {
     "date": "2026-10-28",
     "when": "am",
+    "t": "PSX",
+    "name": "Phillips 66",
+    "eps_est": 11.64
+   },
+   {
+    "date": "2026-10-28",
+    "when": "am",
     "t": "VRT",
     "name": "Vertiv",
     "eps_est": 1.83
@@ -598,16 +673,16 @@
    {
     "date": "2026-10-28",
     "when": "pm",
-    "t": "CMG",
-    "name": "Chipotle",
-    "eps_est": 0.29
+    "t": "FTNT",
+    "name": "Fortinet",
+    "eps_est": 0.84
    },
    {
     "date": "2026-10-28",
     "when": "pm",
-    "t": "FTNT",
-    "name": "Fortinet",
-    "eps_est": 0.84
+    "t": "GOOG",
+    "name": "Alphabet (C)",
+    "eps_est": 2.96
    },
    {
     "date": "2026-10-28",
@@ -661,6 +736,20 @@
    {
     "date": "2026-10-29",
     "when": "am",
+    "t": "HWM",
+    "name": "Howmet Aerospace",
+    "eps_est": 1.37
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "ICE",
+    "name": "Intercontinental Exchange",
+    "eps_est": 1.96
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
     "t": "LIN",
     "name": "Linde",
     "eps_est": 4.52
@@ -678,6 +767,13 @@
     "t": "MA",
     "name": "Mastercard",
     "eps_est": 5.16
+   },
+   {
+    "date": "2026-10-29",
+    "when": "am",
+    "t": "MO",
+    "name": "Altria",
+    "eps_est": 1.51
    },
    {
     "date": "2026-10-29",
@@ -757,11 +853,11 @@
     "eps_est": 3.56
    },
    {
-    "date": "2026-10-29",
-    "when": "pm",
-    "t": "TWLO",
-    "name": "Twilio",
-    "eps_est": 1.32
+    "date": "2026-10-30",
+    "when": "am",
+    "t": "AZN",
+    "name": "AstraZeneca",
+    "eps_est": 1.14
    },
    {
     "date": "2026-10-30",
@@ -782,7 +878,7 @@
     "when": "am",
     "t": "XOM",
     "name": "ExxonMobil",
-    "eps_est": null
+    "eps_est": 3.43
    },
    {
     "date": "2026-11-02",
@@ -793,10 +889,31 @@
    },
    {
     "date": "2026-11-02",
+    "when": "am",
+    "t": "MAR",
+    "name": "Marriott",
+    "eps_est": 2.83
+   },
+   {
+    "date": "2026-11-02",
+    "when": "am",
+    "t": "TSEM",
+    "name": "Tower Semiconductor",
+    "eps_est": 1.05
+   },
+   {
+    "date": "2026-11-02",
     "when": "pm",
     "t": "AAPL",
     "name": "Apple",
     "eps_est": 1.98
+   },
+   {
+    "date": "2026-11-02",
+    "when": "pm",
+    "t": "ON",
+    "name": "ON Semiconductor",
+    "eps_est": 0.88
    },
    {
     "date": "2026-11-02",
@@ -811,53 +928,125 @@
     "t": "VRTX",
     "name": "Vertex Pharmaceuticals",
     "eps_est": 0.9
+   },
+   {
+    "date": "2026-11-03",
+    "when": "am",
+    "t": "ETN",
+    "name": "Eaton",
+    "eps_est": 3.54
+   },
+   {
+    "date": "2026-11-03",
+    "when": "am",
+    "t": "KDP",
+    "name": "Keurig Dr Pepper",
+    "eps_est": 0.62
+   },
+   {
+    "date": "2026-11-03",
+    "when": "am",
+    "t": "MPC",
+    "name": "Marathon Petroleum",
+    "eps_est": 25.31
+   },
+   {
+    "date": "2026-11-03",
+    "when": "am",
+    "t": "PFE",
+    "name": "Pfizer",
+    "eps_est": 0.73
+   },
+   {
+    "date": "2026-11-03",
+    "when": "am",
+    "t": "SHOP",
+    "name": "Shopify",
+    "eps_est": 0.43
+   },
+   {
+    "date": "2026-11-03",
+    "when": "pm",
+    "t": "AMD",
+    "name": "AMD",
+    "eps_est": 1.88
+   },
+   {
+    "date": "2026-11-03",
+    "when": "pm",
+    "t": "AMGN",
+    "name": "Amgen",
+    "eps_est": 5.75
+   },
+   {
+    "date": "2026-11-03",
+    "when": "pm",
+    "t": "ANET",
+    "name": "Arista Networks",
+    "eps_est": 1.06
+   },
+   {
+    "date": "2026-11-03",
+    "when": "pm",
+    "t": "BKNG",
+    "name": "Booking Holdings",
+    "eps_est": 4.49
+   },
+   {
+    "date": "2026-11-03",
+    "when": "pm",
+    "t": "SMCI",
+    "name": "Super Micro Computer",
+    "eps_est": 1.02
    }
   ]
  },
  "sources": [
   "Robinhood index quotes (SPX, NDX, VIX), scanner (S&P 500 breadth) and daily historicals (indicators)",
-  "Massive grouped daily bars 2026-10-16 and 2026-10-19 (ETF and stock closes, % changes); AMZN daily aggs",
-  "Massive treasury yields (latest row Oct 15)",
-  "TradingKey close wrap 2026-10-19",
-  "TheStreet market wrap 2026-10-19",
+  "Massive grouped daily bars 2026-10-19 and 2026-10-20 (ETF and stock closes, % changes); LLY daily aggs",
+  "Massive treasury yields (latest row Oct 16)",
+  "Vistap Global close wrap 2026-10-20",
+  "Investrade market review 2026-10-20",
+  "Motley Fool midday 2026-10-20",
   "BLS release schedule October 2026",
+  "Scotiabank calendar of US economic releases, October 2026",
   "Federal Reserve FOMC calendar",
-  "Robinhood earnings calendar (pulled 2026-10-19)",
-  "CNN Fear & Greed (reference reading)"
+  "Robinhood earnings calendar (pulled 2026-10-20)",
+  "CNN Fear & Greed (reference reading, Oct 19 close)"
  ],
  "vix": {
-  "value": 18.44,
-  "pct": -7.75,
-  "src": "Robinhood VIX quote, 2026-10-19 16:15 ET"
+  "value": 17.31,
+  "pct": -6.13,
+  "src": "Robinhood VIX quote, 2026-10-20 16:15 ET"
  },
  "curve": {
-  "date": "2026-10-15",
-  "date_label": "Oct 15",
-  "note": "US Treasury yields by maturity, Oct 15 close (Massive, latest row). A normal, upward-sloping curve: the 10-year at 5.10% sits 33 bp above the 2-year, and the 30-year is at 5.43%.",
+  "date": "2026-10-16",
+  "date_label": "Oct 16",
+  "note": "US Treasury yields by maturity, Oct 16 close (Massive, latest row). A normal, upward-sloping curve: the 10-year at 5.09% sits 35 bp above the 2-year, and the 30-year is at 5.43%.",
   "points": [
    {
     "m": "1M",
-    "y": 4.17
+    "y": 4.12
    },
    {
     "m": "3M",
-    "y": 4.28
+    "y": 4.26
    },
    {
     "m": "1Y",
-    "y": 4.49
+    "y": 4.46
    },
    {
     "m": "2Y",
-    "y": 4.77
+    "y": 4.74
    },
    {
     "m": "5Y",
-    "y": 4.91
+    "y": 4.89
    },
    {
     "m": "10Y",
-    "y": 5.1
+    "y": 5.09
    },
    {
     "m": "30Y",
@@ -866,178 +1055,174 @@
   ]
  },
  "breadth": {
-  "universe": "S&P 500 members, Robinhood scanner at the Oct 19 close: 316 above the 20-day, 215 above the 50-day and 250 above the 200-day average, out of 497 members (the Oct 15 member count; the scanner capped today's list at 400).",
-  "pct20": 63.6,
-  "pct50": 43.3,
-  "pct200": 50.3,
-  "highs": 10,
-  "lows": 2,
-  "adv": 1647,
-  "dec": 2304,
-  "unch": 68,
-  "upvol_b": 490.0,
-  "downvol_b": 329.7,
-  "adv_universe": "Rising vs falling: 4,019 US-listed stocks and funds over $5 with more than $5M traded (Massive daily bars, Oct 19 vs Oct 16)."
+  "universe": "S&P 500 members, Robinhood scanner at the Oct 20 close: 355 above the 20-day, 258 above the 50-day and 262 above the 200-day average, out of 497 members (the Oct 15 member count; the scanner capped today's list at 400).",
+  "pct20": 71.4,
+  "pct50": 51.9,
+  "pct200": 52.7,
+  "highs": 22,
+  "lows": 1,
+  "adv": 2990,
+  "dec": 991,
+  "unch": 66,
+  "upvol_b": 503.3,
+  "downvol_b": 334.1,
+  "adv_universe": "Rising vs falling: 4,047 US-listed stocks and funds over $5 with more than $5M traded (Massive daily bars, Oct 20 vs Oct 19)."
  },
  "fng": {
   "oracle": {
-   "score": 55,
-   "rating": "Neutral",
+   "score": 59,
+   "rating": "Greed",
    "components": [
     {
      "name": "Market momentum",
-     "value": "S&P +1.9% vs 125-day avg",
-     "score": 59,
+     "value": "S&P +2.2% vs 125-day avg",
+     "score": 61,
      "rating": "Greed"
     },
     {
      "name": "Stock price strength",
-     "value": "10 new 52-wk highs vs 2 lows",
-     "score": 83,
+     "value": "22 new 52-wk highs vs 1 lows",
+     "score": 96,
      "rating": "Extreme greed"
     },
     {
      "name": "Stock price breadth",
-     "value": "43% of S&P 500 above 50-day",
-     "score": 43,
-     "rating": "Fear"
-    },
-    {
-     "name": "Market volatility",
-     "value": "VIXY -2.2% vs 50-day avg",
-     "score": 55,
+     "value": "52% of S&P 500 above 50-day",
+     "score": 52,
      "rating": "Neutral"
     },
     {
+     "name": "Market volatility",
+     "value": "VIXY -2.7% vs 50-day avg",
+     "score": 57,
+     "rating": "Greed"
+    },
+    {
      "name": "Safe haven demand",
-     "value": "Stocks +2.0 pts vs Treasuries (20 days)",
-     "score": 58,
+     "value": "Stocks +1.4 pts vs Treasuries (20 days)",
+     "score": 56,
      "rating": "Greed"
     },
     {
      "name": "Junk bond demand",
-     "value": "High yield -1.18 pts vs Treasuries (20 days)",
-     "score": 32,
+     "value": "High yield -1.34 pts vs Treasuries (20 days)",
+     "score": 30,
      "rating": "Fear"
     }
    ],
    "method": "Seven equal-weight gauges scored 0-100, modelled on CNN Fear & Greed. Bands: 0-24 extreme fear, 25-44 fear, 45-55 neutral, 56-75 greed, 76-100 extreme greed."
   },
   "cnn": {
-   "score": 17.9,
+   "score": 23.2,
    "rating": "Extreme fear",
-   "prev_close": 31.5,
-   "week": 46.5,
-   "month": 27.3,
-   "year": 23.1,
-   "asof": "2026-10-16",
+   "prev_close": 23.1,
+   "week": 44.1,
+   "month": 30.4,
+   "year": 29.9,
+   "asof": "2026-10-19",
    "src": "https://edition.cnn.com/markets/fear-and-greed"
   }
  },
  "indicators": [
   {
    "t": "SPY",
-   "date": "2026-10-19",
-   "close": 766.48,
-   "chg": 0.42,
-   "chg5": -1.49,
-   "chg20": -0.91,
-   "ytd": 12.4,
-   "rsi": 47.1,
-   "macd": 1.179,
-   "macd_sig": 2.234,
-   "macd_hist": -1.055,
-   "sma20": 770.83,
-   "sma50": 768.37,
-   "sma200": 725.44,
-   "pct_b": 0.3,
+   "date": "2026-10-20",
+   "close": 769.05,
+   "chg": 0.34,
+   "chg5": -1.15,
+   "chg20": -0.56,
+   "ytd": 12.78,
+   "rsi": 49.7,
+   "macd": 0.96,
+   "macd_sig": 1.979,
+   "macd_hist": -1.019,
+   "sma20": 770.62,
+   "sma50": 768.29,
+   "sma200": 725.87,
+   "pct_b": 0.43,
    "atr_pct": 0.92,
-   "adx": 12.0,
-   "di_plus": 18.5,
-   "di_minus": 30.2,
+   "adx": 12.5,
+   "di_plus": 18.8,
+   "di_minus": 27.8,
    "hi52": 781.62,
    "lo52": 629.28,
-   "from_hi": -1.94
+   "from_hi": -1.61
   },
   {
    "t": "QQQ",
-   "date": "2026-10-19",
-   "close": 718.36,
-   "chg": 1.21,
-   "chg5": -3.71,
-   "chg20": -3.12,
-   "ytd": 16.94,
-   "rsi": 41.1,
-   "macd": -0.011,
-   "macd_sig": 4.931,
-   "macd_hist": -4.942,
-   "sma20": 741.36,
-   "sma50": 726.68,
-   "sma200": 675.43,
-   "pct_b": 0.03,
-   "atr_pct": 1.51,
-   "adx": 18.5,
-   "di_plus": 16.0,
-   "di_minus": 36.9,
+   "date": "2026-10-20",
+   "close": 717.63,
+   "chg": -0.1,
+   "chg5": -3.49,
+   "chg20": -3.99,
+   "ytd": 16.82,
+   "rsi": 40.8,
+   "macd": -1.273,
+   "macd_sig": 3.69,
+   "macd_hist": -4.963,
+   "sma20": 739.87,
+   "sma50": 726.62,
+   "sma200": 675.95,
+   "pct_b": 0.08,
+   "atr_pct": 1.53,
+   "adx": 20.3,
+   "di_plus": 14.7,
+   "di_minus": 37.9,
    "hi52": 762.86,
    "lo52": 555.6,
-   "from_hi": -5.83
+   "from_hi": -5.93
   },
   {
    "t": "IWM",
-   "date": "2026-10-19",
-   "close": 271.28,
-   "chg": 0.31,
-   "chg5": -2.38,
-   "chg20": -5.01,
-   "ytd": 10.2,
-   "rsi": 33.7,
-   "macd": -4.272,
-   "macd_sig": -3.853,
-   "macd_hist": -0.419,
-   "sma20": 278.6,
-   "sma50": 288.46,
-   "sma200": 277.78,
-   "pct_b": 0.06,
-   "atr_pct": 1.38,
-   "adx": 42.2,
-   "di_plus": 11.5,
-   "di_minus": 35.8,
+   "date": "2026-10-20",
+   "close": 275.78,
+   "chg": 1.66,
+   "chg5": -0.33,
+   "chg20": -3.98,
+   "ytd": 12.03,
+   "rsi": 42.9,
+   "macd": -3.965,
+   "macd_sig": -3.875,
+   "macd_hist": -0.089,
+   "sma20": 278.02,
+   "sma50": 287.98,
+   "sma200": 277.91,
+   "pct_b": 0.35,
+   "atr_pct": 1.41,
+   "adx": 41.2,
+   "di_plus": 18.1,
+   "di_minus": 32.1,
    "hi52": 305.18,
    "lo52": 228.9,
-   "from_hi": -11.11
+   "from_hi": -9.63
   },
   {
    "t": "DIA",
-   "date": "2026-10-19",
-   "close": 518.92,
-   "chg": -0.03,
-   "chg5": 0.2,
-   "chg20": -0.17,
-   "ytd": 7.98,
-   "rsi": 51.7,
-   "macd": -0.97,
-   "macd_sig": -2.339,
-   "macd_hist": 1.368,
-   "sma20": 514.6,
-   "sma50": 523.78,
-   "sma200": 504.52,
-   "pct_b": 0.81,
-   "atr_pct": 0.97,
-   "adx": 18.5,
-   "di_plus": 29.7,
-   "di_minus": 22.4,
+   "date": "2026-10-20",
+   "close": 524.36,
+   "chg": 1.05,
+   "chg5": 1.58,
+   "chg20": 1.23,
+   "ytd": 9.11,
+   "rsi": 58.6,
+   "macd": -0.288,
+   "macd_sig": -1.928,
+   "macd_hist": 1.64,
+   "sma20": 514.92,
+   "sma50": 523.49,
+   "sma200": 504.72,
+   "pct_b": 1.09,
+   "atr_pct": 1.0,
+   "adx": 19.1,
+   "di_plus": 34.3,
+   "di_minus": 20.0,
    "hi52": 546.75,
    "lo52": 450.44,
-   "from_hi": -5.09
+   "from_hi": -4.1
   }
  ],
  "series": {
   "SPY": [
-   [
-    "2026-04-15",
-    699.94
-   ],
    [
     "2026-04-16",
     701.66
@@ -1553,13 +1738,13 @@
    [
     "2026-10-19",
     766.48
+   ],
+   [
+    "2026-10-20",
+    769.05
    ]
   ],
   "QQQ": [
-   [
-    "2026-04-15",
-    637.4
-   ],
    [
     "2026-04-16",
     640.47
@@ -2075,13 +2260,13 @@
    [
     "2026-10-19",
     718.36
+   ],
+   [
+    "2026-10-20",
+    717.63
    ]
   ],
   "IWM": [
-   [
-    "2026-04-15",
-    269.39
-   ],
    [
     "2026-04-16",
     269.95
@@ -2597,13 +2782,13 @@
    [
     "2026-10-19",
     271.28
+   ],
+   [
+    "2026-10-20",
+    275.78
    ]
   ],
   "DIA": [
-   [
-    "2026-04-15",
-    484.72
-   ],
    [
     "2026-04-16",
     485.63
@@ -3119,13 +3304,13 @@
    [
     "2026-10-19",
     518.92
+   ],
+   [
+    "2026-10-20",
+    524.36
    ]
   ],
   "XLV": [
-   [
-    "2026-04-15",
-    147.77
-   ],
    [
     "2026-04-16",
     146.61
@@ -3641,13 +3826,13 @@
    [
     "2026-10-19",
     175.65
+   ],
+   [
+    "2026-10-20",
+    179.82
    ]
   ],
   "TLT": [
-   [
-    "2026-04-15",
-    86.83
-   ],
    [
     "2026-04-16",
     86.28
@@ -4163,13 +4348,13 @@
    [
     "2026-10-19",
     79.46
+   ],
+   [
+    "2026-10-20",
+    80.13
    ]
   ],
   "VIXY": [
-   [
-    "2026-04-15",
-    28.33
-   ],
    [
     "2026-04-16",
     28.29
@@ -4685,6 +4870,10 @@
    [
     "2026-10-19",
     17.01
+   ],
+   [
+    "2026-10-20",
+    16.86
    ]
   ],
   "MSFT": [
@@ -5717,13 +5906,13 @@
    [
     "2026-10-19",
     67.8
+   ],
+   [
+    "2026-10-20",
+    67.97
    ]
   ],
   "AMZN": [
-   [
-    "2026-04-15",
-    248.5
-   ],
    [
     "2026-04-16",
     249.7
@@ -6239,6 +6428,10 @@
    [
     "2026-10-19",
     262.45
+   ],
+   [
+    "2026-10-20",
+    262.63
    ]
   ]
  }

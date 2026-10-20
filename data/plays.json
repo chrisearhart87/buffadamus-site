@@ -75,12 +75,12 @@
     "price": 176.43
    },
    "mark": {
-    "date": "2026-10-19",
-    "price": 175.65,
-    "session": 3
+    "date": "2026-10-20",
+    "price": 179.82,
+    "session": 4
    },
-   "ret_pct": -0.44,
-   "croissants": -11.1
+   "ret_pct": 1.92,
+   "croissants": 48.0
   },
   {
    "session": "2026-10-16",
@@ -199,12 +199,12 @@
     "price": 67.95
    },
    "mark": {
-    "date": "2026-10-19",
-    "price": 67.8,
-    "session": 1
+    "date": "2026-10-20",
+    "price": 67.97,
+    "session": 2
    },
-   "ret_pct": -0.22,
-   "croissants": -5.5
+   "ret_pct": 0.03,
+   "croissants": 0.7
   },
   {
    "session": "2026-10-20",
@@ -254,17 +254,28 @@
    "stake": 2470.0,
    "risk_at_stop": 79.5,
    "id": "P004",
-   "status": "pending"
+   "status": "open",
+   "entry": {
+    "date": "2026-10-20",
+    "price": 264.075
+   },
+   "mark": {
+    "date": "2026-10-20",
+    "price": 262.63,
+    "session": 1
+   },
+   "ret_pct": -0.55,
+   "croissants": -13.5
   }
  ],
  "summary": {
   "bank": 9922.4,
   "realized": -77.6,
-  "unrealized": -16.6,
+  "unrealized": 35.2,
   "plays": 4,
   "closed": 1,
-  "open": 2,
-  "pending": 1,
+  "open": 3,
+  "pending": 0,
   "void": 0,
   "wins": 0,
   "losses": 1,
@@ -276,7 +287,7 @@
   "vs_spy": -45.3,
   "streak": "1 loss",
   "usd": 39689.6,
-  "updated": "2026-10-19 14:15 PT"
+  "updated": "2026-10-20 14:09 PT"
  },
  "equity": [
   {
@@ -296,10 +307,14 @@
   {
    "d": "2026-10-19",
    "bank": 9905.9
+  },
+  {
+   "d": "2026-10-20",
+   "bank": 9957.7
   }
  ],
  "guard": {
   "status": "ok",
-  "checked": "2026-10-19 14:15 PT"
+  "checked": "2026-10-20 14:09 PT"
  }
 }
