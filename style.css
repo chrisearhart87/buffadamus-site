@@ -189,7 +189,7 @@ body.paradox main{animation:paradox .22s steps(2) 8}
 /* anomalies */
 .anoms{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;counter-reset:a}
 .anoms li{border:1px solid var(--line);padding:14px 16px;min-height:96px;display:flex;flex-direction:column;gap:6px;position:relative;background:rgba(12,15,23,.6)}
-.anoms li::before{counter-increment:a;content:"0" counter(a);color:var(--mute);font-size:12px;letter-spacing:.1em}
+.anoms li::before{counter-increment:a;content:counter(a,decimal-leading-zero);color:var(--mute);font-size:12px;letter-spacing:.1em}
 .anoms li .h{color:var(--mute);font-size:14px}
 .anoms li .n{font:500 15px var(--display);color:var(--text)}
 .anoms li.found{border-color:var(--cyan);box-shadow:inset 0 0 0 1px rgba(77,243,230,.25)}
@@ -259,3 +259,4 @@ body.owned main,body.owned .bar{filter:hue-rotate(-60deg) saturate(3) contrast(1
 body.owned::after{content:"hello, friend.";position:fixed;inset:0;z-index:96;display:flex;align-items:center;justify-content:center;font:800 clamp(28px,7vw,84px) var(--mono);color:#ff2a2a;background:rgba(0,0,0,.82);letter-spacing:.04em;pointer-events:none;animation:owned .16s steps(2) 10}
 @keyframes owned{50%{transform:translateX(6px);opacity:.75}}
 @media (prefers-reduced-motion:reduce){#hotdog{left:16px;top:auto!important;bottom:90px;transform:none}}
+#face{-webkit-touch-callout:none;user-select:none;-webkit-user-select:none}

@@ -82,7 +82,8 @@
     ['fsociety', 'Hello, friend', 'Some files hide. Their names start with a dot.'],
     ['yearzero', 'Year zero', 'Dial a year that never happened.'],
     ['forever', 'Holding period: forever', 'Do nothing. Seriously. Nothing.'],
-    ['witchcraft', 'Witchcraft', 'Open the witchcraft window. Say his name.']
+    ['witchcraft', 'Witchcraft', 'Open the witchcraft window. Say his name.'],
+    ['onhold', 'Please continue to hold', 'He has been on hold since 1556. Hold him.']
   ];
   const WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty', 'Twenty-one', 'Twenty-two', 'Twenty-three', 'Twenty-four', 'Twenty-five'];
   $('#anomTotal').textContent = ANOMS.length;
@@ -614,6 +615,21 @@
     beep(180 + pokes * 60, .05, 'square', .03);
     if (pokes >= 6) { flash(); unlock('poke'); pokes = 0; }
   });
+  // press and hold the prophet: he is on hold too
+  let holdT = 0;
+  const holdOff = () => clearTimeout(holdT);
+  face.addEventListener('pointerdown', () => {
+    holdOff();
+    holdT = setTimeout(() => {
+      speech.textContent = '\u266A hold music, 1983 \u266A'; speech.classList.add('on');
+      clearTimeout(face._t); face._t = setTimeout(() => speech.classList.remove('on'), 4200);
+      [523, 659, 784, 659, 587, 698, 880, 698, 523].forEach((f, i) => setTimeout(() => beep(f, .16, 'triangle', .03), i * 190));
+      say('<b>PLEASE CONTINUE TO HOLD.</b> Your call is important to us. Estimated wait: 471 years.', 4000);
+      setTimeout(() => unlock('onhold'), 4100); pokes = 0;
+    }, 2500);
+  });
+  ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => face.addEventListener(ev, holdOff));
+  face.addEventListener('contextmenu', e => e.preventDefault());
   // face follows the mouse a little
   if (!reduce) addEventListener('pointermove', e => {
     const x = (e.clientX / innerWidth - .5), y = (e.clientY / innerHeight - .5);
