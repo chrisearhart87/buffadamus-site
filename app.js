@@ -193,7 +193,7 @@
     { const [x0, y0] = P(angOf(MAX), 157), [x1, y1] = P(angOf(MAX), 174); h += `<line class="maj" x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}"/>`; }
     for (const y of [1555, 1600, 1700, 1800, 1900, 2000, 2099]) { const [x, yy] = P(angOf(y), 124); h += `<text x="${x}" y="${yy}">${y}</text>`; }
     $('#tickG').innerHTML = h;
-    $('#dotG').innerHTML = STATIONS.map(y => { const [x, yy] = P(angOf(y), 187); return `<circle class="st${ANOM_YEARS[y] ? ' a' : ''}" data-y="${y}" cx="${x}" cy="${yy}" r="6"><title>Unknown signal</title></circle>`; }).join('');
+    $('#dotG').innerHTML = STATIONS.map(y => { const [x, yy] = P(angOf(y), 187); return `<circle class="st" data-y="${y}" cx="${x}" cy="${yy}" r="6"><title>Unknown signal</title></circle>`; }).join('');
     $('#trackArc').setAttribute('d', arcPath(-SWEEP / 2, SWEEP / 2, 150));
   })();
   const dots = [...$('#dotG').children];
@@ -201,16 +201,23 @@
   // station logbook
   let logged = new Set(store.get('stations', []).filter(y => TX[y]));
   const strip = $('#logStrip');
-  strip.innerHTML = STATIONS.map(y => `<button type="button" data-y="${y}" disabled>????</button>`).join('');
+  strip.innerHTML = STATIONS.map(() => '<button type="button" disabled>????</button>').join('');
   const cells = [...strip.children];
   $('#logTotal').textContent = STATIONS.length;
   function paintLog() {
-    STATIONS.forEach((y, i) => {
-      const on = logged.has(y), c = cells[i];
-      c.disabled = !on; c.textContent = on ? y : '????';
+    // logged stations first, in year order; unknown ones give away nothing about where they are
+    const ys = STATIONS.filter(y => logged.has(y));
+    cells.forEach((c, i) => {
+      const y = ys[i], on = y != null;
+      c.disabled = !on; c.textContent = on ? y : '????'; if (on) c.dataset.y = y; else delete c.dataset.y;
       c.className = (on ? 'on' : '') + (on && ANOM_YEARS[y] ? ' a' : '') + (on && y === cur ? ' cur' : '');
       c.setAttribute('aria-label', on ? 'Tune to ' + y : 'Station not logged yet');
-      dots[i].classList.toggle('on', on); dots[i].firstChild.textContent = on ? y + ' (logged)' : 'Unknown signal';
+    });
+    STATIONS.forEach((y, i) => {
+      const on = logged.has(y), d = dots[i], an = !!ANOM_YEARS[y];
+      d.classList.toggle('on', on); d.classList.toggle('a', on && an);
+      d.style.display = an && !on ? 'none' : ''; // anomalies have no marker until found
+      d.firstChild.textContent = on ? y + ' (logged)' : 'Unknown signal';
     });
     $('#logCount').textContent = logged.size;
   }
@@ -427,7 +434,8 @@
   const scanBtn = $('#scanBtn'); let scanning = false, scanT = 0;
   function scanNext() {
     if (!scanning) return;
-    const n = STATIONS.find(s => s > cur) ?? STATIONS[0];
+    const ok = STATIONS.filter(s => !ANOM_YEARS[s] || logged.has(s)); // the scanner never finds an anomaly for you
+    const n = ok.find(s => s > cur) ?? ok[0];
     jumpTo(n, { warp: n < cur, ms: 650 }); scanT = setTimeout(scanNext, (reduce ? 0 : 650) + 2800);
   }
   function stopScan() { if (!scanning) return; scanning = false; clearTimeout(scanT); scanBtn.setAttribute('aria-pressed', 'false'); scanBtn.textContent = 'SCAN'; }
@@ -611,13 +619,13 @@
     konami: () => { toggle1555(); return 'overdrive toggled.'; },
     sound: () => { sb.click(); return 'sound ' + (soundOn ? 'on' : 'off'); },
     scan: () => { scanBtn.click(); return scanning ? 'scanner on. touch any dial control to stop it.' : 'scanner off.'; },
-    stations: () => STATIONS.map(y => logged.has(y) ? '[x] ' + y : '[ ] ????').join('  ') + '\n' + logged.size + '/' + STATIONS.length + ' logged',
+    stations: () => STATIONS.filter(y => logged.has(y)).map(y => '[x] ' + y).concat(Array(STATIONS.length - logged.size).fill('[ ] ????')).join('  ') + '\n' + logged.size + '/' + STATIONS.length + ' logged',
     anomalies: () => ANOMS.map(([id, n]) => (found.has(id) ? '[x] ' + n : '[ ] ??? ???')).join('\n'),
     clear: () => { tout.textContent = ''; return null; },
     exit: () => { toggleTerm(false); return null; }
   };
   const FILES = {
-    'transmissions.log': () => STATIONS.map(y => logged.has(y) ? y + '  ' + TX[y].split('\n')[0].slice(0, 54) : '????  [not yet received]').join('\n'),
+    'transmissions.log': () => STATIONS.filter(y => logged.has(y)).map(y => y + '  ' + TX[y].split('\n')[0].slice(0, 54)).concat(Array(STATIONS.length - logged.size).fill('????  [not yet received]')).join('\n'),
     'warranty.pdf': 'binary file. it says "VOID IF USED FOR TIME TRAVEL".',
     'secret.txt': 'the dial is a radio. stations hide between the years. the meter gets louder when you are close.\nthree of them are anomalies. one of them ends in 29. shaking the dial is not recommended.',
     'beans.txt': 'still here. still waiting for y2k.'
