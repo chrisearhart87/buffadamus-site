@@ -149,6 +149,7 @@
   const TX = {
     1555: 'ORIGIN. Built a time machine out of an astrolabe, two candles and confidence. The confidence was load-bearing.',
     1600: 'A new company is founded to sell pepper. I put everything into salt.\nSalt and pepper are not the same trade. I learned this in 1601.',
+    1602: 'Amsterdam invents the stock market: shares in ships that may or may not come back.\nI ask when my ship comes back. They say that is the fun part.',
     1637: 'Tulip bulbs sell for the price of a canal house. I bought the canal house. It was full of tulips.',
     1666: 'London catches fire. Fire insurance is invented the next year. I am always one year early or one year late. Never on time.',
     1720: 'South Sea stock: BUY. [SIGNAL LOST] ...SELL. SELL. Why does nobody ever receive the second half.',
@@ -211,10 +212,10 @@
     { const [x0, y0] = P(angOf(MAX), 157), [x1, y1] = P(angOf(MAX), 174); h += `<line class="maj" x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}"/>`; }
     for (const y of [1555, 1600, 1700, 1800, 1900, 2000, 2099]) { const [x, yy] = P(angOf(y), 124); h += `<text x="${x}" y="${yy}">${y}</text>`; }
     $('#tickG').innerHTML = h;
-    $('#dotG').innerHTML = STATIONS.map(y => { const [x, yy] = P(angOf(y), 187); return `<circle class="st" data-y="${y}" cx="${x}" cy="${yy}" r="6"><title>Unknown signal</title></circle>`; }).join('');
+    // no station markers on the dial: the signal meter is the only guide
     $('#trackArc').setAttribute('d', arcPath(-SWEEP / 2, SWEEP / 2, 150));
   })();
-  const dots = [...$('#dotG').children];
+  const dots = [];
 
   // station logbook
   let logged = new Set(store.get('stations', []).filter(y => TX[y]));
@@ -231,7 +232,7 @@
       c.className = (on ? 'on' : '') + (on && ANOM_YEARS[y] ? ' a' : '') + (on && y === cur ? ' cur' : '');
       c.setAttribute('aria-label', on ? 'Tune to ' + y : 'Station not logged yet');
     });
-    STATIONS.forEach((y, i) => {
+    if (dots.length) STATIONS.forEach((y, i) => {
       const on = logged.has(y), d = dots[i], an = !!ANOM_YEARS[y];
       d.classList.toggle('on', on); d.classList.toggle('a', on && an);
       d.style.display = an && !on ? 'none' : ''; // anomalies have no marker until found
