@@ -7,6 +7,7 @@
     set(k, v) { try { localStorage.setItem('bfd.' + k, JSON.stringify(v)); } catch {} }
   };
   const GL = '!<>-_\\/[]{}=+*^?#%&@$01';
+  const fx = { warp: 0, acc: 'rgba(77,243,230,' }; // shared with the time tunnel
 
   // ---------- sound (off by default) ----------
   let ctx = null, soundOn = store.get('sound', false);
@@ -18,6 +19,15 @@
       o.type = type; o.frequency.value = f; g.gain.value = vol;
       o.connect(g); g.connect(ctx.destination); o.start();
       g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + d); o.stop(ctx.currentTime + d);
+    } catch {}
+  }
+  function sweep(f0, f1, d, type = 'sawtooth', vol = .02) {
+    if (!soundOn) return;
+    try {
+      ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+      const o = ctx.createOscillator(), g = ctx.createGain(), n = ctx.currentTime;
+      o.type = type; o.frequency.setValueAtTime(f0, n); o.frequency.exponentialRampToValueAtTime(f1, n + d);
+      g.gain.value = vol; g.gain.exponentialRampToValueAtTime(.0001, n + d); o.connect(g); g.connect(ctx.destination); o.start(); o.stop(n + d);
     } catch {}
   }
   const sb = $('#soundBtn');
@@ -45,7 +55,7 @@
 
   // ---------- toast + flash ----------
   const toast = $('#toast');
-  function say(html, ms = 3200) { toast.innerHTML = html; toast.hidden = false; clearTimeout(say._t); say._t = setTimeout(() => toast.hidden = true, ms); }
+  function say(html, ms = 3200, low) { if (low && !toast.hidden) return; toast.innerHTML = html; toast.hidden = false; clearTimeout(say._t); say._t = setTimeout(() => toast.hidden = true, ms); }
   function flash() { const f = $('#flash'); f.classList.remove('go'); void f.offsetWidth; f.classList.add('go'); }
 
   // ---------- anomalies ----------
@@ -58,8 +68,14 @@
     ['poke', 'Do not poke the prophet', 'He really does not like being poked.'],
     ['origin', 'Origin ping', 'Type the year he came from. Anywhere.'],
     ['oracle', 'Rule No. 1', 'Type the name of the other half.'],
-    ['lost', 'Page from no year', 'Visit a page that does not exist.']
+    ['lost', 'Page from no year', 'Visit a page that does not exist.'],
+    ['mph88', 'Eighty-seven point nine', 'Spin the dial faster than any time machine should go.'],
+    ['paradox', 'Grandfather clause', 'Shake the dial back and forth. Hard.'],
+    ['stations', 'Station master', 'Log every live station on the dial.']
   ];
+  const WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen'];
+  $('#anomTotal').textContent = ANOMS.length;
+  $('#anomHint').textContent = `${WORDS[ANOMS.length] || ANOMS.length} are hidden on this site. Find them all to repair the timeline.`;
   let found = new Set(store.get('anoms', []));
   const list = $('#anomList');
   function paintAnoms() {
@@ -74,7 +90,7 @@
     found.add(id); store.set('anoms', [...found]); paintAnoms();
     const a = ANOMS.find(x => x[0] === id);
     beep(523, .09, 'triangle', .05); setTimeout(() => beep(784, .12, 'triangle', .05), 90);
-    say(`ANOMALY FOUND: <b>${a ? a[1] : id}</b> (${found.size}/9)`);
+    say(`ANOMALY FOUND: <b>${a ? a[1] : id}</b> (${found.size}/${ANOMS.length})`);
     if (found.size === ANOMS.length) setTimeout(() => { flash(); say('<b>TIMELINE REPAIRED.</b> The signal is clean for one second. Then it breaks again. Follow @Buffadamus for the next leak.', 7000); }, 1200);
   }
   $('#anomBtn').onclick = () => $('#anomalies').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
@@ -115,21 +131,27 @@
   setInterval(() => { const v = 58 + ((Math.random() * 30) | 0); sig.textContent = 'SIGNAL ' + v + '%'; }, 2400);
   $('#nowyear').textContent = new Date().getFullYear();
 
-  // ---------- chrono dial ----------
+  // ---------- chrono dial v3: a rotary tuner for time ----------
   const TX = {
     1555: 'ORIGIN. Built a time machine out of an astrolabe, two candles and confidence. The confidence was load-bearing.',
+    1600: 'A new company is founded to sell pepper. I put everything into salt.\nSalt and pepper are not the same trade. I learned this in 1601.',
     1637: 'Tulip bulbs sell for the price of a canal house. I bought the canal house. It was full of tulips.',
     1666: 'London catches fire. Fire insurance is invented the next year. I am always one year early or one year late. Never on time.',
     1720: 'South Sea stock: BUY. [SIGNAL LOST] ...SELL. SELL. Why does nobody ever receive the second half.',
+    1792: 'Twenty-four men sign a trading agreement under a buttonwood tree. I am the twenty-fifth. I signed the tree.',
     1849: 'Gold in California. I arrive in 1852 with a shovel and a strong opinion.',
     1903: 'Two brothers fly for twelve seconds. I have been flying through time for 471 years. Nobody gives me a museum.',
     1929: 'OCTOBER. I warned them on the 23rd. They said it was different this time.\nIt was not different this time.',
     1969: 'A man walks on the moon. My time machine still cannot parallel park.',
+    1971: 'The dollar leaves the gold standard. I leave the room.\nNobody notices either of us.',
+    1984: 'This transmission is being monitored.\nSo is this one. Hello to whoever is in the other room.',
     1985: '88 miles per hour. That is the speed. I was going 87. That is why I am stuck here.',
     1987: 'A Monday. A black one. Do not check the numbers. Do not check anything. Go outside.',
     1999: 'Every computer resets to 1900 at midnight. I fill a bunker with canned beans.\nJanuary 1st: the beans and I have a lot to talk about.',
     2000: 'Every company adds .com to its name and doubles. I add .com to mine.\nBUFFADAMUS.COM. Wait. That one worked.',
     2008: 'The houses are made of cards. The cards are made of houses. Nobody can explain it. Everybody signs.',
+    2010: 'A man buys two pizzas for 10,000 bitcoin. I was the delivery driver.\nI asked for cash.',
+    2012: 'December 21. The calendar ends. The world does not.\nI had already sold everything. Again.',
     2021: 'A picture of a monkey sells for the price of a castle. I sell my castle. For a different monkey.',
     2026: 'PRESENT DAY. Stranded. The warranty on the time machine expired in 1556.\nCustomer support has me on hold. The hold music is from 1983.',
     2038: 'January 19, 03:14:07. Every old computer runs out of seconds and decides it is 1901.\nFinally. Someone who understands me.',
@@ -148,27 +170,342 @@
     'Someone, somewhere, buys the top. Again.'
   ];
   const ANOM_YEARS = { 1929: 'y1929', 1999: 'y1999', 2038: 'y2038' };
-  const yr = $('#year'), out = $('#yearOut'), body = $('#txBody'), st = $('#txState'), tid = $('#txId');
-  let tm = null, lastV = +yr.value, lastT = performance.now(), fastShown = 0;
-  function tune(v, instant) {
-    out.textContent = v;
-    tid.textContent = 'TX-' + v.toString(16).toUpperCase().padStart(4, '0');
-    const txt = TX[v] || FILL[(v * 7919) % FILL.length];
-    st.textContent = TX[v] ? (ANOM_YEARS[v] ? 'ANOMALY' : 'LIVE') : 'STATIC';
-    st.className = TX[v] ? (ANOM_YEARS[v] ? 'anom' : 'live') : '';
-    clearTimeout(tm);
-    tm = setTimeout(() => { scramble(body, txt, instant ? 6 : 16); if (ANOM_YEARS[v]) unlock(ANOM_YEARS[v]); }, instant ? 0 : 140);
-    beep(200 + (v - 1555) * 1.2, .02, 'sawtooth', .012);
+  const MIN = 1555, MAX = 2099, SPAN = MAX - MIN, SWEEP = 300, C = 200, SIG = 2.5;
+  const STATIONS = Object.keys(TX).map(Number).sort((a, b) => a - b);
+  const ERAS = [[1699, 'renaissance', 'RENAISSANCE', '234,220,187'], [1899, 'steam', 'STEAM AGE', '224,148,90'], [1979, 'analog', 'ANALOG', '214,219,227'], [2029, 'digital', 'DIGITAL', '77,243,230'], [MAX, 'post', 'POST-HUMAN', '197,139,255']];
+  const clampY = v => Math.max(MIN, Math.min(MAX, v));
+  const angOf = v => -SWEEP / 2 + (v - MIN) / SPAN * SWEEP;
+  const P = (a, r) => { const t = a * Math.PI / 180; return [(C + r * Math.sin(t)).toFixed(1), (C - r * Math.cos(t)).toFixed(1)]; };
+  const arcPath = (a0, a1, r) => { const [x0, y0] = P(a0, r), [x1, y1] = P(a1, r); return `M${x0} ${y0}A${r} ${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1} ${y1}`; };
+  const nearest = v => STATIONS.reduce((b, s) => Math.abs(s - v) < Math.abs(b - v) ? s : b, STATIONS[0]);
+  const strength = d => Math.exp(-(d * d) / (2 * SIG * SIG));
+  const hexId = y => 'TX-' + y.toString(16).toUpperCase().padStart(4, '0');
+  const dialEl = $('.dial'), wheel = $('#wheel'), needle = $('#needle'), arcFill = $('#arcFill');
+  const out = $('#yearOut'), eraName = $('#eraName'), lockLbl = $('#lockLbl'), freqEl = $('#freq'), sigPct = $('#sigPct');
+  const body = $('#txBody'), st = $('#txState'), tid = $('#txId'), live = $('#txLive'), yr = $('#year');
+  const barsEl = $('#bars'); barsEl.innerHTML = '<i></i>'.repeat(12);
+  const bars = [...barsEl.children]; bars.forEach((b, i) => b.style.height = (22 + i * 7) + '%');
+
+  // build the face: ticks, labels, station dots
+  (() => {
+    let h = '';
+    for (let y = MIN; y <= MAX; y += 5) { const maj = y % 50 === 0 || y === MIN; const [x0, y0] = P(angOf(y), maj ? 157 : 165), [x1, y1] = P(angOf(y), 174); h += `<line${maj ? ' class="maj"' : ''} x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}"/>`; }
+    { const [x0, y0] = P(angOf(MAX), 157), [x1, y1] = P(angOf(MAX), 174); h += `<line class="maj" x1="${x0}" y1="${y0}" x2="${x1}" y2="${y1}"/>`; }
+    for (const y of [1555, 1600, 1700, 1800, 1900, 2000, 2099]) { const [x, yy] = P(angOf(y), 124); h += `<text x="${x}" y="${yy}">${y}</text>`; }
+    $('#tickG').innerHTML = h;
+    $('#dotG').innerHTML = STATIONS.map(y => { const [x, yy] = P(angOf(y), 187); return `<circle class="st${ANOM_YEARS[y] ? ' a' : ''}" data-y="${y}" cx="${x}" cy="${yy}" r="6"><title>Unknown signal</title></circle>`; }).join('');
+    $('#trackArc').setAttribute('d', arcPath(-SWEEP / 2, SWEEP / 2, 150));
+  })();
+  const dots = [...$('#dotG').children];
+
+  // station logbook
+  let logged = new Set(store.get('stations', []).filter(y => TX[y]));
+  const strip = $('#logStrip');
+  strip.innerHTML = STATIONS.map(y => `<button type="button" data-y="${y}" disabled>????</button>`).join('');
+  const cells = [...strip.children];
+  $('#logTotal').textContent = STATIONS.length;
+  function paintLog() {
+    STATIONS.forEach((y, i) => {
+      const on = logged.has(y), c = cells[i];
+      c.disabled = !on; c.textContent = on ? y : '????';
+      c.className = (on ? 'on' : '') + (on && ANOM_YEARS[y] ? ' a' : '') + (on && y === cur ? ' cur' : '');
+      c.setAttribute('aria-label', on ? 'Tune to ' + y : 'Station not logged yet');
+      dots[i].classList.toggle('on', on); dots[i].firstChild.textContent = on ? y + ' (logged)' : 'Unknown signal';
+    });
+    $('#logCount').textContent = logged.size;
   }
-  yr.addEventListener('input', () => {
-    const v = +yr.value, now = performance.now();
-    const speed = Math.abs(v - lastV) / Math.max(1, now - lastT) * 1000; // years per second
-    if (speed > 1400 && now - fastShown > 5000) { fastShown = now; flash(); say('<b>88 MPH.</b> Nothing happens. You need a DeLorean for that.'); }
-    lastV = v; lastT = now; tune(v);
+  let booting = true;
+  function logStation(y) {
+    if (logged.has(y)) return;
+    logged.add(y); store.set('stations', [...logged]); paintLog();
+    if (booting) return;
+    if (!ANOM_YEARS[y]) say(`STATION LOGGED: <b>${y}</b> (${logged.size}/${STATIONS.length})`, 2200, true);
+    if (logged.size === STATIONS.length) setTimeout(() => { flash(); unlock('stations'); }, 2400);
+  }
+
+  // state
+  let val = 2026, cur = null, locked = null, dirty = true, anim = 0, animRaf = 0, spinRaf = 0, lockT = 0, shimT = 0, lastMove = 0, lblNow = '', pad = '';
+  const setLbl = t => { lblNow = t; if (!pad) lockLbl.textContent = t; };
+  const setState = (t, cls) => { st.textContent = t; st.className = cls; wheel.setAttribute('aria-valuetext', cur + ', ' + t.toLowerCase()); };
+  function setEra(y) {
+    const e = ERAS.find(x => y <= x[0]);
+    if (dialEl.dataset.era === e[1]) return;
+    dialEl.dataset.era = e[1]; eraName.textContent = e[2]; fx.acc = `rgba(${e[3]},`; accCss = null;
+  }
+
+  // partial decode: the closer you tune, the more of the nearest station leaks through
+  const hash = (i, n) => { let x = (i * 374761393 + n * 668265263) | 0; x = Math.imul(x ^ (x >>> 13), 1274126177); return ((x ^ (x >>> 16)) >>> 0) / 4294967296; };
+  let pN = 0, pP = 0;
+  const glyph = () => GL[(Math.random() * GL.length) | 0];
+  function partialText() { const t = TX[pN]; let o = ''; for (let i = 0; i < t.length; i++) { const ch = t[i]; o += ch === ' ' || ch === '\n' || hash(i, pN) < pP ? ch : glyph(); } return o; }
+  function partial(n, p) { clearInterval(body._t); pN = n; pP = p; body.textContent = partialText(); if (!reduce && !shimT) shimT = setInterval(() => { body.textContent = partialText(); }, 90); }
+  function stopShim() { clearInterval(shimT); shimT = 0; }
+  const glitchLine = () => Array.from({ length: 96 }, (_, i) => i % 8 === 7 ? ' ' : glyph()).join('');
+
+  function onYear(y, settled) {
+    if (y === cur && (!settled || locked === y)) return;
+    const changed = y !== cur; cur = y;
+    if (changed) {
+      if (!anim && !booting) beep(180 + (y - MIN) * 1.1, .015, 'sawtooth', .008);
+      if (+yr.value !== y) yr.value = y;
+      if (!pad) out.textContent = y;
+      wheel.setAttribute('aria-valuenow', y);
+      setEra(y);
+      freqEl.textContent = (88 + (y - MIN) / SPAN * 20).toFixed(1) + ' MHz';
+      tid.textContent = hexId(y);
+      paintLog();
+    }
+    clearTimeout(lockT);
+    if (locked !== y) { locked = null; wheel.classList.remove('locked'); }
+    if (TX[y]) { setState('ACQUIRING', 'tune'); setLbl('ACQUIRING'); partial(y, .9); if (settled) lock(y); else lockT = setTimeout(() => lock(y), 380); return; }
+    const n = nearest(y), s = strength(Math.abs(n - y));
+    if (s > .04) { setState('TUNING ' + (y < n ? '>>' : '<<'), 'tune'); setLbl('TUNING'); partial(n, s * .8); }
+    else {
+      stopShim(); setState('STATIC', ''); setLbl('NO SIGNAL');
+      const f = FILL[(y * 7919) % FILL.length];
+      if (settled) { scramble(body, f, 8); live.textContent = y + '. Static. ' + f; } else { clearInterval(body._t); body.textContent = f; }
+    }
+  }
+  function lock(y) {
+    if (cur !== y || locked === y) return;
+    locked = y; stopShim();
+    wheel.classList.remove('locked'); void wheel.getBoundingClientRect(); wheel.classList.add('locked');
+    const an = ANOM_YEARS[y];
+    setState(an ? 'ANOMALY' : 'LIVE', an ? 'anom' : 'live'); setLbl('LOCKED');
+    scramble(body, TX[y], 8); live.textContent = y + '. ' + TX[y];
+    logStation(y);
+    if (booting) return;
+    beep(988, .07, 'triangle', .04); setTimeout(() => beep(1480, .1, 'triangle', .035), 70);
+    fx.warp = Math.min(1, fx.warp + .35);
+    if (an) unlock(an);
+  }
+  function setVal(v) { val = clampY(v); dirty = true; lastMove = performance.now(); if (!anim) onYear(Math.round(val), false); }
+
+  // warp jump: needle spins, counter rolls, tunnel surges
+  function stopAnim() { if (animRaf) cancelAnimationFrame(animRaf); animRaf = 0; if (anim) { anim = 0; dialEl.classList.remove('warping'); } }
+  function jumpTo(t, o = {}) {
+    t = clampY(Math.round(t)); stopAnim(); stopSpin();
+    const from = val, dist = Math.abs(t - from);
+    if (reduce || dist < .5) { val = t; dirty = true; onYear(t, true); return; }
+    const dur = o.ms || Math.min(1200, 320 + dist * 2.4), t0 = performance.now();
+    anim = 1; stopShim(); clearTimeout(lockT); locked = null; wheel.classList.remove('locked');
+    if (o.warp !== false && dist > 30) { fx.warp = 1; dialEl.classList.add('warping'); sweep(t > from ? 220 : 1400, t > from ? 1400 : 220, dur / 1000); }
+    setState('IN TRANSIT', 'tune'); setLbl('IN TRANSIT');
+    const step = now => {
+      const k = Math.min(1, (now - t0) / dur), e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+      val = from + (t - from) * e; dirty = true;
+      if (k < 1) { animRaf = requestAnimationFrame(step); return; }
+      animRaf = 0; anim = 0; dialEl.classList.remove('warping'); val = t; onYear(t, true);
+    };
+    animRaf = requestAnimationFrame(step);
+  }
+
+  // inertia + magnetic settle
+  let vel = 0;
+  function stopSpin() { if (spinRaf) cancelAnimationFrame(spinRaf); spinRaf = 0; }
+  function spin() {
+    let last = performance.now();
+    const step = t => {
+      const dt = Math.min(48, t - last); last = t;
+      vel *= Math.pow(.93, dt / 16.7); setVal(val + vel * dt);
+      if (Math.abs(vel) < .006 || val <= MIN || val >= MAX) { spinRaf = 0; settle(); return; }
+      spinRaf = requestAnimationFrame(step);
+    };
+    spinRaf = requestAnimationFrame(step);
+  }
+  function settle() {
+    const y = Math.round(val), n = nearest(val);
+    if (n !== y && Math.abs(n - val) <= 1.4) jumpTo(n, { warp: false, ms: 260 });
+    else { val = y; dirty = true; onYear(y, true); }
+  }
+
+  // eggs: 88 mph and the paradox
+  let fastShown = 0;
+  function speedEgg(ys) {
+    const now = performance.now();
+    if (ys > 1500 && now - fastShown > 6000) { fastShown = now; flash(); say('<b>88 MPH.</b> Nothing happens. I was going 87.'); setTimeout(() => unlock('mph88'), 2600); }
+  }
+  let pdir = 0, prun = 0, flips = [];
+  function paradoxCheck(dv) {
+    if (!dv) return; const dir = Math.sign(dv);
+    if (dir === pdir) { prun += Math.abs(dv); return; }
+    if (pdir && prun > 4) { const now = performance.now(); flips = flips.filter(t => now - t < 2200); flips.push(now); if (flips.length >= 6) { flips = []; paradox(); } }
+    pdir = dir; prun = Math.abs(dv);
+  }
+  function paradox() {
+    const b = document.body; if (b.classList.contains('paradox')) return;
+    b.classList.add('paradox'); flash(); sweep(1600, 60, .7, 'square', .02);
+    say(`<b>PARADOX.</b> You met yourself in ${cur}. You both pretended not to notice.`, 3000);
+    setTimeout(() => { b.classList.remove('paradox'); unlock('paradox'); }, reduce ? 1200 : 2600);
+  }
+
+  // static noise while tuning (only with sound on)
+  let noise = null;
+  function noiseOn() {
+    if (!soundOn || noise) return;
+    try {
+      ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+      const buf = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate), d = buf.getChannelData(0);
+      for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+      const src = ctx.createBufferSource(), bp = ctx.createBiquadFilter(), g = ctx.createGain();
+      src.buffer = buf; src.loop = true; bp.type = 'bandpass'; bp.frequency.value = 1800; bp.Q.value = .6; g.gain.value = 0;
+      src.connect(bp); bp.connect(g); g.connect(ctx.destination); src.start(); noise = { g, bp };
+    } catch {}
+  }
+  const quiet = () => { if (noise) noise.g.gain.setTargetAtTime(0, ctx.currentTime, .05); };
+  const busy = () => { stopScan(); stopAnim(); stopSpin(); noiseOn(); };
+
+  // pointer: drag the ring, flick it, tap a logged station or a spot on the ring
+  const angAt = e => { const r = wheel.getBoundingClientRect(); const x = (e.clientX - r.left) / r.width * 400 - C, y = (e.clientY - r.top) / r.height * 400 - C; return { a: Math.atan2(x, -y) * 180 / Math.PI, r: Math.hypot(x, y) }; };
+  let drag = null;
+  wheel.addEventListener('pointerdown', e => {
+    if (e.button > 0) return;
+    busy();
+    const dot = e.target.closest && e.target.closest('.st.on');
+    if (dot) { e.preventDefault(); jumpTo(+dot.dataset.y); return; }
+    e.preventDefault(); wheel.focus({ preventScroll: true });
+    try { wheel.setPointerCapture(e.pointerId); } catch {}
+    drag = { a: angAt(e).a, moved: 0, t: performance.now() }; vel = 0; pdir = 0; prun = 0;
   });
-  document.querySelectorAll('.jump button[data-y]').forEach(b => b.onclick = () => { yr.value = b.dataset.y; tune(+b.dataset.y, true); });
-  $('#randYear').onclick = () => { const v = 1555 + ((Math.random() * 545) | 0); yr.value = v; tune(v, true); };
-  tune(+yr.value, true);
+  wheel.addEventListener('pointermove', e => {
+    if (!drag) return;
+    const a = angAt(e).a; let da = a - drag.a; if (da > 180) da -= 360; else if (da < -180) da += 360;
+    drag.a = a; drag.moved += Math.abs(da);
+    const now = performance.now(), dt = Math.max(8, now - drag.t); drag.t = now;
+    const dv = da * SPAN / SWEEP; vel = vel * .5 + (dv / dt) * .5;
+    speedEgg(Math.abs(vel) * 1000); paradoxCheck(dv);
+    setVal(val + dv);
+  });
+  wheel.addEventListener('pointerup', e => {
+    if (!drag) return; const d = drag; drag = null;
+    if (d.moved < 2.5) { const p = angAt(e); if (p.r > 100 && Math.abs(p.a) <= 165) { jumpTo(MIN + (Math.max(-150, Math.min(150, p.a)) + 150) / SWEEP * SPAN); return; } settle(); return; }
+    if (performance.now() - d.t > 90) vel = 0;
+    if (Math.abs(vel) > .03 && !reduce) spin(); else settle();
+  });
+  wheel.addEventListener('pointercancel', () => { if (drag) { drag = null; settle(); } });
+
+  // keyboard: arrows, shift, page keys, home/end, and a 4-digit keypad
+  let padT = 0, keyT = 0, wAcc = 0;
+  const endPad = () => { pad = ''; out.classList.remove('typing'); out.textContent = cur; lockLbl.textContent = lblNow; };
+  wheel.addEventListener('keydown', e => {
+    const k = e.key;
+    if (/^[0-9]$/.test(k)) {
+      e.preventDefault(); busy(); pad += k; clearTimeout(padT);
+      out.textContent = (pad + '____').slice(0, 4); out.classList.add('typing'); lockLbl.textContent = 'KEYPAD';
+      if (pad.length === 4) { const v = +pad; endPad(); if (v < MIN || v > MAX) say(`<b>${v}</b> is outside the warranty. Try 1555 to 2099.`); else jumpTo(v); }
+      else padT = setTimeout(endPad, 2200);
+      return;
+    }
+    if (k === 'Escape' && pad) { clearTimeout(padT); endPad(); return; }
+    let d = 0;
+    if (k === 'ArrowRight' || k === 'ArrowUp') d = 1; else if (k === 'ArrowLeft' || k === 'ArrowDown') d = -1;
+    else if (k === 'PageUp') d = 10; else if (k === 'PageDown') d = -10;
+    else if (k === 'Home' || k === 'End') { e.preventDefault(); busy(); jumpTo(k === 'Home' ? MIN : MAX); return; }
+    if (!d) return;
+    e.preventDefault(); busy(); if (e.shiftKey) d *= 10;
+    setVal(Math.round(val) + d);
+    clearTimeout(keyT); keyT = setTimeout(quiet, 300);
+  });
+  wheel.addEventListener('wheel', e => {
+    if (document.activeElement !== wheel) return;
+    e.preventDefault(); busy(); wAcc += e.deltaY || e.deltaX;
+    while (Math.abs(wAcc) >= 40) { const s = Math.sign(wAcc); wAcc -= s * 40; setVal(Math.round(val) + s * (e.shiftKey ? 10 : 1)); }
+  }, { passive: false });
+
+  // fine-tune slider, presets, random, logbook
+  let lastV = +yr.value, lastT = performance.now();
+  yr.addEventListener('input', () => {
+    busy(); const v = +yr.value, now = performance.now();
+    speedEgg(Math.abs(v - lastV) / Math.max(8, now - lastT) * 1000); lastV = v; lastT = now;
+    setVal(v);
+  });
+  document.querySelectorAll('.jump button[data-y]').forEach(b => b.onclick = () => { busy(); jumpTo(+b.dataset.y); });
+  $('#randYear').onclick = () => { busy(); jumpTo(MIN + Math.random() * SPAN); };
+  strip.addEventListener('click', e => { const b = e.target.closest('button[data-y]'); if (b && !b.disabled) { busy(); jumpTo(+b.dataset.y); } });
+
+  // autoscan, like a 1983 police scanner
+  const scanBtn = $('#scanBtn'); let scanning = false, scanT = 0;
+  function scanNext() {
+    if (!scanning) return;
+    const n = STATIONS.find(s => s > cur) ?? STATIONS[0];
+    jumpTo(n, { warp: n < cur, ms: 650 }); scanT = setTimeout(scanNext, (reduce ? 0 : 650) + 2800);
+  }
+  function stopScan() { if (!scanning) return; scanning = false; clearTimeout(scanT); scanBtn.setAttribute('aria-pressed', 'false'); scanBtn.textContent = 'SCAN'; }
+  scanBtn.onclick = () => { if (scanning) { stopScan(); return; } stopAnim(); stopSpin(); noiseOn(); scanning = true; scanBtn.setAttribute('aria-pressed', 'true'); scanBtn.textContent = 'STOP SCAN'; scanNext(); };
+
+  // leak + coordinates
+  const shareUrl = () => 'https://buffadamus.com/#y' + cur;
+  $('#leakBtn').onclick = () => {
+    let t = body.textContent.replace(/\s+/g, ' ').trim(); if (t.length > 200) t = t.slice(0, 197) + '...';
+    const head = (locked === cur ? 'TRANSMISSION' : st.className === 'tune' ? 'PARTIAL TRANSMISSION' : 'STATIC') + ' // ' + cur;
+    window.open('https://x.com/intent/post?text=' + encodeURIComponent(head + '\n' + t) + '&url=' + encodeURIComponent(shareUrl()), '_blank', 'noopener');
+  };
+  $('#copyBtn').onclick = () => {
+    const u = shareUrl();
+    (navigator.clipboard ? navigator.clipboard.writeText(u) : Promise.reject()).then(() => say('Coordinates copied: <b>' + u.replace('https://', '') + '</b>'), () => say(u, 6000));
+  };
+
+  // oscilloscope + render loop (runs only while the dial is on screen)
+  const sc = $('#scope'), sg = sc.getContext('2d'); let accCss = null;
+  function sizeScope() { const d = Math.min(2, devicePixelRatio || 1); sc.width = Math.round(sc.clientWidth * d); sc.height = Math.round(sc.clientHeight * d); }
+  function drawScope(t) {
+    const w = sc.width, h = sc.height; if (!w || !h) return;
+    if (!accCss) { const cs = getComputedStyle(dialEl); accCss = cs.getPropertyValue('--acc').trim() || '#4df3e6'; }
+    sg.clearRect(0, 0, w, h);
+    sg.strokeStyle = 'rgba(151,161,179,.16)'; sg.lineWidth = 1; sg.beginPath();
+    for (let i = 1; i < 10; i++) { const x = Math.round(i * w / 10) + .5; sg.moveTo(x, 0); sg.lineTo(x, h); }
+    sg.moveTo(0, h / 2 + .5); sg.lineTo(w, h / 2 + .5); sg.stroke();
+    const n = nearest(val), s = anim ? .15 : strength(Math.abs(n - val)), f = 2 + (n - MIN) / SPAN * 9, mid = h / 2, A = h * .36, lk = s > .97;
+    sg.lineWidth = Math.max(1.5, h / 45); sg.strokeStyle = lk ? accCss : s > .04 ? '#ffb547' : 'rgba(151,161,179,.75)';
+    sg.shadowColor = sg.strokeStyle; sg.shadowBlur = lk ? 10 : 0; sg.beginPath();
+    for (let x = 0; x <= w; x += 2) {
+      const p = x / w; let y = s * Math.sin(p * Math.PI * 2 * f + t * .005);
+      if (lk && ANOM_YEARS[n]) y *= .6 + .4 * Math.sin(p * 37 + t * .02);
+      y += (1 - s) * (Math.random() - .5) * 1.7;
+      const yy = mid + y * A; x ? sg.lineTo(x, yy) : sg.moveTo(x, yy);
+    }
+    sg.stroke(); sg.shadowBlur = 0;
+  }
+  function render() {
+    const a = angOf(val);
+    needle.setAttribute('transform', `rotate(${a.toFixed(2)} ${C} ${C})`);
+    arcFill.setAttribute('d', val - MIN < .3 ? '' : arcPath(-SWEEP / 2, a, 150));
+    const s = strength(Math.abs(nearest(val) - val)), lit = Math.round(s * 12);
+    for (let i = 0; i < 12; i++) bars[i].classList.toggle('on', i < lit);
+    sigPct.textContent = Math.round(s * 100) + '%';
+    if (anim) { const y = Math.round(val); out.textContent = y; tid.textContent = hexId(y); setEra(y); if (Math.random() < .5) body.textContent = glitchLine(); }
+    if (noise) {
+      const moving = drag || spinRaf || anim || performance.now() - lastMove < 250;
+      noise.g.gain.setTargetAtTime(soundOn && moving ? (1 - s) * .045 + .004 : 0, ctx.currentTime, .04);
+      noise.bp.frequency.setTargetAtTime(700 + s * 2600, ctx.currentTime, .05);
+    }
+  }
+  let dialVis = false, looping = false;
+  function loop(t) {
+    render();
+    if (!reduce || dirty) drawScope(t);
+    dirty = false;
+    if (dialVis && !document.hidden) requestAnimationFrame(loop); else { looping = false; quiet(); }
+  }
+  const kick = () => { if (!looping && dialVis && !document.hidden) { looping = true; requestAnimationFrame(loop); } };
+  if ('IntersectionObserver' in window) new IntersectionObserver(es => { dialVis = es[0].isIntersecting; if (dialVis) { sizeScope(); dirty = true; kick(); } }).observe(dialEl);
+  else { dialVis = true; sizeScope(); kick(); }
+  document.addEventListener('visibilitychange', kick);
+  addEventListener('resize', () => { sizeScope(); dirty = true; });
+
+  // deep link: buffadamus.com/#y1929 tunes the dial
+  function fromHash() {
+    const m = /^#y(\d{4})$/.exec(location.hash); if (!m) return;
+    const v = clampY(+m[1]);
+    const go = () => { if (!booted) { setTimeout(go, 200); return; } $('#dial').scrollIntoView({ behavior: 'auto', block: 'start' }); setTimeout(() => jumpTo(v), 250); };
+    go();
+  }
+  addEventListener('hashchange', fromHash);
+
+  paintLog();
+  onYear(2026, true); booting = false; dirty = true;
+  if (logged.size === STATIONS.length) unlock('stations');
+  fromHash();
 
   // ---------- intercepted posts ----------
   fetch('data/posts.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null).then(d => {
@@ -248,7 +585,7 @@
     }
   });
   function toggle1555() {
-    flash(); const on = document.body.classList.toggle('y1555');
+    flash(); const on = document.body.classList.toggle('y1555'); accCss = null; dirty = true;
     say(on ? '<b>TEMPORAL OVERDRIVE.</b> Welcome to 1555. Mind the plague.' : 'Back to the present. Wash your hands.');
     unlock('konami');
   }
@@ -260,11 +597,12 @@
     const open = force != null ? force : term.hidden;
     term.hidden = !open;
     if (open) { if (!tout.textContent) tprint('chrono-terminal. type "help".'); tin.focus(); unlock('terminal'); }
+    else tin.blur();
   }
   $('#termBtn').onclick = () => toggleTerm(true);
   $('#termClose').onclick = () => toggleTerm(false);
   const CMDS = {
-    help: () => 'commands: whoami, date, year <n>, ls, cat <file>, prophesy, sudo prophesy, konami, sound, anomalies, clear, exit',
+    help: () => 'commands: whoami, date, year <n>, scan, stations, ls, cat <file>, prophesy, sudo prophesy, konami, sound, anomalies, clear, exit',
     whoami: () => 'buffadamus. half warren buffett, half nostradamus. currently: stuck.',
     date: () => `local: ${new Date().toString().slice(0, 24)}\norigin: 1555 (approx. the warranty says 1556)`,
     ls: () => 'transmissions.log  warranty.pdf  secret.txt  beans.txt',
@@ -272,14 +610,16 @@
     'sudo prophesy': () => 'permission granted. prophecy: you will type another command. [FULFILLED]',
     konami: () => { toggle1555(); return 'overdrive toggled.'; },
     sound: () => { sb.click(); return 'sound ' + (soundOn ? 'on' : 'off'); },
+    scan: () => { scanBtn.click(); return scanning ? 'scanner on. touch any dial control to stop it.' : 'scanner off.'; },
+    stations: () => STATIONS.map(y => logged.has(y) ? '[x] ' + y : '[ ] ????').join('  ') + '\n' + logged.size + '/' + STATIONS.length + ' logged',
     anomalies: () => ANOMS.map(([id, n]) => (found.has(id) ? '[x] ' + n : '[ ] ??? ???')).join('\n'),
     clear: () => { tout.textContent = ''; return null; },
     exit: () => { toggleTerm(false); return null; }
   };
   const FILES = {
-    'transmissions.log': Object.keys(TX).map(y => y + '  ' + TX[y].split('\n')[0].slice(0, 54)).join('\n'),
+    'transmissions.log': () => STATIONS.map(y => logged.has(y) ? y + '  ' + TX[y].split('\n')[0].slice(0, 54) : '????  [not yet received]').join('\n'),
     'warranty.pdf': 'binary file. it says "VOID IF USED FOR TIME TRAVEL".',
-    'secret.txt': 'the dial has three loud years nobody tunes to. one of them ends in 29.',
+    'secret.txt': 'the dial is a radio. stations hide between the years. the meter gets louder when you are close.\nthree of them are anomalies. one of them ends in 29. shaking the dial is not recommended.',
     'beans.txt': 'still here. still waiting for y2k.'
   };
   $('#termForm').addEventListener('submit', e => {
@@ -288,8 +628,8 @@
     const c = raw.toLowerCase();
     let r;
     if (CMDS[c]) r = CMDS[c]();
-    else if (c.startsWith('year ')) { const v = Math.max(1555, Math.min(2099, parseInt(c.slice(5), 10) || 2026)); yr.value = v; tune(v, true); r = 'tuned to ' + v + '. ' + (TX[v] ? 'live signal.' : 'static.'); }
-    else if (c.startsWith('cat ')) r = FILES[c.slice(4).trim()] || 'cat: no such file. or not yet.';
+    else if (c.startsWith('year ')) { const v = Math.max(1555, Math.min(2099, parseInt(c.slice(5), 10) || 2026)); stopScan(); jumpTo(v); r = 'tuning to ' + v + '. ' + (TX[v] ? 'live signal detected.' : 'expect static.'); }
+    else if (c.startsWith('cat ')) { const f = FILES[c.slice(4).trim()]; r = typeof f === 'function' ? f() : f || 'cat: no such file. or not yet.'; }
     else if (c === '1555') { unlock('origin'); r = 'origin ping returned: "who is this"'; }
     else if (c === 'buffett') { unlock('oracle'); r = 'rule no. 1: never lose money. rule no. 2: never trust a time machine.'; }
     else if (c.startsWith('rm ')) r = 'nice try. the timeline is read-only.';
@@ -313,9 +653,9 @@
     stars = Array.from({ length: Math.min(420, (innerWidth * innerHeight) / 3000 | 0) }, () => newStar(true));
   }
   function newStar(any) { return { a: Math.random() * Math.PI * 2, z: any ? Math.random() : 1, s: .2 + Math.random() * .8, h: Math.random() < .5 ? 0 : 1 }; }
-  let mx = 0, my = 0, warp = 0;
+  let mx = 0, my = 0;
   addEventListener('pointermove', e => { mx = (e.clientX / innerWidth - .5); my = (e.clientY / innerHeight - .5); });
-  addEventListener('scroll', () => { warp = Math.min(1, warp + .08); }, { passive: true });
+  addEventListener('scroll', () => { fx.warp = Math.min(1, fx.warp + .08); }, { passive: true });
   function frame(t) {
     const cx = W / 2 + mx * W * .08, cy = H * .42 + my * H * .08;
     g.fillStyle = document.body.classList.contains('y1555') ? 'rgba(239,228,200,.35)' : 'rgba(6,7,12,.28)';
@@ -327,13 +667,13 @@
       g.strokeStyle = i % 2 ? `rgba(255,61,139,${.10 * (1 - k)})` : `rgba(77,243,230,${.12 * (1 - k)})`;
       g.lineWidth = DPR; g.beginPath(); g.ellipse(cx, cy, r * 1.15, r * .8, 0, 0, Math.PI * 2); g.stroke();
     }
-    const sp = .0026 + warp * .02; warp *= .96;
+    const warp = fx.warp, sp = .0026 + warp * .02; fx.warp *= .96;
     for (const s of stars) {
       s.z -= sp * s.s * (1 + s.z); if (s.z <= .02) Object.assign(s, newStar(false));
       const d = (1 / s.z) * 22 * DPR, x = cx + Math.cos(s.a) * d * 1.15, y = cy + Math.sin(s.a) * d * .8;
       if (x < -50 || x > W + 50 || y < -50 || y > H + 50) { Object.assign(s, newStar(false)); continue; }
       const sz = (1 - s.z) * 2.2 * DPR;
-      g.fillStyle = s.h ? 'rgba(77,243,230,.85)' : 'rgba(255,181,71,.8)';
+      g.fillStyle = s.h ? fx.acc + '.85)' : 'rgba(255,181,71,.8)';
       g.fillRect(x, y, sz, sz * (1 + warp * 6));
     }
     if (!reduce && !document.hidden) requestAnimationFrame(frame);
