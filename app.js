@@ -754,9 +754,6 @@
       say('<b>PRICE STABILITY.</b> $1.50 since 1985. The only thing in any timeline that never moves.', 3800);
       setTimeout(() => unlock('hotdog'), 3900);
     });
-    // it also wanders by on its own, rarely
-    const wander = () => { setTimeout(() => { if (!document.hidden && booted) hotdogRun(); wander(); }, 150000 + Math.random() * 150000); };
-    wander();
   }
   // holding period: forever (no input for 75 seconds)
   let lastInput = Date.now();
