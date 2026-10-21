@@ -244,3 +244,18 @@ body.restored .dot{background:var(--amber);box-shadow:0 0 12px var(--amber)}
   *,*::before,*::after{animation:none!important;transition:none!important}
   html{scroll-behavior:auto}
 }
+
+/* eggs v5 */
+#hotdog{position:fixed;left:0;z-index:75;width:96px;height:46px;padding:0;border:0;background:none;cursor:pointer;animation:dogfly 9s linear forwards;filter:drop-shadow(0 0 10px rgba(255,210,63,.5))}
+#hotdog[hidden]{display:none}
+#hotdog svg{display:block;width:100%;height:100%;animation:dogbob 1.1s ease-in-out infinite}
+#hotdog.rtl{animation-name:dogflyr}
+@keyframes dogfly{from{transform:translateX(-120px) rotate(-8deg)}to{transform:translateX(calc(100vw + 20px)) rotate(8deg)}}
+@keyframes dogflyr{from{transform:translateX(calc(100vw + 20px)) rotate(8deg)}to{transform:translateX(-120px) rotate(-8deg)}}
+@keyframes dogbob{50%{transform:translateY(-10px)}}
+main.roll{animation:roll 1.2s ease-in-out}
+@keyframes roll{to{transform:rotate(360deg)}}
+body.owned main,body.owned .bar{filter:hue-rotate(-60deg) saturate(3) contrast(1.4)}
+body.owned::after{content:"hello, friend.";position:fixed;inset:0;z-index:96;display:flex;align-items:center;justify-content:center;font:800 clamp(28px,7vw,84px) var(--mono);color:#ff2a2a;background:rgba(0,0,0,.82);letter-spacing:.04em;pointer-events:none;animation:owned .16s steps(2) 10}
+@keyframes owned{50%{transform:translateX(6px);opacity:.75}}
+@media (prefers-reduced-motion:reduce){#hotdog{left:16px;top:auto!important;bottom:90px;transform:none}}

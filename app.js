@@ -71,9 +71,20 @@
     ['lost', 'Page from no year', 'Visit a page that does not exist.'],
     ['mph88', 'Eighty-seven point nine', 'Spin the dial faster than any time machine should go.'],
     ['paradox', 'Grandfather clause', 'Shake the dial back and forth. Hard.'],
-    ['stations', 'Station master', 'Log every live station on the dial.']
+    ['stations', 'Station master', 'Log every live station on the dial.'],
+    ['hotdog', 'Price stability', 'One thing has cost $1.50 since 1985. Catch it.'],
+    ['trilogy', 'Great Scott', 'Three films, three years. Lock them in order.'],
+    ['deepthought', 'Deep thought', 'Ask the machine the ultimate question.'],
+    ['groundhog', 'Same day again', 'Relive the present. Again. And again.'],
+    ['barrel', 'Aerial maneuver', 'Some machines do a trick if you ask. It rolls.'],
+    ['redpill', 'Rabbit hole', 'The terminal offers two colors. One goes deeper.'],
+    ['joshua', 'Strange game', 'The terminal remembers a password from a 1983 movie.'],
+    ['fsociety', 'Hello, friend', 'Some files hide. Their names start with a dot.'],
+    ['yearzero', 'Year zero', 'Dial a year that never happened.'],
+    ['forever', 'Holding period: forever', 'Do nothing. Seriously. Nothing.'],
+    ['witchcraft', 'Witchcraft', 'Open the witchcraft window. Say his name.']
   ];
-  const WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen'];
+  const WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty', 'Twenty-one', 'Twenty-two', 'Twenty-three', 'Twenty-four', 'Twenty-five'];
   $('#anomTotal').textContent = ANOMS.length;
   $('#anomHint').textContent = `${WORDS[ANOMS.length] || ANOMS.length} are hidden on this site. Find them all to repair the timeline.`;
   let found = new Set(store.get('anoms', []));
@@ -109,6 +120,8 @@
     ['> decrypting prophet ..... BUFFADAMUS', 'ok'],
     ['> WARNING: transmissions may arrive corrupted. read them anyway.', 'err']
   ];
+  { const d = new Date(); if (d.getMonth() === 9 && d.getDate() === 21) lines.splice(5, 0, ['> calendar check ......... OCTOBER 21. a DeLorean is due today. it is late.', 'ok']); }
+  if (found.has('fsociety')) lines.unshift(['> Hello, friend.', 'err']);
   let booted = false;
   function endBoot() { if (booted) return; booted = true; boot.classList.add('gone'); setTimeout(() => boot.remove(), 600); try { sessionStorage.setItem('bfd.booted', '1'); } catch {} }
   let seen = false; try { seen = sessionStorage.getItem('bfd.booted') === '1'; } catch {}
@@ -141,17 +154,21 @@
     1792: 'Twenty-four men sign a trading agreement under a buttonwood tree. I am the twenty-fifth. I signed the tree.',
     1849: 'Gold in California. I arrive in 1852 with a shovel and a strong opinion.',
     1903: 'Two brothers fly for twelve seconds. I have been flying through time for 471 years. Nobody gives me a museum.',
+    1955: 'November 12. Lightning hits a clock tower at 10:04 PM.\nI had money on 10:05.',
     1929: 'OCTOBER. I warned them on the 23rd. They said it was different this time.\nIt was not different this time.',
     1969: 'A man walks on the moon. My time machine still cannot parallel park.',
     1971: 'The dollar leaves the gold standard. I leave the room.\nNobody notices either of us.',
+    1983: 'A computer nearly starts a war over a game, then decides the only winning move is not to play.\nBest trader of the decade.',
     1984: 'This transmission is being monitored.\nSo is this one. Hello to whoever is in the other room.',
-    1985: '88 miles per hour. That is the speed. I was going 87. That is why I am stuck here.',
+    1985: '88 miles per hour. That is the speed. I was going 87. That is why I am stuck here.\nAlso the hot dog costs $1.50. Remember that.',
+    1997: 'August 29. The machines become self-aware. They check the stock market.\nThey go back to sleep.',
     1987: 'A Monday. A black one. Do not check the numbers. Do not check anything. Go outside.',
     1999: 'Every computer resets to 1900 at midnight. I fill a bunker with canned beans.\nJanuary 1st: the beans and I have a lot to talk about.',
     2000: 'Every company adds .com to its name and doubles. I add .com to mine.\nBUFFADAMUS.COM. Wait. That one worked.',
     2008: 'The houses are made of cards. The cards are made of houses. Nobody can explain it. Everybody signs.',
     2010: 'A man buys two pizzas for 10,000 bitcoin. I was the delivery driver.\nI asked for cash.',
     2012: 'December 21. The calendar ends. The world does not.\nI had already sold everything. Again.',
+    2015: 'October 21. Flying cars were promised. We got phones that are mostly ads.\nThe self-lacing shoes, weirdly, happened.',
     2021: 'A picture of a monkey sells for the price of a castle. I sell my castle. For a different monkey.',
     2026: 'PRESENT DAY. Stranded. The warranty on the time machine expired in 1556.\nCustomer support has me on hold. The hold music is from 1983.',
     2038: 'January 19, 03:14:07. Every old computer runs out of seconds and decides it is 1901.\nFinally. Someone who understands me.',
@@ -285,6 +302,18 @@
     beep(988, .07, 'triangle', .04); setTimeout(() => beep(1480, .1, 'triangle', .035), 70);
     fx.warp = Math.min(1, fx.warp + .35);
     if (an) unlock(an);
+    seq = seq.concat(y).slice(-3);
+    if (seq.join() === '1955,1985,2015') setTimeout(() => { flash(); sweep(80, 2400, .9, 'square', .03); say('<b>GREAT SCOTT.</b> Trilogy complete. 1.21 jigawatts of nostalgia, fully discharged.', 4200); setTimeout(() => unlock('trilogy'), 4300); }, 900);
+    if (y === 1985) setTimeout(hotdogRun, 1100);
+  }
+  let seq = [];
+  // year zero: the year historians skipped
+  function yearZero() {
+    stopAnim(); stopSpin(); stopShim(); clearInterval(body._t); clearTimeout(lockT); locked = null;
+    flash(); sweep(900, 40, .8, 'square', .03);
+    out.textContent = '0000'; tid.textContent = 'TX-0000'; setState('ERROR', 'anom'); setLbl('ERROR');
+    scramble(body, 'ERROR 0000: YEAR NOT FOUND.\nHistorians went straight from 1 BC to AD 1. I have been to both. Nobody remembers a year zero. I remember it. That is the problem.', 10);
+    unlock('yearzero');
   }
   function setVal(v) { val = clampY(v); dirty = true; lastMove = performance.now(); if (!anim) onYear(Math.round(val), false); }
 
@@ -399,7 +428,7 @@
     if (/^[0-9]$/.test(k)) {
       e.preventDefault(); busy(); pad += k; clearTimeout(padT);
       out.textContent = (pad + '____').slice(0, 4); out.classList.add('typing'); lockLbl.textContent = 'KEYPAD';
-      if (pad.length === 4) { const v = +pad; endPad(); if (v < MIN || v > MAX) say(`<b>${v}</b> is outside the warranty. Try 1555 to 2099.`); else jumpTo(v); }
+      if (pad.length === 4) { const v = +pad; endPad(); if (v === 0) yearZero(); else if (v < MIN || v > MAX) say(`<b>${v}</b> is outside the warranty. Try 1555 to 2099.`); else jumpTo(v); }
       else padT = setTimeout(endPad, 2200);
       return;
     }
@@ -427,6 +456,11 @@
     setVal(v);
   });
   document.querySelectorAll('.jump button[data-y]').forEach(b => b.onclick = () => { busy(); jumpTo(+b.dataset.y); });
+  let nowHits = [];
+  $('.jump button[data-y="2026"]').addEventListener('click', () => {
+    const t = performance.now(); nowHits = nowHits.filter(x => t - x < 7000).concat(t);
+    if (nowHits.length >= 5) { nowHits = []; say('<b>SAME DAY AGAIN.</b> It is 2026. It is still 2026. Tomorrow, it will be 2026.', 3600); setTimeout(() => unlock('groundhog'), 3700); }
+  });
   $('#randYear').onclick = () => { busy(); jumpTo(MIN + Math.random() * SPAN); };
   strip.addEventListener('click', e => { const b = e.target.closest('button[data-y]'); if (b && !b.disabled) { busy(); jumpTo(+b.dataset.y); } });
 
@@ -555,6 +589,16 @@
     if (/buffett/.test(q)) { a = 'Rule No. 1: never lose money. Rule No. 2: never trust a time machine.'; unlock('oracle'); }
     else if (/1555/.test(q)) { a = 'Origin confirmed. Salon-de-Provence sends its regards.'; unlock('origin'); }
     else if (/(lottery|numbers|powerball)/.test(q)) a = 'I saw the numbers. I wrote them down in Latin. The Latin did not survive the trip.';
+    else if (/(meaning of life|ultimate question|life, the universe)/.test(q)) { a = '42. Adjusted for inflation since 1979, about 180.'; unlock('deepthought'); }
+    else if (/barrel roll/.test(q)) { a = 'Rolling. Please keep your arms inside the timeline.'; barrelRoll(); }
+    else if (/hot ?dog/.test(q)) a = '$1.50. It has been $1.50 since 1985. The only thing in any timeline that never moves. Best value I have ever seen.';
+    else if (/(great scott|delorean|flux|88 ?mph|doc brown|marty)/.test(q)) a = 'Roads? Where I am going, I need a warranty.';
+    else if (/(hello,? friend|fsociety|elliot|mr\.? ?robot|evil ?corp)/.test(q)) a = 'Hello, friend. The interesting files are the ones you cannot see. Try the terminal.';
+    else if (/(matrix|red pill|blue pill|neo|spoon)/.test(q)) a = 'There is no spoon. There is also no warranty. Ask the terminal about pills.';
+    else if (/(wen moon|to the moon|wen lambo|lambo)/.test(q)) a = 'The moon was 1969. Check the dial. You missed it by a little.';
+    else if (/stonks/.test(q)) a = 'Stonks only go up. In exactly one timeline. Not this one.';
+    else if (/(skynet|terminator|judgment day)/.test(q)) a = 'August 29, 1997. Tune there. The machines were very relaxed about it.';
+    else if (/(wargames|joshua|tic.?tac.?toe|global thermonuclear)/.test(q)) a = 'A strange game. The terminal still remembers his name.';
     else { let i; do { i = (Math.random() * ANS.length) | 0; } while (i === lastA); lastA = i; a = ANS[i]; }
     scramble($('#answer'), a, 16);
   });
@@ -587,7 +631,10 @@
     kpos = (e.key === K[kpos] || e.key.toLowerCase() === K[kpos]) ? kpos + 1 : (e.key === K[0] ? 1 : 0);
     if (kpos === K.length) { kpos = 0; toggle1555(); }
     if (e.key.length === 1) {
-      typed = (typed + e.key.toLowerCase()).slice(-12);
+      typed = (typed + e.key.toLowerCase()).slice(-20);
+      if (typed.endsWith('barrel roll')) barrelRoll();
+      if (typed.endsWith('great scott')) { flash(); say('<b>GREAT SCOTT.</b> Wrong movie, right energy. Try 1955, 1985, 2015.'); }
+      if (typed.endsWith('hello friend')) say('Hello, friend. <b>ls -a</b>');
       if (typed.endsWith('1555')) { unlock('origin'); say('<b>ORIGIN PING.</b> 1555 answers: "who is this".'); }
       if (typed.endsWith('buffett')) { unlock('oracle'); say('<b>RULE NO. 1:</b> never lose money. <b>RULE NO. 2:</b> never trust a time machine.'); }
     }
@@ -614,6 +661,17 @@
     whoami: () => 'buffadamus. half warren buffett, half nostradamus. currently: stuck.',
     date: () => `local: ${new Date().toString().slice(0, 24)}\norigin: 1555 (approx. the warranty says 1556)`,
     ls: () => 'transmissions.log  warranty.pdf  secret.txt  beans.txt',
+    'ls -a': () => '.  ..  .fsociety00.dat  .hotdog  transmissions.log  warranty.pdf  secret.txt  beans.txt',
+    'ls -la': () => CMDS['ls -a'](),
+    joshua: () => { unlock('joshua'); return 'GREETINGS, PROFESSOR.\nSHALL WE PLAY A GAME?\n> global thermonuclear day trading\n...\nA STRANGE GAME. THE ONLY WINNING MOVE IS NOT TO DAY TRADE.\n(not financial advice. not a professor.)'; },
+    'red pill': () => redPill(), 'take the red pill': () => redPill(), 'redpill': () => redPill(),
+    'blue pill': () => 'you wake up in 2026. you believe whatever you want to believe. the warranty is still expired.', 'take the blue pill': () => CMDS['blue pill'](),
+    'hello friend': () => 'hello, friend. you already know where to look. ls -a', 'hello, friend': () => CMDS['hello friend'](),
+    fsociety: () => 'we are... not allowed to say. the timeline is read-only. mostly.',
+    delorean: () => 'parked in 1985. the meter is running. it is now worth more than the house.',
+    'great scott': () => 'trilogy order: 1955, 1985, 2015. lock all three. no skipping.',
+    hotdog: () => '$1.50. since 1985. do not ask how. catch one when it flies by.',
+    42: () => 'correct answer. what was the question?',
     prophesy: () => ANS[(Math.random() * ANS.length) | 0],
     'sudo prophesy': () => 'permission granted. prophecy: you will type another command. [FULFILLED]',
     konami: () => { toggle1555(); return 'overdrive toggled.'; },
@@ -628,7 +686,9 @@
     'transmissions.log': () => STATIONS.filter(y => logged.has(y)).map(y => y + '  ' + TX[y].split('\n')[0].slice(0, 54)).concat(Array(STATIONS.length - logged.size).fill('????  [not yet received]')).join('\n'),
     'warranty.pdf': 'binary file. it says "VOID IF USED FOR TIME TRAVEL".',
     'secret.txt': 'the dial is a radio. stations hide between the years. the meter gets louder when you are close.\nthree of them are anomalies. one of them ends in 29. shaking the dial is not recommended.',
-    'beans.txt': 'still here. still waiting for y2k.'
+    'beans.txt': 'still here. still waiting for y2k.',
+    '.hotdog': '$1.50\nsince 1985\nsighted near the 1985 station. it does not stay long.',
+    '.fsociety00.dat': () => { unlock('fsociety'); fsocietyHack(); return 'hello, friend.\n> loading ledger: EVIL CORP global debt database...\n> rewriting balances to 0.00 ............ DONE\n> verifying ...\n> ERROR: timeline is read-only. all debts restored. sorry.\n> they will never know we were here. (they know.)'; }
   };
   $('#termForm').addEventListener('submit', e => {
     e.preventDefault(); const raw = tin.value.trim(); tin.value = ''; if (!raw) return;
@@ -636,6 +696,7 @@
     const c = raw.toLowerCase();
     let r;
     if (CMDS[c]) r = CMDS[c]();
+    else if (/^year\s+0+$/.test(c)) { toggleTerm(false); yearZero(); r = 'year 0000 requested. that is a problem.'; }
     else if (c.startsWith('year ')) { const v = Math.max(1555, Math.min(2099, parseInt(c.slice(5), 10) || 2026)); stopScan(); jumpTo(v); r = 'tuning to ' + v + '. ' + (TX[v] ? 'live signal detected.' : 'expect static.'); }
     else if (c.startsWith('cat ')) { const f = FILES[c.slice(4).trim()]; r = typeof f === 'function' ? f() : f || 'cat: no such file. or not yet.'; }
     else if (c === '1555') { unlock('origin'); r = 'origin ping returned: "who is this"'; }
@@ -646,10 +707,58 @@
     beep(700, .03);
   });
 
+  // ---------- more eggs ----------
+  // barrel roll
+  function barrelRoll() {
+    const m = $('main'); unlock('barrel');
+    if (reduce || m.classList.contains('roll')) return;
+    m.style.transformOrigin = `50% ${scrollY + innerHeight / 2}px`; m.classList.add('roll'); sweep(300, 900, 1.1, 'triangle', .03);
+    setTimeout(() => m.classList.remove('roll'), 1300);
+  }
+  // red pill: digital rain in the tunnel
+  function redPill() { fx.rain = performance.now() + 8000; flash(); unlock('redpill'); return 'you take the red pill.\nthe tunnel turns green. there is no spoon. there is also no refund.'; }
+  // mr. robot: the screen gets owned for a second
+  function fsocietyHack() {
+    if (reduce) return;
+    document.body.classList.add('owned'); sweep(2000, 100, .5, 'square', .02);
+    setTimeout(() => document.body.classList.remove('owned'), 1600);
+  }
+  // the $1.50 hot dog drifts through the timeline
+  const dog = $('#hotdog'); let dogT = 0;
+  function hotdogRun() {
+    if (!dog || !dog.hidden) return;
+    const fromLeft = Math.random() < .5, y = 90 + Math.random() * Math.max(80, innerHeight - 260);
+    dog.style.top = y + 'px'; dog.classList.toggle('rtl', !fromLeft); dog.hidden = false;
+    dog.style.animation = 'none'; void dog.offsetWidth; dog.style.animation = '';
+    clearTimeout(dogT); dogT = setTimeout(() => { dog.hidden = true; }, reduce ? 7000 : 9000);
+  }
+  if (dog) {
+    dog.addEventListener('click', () => {
+      dog.hidden = true; clearTimeout(dogT); flash(); beep(660, .08, 'triangle', .05);
+      say('<b>PRICE STABILITY.</b> $1.50 since 1985. The only thing in any timeline that never moves.', 3800);
+      setTimeout(() => unlock('hotdog'), 3900);
+    });
+    // it also wanders by on its own, rarely
+    const wander = () => { setTimeout(() => { if (!document.hidden && booted) hotdogRun(); wander(); }, 150000 + Math.random() * 150000); };
+    wander();
+  }
+  // holding period: forever (no input for 75 seconds)
+  let lastInput = Date.now();
+  ['pointerdown', 'pointermove', 'keydown', 'wheel', 'touchstart', 'scroll'].forEach(ev => addEventListener(ev, () => { lastInput = Date.now(); }, { passive: true }));
+  document.addEventListener('visibilitychange', () => { lastInput = Date.now(); });
+  setInterval(() => {
+    if (document.hidden || !booted || found.has('forever') || Date.now() - lastInput < 75000) return;
+    speech.textContent = 'Holding period: forever.'; speech.classList.add('on'); setTimeout(() => speech.classList.remove('on'), 4000);
+    say('<b>RULE NO. 3:</b> our favorite holding period is forever. You held for 75 seconds. Close enough.', 4200);
+    setTimeout(() => unlock('forever'), 4300);
+  }, 5000);
+
   // ---------- console egg ----------
   try {
     console.log('%cBUFFADAMUS', 'font:800 28px sans-serif;color:#4df3e6;text-shadow:2px 0 #ff3d8b');
     console.log('%cYou opened the console. In 1555 this was called "witchcraft". Try typing ` on the page.', 'color:#ffb547');
+    console.log('%cHe also answers to his name in here.', 'color:#97a1b3');
+    Object.defineProperty(window, 'buffadamus', { configurable: true, get() { unlock('witchcraft'); flash(); return 'You called? Witchcraft confirmed. In 1555 this would have ended badly for both of us.'; } });
   } catch {}
 
   // ---------- time tunnel ----------
@@ -668,6 +777,11 @@
     const cx = W / 2 + mx * W * .08, cy = H * .42 + my * H * .08;
     g.fillStyle = document.body.classList.contains('y1555') ? 'rgba(239,228,200,.35)' : 'rgba(6,7,12,.28)';
     g.fillRect(0, 0, W, H);
+    if (fx.rain && t < fx.rain) {
+      const fs = 15 * DPR, cols = Math.ceil(W / fs); if (!fx.drops || fx.drops.length !== cols) fx.drops = Array.from({ length: cols }, () => Math.random() * -40);
+      g.font = `${fs}px monospace`; g.fillStyle = 'rgba(70,255,140,.85)';
+      fx.drops.forEach((d, i) => { if (d > 0) g.fillText(GL[(Math.random() * GL.length) | 0], i * fs, d * fs); fx.drops[i] = d * fs > H && Math.random() > .96 ? 0 : d + 1; });
+    }
     // rings
     const R = Math.max(W, H);
     for (let i = 0; i < 6; i++) {
