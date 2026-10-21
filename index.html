@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Buffadamus - Half Warren Buffett, Half Nostradamus</title>
-<meta name="description" content="Visiting from the year 1555. Half Warren Buffett, Half Nostradamus. I like 🥐 croissants and I have a dog. It is very loud here. Parody. Not financial advice.">
-<meta name="theme-color" content="#0f0b09">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Buffadamus - Transmissions from 1555</title>
+<meta name="description" content="Half Warren Buffett, Half Nostradamus. Stranded in 2026 by a faulty time machine. His prophecies arrive corrupted. Parody. Not financial advice.">
+<meta name="theme-color" content="#06070c">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Buffadamus">
-<meta property="og:description" content="Half Warren Buffett, Half Nostradamus. Visiting from the year 1555. Home of the Trading Desk and the Croissant Bank.">
-<meta property="og:image" content="https://buffadamus.com/og.jpg?v=20261020">
+<meta property="og:description" content="Transmissions from 1555. Signal corrupted. Read them anyway.">
+<meta property="og:image" content="https://buffadamus.com/og.jpg?v=2">
 <meta property="og:url" content="https://buffadamus.com/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@Buffadamus">
@@ -17,140 +17,106 @@
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=202610150015">
-<link rel="stylesheet" href="almanac.css?v=202610150015">
-<script>document.documentElement.classList.add('js')</script>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=JetBrains+Mono:wght@400;600&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
-<header class="topnav">
-  <div class="wrap">
-    <a class="brand" href="./"><img src="avatar.jpg" alt=""><span>BUFFADAMUS</span></a>
-    <button class="navtoggle" type="button" aria-controls="sitenav" aria-expanded="false" aria-label="Menu"><span></span></button>
-    <nav id="sitenav" aria-label="Site">
-      <a href="./" aria-current="page">Home</a>
-      <a href="desk.html">Trading Desk</a>
-      <a href="prophecies.html">Prophecies</a>
-      <a href="dog.html">Ask the Dog</a>
-      <a href="glossary.html">Glossary</a>
-      <a href="merch.html">Merch</a>
-      <a href="about.html">About</a>
-    </nav>
-  </div>
+<canvas id="tunnel" aria-hidden="true"></canvas>
+<div class="scan" aria-hidden="true"></div>
+
+<div id="boot" role="dialog" aria-label="Connecting to the timeline">
+  <pre id="bootlog"></pre>
+  <button id="skip" class="ghost">Skip <kbd>Esc</kbd></button>
+</div>
+
+<header class="bar">
+  <a class="mark" href="#top" data-glitch="BUFFADAMUS">BUFFADAMUS</a>
+  <span class="readout"><span class="dot"></span><span id="signal">SIGNAL 71%</span></span>
+  <span class="readout hide-sm">ORIGIN <b>1555</b> / LOCAL <b id="nowyear">2026</b></span>
+  <button id="anomBtn" class="chip" aria-controls="anomalies">ANOMALIES <b id="anomCount">0</b>/9</button>
+  <button id="soundBtn" class="chip" aria-pressed="false" aria-label="Sound off">SND OFF</button>
 </header>
 
-<main>
-  <section class="hero" aria-label="Buffadamus">
-    <picture>
-      <source media="(max-width: 700px)" srcset="hero-tall.jpg">
-      <img src="hero-wide.jpg" alt="A woven tapestry of a 16th-century seer in a velvet cap holding a hotdog beside a globe, astrolabe and prophecy scroll">
-    </picture>
-    <div class="wrap">
-      <h1>BUFFADAMUS</h1>
-      <p class="tag">Half Warren Buffett · Half Nostradamus</p>
-      <p class="loc">Omaha, Francé 1555</p>
+<main id="top">
+  <section class="hero">
+    <div class="hero-txt">
+      <p class="kicker">INCOMING TRANSMISSION <span class="blink">//</span> ORIGIN 1555</p>
+      <h1 class="title" data-glitch="BUFFADAMUS">BUFFADAMUS</h1>
+      <p class="sub">Half Warren Buffett, Half Nostradamus.</p>
+      <p class="bio">Stranded in 2026 by a faulty time machine. My prophecies arrive corrupted. Read them anyway.</p>
+      <div class="ctas">
+        <a class="btn" href="https://x.com/Buffadamus" target="_blank" rel="noopener">Follow the signal on X</a>
+        <a class="btn ghost" href="#dial">Open the chrono-dial</a>
+      </div>
     </div>
+    <button class="face" id="face" aria-label="Buffadamus. Do not poke him.">
+      <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
+      <span class="layer c"></span><span class="layer m"></span><span class="layer base"></span>
+      <span class="speech" id="speech" aria-live="polite"></span>
+    </button>
   </section>
 
-  <section class="intro-sec reveal">
-    <div class="wrap intro">
-      <img class="medallion" src="avatar-lg.jpg" alt="Buffadamus in a black velvet cap and white lace ruff" width="200" height="200">
-      <div>
-        <p class="bio dropcap">Visiting from the year 1555. Half Warren Buffett, Half Nostradamus. I like 🥐 croissants and I have a dog. It is very loud here.</p>
-        <p style="margin:0 0 14px"><a class="btn" href="https://x.com/Buffadamus">Follow on X</a></p>
-        <nav class="linkrow" aria-label="Buffadamus on social media">
-          <a href="https://www.instagram.com/buffadamus/">Instagram</a>
-          <a href="https://www.threads.com/@buffadamus">Threads</a>
-          <a href="https://www.youtube.com/@Buffadamus">YouTube</a>
-          <a href="https://www.reddit.com/user/buffadamus/">Reddit</a>
-          <a href="https://www.twitch.tv/buffadamus">Twitch</a>
-          <a href="https://www.pinterest.com/buffadamus/">Pinterest</a>
-          <a href="https://linktr.ee/buffadamus">Linktree</a>
-        </nav>
+  <section class="panel" id="dial">
+    <div class="phead"><span class="num">01</span><h2>The chrono-dial</h2><span class="hint">Drag through time. Some years are louder than others.</span></div>
+    <div class="dial">
+      <div class="yearbox"><span class="lbl">TUNED TO</span><output id="yearOut" for="year">2026</output></div>
+      <input type="range" id="year" min="1555" max="2099" step="1" value="2026" aria-label="Year">
+      <div class="ticks" aria-hidden="true"><span>1555</span><span>1700</span><span>1850</span><span>2000</span><span>2099</span></div>
+      <div class="tx" aria-live="polite">
+        <div class="txhead"><span id="txId">TX-07E2</span><span id="txState">LOCKED</span></div>
+        <p id="txBody" class="txbody"></p>
+      </div>
+      <div class="jump">
+        <button data-y="1555">1555</button><button data-y="1720">1720</button><button data-y="1987">1987</button><button data-y="2008">2008</button><button data-y="2026">NOW</button><button data-y="2099">2099</button><button id="randYear">RANDOM</button>
       </div>
     </div>
   </section>
 
-  <section id="desk-teaser" class="parch-band reveal">
-    <div class="wrap grid2" style="align-items:start">
-      <div>
-        <p class="kicker">The Trading Desk</p>
-        <h2>One play a day. Written in ink.</h2>
-        <p>Every market day Buffadamus publishes one paper trade, a stock or an option, with the stop loss and take profit set before the open. Every result goes on the record and is paid in croissants.</p>
-        <p>Plus the market close, breadth, fear and greed, and the economic and earnings calendars.</p>
-        <p><a class="btn" href="desk.html">Open the Trading Desk</a></p>
-        <div class="card" id="ci-tile" style="margin-top:14px"><div class="skel"><i></i><i></i></div></div>
-      </div>
-      <div class="card" id="play-teaser"><div class="skel"><i></i><i></i><i></i></div></div>
-    </div>
+  <section class="panel" id="intercepts">
+    <div class="phead"><span class="num">02</span><h2>Intercepted on X</h2><span class="hint">Hover or tap to decode.</span></div>
+    <div class="cards" id="posts"></div>
+    <p class="more"><a href="https://x.com/Buffadamus" target="_blank" rel="noopener">All transmissions on X &rarr;</a></p>
   </section>
 
-  <section id="oracle" class="reveal">
-    <div class="wrap">
-      <div class="card parch oracle" style="max-width:720px;margin:0 auto">
-        <div>
-          <p class="kicker" style="color:#7a5a1c">Free prophecy. Worth every penny.</p>
-          <h2 style="margin-bottom:6px">Ask the Oracle</h2>
-          <p class="muted" style="margin:0">Type any question. Buffadamus will consult the stars, the croissant and his dog.</p>
-        </div>
-        <form id="oracle-form">
-          <label class="sr" for="oracle-q">Your question</label>
-          <input id="oracle-q" maxlength="120" placeholder="Should I buy the dip?" autocomplete="off">
-          <button class="btn" type="submit">Consult</button>
-        </form>
-        <p class="answer idle show" id="oracle-answer" aria-live="polite">The candle is lit and the quill is wet. Ask, and the stars will answer. Probably wrongly.</p>
-        <a class="share" id="oracle-share" href="https://x.com/intent/post?text=I%20consulted%20the%20Oracle%20of%201555.&amp;url=https%3A%2F%2Fbuffadamus.com&amp;via=Buffadamus" target="_blank" rel="noopener">Share the Oracle on X</a>
-      </div>
-    </div>
+  <section class="panel" id="ask">
+    <div class="phead"><span class="num">03</span><h2>Ask the machine</h2><span class="hint">One question per century. We are not strict about it.</span></div>
+    <form id="askForm" class="ask">
+      <label for="q" class="sr">Your question</label>
+      <span class="prompt" aria-hidden="true">&gt;</span>
+      <input id="q" maxlength="120" autocomplete="off" placeholder="will it go up?">
+      <button class="btn" type="submit">Transmit</button>
+    </form>
+    <p class="answer" id="answer" aria-live="polite">The machine is warm. Ask it something.</p>
   </section>
 
-  <div class="flourish" aria-hidden="true"></div>
-
-  <section id="latest" class="parch-band reveal">
-    <div class="wrap">
-      <div class="center">
-        <p class="kicker">From the scrolls</p>
-        <h2>Recent Prophecies</h2>
-        <p class="lede">Original quatrains, numbered and judged. Most will be muffed.</p>
-      </div>
-      <div class="stats" id="scoreboard" style="max-width:720px;margin:18px auto"></div>
-      <div id="prophecy-teaser" class="prophecy-stack" style="margin-top:10px"><div class="card prophecy"><div class="skel"><i></i><i></i><i></i></div></div></div>
-      <p class="center" style="margin-top:22px"><a class="btn ghost" href="prophecies.html">The full archive</a></p>
-    </div>
-  </section>
-
-  <section id="feed" class="reveal">
-    <div class="wrap">
-      <div class="center"><p class="kicker">From X</p><h2>The Latest Posts</h2></div>
-      <div class="posts" id="posts"><div class="post"><div class="skel"><i></i><i></i><i></i></div></div><div class="post"><div class="skel"><i></i><i></i><i></i></div></div></div>
-      <p class="center" style="margin-top:20px"><a class="btn ghost" href="https://x.com/Buffadamus">Everything on X</a></p>
-    </div>
-  </section>
-
-  <div class="flourish" aria-hidden="true"></div>
-
-  <section id="merch-teaser" class="reveal">
-    <div class="wrap">
-      <div class="card" style="display:flex;flex-wrap:wrap;gap:20px;align-items:center;justify-content:space-between">
-        <div style="flex:1 1 320px">
-          <span class="soon">Coming soon</span>
-          <h2 style="margin-bottom:6px">Wear the prophecy</h2>
-          <p class="lede" style="margin:0">Croissant tees, "I foresaw this" mugs and a ruff for every occasion. Nothing is for sale yet. Get on the list and be first.</p>
-        </div>
-        <a class="btn" href="merch.html">Get notified</a>
-      </div>
-    </div>
+  <section class="panel" id="anomalies">
+    <div class="phead"><span class="num">04</span><h2>Timeline anomalies</h2><span class="hint">Nine are hidden on this site. Find them all to repair the timeline.</span></div>
+    <ol class="anoms" id="anomList"></ol>
   </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <a href="mailto:hello@buffadamus.com">hello@buffadamus.com</a> · <a href="https://x.com/Buffadamus">@Buffadamus</a> · <a href="about.html">About &amp; press</a>
-    <p class="fine">Buffadamus is a parody character. He is not Warren Buffett, not Nostradamus, and not affiliated with either. Nothing on this site or his accounts is financial advice. He is usually wrong. That is the point.</p>
-    <p class="fine">© <span id="year">2026</span> Buffadamus</p>
-  </div>
+<footer class="foot">
+  <nav class="social" aria-label="Buffadamus elsewhere">
+    <a href="https://x.com/Buffadamus" target="_blank" rel="noopener">X</a>
+    <a href="https://www.instagram.com/buffadamus/" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.threads.com/@buffadamus" target="_blank" rel="noopener">Threads</a>
+    <a href="https://bsky.app/profile/buffadamus.bsky.social" target="_blank" rel="noopener">Bluesky</a>
+    <a href="https://www.youtube.com/@Buffadamus" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://www.twitch.tv/buffadamus" target="_blank" rel="noopener">Twitch</a>
+  </nav>
+  <p class="fine">Buffadamus is a parody character. He is not Warren Buffett, not Nostradamus, and not financial advice. His time machine is also not real. Probably.</p>
+  <p class="fine">hello@buffadamus.com <button id="termBtn" class="tiny" aria-label="Open the terminal">&gt;_</button></p>
 </footer>
-<script src="desk.js?v=202610150015" defer></script>
-<script src="app.js?v=202610150015" defer></script>
+
+<div id="term" role="dialog" aria-label="Chrono terminal" hidden>
+  <div class="termbar"><span>chrono-terminal v1555.2026</span><button id="termClose" class="tiny" aria-label="Close terminal">x</button></div>
+  <pre id="termOut"></pre>
+  <form id="termForm"><label for="termIn" class="sr">Command</label><span aria-hidden="true">buff@1555:~$</span><input id="termIn" autocomplete="off" spellcheck="false"></form>
+</div>
+
+<div id="toast" class="toast" role="status" hidden></div>
+<div id="flash" aria-hidden="true"></div>
+
+<script src="app.js?v=2" defer></script>
 </body>
 </html>

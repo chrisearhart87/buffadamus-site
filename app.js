@@ -1,228 +1,344 @@
-// Buffadamus site scripts. No tracking, no cookies.
-(function () {
-  const $ = (s, r = document) => r.querySelector(s);
+// Buffadamus v2 - transmissions from 1555. No tracking. Easter eggs stored only in this browser.
+(() => {
+  const $ = s => document.querySelector(s);
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem('bfd.' + k); return v == null ? d : JSON.parse(v); } catch { return d; } },
+    set(k, v) { try { localStorage.setItem('bfd.' + k, JSON.stringify(v)); } catch {} }
+  };
+  const GL = '!<>-_\\/[]{}=+*^?#%&@$01';
 
-  // ---------- mobile menu ----------
-  const nt = $('.navtoggle'), nv = $('#sitenav');
-  if (nt && nv) {
-    nt.addEventListener('click', () => { const o = nv.classList.toggle('open'); nt.setAttribute('aria-expanded', o); });
-    nv.addEventListener('click', e => { if (e.target.tagName === 'A') { nv.classList.remove('open'); nt.setAttribute('aria-expanded', false); } });
+  // ---------- sound (off by default) ----------
+  let ctx = null, soundOn = store.get('sound', false);
+  function beep(f = 660, d = 0.06, type = 'square', vol = 0.035) {
+    if (!soundOn) return;
+    try {
+      ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.type = type; o.frequency.value = f; g.gain.value = vol;
+      o.connect(g); g.connect(ctx.destination); o.start();
+      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + d); o.stop(ctx.currentTime + d);
+    } catch {}
+  }
+  const sb = $('#soundBtn');
+  const paintSound = () => { sb.setAttribute('aria-pressed', soundOn); sb.textContent = soundOn ? 'SND ON' : 'SND OFF'; sb.setAttribute('aria-label', soundOn ? 'Sound on' : 'Sound off'); };
+  sb.onclick = () => { soundOn = !soundOn; store.set('sound', soundOn); paintSound(); beep(880, .08); };
+  paintSound();
+
+  // ---------- text scramble ----------
+  function scramble(el, text, speed = 18) {
+    if (reduce) { el.textContent = text; return Promise.resolve(); }
+    return new Promise(res => {
+      let frame = 0; const total = Math.min(60, 12 + text.length / 3);
+      clearInterval(el._t);
+      el._t = setInterval(() => {
+        frame++;
+        const p = frame / total, n = Math.floor(text.length * p);
+        let out = text.slice(0, n);
+        for (let i = n; i < text.length; i++) out += text[i] === '\n' || text[i] === ' ' ? text[i] : GL[(Math.random() * GL.length) | 0];
+        el.textContent = out;
+        if (frame % 3 === 0) beep(300 + Math.random() * 600, .02, 'square', .015);
+        if (frame >= total) { clearInterval(el._t); el.textContent = text; res(); }
+      }, speed);
+    });
   }
 
-  // ---------- gentle fade-ins (content stays visible without JS) ----------
-  const rv = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window) {
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' });
-    rv.forEach(el => io.observe(el));
-  } else rv.forEach(el => el.classList.add('in'));
+  // ---------- toast + flash ----------
+  const toast = $('#toast');
+  function say(html, ms = 3200) { toast.innerHTML = html; toast.hidden = false; clearTimeout(say._t); say._t = setTimeout(() => toast.hidden = true, ms); }
+  function flash() { const f = $('#flash'); f.classList.remove('go'); void f.offsetWidth; f.classList.add('go'); }
 
-  // ---------- Next Croissant Index reading: next weekday 1:00 pm Pacific (US market close) ----------
-  function nextCloseUTC(now) {
-    // Find "now" in America/Los_Angeles, step to the next weekday 13:00 PT.
-    const fmt = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, weekday: 'short' });
-    const parts = Object.fromEntries(fmt.formatToParts(now).map(p => [p.type, p.value]));
-    const ptNow = Date.UTC(+parts.year, +parts.month - 1, +parts.day, +parts.hour % 24, +parts.minute, +parts.second);
-    const offset = ptNow - now.getTime(); // PT wall clock minus real UTC
-    let d = new Date(Date.UTC(+parts.year, +parts.month - 1, +parts.day, 13, 0, 0));
-    const isWeekend = x => [0, 6].includes(x.getUTCDay());
-    if (ptNow >= d.getTime() || isWeekend(d)) {
-      do { d = new Date(d.getTime() + 864e5); } while (isWeekend(d));
-    }
-    return new Date(d.getTime() - offset);
+  // ---------- anomalies ----------
+  const ANOMS = [
+    ['y1929', 'Black October', 'A year when the floor fell out. Tune the dial.'],
+    ['y1999', 'The bug that never bit', 'The year every clock was supposed to die.'],
+    ['y2038', 'Integer overflow', 'When the old computers run out of seconds.'],
+    ['konami', 'Temporal overdrive', 'An old cheat code. Up, up...'],
+    ['terminal', 'Root access', 'There is a terminal. The key is under Esc.'],
+    ['poke', 'Do not poke the prophet', 'He really does not like being poked.'],
+    ['origin', 'Origin ping', 'Type the year he came from. Anywhere.'],
+    ['oracle', 'Rule No. 1', 'Type the name of the other half.'],
+    ['lost', 'Page from no year', 'Visit a page that does not exist.']
+  ];
+  let found = new Set(store.get('anoms', []));
+  const list = $('#anomList');
+  function paintAnoms() {
+    list.innerHTML = ANOMS.map(([id, name, hint]) => found.has(id)
+      ? `<li class="found"><span class="n">${name}</span><span class="h">${hint}</span></li>`
+      : `<li><span class="n">??? ??? ???</span><span class="h">${hint}</span></li>`).join('');
+    $('#anomCount').textContent = found.size;
+    document.body.classList.toggle('restored', found.size === ANOMS.length);
   }
-  const cd = $('#countdown');
-  if (cd) {
-    const tick = () => {
-      const now = new Date(), t = nextCloseUTC(now), ms = t - now;
-      const h = Math.floor(ms / 36e5), m = Math.floor(ms % 36e5 / 6e4), s = Math.floor(ms % 6e4 / 1e3);
-      cd.textContent = `${h}h ${String(m).padStart(2, '0')}m ${String(s).padStart(2, '0')}s`;
-      const when = $('#countdown-when');
-      if (when) when.textContent = t.toLocaleString('en-US', { timeZone: 'America/Los_Angeles', weekday: 'long', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' PT';
+  function unlock(id) {
+    if (found.has(id)) return;
+    found.add(id); store.set('anoms', [...found]); paintAnoms();
+    const a = ANOMS.find(x => x[0] === id);
+    beep(523, .09, 'triangle', .05); setTimeout(() => beep(784, .12, 'triangle', .05), 90);
+    say(`ANOMALY FOUND: <b>${a ? a[1] : id}</b> (${found.size}/9)`);
+    if (found.size === ANOMS.length) setTimeout(() => { flash(); say('<b>TIMELINE REPAIRED.</b> The signal is clean for one second. Then it breaks again. Follow @Buffadamus for the next leak.', 7000); }, 1200);
+  }
+  $('#anomBtn').onclick = () => $('#anomalies').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  paintAnoms();
+  if (store.get('lost', false)) unlock('lost');
+
+  // ---------- boot sequence ----------
+  const boot = $('#boot'), log = $('#bootlog');
+  const lines = [
+    ['> CHRONO-LINK v1555.2026', ''],
+    ['> locating origin ........ 1555 AD, Salon-de-Provence', 'ok'],
+    ['> locating present ....... ' + new Date().getFullYear() + ' AD, your device', 'ok'],
+    ['> calibrating astrolabe .. done', 'ok'],
+    ['> warranty check ......... EXPIRED (1556)', 'err'],
+    ['> signal integrity ....... 71%', ''],
+    ['> decrypting prophet ..... BUFFADAMUS', 'ok'],
+    ['> WARNING: transmissions may arrive corrupted. read them anyway.', 'err']
+  ];
+  let booted = false;
+  function endBoot() { if (booted) return; booted = true; boot.classList.add('gone'); setTimeout(() => boot.remove(), 600); try { sessionStorage.setItem('bfd.booted', '1'); } catch {} }
+  let seen = false; try { seen = sessionStorage.getItem('bfd.booted') === '1'; } catch {}
+  if (seen || reduce) { boot.remove(); booted = true; }
+  else {
+    let i = 0;
+    const next = () => {
+      if (booted) return;
+      if (i >= lines.length) { setTimeout(endBoot, 700); return; }
+      const [t, c] = lines[i++]; const span = document.createElement('span'); if (c) span.className = c;
+      log.appendChild(span); log.appendChild(document.createTextNode('\n'));
+      let k = 0; const ty = setInterval(() => { span.textContent = t.slice(0, ++k); if (k % 2) beep(1200, .01, 'square', .01); if (k >= t.length) { clearInterval(ty); setTimeout(next, 120); } }, 14);
     };
-    tick(); setInterval(tick, 1000);
+    next();
+    $('#skip').onclick = endBoot; boot.onclick = endBoot;
   }
 
-  // ---------- Croissant Index data ----------
-  const phrase = pct => { const a = Math.abs(pct).toFixed(2); return pct >= 0
-    ? `The stock market gained ${a}% today. That's ${a}% more croissants.`
-    : `The stock market lost ${a}% today. That's ${a}% less croissants.`; };
+  // ---------- signal readout ----------
+  const sig = $('#signal');
+  setInterval(() => { const v = 58 + ((Math.random() * 30) | 0); sig.textContent = 'SIGNAL ' + v + '%'; }, 2400);
+  $('#nowyear').textContent = new Date().getFullYear();
 
-  async function loadJSON(url) {
-    try { const r = await fetch(url, { cache: 'no-store' }); if (!r.ok) throw 0; return await r.json(); }
-    catch { return null; }
+  // ---------- chrono dial ----------
+  const TX = {
+    1555: 'ORIGIN. Built a time machine out of an astrolabe, two candles and confidence. The confidence was load-bearing.',
+    1637: 'Tulip bulbs sell for the price of a canal house. I bought the canal house. It was full of tulips.',
+    1666: 'London catches fire. Fire insurance is invented the next year. I am always one year early or one year late. Never on time.',
+    1720: 'South Sea stock: BUY. [SIGNAL LOST] ...SELL. SELL. Why does nobody ever receive the second half.',
+    1849: 'Gold in California. I arrive in 1852 with a shovel and a strong opinion.',
+    1903: 'Two brothers fly for twelve seconds. I have been flying through time for 471 years. Nobody gives me a museum.',
+    1929: 'OCTOBER. I warned them on the 23rd. They said it was different this time.\nIt was not different this time.',
+    1969: 'A man walks on the moon. My time machine still cannot parallel park.',
+    1985: '88 miles per hour. That is the speed. I was going 87. That is why I am stuck here.',
+    1987: 'A Monday. A black one. Do not check the numbers. Do not check anything. Go outside.',
+    1999: 'Every computer resets to 1900 at midnight. I fill a bunker with canned beans.\nJanuary 1st: the beans and I have a lot to talk about.',
+    2000: 'Every company adds .com to its name and doubles. I add .com to mine.\nBUFFADAMUS.COM. Wait. That one worked.',
+    2008: 'The houses are made of cards. The cards are made of houses. Nobody can explain it. Everybody signs.',
+    2021: 'A picture of a monkey sells for the price of a castle. I sell my castle. For a different monkey.',
+    2026: 'PRESENT DAY. Stranded. The warranty on the time machine expired in 1556.\nCustomer support has me on hold. The hold music is from 1983.',
+    2038: 'January 19, 03:14:07. Every old computer runs out of seconds and decides it is 1901.\nFinally. Someone who understands me.',
+    2049: '[CORRUPTED] ...the robots pay rent. They ask where the money comes from. We do not know either. [CORRUPTED]',
+    2077: 'Everything is chrome. The chrome is a subscription. Missing a payment makes it beige.',
+    2099: 'LAST CLEAN SIGNAL. Everything works out.\nExcept for one thing. You will know it when you see it.'
+  };
+  const FILL = [
+    'No clear signal. Static shaped like a bull market.',
+    'Faint fragment: "...prices up again..." The rest is wind.',
+    'Silence. Even the future takes weekends.',
+    'Signal blocked by a very large cloud. Possibly a cloud provider.',
+    'Fragment: "...this time is different..." (it is not).',
+    'Nothing happens. Historians will later call it "nothing happened".',
+    'A transmission arrives. It is an ad. Even the future has ads.',
+    'Someone, somewhere, buys the top. Again.'
+  ];
+  const ANOM_YEARS = { 1929: 'y1929', 1999: 'y1999', 2038: 'y2038' };
+  const yr = $('#year'), out = $('#yearOut'), body = $('#txBody'), st = $('#txState'), tid = $('#txId');
+  let tm = null, lastV = +yr.value, lastT = performance.now(), fastShown = 0;
+  function tune(v, instant) {
+    out.textContent = v;
+    tid.textContent = 'TX-' + v.toString(16).toUpperCase().padStart(4, '0');
+    const txt = TX[v] || FILL[(v * 7919) % FILL.length];
+    st.textContent = TX[v] ? (ANOM_YEARS[v] ? 'ANOMALY' : 'LIVE') : 'STATIC';
+    st.className = TX[v] ? (ANOM_YEARS[v] ? 'anom' : 'live') : '';
+    clearTimeout(tm);
+    tm = setTimeout(() => { scramble(body, txt, instant ? 6 : 16); if (ANOM_YEARS[v]) unlock(ANOM_YEARS[v]); }, instant ? 0 : 140);
+    beep(200 + (v - 1555) * 1.2, .02, 'sawtooth', .012);
   }
+  yr.addEventListener('input', () => {
+    const v = +yr.value, now = performance.now();
+    const speed = Math.abs(v - lastV) / Math.max(1, now - lastT) * 1000; // years per second
+    if (speed > 1400 && now - fastShown > 5000) { fastShown = now; flash(); say('<b>88 MPH.</b> Nothing happens. You need a DeLorean for that.'); }
+    lastV = v; lastT = now; tune(v);
+  });
+  document.querySelectorAll('.jump button[data-y]').forEach(b => b.onclick = () => { yr.value = b.dataset.y; tune(+b.dataset.y, true); });
+  $('#randYear').onclick = () => { const v = 1555 + ((Math.random() * 545) | 0); yr.value = v; tune(v, true); };
+  tune(+yr.value, true);
 
-  const fmtD = (d, o) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', o);
-  const latest = $('#hd-latest'), log = $('#hd-log'), chart = $('#ci-chart'), stats = $('#ci-stats');
-  if (latest || log || chart || stats) loadJSON('data/croissant.json').then(data => {
-    const asc = (data && data.readings || []).slice().sort((a, b) => a.date.localeCompare(b.date));
-    // Croissant Basket: 100 croissants held at the base close, compounded daily.
-    let basket = (data && data.base && data.base.croissants) || 100;
-    asc.forEach(r => { basket = basket * (1 + r.pct / 100); r.basket = basket; });
-    const rows = asc.slice().reverse();
-    const sign = p => (p >= 0 ? '+' : '-') + Math.abs(p).toFixed(2) + '%';
-    if (latest) {
-      if (!rows.length) {
-        latest.innerHTML = '<p class="muted">The first official reading arrives after the next market close. The oven is warming up.</p>';
-      } else {
-        const r = rows[0], cls = r.pct >= 0 ? 'up' : 'down';
-        latest.innerHTML = `<div class="hd-big"><span class="hd-num ${cls}">${sign(r.pct)}</span><span class="muted">${fmtD(r.date, { weekday: 'long', month: 'long', day: 'numeric' })}</span></div>
-          <p style="font-size:21px;margin:6px 0">${phrase(r.pct)}</p>
-          <p class="muted" style="font-size:15px;margin:0">Croissant Basket: <b>${r.basket.toFixed(2)}</b> croissants${r.url ? ` · <a href="${r.url}" style="color:inherit">See the post on X</a>` : ''}</p>`;
+  // ---------- intercepted posts ----------
+  fetch('data/posts.json', { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null).then(d => {
+    const el = $('#posts'); const ps = (d && d.posts || []).slice(0, 3);
+    if (!ps.length) { el.innerHTML = '<p class="hint">No transmissions intercepted yet. Check X.</p>'; return; }
+    const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+    el.innerHTML = ps.map((p, i) => `<article class="card" tabindex="0"><div class="meta"><span>TX-${(0xA1 + i).toString(16).toUpperCase()}</span><span>${esc(p.date)}</span></div><p data-text="${esc(p.text)}"></p><a href="${esc(p.url)}" target="_blank" rel="noopener">View on X</a></article>`).join('');
+    el.querySelectorAll('.card').forEach(c => {
+      const p = c.querySelector('p'), t = p.dataset.text;
+      p.textContent = t.replace(/[^\s]/g, () => GL[(Math.random() * GL.length) | 0]);
+      const go = () => { if (!c._done) { c._done = true; scramble(p, t, 14); } };
+      c.addEventListener('mouseenter', go); c.addEventListener('focus', go); c.addEventListener('click', go);
+      if ('IntersectionObserver' in window && matchMedia('(hover: none)').matches) {
+        const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { go(); io.disconnect(); } }), { threshold: .6 }); io.observe(c);
       }
-    }
-    if (stats && asc.length) {
-      const ups = asc.filter(r => r.pct >= 0).length, best = asc.reduce((a, b) => b.pct > a.pct ? b : a), worst = asc.reduce((a, b) => b.pct < a.pct ? b : a);
-      let streak = 0; const dir = rows[0].pct >= 0; for (const r of rows) { if ((r.pct >= 0) === dir) streak++; else break; }
-      const cell = (k, v, s) => `<div class="stat"><span class="k">${k}</span><span class="v">${v}</span><span class="s">${s}</span></div>`;
-      stats.innerHTML = cell('Croissant Basket', rows[0].basket.toFixed(2), 'from 100 on Sep 30') +
-        cell('Streak', `${streak} ${dir ? 'up' : 'down'}`, streak > 1 ? 'days in a row' : 'day') +
-        cell('Best day', sign(best.pct), fmtD(best.date, { month: 'short', day: 'numeric' })) +
-        cell('Worst day', sign(worst.pct), fmtD(worst.date, { month: 'short', day: 'numeric' })) +
-        cell('Days up', `${ups} of ${asc.length}`, 'the dog takes credit');
-    }
-    if (chart && asc.length) {
-      const W = 640, H = 150, pad = 12, n = asc.length, max = Math.max(...asc.map(r => Math.abs(r.pct)), 0.5);
-      const bw = Math.max(4, (W - pad * 2) / n - 4), mid = H / 2;
-      const bars = asc.map((r, i) => {
-        const h = Math.abs(r.pct) / max * (mid - pad), x = pad + i * ((W - pad * 2) / n) + 2, y = r.pct >= 0 ? mid - h : mid;
-        return `<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(h, 1.5).toFixed(1)}" rx="2" class="${r.pct >= 0 ? 'b-up' : 'b-down'}"><title>${fmtD(r.date, { month: 'short', day: 'numeric' })}: ${sign(r.pct)}</title></rect>`;
-      }).join('');
-      chart.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Daily Croissant Index moves"><line x1="${pad}" x2="${W - pad}" y1="${mid}" y2="${mid}" class="axis"/>${bars}</svg>`;
-    }
-    if (log) {
-      if (!rows.length) { log.innerHTML = '<tr><td colspan="4" class="empty">No readings yet. History begins with the first post.</td></tr>'; return; }
-      const max = Math.max(...rows.map(r => Math.abs(r.pct)), 0.5);
-      log.innerHTML = rows.map(r => `<tr>
-        <td>${fmtD(r.date, { month: 'short', day: 'numeric', year: 'numeric' })}</td>
-        <td style="width:34%"><div class="bar ${r.pct < 0 ? 'down' : ''}" style="width:${Math.abs(r.pct) / max * 100}%"></div></td>
-        <td>${r.url ? `<a href="${r.url}">` : ''}${sign(r.pct)} ${r.pct >= 0 ? 'more' : 'less'} croissants${r.url ? '</a>' : ''}</td>
-        <td>${r.basket.toFixed(2)}</td></tr>`).join('');
-    }
-  });
-
-  // ---------- Prophecy archive ----------
-  const roman = n => { const m = [[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']]; let s=''; for (const [v,r] of m) while (n >= v) { s += r; n -= v; } return s; };
-  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-  const arch = $('#prophecies'), teaser = $('#prophecy-teaser');
-  if (arch || teaser) loadJSON('data/prophecies.json').then(data => {
-    // Original quatrains only (never X posts or reposts). Schema: see docs/PROPHECY-STYLE.md
-    const items = (data && data.prophecies || []).slice().sort((a, b) => (b.century - a.century) || (b.number - a.number));
-    const verdicts = { pending: 'Pending', fulfilled: 'Fulfilled', muffed: 'Muffed it'};
-    const fmtDate = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-    const card = p => `<article class="card prophecy"><span class="num">${roman(p.century)}.${p.number}</span>
-      ${p.title ? `<h3 style="margin-bottom:10px">${esc(p.title)}</h3>` : ''}
-      <blockquote>${(p.lines || []).map(esc).join('<br>')}</blockquote>
-      <div class="meta"><span class="verdict v-${esc(p.verdict || 'pending')}">${verdicts[p.verdict] || 'Pending'}</span>
-        Prophesied ${fmtDate(p.date)}${p.resolves ? ` · Judged ${fmtDate(p.resolves)}` : ''}${p.about ? ` · ${esc(p.about)}` : ''}${p.verdict_note ? `<br><em>${esc(p.verdict_note)}</em>` : ''}
-        <br><a class="share" target="_blank" rel="noopener" href="https://x.com/intent/post?text=${encodeURIComponent(`Prophecy ${roman(p.century)}.${p.number}${p.title ? ', ' + p.title : ''}:\n` + (p.lines || []).join('\n'))}&url=${encodeURIComponent('https://buffadamus.com/prophecies.html')}&via=Buffadamus">Share this prophecy on X</a></div></article>`;
-    const sb = $('#scoreboard');
-    if (sb) {
-      const c = v => items.filter(p => (p.verdict || 'pending') === v).length, f = c('fulfilled'), m = c('muffed'), judged = f + m;
-      const acc = judged ? Math.round(f / judged * 100) + '%' : 'TBD';
-      sb.innerHTML = [['Fulfilled', f], ['Muffed it', m], ['Pending', c('pending')], ['Accuracy', acc]].map(([k, v]) => `<div class="stat"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('') +
-        `<p class="muted sbnote">${judged ? `Sample size: ${judged}. Statisticians call this "not a sample". Buffadamus calls it a perfect record.` : 'No verdicts yet.'}</p>`;
-    }
-    if (arch) arch.innerHTML = items.length ? items.map(card).join('') : '<p class="empty">The scrolls are blank. For now.</p>';
-    if (teaser) teaser.innerHTML = [...items.filter(p => (p.verdict || 'pending') !== 'pending').slice(0, 1), ...items.filter(p => (p.verdict || 'pending') === 'pending').sort((x, y) => String(x.resolves || '9').localeCompare(String(y.resolves || '9')))].slice(0, 3).map(card).join('') || '<p class="empty">The first prophecies are being inked.</p>';
-  });
-
-  // ---------- Ask the Oracle ----------
-  const answers = [
-    'The signs are clear. Unfortunately I am reading them upside down.',
-    'Yes. Or no. The croissant has not decided.',
-    'I foresee great fortune. For someone. Possibly not you.',
-    'Ask again after the market closes. I am on lunch.',
-    'The stars say hold. My dog says sell. I trust the dog.',
-    'In 1555 I would have said yes. A lot has changed.',
-    'This is not financial advice. It is barely advice.',
-    'The candle flickered. That means something. I will think about it.',
-    'Buy the dip. Unless it dips more. Then buy that dip.',
-    'The future is uncertain. My past is also uncertain. I lost my notes.',
-    'My crystal ball shows a croissant. It always shows a croissant.',
-    'Absolutely. I am wrong about 80% of the time, so this is exciting.',
-    'The quill wrote "maybe" and then fell asleep.',
-    'Patience. The prophecy is still loading.',
-  ];
-  const form = $('#oracle-form');
-  if (form) {
-    const out = $('#oracle-answer'), share = $('#oracle-share');
-    let last = -1;
-    form.addEventListener('submit', e => {
-      e.preventDefault();
-      const q = $('#oracle-q').value.trim();
-      let i; do { i = Math.floor(Math.random() * answers.length); } while (i === last && answers.length > 1); last = i;
-      out.classList.remove('show');
-      setTimeout(() => {
-        out.textContent = answers[i];
-        out.classList.remove('idle'); out.classList.add('show');
-        const text = (q ? `I asked Buffadamus: "${q.slice(0, 90)}"\nHe said: ` : 'Buffadamus has spoken: ') + `"${answers[i]}"`;
-        share.href = 'https://x.com/intent/post?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent('https://buffadamus.com') + '&via=Buffadamus';
-        share.textContent = 'Share this prophecy on X';
-      }, 250);
     });
+  });
+
+  // ---------- ask the machine ----------
+  const ANS = [
+    'Signal says yes. Signal also says the signal is broken.',
+    'I have seen your future. You are reading this on a screen. Accurate so far.',
+    'The answer arrived corrupted: YE#@!S. Or NO. One of those.',
+    'Ask again in 1556.',
+    'The stars say hold. The time machine says it needs an update.',
+    'Absolutely not. Unless it works. Then I said yes.',
+    'Prophecy pending. Estimated delivery: 3 to 400 years.',
+    'The candle flickered twice. That is either yes or a draft.',
+    'I looked into the future. It looked back and asked me the same question.',
+    'Error 1555: optimism not found.',
+    'Every timeline I checked, you did it anyway.',
+    'Yes, but in the timeline where you wore a hat.'
+  ];
+  let lastA = -1;
+  $('#askForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const q = $('#q').value.trim().toLowerCase();
+    let a;
+    if (/buffett/.test(q)) { a = 'Rule No. 1: never lose money. Rule No. 2: never trust a time machine.'; unlock('oracle'); }
+    else if (/1555/.test(q)) { a = 'Origin confirmed. Salon-de-Provence sends its regards.'; unlock('origin'); }
+    else if (/(lottery|numbers|powerball)/.test(q)) a = 'I saw the numbers. I wrote them down in Latin. The Latin did not survive the trip.';
+    else { let i; do { i = (Math.random() * ANS.length) | 0; } while (i === lastA); lastA = i; a = ANS[i]; }
+    scramble($('#answer'), a, 16);
+  });
+
+  // ---------- poke the prophet ----------
+  const face = $('#face'), speech = $('#speech'); let pokes = 0, pokeT = 0;
+  const LINES = ['Hey.', 'Please.', 'I am working.', 'That is my timeline.', 'Sir.', 'STOP POKING THE TIMELINE'];
+  face.addEventListener('click', () => {
+    const now = Date.now(); pokes = now - pokeT < 1500 ? pokes + 1 : 1; pokeT = now;
+    speech.textContent = LINES[Math.min(pokes - 1, LINES.length - 1)]; speech.classList.add('on');
+    clearTimeout(face._t); face._t = setTimeout(() => speech.classList.remove('on'), 1400);
+    face.classList.add('poked'); setTimeout(() => face.classList.remove('poked'), 600);
+    beep(180 + pokes * 60, .05, 'square', .03);
+    if (pokes >= 6) { flash(); unlock('poke'); pokes = 0; }
+  });
+  // face follows the mouse a little
+  if (!reduce) addEventListener('pointermove', e => {
+    const x = (e.clientX / innerWidth - .5), y = (e.clientY / innerHeight - .5);
+    face.style.transform = `perspective(900px) rotateY(${x * 8}deg) rotateX(${-y * 6}deg)`;
+  });
+
+  // ---------- typed secrets + Konami ----------
+  const K = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  let kpos = 0, typed = '';
+  addEventListener('keydown', e => {
+    if (!booted && e.key === 'Escape') { endBoot(); return; }
+    const ae = document.activeElement; const inField = !!ae && (ae.tagName === 'TEXTAREA' || (ae.tagName === 'INPUT' && ae.type !== 'range'));
+    if (e.key === '`' || e.key === '~') { if (!inField || document.activeElement.id === 'termIn') { e.preventDefault(); toggleTerm(); } return; }
+    if (inField) return;
+    kpos = (e.key === K[kpos] || e.key.toLowerCase() === K[kpos]) ? kpos + 1 : (e.key === K[0] ? 1 : 0);
+    if (kpos === K.length) { kpos = 0; toggle1555(); }
+    if (e.key.length === 1) {
+      typed = (typed + e.key.toLowerCase()).slice(-12);
+      if (typed.endsWith('1555')) { unlock('origin'); say('<b>ORIGIN PING.</b> 1555 answers: "who is this".'); }
+      if (typed.endsWith('buffett')) { unlock('oracle'); say('<b>RULE NO. 1:</b> never lose money. <b>RULE NO. 2:</b> never trust a time machine.'); }
+    }
+  });
+  function toggle1555() {
+    flash(); const on = document.body.classList.toggle('y1555');
+    say(on ? '<b>TEMPORAL OVERDRIVE.</b> Welcome to 1555. Mind the plague.' : 'Back to the present. Wash your hands.');
+    unlock('konami');
   }
 
-
-  // ---------- Ask the Dog ----------
-  const dogs = [
-    ['The dog barked twice.', 'Two barks. A strong yes. Or the mailman.'],
-    ['The dog sat on the business section.', 'He is bearish on reading.'],
-    ['The dog ate the croissant.', 'The Croissant Index has fallen 100%.'],
-    ['The dog rolled over.', 'A reversal. Analysts will call it the Dog Roll.'],
-    ['The dog stared at the wall for nine minutes.', 'He is also waiting for the Fed.'],
-    ['The dog brought me one sock.', 'Half a position. He is hedging.'],
-    ['The dog wagged at the green candles.', 'He likes the green ones. He is colorblind.'],
-    ['The dog yawned.', 'Low volatility expected.'],
-    ['The dog chased his own tail.', 'This is what day trading looks like.'],
-    ['The dog fell asleep.', 'Hold.'],
-    ['The dog buried something in the garden.', 'Gold, or a sandwich. Both are stores of value.'],
-    ['The dog sneezed.', 'Bless him. The prophecy is unclear.'],
-    ['The dog walked out of the room.', 'He does not answer questions about crypto.'],
-    ['The dog looked at me, then at the treat jar.', 'There is a fee for this service.'],
-    ['The dog howled at the screen.', 'Someone bought the top. It was me.'],
-  ];
-  const dform = $('#dog-form');
-  if (dform) {
-    const act = $('#dog-act'), read = $('#dog-read'), share = $('#dog-share'), face = $('#dog-face');
-    let last = -1;
-    dform.addEventListener('submit', e => {
-      e.preventDefault();
-      const q = $('#dog-q').value.trim();
-      let i; do { i = Math.floor(Math.random() * dogs.length); } while (i === last && dogs.length > 1); last = i;
-      act.classList.remove('show'); read.classList.remove('show'); face && face.classList.add('think');
-      setTimeout(() => { face && face.classList.remove('think'); act.textContent = dogs[i][0]; act.classList.remove('idle'); act.classList.add('show'); }, 700);
-      setTimeout(() => {
-        read.textContent = 'Buffadamus reads it: ' + dogs[i][1]; read.classList.add('show');
-        const text = (q ? `I asked Buffadamus's dog: "${q.slice(0, 80)}"\n` : '') + `${dogs[i][0]} ${dogs[i][1]}`;
-        share.href = 'https://x.com/intent/post?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent('https://buffadamus.com/dog.html') + '&via=Buffadamus';
-        share.textContent = "Share the dog's call on X";
-      }, 1500);
-    });
+  // ---------- terminal ----------
+  const term = $('#term'), tout = $('#termOut'), tin = $('#termIn');
+  const tprint = s => { tout.textContent += s + '\n'; tout.scrollTop = tout.scrollHeight; };
+  function toggleTerm(force) {
+    const open = force != null ? force : term.hidden;
+    term.hidden = !open;
+    if (open) { if (!tout.textContent) tprint('chrono-terminal. type "help".'); tin.focus(); unlock('terminal'); }
   }
-
-  // ---------- Latest posts (static copies of live X posts) ----------
-  const pl = $('#posts');
-  if (pl) loadJSON('data/posts.json').then(data => {
-    const ps = (data && data.posts || []).slice(0, 4);
-    pl.innerHTML = ps.length ? ps.map(p => `<article class="post"><div class="who"><img src="avatar.jpg" alt="" width="40" height="40"><span><b>Buffadamus</b><br>@Buffadamus · ${fmtD(p.date, { month: 'short', day: 'numeric' })}</span></div>
-      <p>${esc(p.text)}</p><a class="view" href="${esc(p.url)}" target="_blank" rel="noopener">View on X</a></article>`).join('')
-      : '<p class="empty">The town crier is resting his voice. <a href="https://x.com/Buffadamus">See @Buffadamus on X</a>.</p>';
+  $('#termBtn').onclick = () => toggleTerm(true);
+  $('#termClose').onclick = () => toggleTerm(false);
+  const CMDS = {
+    help: () => 'commands: whoami, date, year <n>, ls, cat <file>, prophesy, sudo prophesy, konami, sound, anomalies, clear, exit',
+    whoami: () => 'buffadamus. half warren buffett, half nostradamus. currently: stuck.',
+    date: () => `local: ${new Date().toString().slice(0, 24)}\norigin: 1555 (approx. the warranty says 1556)`,
+    ls: () => 'transmissions.log  warranty.pdf  secret.txt  beans.txt',
+    prophesy: () => ANS[(Math.random() * ANS.length) | 0],
+    'sudo prophesy': () => 'permission granted. prophecy: you will type another command. [FULFILLED]',
+    konami: () => { toggle1555(); return 'overdrive toggled.'; },
+    sound: () => { sb.click(); return 'sound ' + (soundOn ? 'on' : 'off'); },
+    anomalies: () => ANOMS.map(([id, n]) => (found.has(id) ? '[x] ' + n : '[ ] ??? ???')).join('\n'),
+    clear: () => { tout.textContent = ''; return null; },
+    exit: () => { toggleTerm(false); return null; }
+  };
+  const FILES = {
+    'transmissions.log': Object.keys(TX).map(y => y + '  ' + TX[y].split('\n')[0].slice(0, 54)).join('\n'),
+    'warranty.pdf': 'binary file. it says "VOID IF USED FOR TIME TRAVEL".',
+    'secret.txt': 'the dial has three loud years nobody tunes to. one of them ends in 29.',
+    'beans.txt': 'still here. still waiting for y2k.'
+  };
+  $('#termForm').addEventListener('submit', e => {
+    e.preventDefault(); const raw = tin.value.trim(); tin.value = ''; if (!raw) return;
+    tprint('buff@1555:~$ ' + raw);
+    const c = raw.toLowerCase();
+    let r;
+    if (CMDS[c]) r = CMDS[c]();
+    else if (c.startsWith('year ')) { const v = Math.max(1555, Math.min(2099, parseInt(c.slice(5), 10) || 2026)); yr.value = v; tune(v, true); r = 'tuned to ' + v + '. ' + (TX[v] ? 'live signal.' : 'static.'); }
+    else if (c.startsWith('cat ')) r = FILES[c.slice(4).trim()] || 'cat: no such file. or not yet.';
+    else if (c === '1555') { unlock('origin'); r = 'origin ping returned: "who is this"'; }
+    else if (c === 'buffett') { unlock('oracle'); r = 'rule no. 1: never lose money. rule no. 2: never trust a time machine.'; }
+    else if (c.startsWith('rm ')) r = 'nice try. the timeline is read-only.';
+    else r = 'command not found. it may not be invented yet.';
+    if (r) tprint(r);
+    beep(700, .03);
   });
 
-  // ---------- Glossary ----------
-  const gl = $('#glossary');
-  if (gl) loadJSON('data/glossary.json').then(data => {
-    const terms = (data && data.terms || []).slice().sort((a, b) => a.term.localeCompare(b.term));
-    const draw = f => {
-      const list = terms.filter(t => !f || (t.term + ' ' + t.def).toLowerCase().includes(f));
-      gl.innerHTML = list.length ? list.map(t => `<div class="card term" id="${esc(t.term.toLowerCase().replace(/[^a-z0-9]+/g, '-'))}"><h3>${esc(t.term)}</h3><p>${esc(t.def)}</p>
-        <a class="share" target="_blank" rel="noopener" href="https://x.com/intent/post?text=${encodeURIComponent(t.term + ': ' + t.def)}&url=${encodeURIComponent('https://buffadamus.com/glossary.html')}&via=Buffadamus">Share</a></div>`).join('') : '<p class="empty">That word has not been invented yet.</p>';
-    };
-    draw('');
-    const gq = $('#gloss-q'); if (gq) gq.addEventListener('input', () => draw(gq.value.trim().toLowerCase()));
-  });
+  // ---------- console egg ----------
+  try {
+    console.log('%cBUFFADAMUS', 'font:800 28px sans-serif;color:#4df3e6;text-shadow:2px 0 #ff3d8b');
+    console.log('%cYou opened the console. In 1555 this was called "witchcraft". Try typing ` on the page.', 'color:#ffb547');
+  } catch {}
 
-  // footer year
-  const y = $('#year'); if (y) y.textContent = new Date().getFullYear();
+  // ---------- time tunnel ----------
+  const cv = $('#tunnel'), g = cv.getContext('2d');
+  let W, H, DPR, stars = [];
+  function size() {
+    DPR = Math.min(2, devicePixelRatio || 1); W = cv.width = innerWidth * DPR; H = cv.height = innerHeight * DPR;
+    cv.style.width = innerWidth + 'px'; cv.style.height = innerHeight + 'px';
+    stars = Array.from({ length: Math.min(420, (innerWidth * innerHeight) / 3000 | 0) }, () => newStar(true));
+  }
+  function newStar(any) { return { a: Math.random() * Math.PI * 2, z: any ? Math.random() : 1, s: .2 + Math.random() * .8, h: Math.random() < .5 ? 0 : 1 }; }
+  let mx = 0, my = 0, warp = 0;
+  addEventListener('pointermove', e => { mx = (e.clientX / innerWidth - .5); my = (e.clientY / innerHeight - .5); });
+  addEventListener('scroll', () => { warp = Math.min(1, warp + .08); }, { passive: true });
+  function frame(t) {
+    const cx = W / 2 + mx * W * .08, cy = H * .42 + my * H * .08;
+    g.fillStyle = document.body.classList.contains('y1555') ? 'rgba(239,228,200,.35)' : 'rgba(6,7,12,.28)';
+    g.fillRect(0, 0, W, H);
+    // rings
+    const R = Math.max(W, H);
+    for (let i = 0; i < 6; i++) {
+      const k = ((t / 6000 + i / 6) % 1); const r = k * k * R * .9;
+      g.strokeStyle = i % 2 ? `rgba(255,61,139,${.10 * (1 - k)})` : `rgba(77,243,230,${.12 * (1 - k)})`;
+      g.lineWidth = DPR; g.beginPath(); g.ellipse(cx, cy, r * 1.15, r * .8, 0, 0, Math.PI * 2); g.stroke();
+    }
+    const sp = .0026 + warp * .02; warp *= .96;
+    for (const s of stars) {
+      s.z -= sp * s.s * (1 + s.z); if (s.z <= .02) Object.assign(s, newStar(false));
+      const d = (1 / s.z) * 22 * DPR, x = cx + Math.cos(s.a) * d * 1.15, y = cy + Math.sin(s.a) * d * .8;
+      if (x < -50 || x > W + 50 || y < -50 || y > H + 50) { Object.assign(s, newStar(false)); continue; }
+      const sz = (1 - s.z) * 2.2 * DPR;
+      g.fillStyle = s.h ? 'rgba(77,243,230,.85)' : 'rgba(255,181,71,.8)';
+      g.fillRect(x, y, sz, sz * (1 + warp * 6));
+    }
+    if (!reduce && !document.hidden) requestAnimationFrame(frame);
+  }
+  size(); addEventListener('resize', size);
+  if (reduce) { g.fillStyle = '#06070c'; g.fillRect(0, 0, W, H); frame(0); }
+  else { requestAnimationFrame(frame); document.addEventListener('visibilitychange', () => { if (!document.hidden) requestAnimationFrame(frame); }); }
 })();
