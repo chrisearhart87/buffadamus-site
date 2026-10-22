@@ -490,7 +490,7 @@ body.redpill .spoon{display:block}
 body.bullet main{animation:bullet 1.4s ease-out}
 @keyframes bullet{0%{filter:blur(0)}20%{filter:blur(2px) hue-rotate(40deg);transform:scale(.995) skewX(-1deg)}100%{filter:none;transform:none}}
 .devnote,.coin{display:none}
-body.shades .devnote{display:block;position:absolute;right:12px;bottom:4px;z-index:4;font:500 12px var(--mono);color:#ffb547;opacity:.85;pointer-events:none;max-width:calc(100% - 24px);text-align:right}
+body.shades .devnote{display:block;position:absolute;right:12px;bottom:4px;z-index:4;font:500 12px var(--mono);color:#ffb547;background:rgba(10,4,16,.88);border:1px solid rgba(255,181,71,.35);padding:2px 8px;pointer-events:none;max-width:calc(100% - 24px);text-align:right}
 body.shades .coin{display:flex;align-items:center;justify-content:center;position:absolute;z-index:6;width:28px;height:28px;padding:0;border:2px solid #8a6a10;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff6c0,#ffd23f 45%,#c9a227);cursor:pointer;animation:coin 1.1s linear infinite;box-shadow:0 0 12px rgba(255,210,63,.6)}
 .coin i{font:800 14px var(--display);color:#7a5a10;font-style:normal}
 @keyframes coin{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.15)}}

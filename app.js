@@ -2092,7 +2092,7 @@
   addEventListener('pointermove', e => { mx = (e.clientX / innerWidth - .5); my = (e.clientY / innerHeight - .5); });
   addEventListener('scroll', () => { fx.warp = Math.min(1, fx.warp + .08); }, { passive: true });
   // v18 backgrounds: shades = the game world, red pill = code rain, blue pill = a nice calm lie
-  const CUBES = [[.12, .18, 'CHUNK 0x1555 LOADING'], [.82, .14, 'NPC SPAWN'], [.28, .36, 'ASSET_MISSING: 1555.png'], [.7, .38, 'SKYBOX v0.88'], [.5, .1, 'RENDER DIST: 88 MPH']];
+  const CUBES = [[.05, .2, 'CHUNK 0x1555'], [.95, .16, 'NPC SPAWN'], [.06, .5, 'ASSET_MISSING'], [.94, .46, 'SKYBOX v0.88']];
   let bokeh = [], fpsN = 0, fpsT = 0;
   function rainFrame(fade, col) {
     g.fillStyle = fade; g.fillRect(0, 0, W, H);
@@ -2116,13 +2116,13 @@
     g.globalAlpha = 1; g.fillStyle = 'rgba(255,61,139,.8)'; g.fillRect(0, hz - DPR, W, 2 * DPR);
     g.font = `${11 * DPR}px monospace`; g.textAlign = 'center';
     CUBES.forEach(([fx_, fy, lbl], n) => {
-      const cx = fx_ * W + mx * W * .03 * (n + 1), cy = fy * H + Math.sin(t / 900 + n) * 8 * DPR, s = (16 + n * 4) * DPR, a = t / (1600 + n * 300), b = t / (2300 + n * 200);
+      if (W < 900 * DPR && n > 1) return; const cx = fx_ * W + mx * W * .01, cy = fy * H + Math.sin(t / 900 + n) * 8 * DPR, s = (16 + n * 4) * DPR, a = t / (1600 + n * 300), b = t / (2300 + n * 200);
       const P = [-1, 1].flatMap(x => [-1, 1].flatMap(y => [-1, 1].map(z => { const x1 = x * Math.cos(a) - z * Math.sin(a), z1 = x * Math.sin(a) + z * Math.cos(a), y1 = y * Math.cos(b) - z1 * Math.sin(b); return [cx + x1 * s, cy + y1 * s]; })));
       g.strokeStyle = n % 2 ? 'rgba(77,243,230,.7)' : 'rgba(125,255,154,.7)'; g.beginPath();
       [[0, 1], [2, 3], [4, 5], [6, 7], [0, 2], [1, 3], [4, 6], [5, 7], [0, 4], [1, 5], [2, 6], [3, 7]].forEach(([p, q]) => { g.moveTo(P[p][0], P[p][1]); g.lineTo(P[q][0], P[q][1]); }); g.stroke();
-      g.fillStyle = 'rgba(125,255,154,.75)'; g.fillText(lbl, cx, cy + s * 2.2);
+      g.fillStyle = 'rgba(125,255,154,.4)'; g.fillText(lbl, cx, cy + s * 2.2);
     });
-    for (let k = 0; k < 6; k++) { const ph = ((t / 3000 + k / 6) % 1), x = (k * 0.17 + .08) * W, y = hz - ph * hz * .7; g.globalAlpha = 1 - ph; g.fillStyle = '#ffd23f'; g.fillText('+1 XP', x, y); }
+    for (let k = 0; k < 6; k++) { const ph = ((t / 3000 + k / 6) % 1), x = (k % 2 ? .97 - k * .01 : .03 + k * .01) * W, y = hz - ph * hz * .7; g.globalAlpha = (1 - ph) * .5; g.fillStyle = '#ffd23f'; g.fillText('+1 XP', x, y); }
     g.globalAlpha = 1; g.textAlign = 'left';
   }
   function blueFrame(t) {
