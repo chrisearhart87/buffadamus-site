@@ -576,18 +576,20 @@
 
   // ---------- ask the machine ----------
   const ANS = [
-    'Signal says yes. Signal also says the signal is broken.',
-    'I have seen your future. You are reading this on a screen. Accurate so far.',
-    'The answer arrived corrupted: YE#@!S. Or NO. One of those.',
-    'Ask again in 1556.',
-    'The stars say hold. The time machine says it needs an update.',
-    'Absolutely not. Unless it works. Then I said yes.',
-    'Prophecy pending. Estimated delivery: 3 to 400 years.',
+    'Yes. The no arrives separately, in about 400 years.',
+    'My visions say yes. My accountant says to stop listening to my visions.',
+    'The answer arrived corrupted: Y#$S. Possibly YES. Possibly YIKES.',
+    'Ask again in 1556. I will be in a better mood. The plague will be over. Mostly.',
+    'The stars say hold. The stars are also not licensed.',
+    'Absolutely not. Unless it works. Then I said yes, in a different timeline.',
+    'Prophecy pending. Estimated delivery: 3 to 400 years. Tracking number: [SIGNAL LOST]',
     'The candle flickered twice. That is either yes or a draft.',
     'I looked into the future. It looked back and asked me the same question.',
     'Error 1555: optimism not found.',
-    'Every timeline I checked, you did it anyway.',
-    'Yes, but in the timeline where you wore a hat.'
+    'Every timeline I checked, you did it anyway. Some of them went great.',
+    'Yes, but only in the timeline where you wore a hat. Find the hat.',
+    'In 1555 we would have asked a goat. The goat said no. The goat was right.',
+    'My crystal ball says yes. My crystal ball is a fishbowl.'
   ];
   let lastA = -1;
   $('#askForm').addEventListener('submit', e => {
