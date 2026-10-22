@@ -89,9 +89,12 @@
     ['highscore', 'High score', 'Score 1555 in the machine that eats quarters.'],
     ['gate', 'The gate', 'Find all three keys.'],
     ['rabbit', 'Down the rabbit hole', 'Follow the white rabbit. It does not stay put.'],
-    ['guestbook', 'Sign my guestbook', 'Leave a note in 1999.']
+    ['guestbook', 'Sign my guestbook', 'Leave a note in 1999.'],
+    ['root', 'Root access granted', 'sudo needs a password. It is the year he left.'],
+    ['backdoor', 'Backdoor', 'Scan the year he left. Something is listening on an open port.'],
+    ['planet', 'Hack the planet', 'A 1995 movie told you what to hack. Ask the terminal.']
   ];
-  const WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty', 'Twenty-one', 'Twenty-two', 'Twenty-three', 'Twenty-four', 'Twenty-five', 'Twenty-six', 'Twenty-seven', 'Twenty-eight', 'Twenty-nine', 'Thirty'];
+  const WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty', 'Twenty-one', 'Twenty-two', 'Twenty-three', 'Twenty-four', 'Twenty-five', 'Twenty-six', 'Twenty-seven', 'Twenty-eight', 'Twenty-nine', 'Thirty', 'Thirty-one', 'Thirty-two', 'Thirty-three'];
   $('#anomTotal').textContent = ANOMS.length;
   $('#anomHint').textContent = `${WORDS[ANOMS.length] || ANOMS.length} are hidden on this site. Find them all to repair the timeline.`;
   let found = new Set(store.get('anoms', []));
@@ -680,13 +683,12 @@
   function toggleTerm(force) {
     const open = force != null ? force : term.hidden;
     term.hidden = !open;
-    if (open) { if (!tout.textContent) tprint('chrono-terminal. type "help".'); tin.focus(); unlock('terminal'); }
+    if (open) { if (!tout.textContent) tprint('chrono-terminal v2.0 (TimeOS 1555.2026)\ntype "help". tab completes. arrow keys remember.'); tin.focus(); unlock('terminal'); }
     else tin.blur();
   }
   $('#termBtn').onclick = () => toggleTerm(true);
   $('#termClose').onclick = () => toggleTerm(false);
   const CMDS = {
-    help: () => 'commands: whoami, date, year <n>, scan, stations, ls, cat <file>, prophesy, sudo prophesy, konami, sound, anomalies, clear, exit',
     whoami: () => 'buffadamus. half warren buffett, half nostradamus. currently: stuck.',
     date: () => `local: ${new Date().toString().slice(0, 24)}\norigin: 1555 (approx. the warranty says 1556)`,
     ls: () => 'transmissions.log  warranty.pdf  secret.txt  beans.txt',
@@ -719,21 +721,165 @@
     '.hotdog': '$1.50\nsince 1985\nsighted near the 1985 station. it does not stay long.',
     '.fsociety00.dat': () => { unlock('fsociety'); fsocietyHack(); return 'hello, friend.\n> loading ledger: EVIL CORP global debt database...\n> rewriting balances to 0.00 ............ DONE\n> verifying ...\n> ERROR: timeline is read-only. all debts restored. sorry.\n> they will never know we were here. (they know.)'; }
   };
+  // ---------- terminal v2: history, tab completion, sudo, fake hacking tools ----------
+  const hist = store.get('termHist', []).slice(-50); let hIdx = hist.length, tBusy = false, isRoot = false, pw = null, sudoOk = false;
+  const promptEl = $('#termForm span[aria-hidden]');
+  const prompt = () => isRoot ? 'root@1555:~#' : 'buff@1555:~$';
+  const setPrompt = () => { promptEl.textContent = prompt(); term.classList.toggle('root', isRoot); };
+  function emit(r) {
+    if (r == null) return Promise.resolve();
+    if (!Array.isArray(r)) { tprint(r); return Promise.resolve(); }
+    tBusy = true; tin.disabled = true;
+    return new Promise(res => {
+      let i = 0;
+      const next = () => {
+        if (i >= r.length) { tBusy = false; tin.disabled = false; tin.focus(); res(); return; }
+        const ln = r[i++];
+        if (typeof ln === 'function') { const v = ln(); if (v) tprint(v); } else tprint(ln);
+        if (i % 2) beep(1500 + Math.random() * 500, .01, 'square', .008);
+        setTimeout(next, reduce ? 0 : (typeof ln === 'string' && ln.startsWith('~') ? 400 : 70));
+      };
+      next();
+    });
+  }
+  const hex = n => Array.from({ length: n }, () => '0123456789abcdef'[(Math.random() * 16) | 0]).join('');
+  const PROCS = [
+    ['1', 'root', '0.1', 'chronos --init', ''], ['42', 'buff', '99.9', 'prophecy.exe --corrupted', ''], ['88', 'buff', '12.0', 'flux_capacitor', ''],
+    ['1555', 'root', '0.0', 'astrolabe.d', ''], ['1983', 'buff', '33.3', 'hold_music.mp3 --loop', ''], ['1999', 'root', '7.0', 'y2k_bunker --beans', ''],
+    ['2008', 'buff', '0.0', 'housing_market (zombie)', ''], ['2026', 'buff', '5.5', 'doomscroll', ''], ['6000', 'goat', '61.0', 'goat --in-charge', '']
+  ];
+  const KILL = { '42': 'prophecy.exe restarted. it always restarts.', '1983': 'hold music stopped. it started again. you are still on hold.', '2008': 'cannot kill zombie process. it got bailed out.', '6000': 'permission denied. the goat outranks you.', '1': 'you cannot kill time. it kills you.' };
+  function cal1752() { return ['   September 1752', 'Su Mo Tu We Th Fr Sa', '       1  2 14 15 16', '17 18 19 20 21 22 23', '24 25 26 27 28 29 30', '', 'eleven days were deleted. not by me. this time.']; }
+  function calNow() {
+    const d = new Date(), y = d.getFullYear(), m = d.getMonth(), first = new Date(y, m, 1).getDay(), days = new Date(y, m + 1, 0).getDate();
+    const L = ['    ' + d.toLocaleString('en-US', { month: 'long' }) + ' ' + y, 'Su Mo Tu We Th Fr Sa']; let row = '   '.repeat(first);
+    for (let i = 1; i <= days; i++) { row += String(i).padStart(2, ' ') + ' '; if ((first + i) % 7 === 0 || i === days) { L.push(row.trimEnd()); row = ''; } }
+    return L;
+  }
+  const MAN = {
+    nmap: 'nmap - network mapper. scans hosts for open ports. try a year.', nc: 'nc - netcat. connects to a host and port. pairs well with nmap.',
+    sudo: 'sudo - do something as root. needs a password. the password is not "password".', ping: 'ping - checks if a year is still there.',
+    traceroute: 'traceroute - shows every year between here and there.', ssh: 'ssh - secure shell. not invented in 1555.', hack: 'hack - see: a 1995 movie.',
+    cowsay: 'cowsay - a cow says things. a goat was unavailable.', neofetch: 'neofetch - system info, for showing off.', man: 'man - manual. you are reading it. hello.'
+  };
+  const COMMANDS = ['help', 'man', 'whoami', 'date', 'cal', 'year', 'scan', 'stations', 'ls', 'cd', 'pwd', 'cat', 'echo', 'history', 'clear', 'exit', 'uname', 'neofetch', 'uptime', 'ps', 'top', 'kill', 'free', 'df',
+    'ifconfig', 'ping', 'traceroute', 'nmap', 'nc', 'telnet', 'ssh', 'whois', 'dig', 'curl', 'wget', 'git', 'sudo', 'su', 'crontab', 'cowsay', 'fortune', 'sl', 'vim', 'emacs', 'cmatrix', 'hack', 'mine', 'tree',
+    'prophesy', 'riddle', 'answer', 'keys', 'arcade', 'konami', 'sound', 'anomalies', 'xyzzy'];
+  function termPlus(raw, c) {
+    const [cmd, ...args] = c.split(/\s+/), a = args.join(' ');
+    if (isRoot && c === 'whoami') return 'root. drunk with power. still stuck in 2026.';
+    if (isRoot && c === 'exit') { isRoot = false; setPrompt(); return 'logout. back to being a regular prophet.'; }
+    switch (cmd) {
+      case 'help': return ['chrono-terminal help', '  basics    whoami date cal year <n> ls cd pwd cat <file> echo history clear exit', '  system    uname -a neofetch uptime ps aux top kill <pid> free -h df -h crontab -l', '  network   ifconfig ping <host> traceroute <host> nmap <host> nc <host> <port> ssh whois dig curl wget', '  dev       git log git blame vim emacs sudo su', '  fun       prophesy fortune cowsay <text> sl cmatrix hack mine scan stations konami sound anomalies', '  man <command> explains things. some commands are not listed. obviously.'];
+      case 'man': return a ? (MAN[a] || `no manual entry for ${a}. it may not be invented yet.`) : 'what manual page do you want? (try: man nmap)';
+      case 'pwd': return '/home/buff/2026  (should be /home/buff/1555)';
+      case 'cd': return !a || a === '~' ? '' : a === '..' ? 'you are already at the bottom of history.' : /^\/?(past|1555)/.test(a) ? 'cd: permission denied: time machine required' : `cd: ${a}: no such era`;
+      case 'echo': return a === '$path' ? '/usr/bin:/bin:/past:/future:/dev/null/1556' : a === '$home' ? '/home/buff/1555 (unreachable)' : raw.slice(5);
+      case 'history': return hist.slice(-15).map((h, i) => String(i + 1).padStart(4) + '  ' + h).concat(['   --  1555  built time machine', '   --  1555  sudo trust confidence', '   --  2026  why']);
+      case 'uname': return 'TimeOS 1555.2026-glitch #1 SMP PREEMPT Sat Nov 12 22:04:00 1955 astrolabe GNU/Nostradamus';
+      case 'neofetch': return ['        .-"""-.         buff@1555', '       /  _ _  \\        ---------', '      |  (o o)  |       OS: TimeOS 1555.2026 (glitched)', '      |   ___   |       Host: astrolabe (refurbished)', '       \\  \\_/  /        Kernel: 1555.2026-corrupted', "     ___'-...-'___      Uptime: 471 years", '    /  ruff ruff  \\     Shell: buffsh 0.1', '   |  ~~~~~~~~~~~  |    CPU: 2x candle @ 0.0001 GHz', '   |   1555-2026   |    Memory: ??? / 1555 MB (corrupted)', '                        Warranty: expired (1556)'];
+      case 'uptime': return ` ${new Date().toTimeString().slice(0, 8)} up 471 years, 2 users (you, the goat), load average: 15.55, 20.26, 0.00`;
+      case 'ps': case 'top': case 'htop': return ['  PID USER   %CPU COMMAND'].concat(PROCS.map(p => p[0].padStart(5) + ' ' + p[1].padEnd(6) + ' ' + p[2].padStart(4) + ' ' + p[3]));
+      case 'kill': { const pid = args.filter(x => !x.startsWith('-'))[0]; return !pid ? 'kill: usage: kill <pid> (try ps aux)' : KILL[pid] || (PROCS.some(p => p[0] === pid) ? `killed ${pid}. it was not important. probably.` : `kill: (${pid}): no such process. lucky it.`); }
+      case 'free': return ['              total     used     free', 'Mem:           1555     1555        0', 'Swap:          2026     2026        0', 'all memory is being used by the hold music.'];
+      case 'df': return ['Filesystem   Size  Used Avail Mounted on', '/dev/past     545y  471y   74y /past', '/dev/future   ???   ???   ??? /future', '/dev/beans    1.2T  1.2T     0 /bunker'];
+      case 'crontab': return '0 8 * * * /usr/bin/prophesy --corrupted --post-to-x\n@yearly /usr/bin/renew-warranty  # failing since 1556';
+      case 'ifconfig': case 'ip': return ['astrolabe0: flags=4163<UP,BROADCAST,RUNNING,TEMPORAL>  mtu 1555', '        inet 15.55.20.26  netmask 255.255.0.0', 'flux0: flags=88<UP,88MPH>  mtu 121', '        inet 19.55.10.04', 'lo: flags=73<UP,LOOPBACK>  loops through 2026 forever'];
+      case 'ping': { const h = a || '1555'; return [`PING ${h} (15.55.20.26): 56 data bytes`, `64 bytes from ${h}: icmp_seq=0 ttl=1555 time=471 years`, `Request timeout for icmp_seq 1`, `64 bytes from ${h}: icmp_seq=2 ttl=1555 time=471 years (corrupted)`, `Request timeout for icmp_seq 3`, `--- ${h} ping statistics ---`, '4 packets transmitted, 2 received, 50% packet loss. the other half arrived in 1720.']; }
+      case 'traceroute': case 'tracert': { const h = a || '1555'; return [`traceroute to ${h}, 30 hops max`, ' 1  2026.local      0.1 ms', ' 2  2008.crash       * * *  (housing market down)', ' 3  1999.y2k         2 ms   (beans detected)', ' 4  1987.monday      * * *', ' 5  1929.crash       * * *', ' 6  1720.southsea    BUY... [signal lost]', ' 7  1637.tulips      1 ms   (overvalued)', h.includes('1555') ? ' 8  1555.origin      reply: "who is this"' : ` 8  ${h}  unreachable from this timeline`]; }
+      case 'nmap': { const h = a.replace(/-\S+\s*/g, '') || ''; if (!h) return 'nmap: usage: nmap <host>  (try a year)';
+        if (!/1555/.test(h)) return [`Starting Nmap 7.94 ( https://nmap.org ) at ${new Date().toLocaleString('sv-SE').slice(0, 16)} local`, `Nmap scan report for ${h}`, 'All 1000 scanned ports are filtered (mostly by the present).', 'Nmap done: 1 IP address (1 host up). nothing interesting. try the year he left.'];
+        return [`Starting Nmap 7.94 ( https://nmap.org ) at ${new Date().toLocaleString('sv-SE').slice(0, 16)} local`, 'Nmap scan report for 1555.origin (15.55.20.26)', 'Host is up (471y latency).', 'PORT      STATE     SERVICE', '22/tcp    closed    ssh (not invented yet)', '80/tcp    filtered  http (filtered by the church)', '1555/tcp  open      astrolabe', '8888/tcp  open      prophecy-backdoor', '', 'Nmap done: 1 IP address (1 host up) scanned in 471.00 years'];
+      }
+      case 'nc': case 'netcat': case 'telnet': {
+        if (/1555/.test(a) && /8888/.test(a)) return ['Connection to 1555 port 8888 [tcp/prophecy-backdoor] succeeded!', '~', '<1555> who is this', '<1555> how are you using my astrolabe', '<1555> if you are reading this, i am stuck in your year. send help. or a better time machine.', '<1555> also: did the tulips work out?', () => { setTimeout(() => unlock('backdoor'), 300); return 'Connection closed by foreign host (it is 1555, they do not have hosts).'; }];
+        if (/towel\.blinkenlights/.test(a)) return 'connecting to a galaxy far away... the episode is still buffering since 1977.';
+        return a ? `nc: connect to ${a} failed: connection refused. try a port that is actually open.` : 'usage: nc <host> <port>';
+      }
+      case 'ssh': return a ? `ssh: connect to host ${a.split('@').pop()} port 22: connection refused (ssh will not be invented for 440 years). try a port that is open.` : 'usage: ssh user@host';
+      case 'whois': return ['Domain Name: BUFFADAMUS.COM', 'Registrant: Buffadamus, Salon-de-Provence, 1555', 'Registrar: probably a guy with a quill', 'Creation Date: 1555-01-01 (approx.)', 'Expiry Date: 1556 (like everything else)'];
+      case 'dig': case 'nslookup': return [`;; ANSWER SECTION:`, `${a || '1555'}.  471  IN  A  15.55.20.26`, ';; SERVER: astrolabe#53 (it guessed)'];
+      case 'curl': return /wttr/.test(a) ? 'Weather for 1555: cloudy, 9 C, chance of plague 40%.' : /buffadamus/.test(a) ? '<!doctype html><title>Buffadamus</title><!-- you are already here. -->' : a ? `curl: (6) could not resolve host: ${a}. it does not exist yet.` : 'curl: try "curl wttr.in"';
+      case 'wget': { const f = a || 'time_machine.zip'; return [`--${new Date().toLocaleString('sv-SE').slice(0, 19)}--  https://1555.origin/${f}`, 'Connecting to 1555.origin|15.55.20.26|:1555... connected.', () => '[=====>              ] 31%  carrier pigeon', () => '[=============>      ] 72%  carrier pigeon (tired)', () => '[===================] 100%', `saved: '${f}' (0 bytes). corrupted, as expected.`]; }
+      case 'git': return /blame/.test(a) ? 'git blame: every line was written by the goat.' : /log/.test(a) || !a ? ['commit 1555a  fix: time machine (did not fix)', 'commit 1556b  chore: warranty expired', 'commit 1955c  feat: add 1.21 gigawatts', 'commit 2026d  revert: confidence', 'commit 2026e  wip: get home'] : /push/.test(a) ? 'git push: rejected. the past is read-only.' : `git: '${a}' is not a git command. neither is time travel.`;
+      case 'su': if (isRoot) return 'you are already root.'; pw = { cmd: 'su', tries: 0 }; tin.type = 'password'; return 'Password:';
+      case 'sudo': {
+        if (!a) return 'usage: sudo <command>';
+        if (a === 'make me a sandwich') return sudoOk || isRoot ? 'okay.' : (pw = { cmd: a, tries: 0 }, tin.type = 'password', '[sudo] password for buff:');
+        if (isRoot || sudoOk) return runSudo(a);
+        pw = { cmd: a, tries: 0 }; tin.type = 'password'; return '[sudo] password for buff:';
+      }
+      case 'make': return a === 'me a sandwich' ? 'what? make it yourself.' : /coffee/.test(a) ? '418 I\'m a teapot.' : `make: *** no rule to make target '${a}'. stop.`;
+      case 'cowsay': { const t = (raw.slice(7) || 'moo. buy low.').slice(0, 40), l = t.length + 2; return [' ' + '_'.repeat(l), `< ${t} >`, ' ' + '-'.repeat(l), '        \\   ^__^', '         \\  (oo)\\_______', '            (__)\\       )\\/\\', '                ||----w |', '                ||     ||']; }
+      case 'fortune': return ANS[(Math.random() * ANS.length) | 0];
+      case 'sl': return ['      ====        ________', '  _D _|  |_______/        \\__I_I_____', '   |(_)---  |   H\\________/ |   |', '   /     |  |   H  |  |     |   |', '  |      |  |   H  |__-----------------|', '  | ________|___H__/__|_____/[][]~\\_______|', '  |/ |   |-----------I_____I [][] []  D   |', '__/ =| o |=-~~\\  /~~\\  /~~\\  /~~\\ ____Y___', '   you meant ls. the train does not care.'];
+      case 'vim': case 'vi': case 'nano': vimMode = true; return 'you are now stuck in vim. like me in 2026. type :q to escape.';
+      case ':q': case ':q!': case ':wq': case ':x': if (vimMode) { vimMode = false; return 'you escaped vim. that is harder than time travel. respect.'; } return 'not in vim. nobody knows how they got here though.';
+      case 'emacs': return 'emacs is still loading. it started in 1976.';
+      case 'cmatrix': fx.rain = performance.now() + 7000; return 'wake up, user.';
+      case 'hack': return a === 'the planet' ? ['initializing...', ...Array.from({ length: 10 }, () => () => hex(8) + ' ' + hex(8) + ' ' + hex(8) + ' ' + hex(8)), '~', 'ACCESS GRANTED', 'HACK THE PLANET!', () => { flash(); setTimeout(() => unlock('planet'), 400); return '(1995 called. it is proud of you.)'; }] : 'hack what? be specific. a 1995 movie had a suggestion.';
+      case 'mine': return ['mining with 2x candle @ 0.0001 GHz...', () => 'hashrate: 0.000002 H/s', () => 'hashrate: 0.000001 H/s (one candle went out)', 'found: 0.00000001 BTC. electricity cost: one candle. net: -1 candle.'];
+      case 'tree': return ['/', '|-- past', '|   |-- 1555 (home, unreachable)', '|   |-- 1929 (do not open)', '|   `-- 1999 (beans)', '|-- present', '|   `-- 2026 (you are here. so is he.)', '`-- future', '    `-- 2099 (last clean signal)'];
+      case 'xyzzy': return 'Nothing happens.';
+      case 'hello': case 'hi': return 'hello, user. it is the present day. do you know where your prophecies are?';
+      case 'cal': return /1752/.test(a) ? cal1752() : calNow();
+      case 'ls': if (a === '/') return 'bin  dev  etc  home  past  present  future  tmp  bunker'; if (/past/.test(a)) return '1555  1637  1666  1720  1849  1929  1999  ...'; if (/future/.test(a)) return 'permission denied: you have to wait like everyone else.'; return undefined;
+      case 'cat': if (a === '/etc/passwd') return ['root:x:0:0:Nostradamus:/root:/bin/prophesy', 'buff:x:1555:1555:Buffadamus:/home/buff:/bin/buffsh', 'warren:x:1930:1930:Rule No. 1:/omaha:/bin/never-lose-money', 'goat:x:6000:6000:in charge:/barn:/bin/no', '# the password is not in here. it never is.'];
+        if (a === '/etc/shadow') return isRoot ? 'root:$1555$astrolabe$:the year he left (you already know)' : 'cat: /etc/shadow: permission denied. nice try.';
+        return undefined;
+      default: return undefined;
+    }
+  }
+  let vimMode = false;
+  function runSudo(cmd) {
+    if (/^(su|-i|su -|-s)$/.test(cmd)) { isRoot = true; setPrompt(); flash(); setTimeout(() => unlock('root'), 300); return 'root shell granted. with great power comes great nothing, the timeline is still read-only.'; }
+    if (/^rm\s+-rf\s+\/\*?$/.test(cmd) || cmd === 'rm -rf --no-preserve-root /') return ['removing /past/1929 ...', 'removing /past/2008 ...', 'removing /bunker/beans ...', 'removing /present/mondays ...', '~', 'just kidding. the timeline is read-only. you monster.'];
+    if (cmd === 'make me a sandwich') return 'okay.';
+    const r = termPlus(cmd, cmd); if (r !== undefined) return r;
+    if (CMDS[cmd]) return CMDS[cmd]();
+    return `sudo: ${cmd}: command not found, even with power.`;
+  }
+  function handlePassword(raw) {
+    tin.type = 'text';
+    const p = pw;
+    if (raw === '1555') {
+      pw = null; sudoOk = true;
+      if (p.cmd === 'su') { isRoot = true; setPrompt(); flash(); setTimeout(() => unlock('root'), 300); emit('root shell granted.'); return; }
+      emit(runSudo(p.cmd)); return;
+    }
+    p.tries++;
+    if (p.tries >= 3) { pw = null; emit(['sudo: 3 incorrect password attempts', 'this incident will be reported. to Nostradamus. he already knew.']); return; }
+    tin.type = 'password'; emit(['Sorry, try again.', p.cmd === 'su' ? 'Password:' : '[sudo] password for buff:']);
+  }
+  tin.addEventListener('keydown', e => {
+    if (e.key === 'ArrowUp' && hist.length && !pw) { e.preventDefault(); hIdx = Math.max(0, hIdx - 1); tin.value = hist[hIdx] || ''; }
+    else if (e.key === 'ArrowDown' && !pw) { e.preventDefault(); hIdx = Math.min(hist.length, hIdx + 1); tin.value = hist[hIdx] || ''; }
+    else if (e.key === 'Tab') {
+      e.preventDefault(); const v = tin.value.toLowerCase(); if (!v || v.includes(' ')) return;
+      const m = COMMANDS.filter(x => x.startsWith(v));
+      if (m.length === 1) tin.value = m[0] + ' '; else if (m.length > 1) tprint(m.join('  '));
+    }
+    else if (e.key === 'l' && e.ctrlKey) { e.preventDefault(); tout.textContent = ''; }
+    else if (e.key === 'c' && e.ctrlKey && !window.getSelection().toString()) { e.preventDefault(); tprint(prompt() + ' ' + tin.value + '^C'); tin.value = ''; if (pw) { pw = null; tin.type = 'text'; } }
+  });
   $('#termForm').addEventListener('submit', e => {
-    e.preventDefault(); const raw = tin.value.trim(); tin.value = ''; if (!raw) return;
-    tprint('buff@1555:~$ ' + raw);
-    const c = raw.toLowerCase();
+    e.preventDefault(); const raw = tin.value.trim(); tin.value = '';
+    if (pw) { tprint(''); handlePassword(raw); return; }
+    if (!raw || tBusy) return;
+    hist.push(raw); if (hist.length > 50) hist.shift(); hIdx = hist.length; store.set('termHist', hist);
+    tprint(prompt() + ' ' + raw);
+    const c = raw.toLowerCase().replace(/\s+/g, ' ');
     let r;
-    if (CMDS[c]) r = CMDS[c]();
+    if (CMDS[c] && !(isRoot && (c === 'exit' || c === 'whoami'))) r = CMDS[c]();
+    else if ((r = termPlus(raw, c)) !== undefined) { /* handled */ }
     else if (/^year\s+0+$/.test(c)) { toggleTerm(false); yearZero(); r = 'year 0000 requested. that is a problem.'; }
     else if (c.startsWith('year ')) { const v = Math.max(1555, Math.min(2099, parseInt(c.slice(5), 10) || 2026)); stopScan(); jumpTo(v); r = 'tuning to ' + v + '. ' + (TX[v] ? 'live signal detected.' : 'expect static.'); }
     else if (c.startsWith('cat ')) { const f = FILES[c.slice(4).trim()]; r = typeof f === 'function' ? f() : f || 'cat: no such file. or not yet.'; }
     else if (c === '1555') { unlock('origin'); r = 'origin ping returned: "who is this"'; }
     else if (c === 'buffett') { unlock('oracle'); r = 'rule no. 1: never lose money. rule no. 2: never trust a time machine.'; }
     else if (c.startsWith('rm ')) r = 'nice try. the timeline is read-only.';
-    else { const x = termExtra(c); r = x === undefined ? 'command not found. it may not be invented yet.' : x; }
-    if (r) tprint(r);
-    beep(700, .03);
+    else { const x = termExtra(c); r = x === undefined ? `${c.split(' ')[0]}: command not found. it may not be invented yet.` : x; }
+    emit(r); beep(700, .03);
   });
 
   // ---------- more eggs ----------

@@ -410,3 +410,6 @@ body.shades .rabbit{opacity:1;outline:2px dashed #7dff9a;outline-offset:4px}
 .ghost-drag{position:fixed;z-index:99;pointer-events:none;transform:translate(-50%,-50%) scale(1.15);opacity:.9}
 @media (max-width:860px){ .shop2{grid-template-columns:1fr} }
 @media (max-width:560px){ .shop2{padding:14px} .pcs{grid-template-columns:repeat(3,minmax(0,1fr))} .pc{min-height:92px} .pc .ico{width:40px;height:40px} .stat{grid-template-columns:84px 1fr 30px} .pilotbox{grid-template-columns:96px 1fr} .pface{width:92px;height:92px} }
+
+#term.root{border-color:#ff3d3d;box-shadow:0 0 40px rgba(255,61,61,.25)} #term.root #termForm span{color:#ff5a5a} #term.root #termOut{color:#ffb3b3}
+#termIn:disabled{opacity:.5}
