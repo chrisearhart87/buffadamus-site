@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=JetBrains+Mono:wght@400;600&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=17">
+<link rel="stylesheet" href="style.css?v=18">
 </head>
 <body>
 <canvas id="tunnel" aria-hidden="true"></canvas>
@@ -181,14 +181,14 @@
 <div id="arcade" role="dialog" aria-label="Arcade: Zombies Ate My 401(k)" hidden>
   <div class="cabinet">
     <div class="marquee">ZOMBIES ATE MY 401(K)</div>
-    <div class="screen"><canvas id="game" width="320" height="400"></canvas><div class="ghud"><span id="gScore">0</span><span id="gTime">LV1</span><span id="gLives">&#9829;&#9829;&#9829;</span></div><div class="gmsg" id="gMsg"><b>ZOMBIES ATE MY 401(K)</b><p></p><button class="btn" id="gStart" type="button">Insert $1.50</button><p class="hs">HIGH SCORE <span id="gHigh">0</span></p></div></div>
-    <div class="pad"><button id="gClose" type="button" class="ghost">Exit</button><span class="padhint">Touch: drag the screen to move</span><button id="gFire" type="button" class="fire" aria-label="Squirt">FIRE</button></div>
+    <div class="screen"><canvas id="game" width="384" height="288"></canvas><div class="gmsg" id="gMsg"><b>ZOMBIES ATE MY 401(K)</b><p></p><button class="btn" id="gStart" type="button">Insert $1.50</button><p class="hs">HIGH SCORE <span id="gHigh">0</span></p></div></div>
+    <div class="pad"><button id="gClose" type="button" class="ghost">Exit</button><span class="padhint"><span class="pk">Arrows move &middot; Space fire &middot; Q weapon &middot; E item &middot; X use &middot; P pause</span><span class="pt">Drag the screen to move</span></span><button id="gItem" type="button" class="sm" aria-label="Use item. Hold to switch item.">ITEM</button><button id="gWpn" type="button" class="sm" aria-label="Switch weapon">WPN</button><button id="gFire" type="button" class="fire" aria-label="Fire">FIRE</button></div>
   </div>
 </div>
 <div id="hud" aria-hidden="true"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i><div class="hud-top"><span>PLAYER ONE</span><span id="hudXp">XP 0</span><span id="hudKeys">KEYS 0/3</span></div><div class="hud-bot">QUEST: GET BACK TO 1555 &middot; ESC TO TAKE OFF THE SHADES</div></div>
 <div id="toast" class="toast" role="status" hidden></div>
 <div id="flash" aria-hidden="true"></div>
 
-<script src="app.js?v=17" defer></script>
+<script src="app.js?v=18" defer></script>
 </body>
 </html>
