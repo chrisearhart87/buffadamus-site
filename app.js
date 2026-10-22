@@ -86,7 +86,7 @@
     ['onhold', 'Please continue to hold', 'He has been on hold since 1556. Hold him.'],
     ['recipe', 'Original recipe', 'Build the machine that lands exactly in 1555.'],
     ['shades', 'Player one', 'Bring something back from the future. Then make him wear it.'],
-    ['highscore', 'High score', 'Score 1555 in the machine that eats quarters.'],
+    ['highscore', 'High score', 'Score 15,550 in the machine that eats quarters.'],
     ['gate', 'The gate', 'Find all three keys.'],
     ['rabbit', 'Down the rabbit hole', 'Follow the white rabbit. It does not stay put.'],
     ['guestbook', 'Sign my guestbook', 'Leave a note in 1999.'],
@@ -960,6 +960,25 @@
     pocketwatch: '<circle cx="32" cy="36" r="20"/><circle cx="32" cy="36" r="16"/><path d="M32 36V24M32 36l8 6M28 10h8v6h-8zM32 4v6"/>',
     boombox: '<path d="M6 22h52v30H6z"/><circle cx="18" cy="38" r="8"/><circle cx="46" cy="38" r="8"/><path d="M26 28h12M26 34h12M18 22V12h28v10"/><circle cx="18" cy="38" r="3"/><circle cx="46" cy="38" r="3"/>',
     eyepatch: '<path d="M4 20c12 4 44 4 56 0"/><path d="M20 22c0 10 4 16 12 16s12-6 12-16"/><path d="M22 46c4 4 16 4 20 0" opacity=".6"/>',
+    sphere: '<circle cx="32" cy="34" r="20"/><path d="M30 12l-6 12h8l-6 12M44 20l-4 8h5l-4 8M18 24l4 6M14 40l6-2M48 44l-6-4"/><path d="M26 56h12"/>',
+    capsule: '<path d="M32 6c10 8 14 20 14 34H18c0-14 4-26 14-34z"/><circle cx="32" cy="24" r="5"/><path d="M18 40l-8 12h12M46 40l8 12H42M26 46l-2 10M38 46l2 10"/>',
+    primer: '<path d="M14 18h36v30H14z"/><path d="M18 22h28v22H18z" opacity=".5"/><path d="M14 30H6v20h12M50 26h8v24H46"/><circle cx="24" cy="12" r="3"/><circle cx="40" cy="12" r="3"/><path d="M24 15v3M40 15v3"/>',
+    chamber: '<path d="M18 14c0-6 6-8 14-8s14 2 14 8v36H18z"/><path d="M22 18h20v26H22z"/><path d="M14 50h36v6H14z"/><circle cx="32" cy="30" r="4"/><path d="M28 38h8"/>',
+    spice: '<path d="M4 46c8-6 14-6 22 0s14 6 22 0 10-4 12-2"/><path d="M4 54c8-6 14-6 22 0s14 6 22 0 10-4 12-2"/><path d="M40 10l2 6 6 2-6 2-2 6-2-6-6-2 6-2zM20 20l1 3 3 1-3 1-1 3-1-3-3-1 3-1z"/>',
+    soylent: '<path d="M10 20h20v20H10zM34 24h20v20H34zM18 42h20v16H18z"/><path d="M14 26h4M22 30h4M40 30h4M46 36h4M24 48h4"/>',
+    homefusion: '<path d="M20 20h24l-3 34H23z"/><path d="M18 20h28M24 20v-6h16v6"/><path d="M40 12c3-5 9-7 14-5-3 2-5 4-6 8M40 12c-3-3-8-3-11-1"/><path d="M26 34h12M27 42h10"/>',
+    tesseract: '<path d="M10 14h30v30H10z"/><path d="M24 22h30v30H24z"/><path d="M10 14l14 8M40 14l14 8M10 44l14 8M40 44l14 8"/><path d="M14 20v20M18 20v20" opacity=".5"/>',
+    journal: '<path d="M14 8h32a4 4 0 0 1 4 4v44H18a4 4 0 0 1-4-4z"/><path d="M14 50a4 4 0 0 1 4-4h32"/><path d="M32 22c-6-6-12-2-10 4 1 4 6 4 10 2 4 2 9 2 10-2 2-6-4-10-10-4zM32 28v10"/>',
+    remote: '<path d="M24 6h16a4 4 0 0 1 4 4v44a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4z"/><circle cx="32" cy="16" r="4"/><path d="M26 28l6 4-6 4zM34 28l6 4-6 4M27 44h10M27 50h10"/>',
+    jumanji: '<path d="M8 14h48v36H8z"/><path d="M8 32h48M32 14v36"/><path d="M40 20h10v10H40z"/><circle cx="43" cy="23" r="1"/><circle cx="47" cy="27" r="1"/><path d="M14 40l6-6 6 6-6 6z"/>',
+    zoltar: '<path d="M14 6h36v52H14z"/><path d="M32 16l3 7 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/><path d="M20 44h24M22 50h20"/>',
+    watermelon: '<path d="M6 30a26 26 0 0 0 52 0z"/><path d="M12 30a20 20 0 0 0 40 0"/><path d="M22 38l1 2M32 42l1 2M42 38l-1 2M27 34l1 2M37 34l-1 2"/>',
+    mixtape: '<path d="M6 16h52v32H6z"/><path d="M12 22h40v12H12z"/><circle cx="22" cy="28" r="4"/><circle cx="42" cy="28" r="4"/><path d="M16 48l4-8h24l4 8"/>',
+    vhs: '<path d="M6 18h52v28H6z"/><path d="M14 24h36v10H14z"/><circle cx="22" cy="29" r="3"/><circle cx="42" cy="29" r="3"/><path d="M14 40h36"/><text x="32" y="15" font-size="7" text-anchor="middle" fill="currentColor" stroke="none">7 DAYS</text>',
+    kahuna: '<path d="M10 28c0-12 10-18 22-18s22 6 22 18z"/><path d="M8 34h48M10 40c4 2 8-2 12 0s8 2 12 0 8-2 12 0 8 2 10 0"/><path d="M10 46h44c0 6-6 8-10 8H20c-4 0-10-2-10-8z"/><path d="M22 18h1M32 16h1M42 19h1"/>',
+    briefcase: '<path d="M8 22h48v30H8z"/><path d="M24 22v-6h16v6M8 34h48"/><path d="M30 34v6h4v-6"/><path d="M32 6v6M18 10l3 5M46 10l-3 5" opacity=".8"/>',
+    idol: '<path d="M24 8h16l2 12-4 6 4 28H22l4-28-4-6z"/><circle cx="32" cy="16" r="3"/><path d="M18 54h28M46 40c6 0 10 4 10 10" opacity=".6"/>',
+    wilson: '<circle cx="32" cy="32" r="24"/><path d="M14 18c10 8 26 8 36 0M10 34c14 6 30 6 44 0M22 52c4-10 16-10 20 0"/><path d="M26 26c-2 4 0 10 6 10s8-6 6-10" opacity=".8"/>',
     twinkie: '<path d="M8 30c0-8 10-12 24-12s24 4 24 12v6c0 8-10 12-24 12S8 44 8 36z"/><path d="M8 33c6 4 14 5 24 5s18-1 24-5"/><circle cx="20" cy="28" r="1.5"/><circle cx="32" cy="26" r="1.5"/><circle cx="44" cy="28" r="1.5"/>'
   };
   const icon = (id, cls) => `<svg viewBox="0 0 64 64" class="ico ${cls || ''}" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${ICON[id]}</svg>`;
@@ -971,21 +990,31 @@
       ['booth', 'Phone booth', "Bill & Ted's Excellent Adventure (1989). Takes quarters. Excellent.", { s: 60, a: 55 }],
       ['sled', 'Victorian time sled', 'The Time Machine (1960). Red velvet seat. Only goes far. Very far.', { s: 75, a: 50 }],
       ['locomotive', 'Steam locomotive', 'Back to the Future Part III (1990). Will not go back once it leaves.', { s: 80, a: 55 }],
-      ['rico', 'Internet time machine', 'Napoleon Dynamite (2004). Ordered online. Mostly zaps you.', { s: 10, a: 5 }]
+      ['rico', 'Internet time machine', 'Napoleon Dynamite (2004). Ordered online. Mostly zaps you.', { s: 10, a: 5 }],
+      ['sphere', 'Time displacement sphere', 'The Terminator (1984). Arrive in a ball of lightning. Arrive naked.', { s: 65, a: 70 }],
+      ['capsule', 'Space capsule', 'Planet of the Apes (1968). Lands in a lake. Check the beach.', { s: 85, a: 20 }],
+      ['primer', 'Garage box', 'Primer (2004). Built in a garage. Six hours at a time. Do not meet yourself.', { s: 40, a: 80 }],
+      ['chamber', 'Time chamber', '12 Monkeys (1995). Aims for 1990. Usually misses.', { s: 55, a: 35 }]
     ],
     power: [
       ['lightning', '1.21 gigawatts', 'Back to the Future (1985). Requires a clock tower and perfect timing.', { p: 100 }],
       ['plutonium', 'Plutonium', 'Back to the Future (1985). Borrowed. Do not ask from whom.', { p: 92 }],
       ['chernobly', 'Chernobly', 'Hot Tub Time Machine (2010). Illegal Russian energy drink. Spill it on the controls.', { p: 88 }],
       ['proton', 'Proton pack', 'Ghostbusters (1984). Unlicensed nuclear accelerator. Do not cross the streams.', { p: 95 }],
-      ['mogwai', 'A mogwai', 'Gremlins (1984). Never get it wet. Never feed it after midnight.', { p: 40 }]
+      ['mogwai', 'A mogwai', 'Gremlins (1984). Never get it wet. Never feed it after midnight.', { p: 40 }],
+      ['homefusion', 'Home fusion reactor', 'Back to the Future Part II (1989). Runs on banana peels and old beer.', { p: 90 }],
+      ['spice', 'The spice', 'Dune (1984). It must flow. Folds space. Also folds time, a little.', { p: 99 }],
+      ['soylent', 'Soylent Green', 'Soylent Green (1973). Very high energy. Do not ask what is in it.', { p: 77 }]
     ],
     nav: [
       ['flux', 'Flux capacitor', 'Back to the Future (1985). Shaped like a Y. Nobody knows why.', { a: 85 }],
       ['necro', 'Necronomicon', 'Army of Darkness (1992). Say the words exactly. Klaatu barada nikto.', { a: 70 }],
       ['timemap', 'Map of time holes', 'Time Bandits (1981). Stolen from the Supreme Being. He wants it back.', { a: 45 }],
       ['omega', 'Omega 13', 'Galaxy Quest (1999). Rewinds exactly 13 seconds. Enough to fix one mistake.', { a: 99 }],
-      ['countdown', 'The countdown', 'Donnie Darko (2001). 28 days, 6 hours, 42 minutes, 12 seconds.', { a: 60 }]
+      ['countdown', 'The countdown', 'Donnie Darko (2001). 28 days, 6 hours, 42 minutes, 12 seconds.', { a: 60 }],
+      ['tesseract', 'The bookshelf', 'Interstellar (2014). A tesseract behind a bookshelf. Communicate with gravity.', { a: 75 }],
+      ['journal', 'Childhood journal', 'The Butterfly Effect (2004). Read it. The room shakes. Change one thing.', { a: 50 }],
+      ['remote', 'Universal remote', 'Click (2006). Fast-forwards the boring parts. All of them.', { a: 65 }]
     ]
   };
   const CURIOS = [
@@ -1000,20 +1029,31 @@
     ['pocketwatch', 'Pocket watch', 'Somewhere in Time (1980). Nobody knows where it came from.'],
     ['boombox', 'Boombox', 'Say Anything (1989). Hold it over your head. Wait.'],
     ['eyepatch', 'Eyepatch', 'Escape from New York (1981). Call him Snake.'],
-    ['twinkie', 'Twinkie', 'Ghostbusters (1984). Represents normal levels of psychokinetic energy.']
+    ['twinkie', 'Twinkie', 'Ghostbusters (1984). Represents normal levels of psychokinetic energy.'],
+    ['jumanji', 'Jungle board game', 'Jumanji (1995). Roll a five or an eight.'],
+    ['zoltar', 'Fortune machine card', 'Big (1988). Your wish is granted.'],
+    ['watermelon', 'Watermelon', 'Dirty Dancing (1987). You carried it. Nobody asked why.'],
+    ['mixtape', 'Awesome Mix Vol. 1', 'Guardians of the Galaxy (2014). Side B slaps.'],
+    ['vhs', 'Cursed VHS tape', 'The Ring (2002). Seven days.'],
+    ['kahuna', 'Big Kahuna Burger', 'Pulp Fiction (1994). That is a tasty burger.'],
+    ['briefcase', 'Glowing briefcase', 'Pulp Fiction (1994). Do not ask what is inside.'],
+    ['idol', 'Golden idol', 'Raiders of the Lost Ark (1981). Swap it for a bag of sand. Run.'],
+    ['wilson', 'Volleyball', 'Cast Away (2000). Best listener you will ever meet.']
   ];
   const ALLP = Object.fromEntries([...PARTS2.chassis, ...PARTS2.power, ...PARTS2.nav, ...CURIOS].map(p => [p[0], p]));
   const pick = { chassis: null, power: null, nav: null, curio: null };
   let curioShown = [];
   const shopEl = $('#shop2');
-  function shuffleCurios() { curioShown = CURIOS.map(c => c[0]).sort(() => Math.random() - .5).slice(0, 4); if (!curioShown.includes(pick.curio)) pick.curio = null; }
+  function shuffleCurios() { curioShown = CURIOS.map(c => c[0]).sort(() => Math.random() - .5).slice(0, 6); if (!curioShown.includes(pick.curio)) pick.curio = null; }
   function cardHtml(cat, [id, name, note]) {
     return `<button type="button" class="pc${pick[cat] === id ? ' on' : ''}" data-cat="${cat}" data-id="${id}" aria-pressed="${pick[cat] === id}" title="${esc(note)}">${icon(id)}<span class="pn">${esc(name)}</span></button>`;
   }
   function paintShop() {
-    const row = (cat, label, list, opt) => `<div class="prow"><div class="plbl">${label}${opt ? ' <i>optional</i>' : ''}</div><div class="pcs">${list.map(p => cardHtml(cat, p)).join('')}</div></div>`;
+    const row = (cat, label, list, opt) => `<div class="prow"><div class="plbl">${label} <span class="cnt">${list.length}</span>${opt ? ' <i>optional, reshuffles</i>' : ''}</div><div class="pcs" data-row="${cat}">${list.map(p => cardHtml(cat, p)).join('')}</div></div>`;
+    const keep = {}; document.querySelectorAll('#partRows .pcs').forEach(r => { keep[r.dataset.row] = r.scrollLeft; });
     $('#partRows').innerHTML = row('chassis', 'CHASSIS', PARTS2.chassis) + row('power', 'POWER', PARTS2.power) + row('nav', 'NAVIGATION', PARTS2.nav)
       + row('curio', 'CURIO DRAWER', CURIOS.filter(c => curioShown.includes(c[0])), true);
+    document.querySelectorAll('#partRows .pcs').forEach(r => { if (keep[r.dataset.row]) r.scrollLeft = keep[r.dataset.row]; });
     const slots = ['chassis', 'power', 'nav', 'curio'].map(cat => {
       const id = pick[cat];
       return `<div class="bp-slot${id ? ' full' : ''}">${id ? icon(id, 'big') : '<span class="q">?</span>'}<span class="bp-lbl">${cat === 'nav' ? 'NAV' : cat.toUpperCase()}</span></div>`;
@@ -1036,6 +1076,14 @@
     const { chassis: c, power: p, nav: n, curio: x } = pick, h = hashStr(c + p + n + (x || ''));
     let y, line;
     if (c === 'sled' && p === 'lightning' && n === 'necro') { y = 1555; line = 'ORIGINAL RECIPE. The oldest machine, a bolt from the sky and a book you should not read aloud.\nYou arrive in 1555 for one second. Then the warranty expires again.'; }
+    else if (c === 'sphere') { y = 1984; line = 'You arrive in 1984 in a ball of lightning. Naked. In Los Angeles.\nSomebody is going to need your clothes, your boots and your motorcycle.'; }
+    else if (c === 'capsule') { y = 3978; line = 'You crash into a lake in the year 3978. The locals are very hairy.\nThere is a statue on the beach. Oh no. It was Earth all along.'; }
+    else if (c === 'primer') { y = PRESENT; line = 'You go back six hours. Then again. Then again.\nNow there are four of you, and all of you are lying to each other.'; }
+    else if (c === 'chamber') { y = 1996; line = 'You aimed for 1990. You arrive in 1996.\nYou end up in an asylum. Nobody believes you. Honestly, fair.'; }
+    else if (p === 'spice') { y = 10191; line = 'The spice must flow. You fold space instead of time.\nYou arrive on a desert planet in 10,191. Do not walk with rhythm.'; }
+    else if (n === 'remote') { y = PRESENT + 30; line = `You fast-forward through the boring parts. You skip to ${PRESENT + 30}.\nTurns out the boring parts were your whole life. Oops.`; }
+    else if (n === 'tesseract') { y = PRESENT; line = 'You arrive inside a bookshelf in five dimensions.\nYou knock books off in Morse code. Nobody gets it. Love transcends time. Rent does not.'; }
+    else if (n === 'journal') { y = PRESENT - 18 - (h % 10); line = `You read your old journal. The room shakes. You arrive in ${PRESENT - 18 - (h % 10)}.\nYou change one tiny thing. Now everything is worse. Classic.`; }
     else if (c === 'rico') { y = PRESENT; line = 'It zaps you. You do not move.\nYou are still in the present day. Your whole body hurts. Mostly one part.'; }
     else if (n === 'omega') { y = PRESENT; line = 'Omega 13. You go back exactly 13 seconds.\nEnough time to fix one mistake. You use it to make the same mistake again.'; }
     else if (n === 'countdown') { y = PRESENT; line = '28 days, 6 hours, 42 minutes, 12 seconds.\nThat is when the world ends, says a large rabbit. You set a reminder.'; }
@@ -1064,6 +1112,17 @@
     if (x === 'pocketwatch') line += '\nYou find a pocket watch. You give it to yourself. Nobody knows where it came from. Do not think about it.';
     if (x === 'boombox') line += '\nYou hold a boombox over your head outside 1555. 1555 does not open the window.';
     if (x === 'eyepatch') { y = 1997; line = 'Call him Snake. You arrive in 1997.\nNew York is a prison now. The rent is somehow still high.'; }
+    if (p === 'soylent') line += '\nThe fuel is people. You knew that. It was right there in the name. Sort of.';
+    if (p === 'homefusion' && !(c === 'gullwing' && n === 'flux')) line += '\nThe reactor ran on a banana peel. It smells like the future.';
+    if (x === 'jumanji') { y = PRESENT - 26; line = `You roll a five or an eight. You are stuck in a jungle until ${PRESENT}.\nYou arrive back in ${PRESENT - 26} anyway. A lion is on the couch.`; }
+    if (x === 'zoltar') { y = 1988; line = 'A fortune machine grants your wish. You wake up in 1988, age 30, in a toy company.\nYou play a giant piano. With your feet.'; }
+    if (x === 'watermelon') line += '\nYou carried a watermelon. Nobody asked why. You will never live it down.';
+    if (x === 'mixtape') line += '\nThe mixtape plays the whole way. Side B slaps.';
+    if (x === 'vhs') { y = PRESENT; line = 'You watch the tape. The phone rings.\nSeven days. You arrive seven days from now and it is still a Tuesday.'; }
+    if (x === 'kahuna') line += '\nYou stop for a burger on the way. That is a tasty burger.';
+    if (x === 'briefcase') line += '\nYou open the glowing briefcase. Your face lights up. Nobody will ever know what was inside.';
+    if (x === 'idol') line += '\nYou swap the golden idol for a bag of sand. A boulder follows you through time.';
+    if (x === 'wilson') line += '\nYou bring a volleyball for company. You talk to it the whole way. Best listener you ever met.';
     if (x === 'twinkie') line += '\nThe machine eats your Twinkie. It is 35 feet long now. That is a big Twinkie.';
     return { y, line, recipe: y === 1555 && !x };
   }
@@ -1199,101 +1258,300 @@
     return undefined;
   }
 
-  // ---------- arcade: Escape 2026 ----------
+  // ---------- arcade: ZOMBIES ATE MY 401(K) ----------
   const arc = $('#arcade'), cv2 = $('#game'), gx = cv2.getContext('2d');
-  const GW = 320, GH = 400;
-  let game = null, gRaf = 0, keysDown = { l: false, r: false };
+  const GW = 320, GH = 400, MW = 704, MH = 880;
+  let G = null, gRaf = 0;
+  const keysDown = { u: 0, d: 0, l: 0, r: 0, f: 0 };
   $('#gHigh').textContent = store.get('high', 0);
-  function openArcade() { arc.hidden = false; $('#gMsg').hidden = false; $('#gStart').focus(); drawIdle(); }
-  function closeArcade() { arc.hidden = true; stopGame(); $('#arcadeBtn').focus(); }
-  $('#arcadeBtn').onclick = openArcade;
-  $('#gClose').onclick = closeArcade;
-  arc.addEventListener('click', e => { if (e.target === arc) closeArcade(); });
-  function drawIdle() {
-    gx.fillStyle = '#05030c'; gx.fillRect(0, 0, GW, GH);
-    for (let i = 0; i < 60; i++) { gx.fillStyle = i % 3 ? '#2a2050' : '#4df3e6'; gx.fillRect((i * 97) % GW, (i * 53) % GH, 2, 2); }
-  }
-  const CRASH = ['1929', '1637', '1720', '1987', '2000', '2008', 'Y2K', '2038'];
-  const PICK = [['⚙', '#4df3e6', 100], ['⚡', '#ffb547', 100], ['\u{1F32D}', '#ff7a59', 150]];
-  function startGame() {
-    $('#gMsg').hidden = true; stopGame();
-    game = { x: GW / 2, items: [], t0: performance.now(), last: performance.now(), spawn: 0, score: 0, lives: 3, hurt: 0, over: false, won: false, stars: Array.from({ length: 50 }, (_, i) => ({ x: (i * 97) % GW, y: (i * 53) % GH, s: 1 + (i % 3) })) };
-    beep(880, .08, 'square', .04); setTimeout(() => beep(1320, .1, 'square', .04), 90);
-    gRaf = requestAnimationFrame(tick);
-  }
-  function stopGame() { cancelAnimationFrame(gRaf); gRaf = 0; }
-  function endGame(won) {
-    game.over = true; stopGame();
-    const sc = Math.round(game.score), hi = Math.max(sc, store.get('high', 0)); store.set('high', hi); $('#gHigh').textContent = hi;
-    const m = $('#gMsg'); m.hidden = false;
-    m.querySelector('b').textContent = won ? 'ESCAPED' : 'GAME OVER';
-    m.querySelector('p').innerHTML = won ? `Score ${sc}. You escaped 2026 for 0.4 seconds.<br>Something shiny is stuck in the coin slot.` : `Score ${sc}. Crushed by ${game.killer || 'history'}.<br>Survive 60 seconds to escape.`;
-    $('#gStart').textContent = 'Play again';
-    if (won) { grantKey('crystal'); }
-    if (sc >= 1555) setTimeout(() => unlock('highscore'), won ? 4200 : 300);
-  }
-  function tick(now) {
-    const g = game; if (!g || g.over) return;
-    const dt = Math.min(50, now - g.last) / 1000; g.last = now;
-    const el = (now - g.t0) / 1000, left = Math.max(0, 60 - el), speed = 140 + el * 5.5;
-    if (keysDown.l) g.x -= 230 * dt; if (keysDown.r) g.x += 230 * dt; g.x = Math.max(16, Math.min(GW - 16, g.x));
-    g.spawn -= dt;
-    if (g.spawn <= 0) {
-      g.spawn = Math.max(.19, .5 - el * .0055);
-      const bad = Math.random() < .68;
-      g.items.push(bad ? { bad: true, x: 20 + Math.random() * (GW - 40), y: -20, w: 44 + ((Math.random() * 3) | 0) * 10, vx: el > 25 && Math.random() < .45 ? (Math.random() < .5 ? -1 : 1) * (40 + el) : 0, t: CRASH[(Math.random() * CRASH.length) | 0] } : { bad: false, x: 14 + Math.random() * (GW - 28), y: -16, p: PICK[Math.random() < .15 ? 2 : (Math.random() * 2) | 0] });
+  const LEVELS = [
+    { name: 'NIGHT OF THE LIVING DEBT', sub: 'Save your neighbors. They have savings.', types: ['payday', 'insurer', 'lobbyist'], start: 5, every: 2.8, cap: 12 },
+    { name: '28 FEES LATER', sub: 'The fees are faster now. So are you. Probably.', types: ['payday', 'insurer', 'lobbyist', 'hedge', 'fees', 'crypto'], start: 10, every: 2.0, cap: 20 },
+    { name: 'DAWN OF THE BAILOUT', sub: 'Something too big to fail is coming.', types: ['payday', 'insurer', 'lobbyist', 'hedge', 'fees', 'crypto', 'politician', 'pe'], start: 12, every: 1.6, cap: 24, boss: true }
+  ];
+  const ZT = {
+    payday: { name: 'Payday lender', suit: '#6a3f8f', tie: '#ffd23f', hp: 1, sp: 50, r: 7, q: ['Only 400% APR!', 'Fast cash!', 'Sign here.'] },
+    insurer: { name: 'Insurance broker', suit: '#3f5a4a', tie: '#9fd8ff', hp: 2, sp: 38, r: 7, q: ['DENIED.', 'Pre-existing condition.', 'Not covered.', 'Read the fine print.'], prop: 'clip' },
+    lobbyist: { name: 'Lobbyist', suit: '#5a3a2a', tie: '#ff6b6b', hp: 2, sp: 44, r: 7, q: ['Just a small donation.', 'Let us do lunch.', 'I represent interests.'], prop: 'bag' },
+    hedge: { name: 'Hedge fund manager', suit: '#151515', tie: '#c9a227', hp: 3, sp: 42, r: 7, q: ['Two and twenty.', 'We shorted your house.', 'Synergy.', 'It is not a bubble.'], prop: 'case' },
+    fees: { name: 'Junk fee', suit: '#9a2b2b', tie: '#fff', hp: 1, sp: 72, r: 5, q: ['Convenience fee!', 'Service fee!', 'Fee for the fee!'] },
+    crypto: { name: 'Rug puller', suit: '#202020', tie: '#ff3df0', hp: 2, sp: 60, r: 7, q: ['Have fun staying poor.', 'Trust me bro.', 'Wen lambo.'], eyes: 1 },
+    politician: { name: 'Career politician', suit: '#2e3550', tie: 'split', hp: 3, sp: 34, r: 7, q: ['Let me be clear.', 'I do not recall.', 'Thoughts and prayers.', 'My good friend across the aisle.'], prop: 'pin' },
+    pe: { name: 'Private equity', suit: '#4f5566', vest: '#2a4a7a', tie: '#4f5566', hp: 4, sp: 30, r: 8, q: ['We are a family here.', 'Cost synergies.', 'You are all laid off.'] },
+    sub: { name: 'Subsidiary', suit: '#3b4f3b', tie: '#c9a227', hp: 2, sp: 58, r: 6, q: ['Spun off!', 'Offshore!'] },
+    boss: { name: 'TOO BIG TO FAIL', suit: '#2b2b2b', tie: '#c9a227', hp: 40, sp: 24, r: 22, q: ['TOO BIG TO FAIL.', 'I need a bailout.', 'Socialize the losses!'] }
+  };
+  const NBS = [['Grandma', 'her pension'], ['Teacher', 'her lunch money'], ['Nurse', 'his overtime'], ['Barista', 'her tips'], ['Lemonade kid', 'his startup'], ['Mail carrier', 'his route'], ['Shop owner', 'her shop'], ['Gig worker', 'all 3 jobs'], ['1555 tourist', 'his astrolabe'], ['Retired plumber', 'his 401(k)']];
+  const NBCOL = ['#e45d8c', '#ffb547', '#7fd1ff', '#9be37a', '#ff8a3d', '#b48aff', '#4df3e6', '#f2f2f2', '#eadcbb', '#ff6b6b'];
+  const PICKS = { audit: ['AUDIT', '#ff3d8b'], tape: ['RED TAPE', '#ff4040'], dog: ['$1.50 HOT DOG', '#ff8a3d'], index: ['INDEX FUND', '#4df3e6'] };
+  const rr = (a, b) => a + Math.random() * (b - a);
+  function genMap(lv) {
+    const walls = [], water = [];
+    // the street runs across the middle, houses in two rows, hedges and a pool
+    for (let row = 0; row < 3; row++) for (let col = 0; col < 3; col++) {
+      const x = 40 + col * 230 + rr(-8, 8), y = 70 + row * 290 + rr(-8, 8);
+      walls.push({ x, y, w: 104, h: 74, k: 'house', c: ['#7a3f3f', '#3f5a7a', '#6a6a3a', '#5a3f6a'][(row * 3 + col + lv) % 4] });
+      if ((row + col + lv) % 3 === 0) walls.push({ x: x + 8, y: y + 120, w: 90, h: 10, k: 'hedge' });
+      else walls.push({ x: x + 130, y: y + 10, w: 10, h: 70, k: 'hedge' });
     }
-    g.score += dt * 10;
-    // draw
-    gx.fillStyle = '#05030c'; gx.fillRect(0, 0, GW, GH);
-    for (const s of g.stars) { s.y += s.s * speed * dt * .25; if (s.y > GH) s.y = 0; gx.fillStyle = s.s === 3 ? '#4df3e6' : '#3a2f6a'; gx.fillRect(s.x, s.y, s.s, s.s * 2); }
-    gx.font = 'bold 14px monospace'; gx.textAlign = 'center'; gx.textBaseline = 'middle';
-    const py = GH - 34;
-    for (const it of g.items) {
-      it.y += speed * dt; if (it.vx) { it.x += it.vx * dt; if (it.x < it.w / 2 || it.x > GW - it.w / 2) it.vx = -it.vx; }
-      if (it.bad) { gx.fillStyle = '#ff3d8b'; gx.fillRect(it.x - it.w / 2, it.y - 10, it.w, 20); gx.fillStyle = '#05030c'; gx.fillText(it.t, it.x, it.y + 1); }
-      else { gx.font = '20px serif'; gx.fillText(it.p[0], it.x, it.y); gx.font = 'bold 14px monospace'; }
-      const hit = it.bad ? Math.abs(it.x - g.x) < it.w / 2 + 12 && Math.abs(it.y - py) < 20 : Math.abs(it.x - g.x) < 22 && Math.abs(it.y - py) < 22;
-      if (hit && !it.gone) {
-        it.gone = true;
-        if (it.bad) { if (g.hurt <= 0) { g.lives--; g.hurt = 1; g.killer = it.t; beep(110, .25, 'sawtooth', .05); if (g.lives <= 0) { drawShip(g, py); return endGame(false); } } }
-        else { g.score += it.p[2]; beep(1200, .05, 'square', .03); }
+    water.push({ x: 300 + lv * 20, y: 450, w: 90, h: 56 });
+    return { walls, water };
+  }
+  function blocked(x, y, r) {
+    if (x < r || y < r || x > MW - r || y > MH - r) return true;
+    for (const w of G.walls) if (x + r > w.x && x - r < w.x + w.w && y + r > w.y && y - r < w.y + w.h) return true;
+    for (const w of G.water) if (x + r > w.x && x - r < w.x + w.w && y + r > w.y && y - r < w.y + w.h) return true;
+    return false;
+  }
+  function freeSpot(r, edge) {
+    for (let i = 0; i < 300; i++) {
+      let x = rr(30, MW - 30), y = rr(30, MH - 30);
+      if (edge) { const e = (Math.random() * 4) | 0; if (e === 0) y = rr(16, 40); else if (e === 1) y = rr(MH - 40, MH - 16); else if (e === 2) x = rr(16, 40); else x = rr(MW - 40, MW - 16); }
+      if (blocked(x, y, r + 4) || Math.hypot(x - G.p.x, y - G.p.y) < 170) continue;
+      if (edge && (G.ns || []).some(n => Math.hypot(n.x - x, n.y - y) < 130)) continue;
+      return [x, y];
+    }
+    return [MW / 2, 24];
+  }
+  function bubble(o, t, c) { G.bub.push({ o, t, c: c || '#fff', life: 1.6 }); }
+  function banner(t, s, d) { G.ban = { t, s, life: d || 2.6 }; }
+  function spawnZ(type, at) {
+    const T = ZT[type], [x, y] = at || freeSpot(T.r, true);
+    const z = { type, T, x, y, hp: T.hp, r: T.r, wob: Math.random() * 6, rise: .6, hit: 0 };
+    G.zs.push(z); if (Math.random() < .35) bubble(z, T.q[(Math.random() * T.q.length) | 0], '#ffd0d0');
+    return z;
+  }
+  function startLevel(i) {
+    const L = LEVELS[i]; G.lv = i; G.L = L;
+    const m = genMap(i); G.walls = m.walls; G.water = m.water;
+    G.p.x = 350; G.p.y = 362; // the street crossing is always clear
+    for (let rad = 0; rad < 300 && blocked(G.p.x, G.p.y, 8); rad += 6) { const a = rad * .7; G.p.x = 350 + Math.cos(a) * rad; G.p.y = 362 + Math.sin(a) * rad; }
+    G.zs = []; G.ns = []; G.shots = []; G.pk = []; G.bub = []; G.saved = 0; G.lost = 0; G.spawnT = 3; G.spawned = 0; G.bossDone = !L.boss;
+    const pool = NBS.slice().sort(() => Math.random() - .5).slice(0, 8);
+    pool.forEach(([n, what], k) => { let x, y; for (let t = 0; t < 60; t++) { [x, y] = freeSpot(6); if (!G.ns.some(o => Math.hypot(o.x - x, o.y - y) < 90) && x > 70 && x < MW - 70 && y > 70 && y < MH - 70) break; } G.ns.push({ n, what, x, y, c: NBCOL[(k + i * 3) % NBCOL.length], t: Math.random() * 6, grab: 0 }); });
+    for (let k = 0; k < L.start; k++) spawnZ(L.types[(Math.random() * L.types.length) | 0]);
+    ['dog', 'index', i > 0 ? 'audit' : 'tape'].forEach(k => { const [x, y] = freeSpot(6); G.pk.push({ k, x, y }); });
+    if (L.boss) setTimeout(() => { if (G && G.lv === i && !G.over) { const b = spawnZ('boss', [MW / 2, 40]); b.boss = true; banner('TOO BIG TO FAIL', 'It splits when you hit it. Like a bank.', 2.4); beep(90, .5, 'sawtooth', .05); } }, 9000);
+    banner('LEVEL ' + (i + 1), L.name + '\n' + L.sub, 3);
+  }
+  function newGame(lives) {
+    G = { p: { x: MW / 2, y: MH / 2, dx: 0, dy: 1, cd: 0, inv: 1.5, spread: 0 }, score: 0, lives: lives || 3, t: 0, last: performance.now(), slow: 0, over: false, paused: false, cam: { x: 0, y: 0 }, fx: [] };
+    startLevel(0);
+  }
+  // ---- update ----
+  function fire() {
+    const p = G.p; if (p.cd > 0) return; p.cd = p.spread > 0 ? .2 : .24;
+    const a = Math.atan2(p.dy, p.dx), angs = p.spread > 0 ? [a - .22, a, a + .22] : [a];
+    angs.forEach(t => G.shots.push({ x: p.x + Math.cos(t) * 8, y: p.y + Math.sin(t) * 8, vx: Math.cos(t) * 260, vy: Math.sin(t) * 260, life: .62 }));
+    beep(900 + Math.random() * 200, .03, 'square', .012);
+  }
+  function hurtZ(z, dmg) {
+    z.hp -= dmg; z.hit = .12;
+    if (z.boss) {
+      [30, 20, 10].forEach(th => { if (z.hp <= th && !z['s' + th]) { z['s' + th] = 1; for (let k = 0; k < 2; k++) spawnZ('sub', [z.x + rr(-20, 20), z.y + rr(-20, 20)]); bubble(z, 'I need a bailout!', '#ffd23f'); } });
+    }
+    if (z.hp <= 0) {
+      z.dead = 1; G.score += 100 * z.T.hp * (z.boss ? 10 : 1);
+      for (let k = 0; k < (z.boss ? 30 : 6); k++) G.fx.push({ x: z.x, y: z.y, vx: rr(-60, 60), vy: rr(-80, 20), life: rr(.4, .9), c: Math.random() < .5 ? '#eadcbb' : '#7fdc6f', s: 2 });
+      if (z.boss) { G.bossDone = true; banner('BAILOUT DENIED', 'The taxpayers thank you.', 2.6); flash(); sweep(1400, 60, .9, 'square', .04); }
+      else if (Math.random() < .1) G.pk.push({ k: ['audit', 'tape', 'dog', 'index'][(Math.random() * 4) | 0], x: z.x, y: z.y });
+      beep(240, .06, 'square', .02);
+    }
+  }
+  function update(dt) {
+    const p = G.p; G.t += dt;
+    // move
+    let mx = (keysDown.r ? 1 : 0) - (keysDown.l ? 1 : 0), my = (keysDown.d ? 1 : 0) - (keysDown.u ? 1 : 0);
+    if (joy.on) { mx = joy.x; my = joy.y; }
+    const m = Math.hypot(mx, my);
+    if (m > .15) { mx /= Math.max(1, m); my /= Math.max(1, m); p.dx = mx; p.dy = my; const sp = 96 * dt;
+      if (!blocked(p.x + mx * sp, p.y, 7)) p.x += mx * sp; if (!blocked(p.x, p.y + my * sp, 7)) p.y += my * sp; }
+    p.cd -= dt; p.inv -= dt; p.spread -= dt; G.slow -= dt;
+    if (keysDown.f || fireHeld) fire();
+    // spawns
+    G.spawnT -= dt;
+    if (G.spawnT <= 0 && G.zs.length < G.L.cap && G.ns.length) { G.spawnT = G.L.every; spawnZ(G.L.types[(Math.random() * G.L.types.length) | 0]); }
+    // shots
+    for (const s of G.shots) { s.x += s.vx * dt; s.y += s.vy * dt; s.life -= dt; if (blocked(s.x, s.y, 1)) s.life = 0;
+      for (const z of G.zs) if (!z.dead && z.rise <= 0 && Math.hypot(z.x - s.x, z.y - s.y) < z.r + 3) { hurtZ(z, 1); s.life = 0; break; } }
+    G.shots = G.shots.filter(s => s.life > 0);
+    // zombies
+    const slow = G.slow > 0 ? .35 : 1;
+    for (const z of G.zs) {
+      if (z.dead) continue; z.hit -= dt;
+      if (z.rise > 0) { z.rise -= dt; continue; }
+      let tx = p.x, ty = p.y, best = Math.hypot(p.x - z.x, p.y - z.y) * 1.1;
+      for (const n of G.ns) { const d = Math.hypot(n.x - z.x, n.y - z.y); if (d < best && d < 115) { best = d; tx = n.x; ty = n.y; } }
+      if (z.grabbing) { const n = z.grabbing; if (n.gone || Math.hypot(n.x - z.x, n.y - z.y) > z.r + 10) z.grabbing = null; else continue; }
+      const a = Math.atan2(ty - z.y, tx - z.x) + Math.sin(G.t * 2 + z.wob) * .35, sp = z.T.sp * slow * (.82 + G.lv * .1) * dt;
+      const nx = z.x + Math.cos(a) * sp, ny = z.y + Math.sin(a) * sp;
+      if (!blocked(nx, z.y, z.r)) z.x = nx; else if (!blocked(z.x, z.y + Math.sign(Math.sin(a) || 1) * sp, z.r)) z.y += Math.sign(Math.sin(a) || 1) * sp;
+      if (!blocked(z.x, ny, z.r)) z.y = ny; else if (!blocked(z.x + Math.sign(Math.cos(a) || 1) * sp, z.y, z.r)) z.x += Math.sign(Math.cos(a) || 1) * sp;
+      // eat a neighbor
+      for (const n of G.ns) if (!n.gone && !z.grabbing && Math.hypot(n.x - z.x, n.y - z.y) < z.r + 6) { z.grabbing = n; n.grab = n.grab || .01; bubble(n, 'HELP! A ' + z.T.name.toUpperCase() + '!', '#ff8a8a'); }
+      // bite the player
+      if (p.inv <= 0 && Math.hypot(p.x - z.x, p.y - z.y) < z.r + 7) {
+        G.lives--; p.inv = 1.6; flash(); beep(110, .3, 'sawtooth', .05); bubble(p, ['My portfolio!', 'Ow. That was a fee.', 'Not again.'][(Math.random() * 3) | 0], '#ffd23f');
+        if (G.lives <= 0) return endGame(false, 'THE ECONOMY ATE YOU', 'Your neighbors are on their own now.');
       }
     }
-    g.items = g.items.filter(it => it.y < GH + 30 && !it.gone);
-    g.hurt -= dt;
-    drawShip(g, py);
-    $('#gScore').textContent = Math.round(g.score); $('#gTime').textContent = Math.ceil(left); $('#gLives').innerHTML = '&#9829;'.repeat(Math.max(0, g.lives));
-    if (left <= 0) { g.won = true; return endGame(true); }
+    G.zs = G.zs.filter(z => !z.dead);
+    // neighbors
+    for (const n of G.ns) {
+      if (n.gone) continue; n.t += dt;
+      const grabbed = G.zs.some(z => z.grabbing === n && !z.dead);
+      if (grabbed) { n.grab += dt; if (n.grab > 4) { n.gone = 1; G.lost++; bubble({ x: n.x, y: n.y }, `${n.n}: ${n.what} acquired.`, '#ff8a8a'); beep(120, .2, 'sawtooth', .03); G.zs.forEach(z => { if (z.grabbing === n) z.grabbing = null; }); continue; } }
+      else n.grab = 0;
+      if (Math.random() < dt * .08) bubble(n, ['HELP!', 'My savings!', 'Is that a fee?', 'Save me!'][(Math.random() * 4) | 0], n.c);
+      if (Math.hypot(n.x - p.x, n.y - p.y) < 14) { n.gone = 1; n.saved = 1; G.saved++; G.score += 500; bubble({ x: n.x, y: n.y }, `SAVED: ${n.n} and ${n.what}`, '#9be37a'); [660, 880, 1320].forEach((f, k) => setTimeout(() => beep(f, .07, 'triangle', .04), k * 70)); }
+    }
+    G.ns = G.ns.filter(n => !n.gone);
+    // pickups
+    for (const k of G.pk) if (!k.got && Math.hypot(k.x - p.x, k.y - p.y) < 14) {
+      k.got = 1; G.score += 50; beep(1200, .06, 'square', .03);
+      if (k.k === 'audit') { G.zs.forEach(z => { if (!z.boss) hurtZ(z, 99); else hurtZ(z, 6); }); flash(); banner('AUDITED', 'Everyone has to show receipts.', 1.6); }
+      if (k.k === 'tape') { G.slow = 6; bubble(p, 'RED TAPE: everyone slows down.', '#ff8080'); }
+      if (k.k === 'dog') { G.lives = Math.min(G.lives + 1, 30); bubble(p, '$1.50. Still.', '#ff8a3d'); }
+      if (k.k === 'index') { p.spread = 10; bubble(p, 'Diversified!', '#4df3e6'); }
+    }
+    G.pk = G.pk.filter(k => !k.got);
+    // fx
+    G.fx.forEach(f => { f.x += f.vx * dt; f.y += f.vy * dt; f.vy += 120 * dt; f.life -= dt; }); G.fx = G.fx.filter(f => f.life > 0);
+    G.bub.forEach(b => b.life -= dt); G.bub = G.bub.filter(b => b.life > 0).slice(-6);
+    if (G.ban) { G.ban.life -= dt; if (G.ban.life <= 0) G.ban = null; }
+    // level end: every neighbor saved or lost (and the boss handled)
+    if (!G.ns.length && G.bossDone && !G.clearing) {
+      if (!G.saved) return endGame(false, 'NOBODY LEFT', 'Every neighbor was acquired. Even the 1555 tourist.');
+      G.clearing = 1; const bonus = G.saved * 1000; G.score += bonus;
+      banner('LEVEL CLEAR', `Saved ${G.saved} of 8. Bonus ${bonus}.`, 2.4); [523, 659, 784, 1047].forEach((f, k) => setTimeout(() => beep(f, .1, 'square', .04), k * 110));
+      setTimeout(() => { if (!G || G.over) return; G.clearing = 0; if (G.lv + 1 < LEVELS.length) startLevel(G.lv + 1); else endGame(true, 'NEIGHBORHOOD SAVED', 'The economy is still a zombie. But your block is fine.'); }, 2600);
+    }
+    G.p.cam = 1;
+  }
+  // ---- draw ----
+  function draw() {
+    const p = G.p, cx = Math.max(0, Math.min(MW - GW, p.x - GW / 2)), cy = Math.max(0, Math.min(MH - GH, p.y - GH / 2));
+    gx.save(); gx.translate(-Math.round(cx), -Math.round(cy));
+    // lawn + street
+    gx.fillStyle = '#1d3b1f'; gx.fillRect(0, 0, MW, MH);
+    gx.fillStyle = '#244a26'; for (let y = 0; y < MH; y += 16) for (let x = (y / 16) % 2 ? 0 : 16; x < MW; x += 32) gx.fillRect(x, y, 16, 16);
+    gx.fillStyle = '#2b2b33'; gx.fillRect(0, 340, MW, 44); gx.fillRect(0, 630, MW, 44); gx.fillRect(330, 0, 40, MH);
+    gx.fillStyle = '#d8c060'; for (let x = 0; x < MW; x += 28) { gx.fillRect(x, 361, 14, 2); gx.fillRect(x, 651, 14, 2); }
+    for (const w of G.water) { gx.fillStyle = '#2d7fbf'; gx.fillRect(w.x, w.y, w.w, w.h); gx.strokeStyle = '#eaf6ff'; gx.lineWidth = 2; gx.strokeRect(w.x, w.y, w.w, w.h); gx.fillStyle = 'rgba(255,255,255,.25)'; gx.fillRect(w.x + 8 + (G.t * 10 % 40), w.y + 14, 16, 2); }
+    for (const w of G.walls) {
+      if (w.k === 'hedge') { gx.fillStyle = '#0f2a12'; gx.fillRect(w.x, w.y, w.w, w.h); gx.fillStyle = '#1e5a24'; gx.fillRect(w.x + 1, w.y + 1, w.w - 2, w.h - 2); continue; }
+      gx.fillStyle = '#d9cfb8'; gx.fillRect(w.x, w.y + 18, w.w, w.h - 18);
+      gx.fillStyle = w.c; gx.beginPath(); gx.moveTo(w.x - 4, w.y + 20); gx.lineTo(w.x + w.w / 2, w.y); gx.lineTo(w.x + w.w + 4, w.y + 20); gx.fill();
+      gx.fillStyle = '#4a3020'; gx.fillRect(w.x + w.w / 2 - 6, w.y + w.h - 18, 12, 18);
+      gx.fillStyle = '#ffe9a0'; gx.fillRect(w.x + 12, w.y + 30, 14, 12); gx.fillRect(w.x + w.w - 26, w.y + 30, 14, 12);
+    }
+    // pickups
+    for (const k of G.pk) { const [n, c] = PICKS[k.k], b = Math.sin(G.t * 5 + k.x) * 2; gx.fillStyle = c; gx.fillRect(k.x - 6, k.y - 6 + b, 12, 12); gx.fillStyle = '#05030c'; gx.fillRect(k.x - 4, k.y - 4 + b, 8, 8); gx.fillStyle = c; gx.font = 'bold 7px monospace'; gx.textAlign = 'center'; gx.fillText(n, k.x, k.y - 10 + b); }
+    // neighbors
+    for (const n of G.ns) { if (n.grab > 0) { gx.fillStyle = '#300'; gx.fillRect(n.x - 9, n.y - 16, 18, 3); gx.fillStyle = '#ff3d3d'; gx.fillRect(n.x - 9, n.y - 16, 18 * Math.min(1, n.grab / 4), 3); } }
+    for (const n of G.ns) { const wave = Math.sin(n.t * 8) > 0 ? -3 : 0; gx.fillStyle = n.c; gx.fillRect(n.x - 4, n.y - 3, 8, 9); gx.fillStyle = '#f0c8a0'; gx.fillRect(n.x - 3, n.y - 9, 6, 6); gx.fillRect(n.x - 7, n.y - 6 + wave, 3, 3); gx.fillRect(n.x + 4, n.y - 6 - wave, 3, 3); gx.fillStyle = '#222'; gx.fillRect(n.x - 3, n.y + 6, 2, 3); gx.fillRect(n.x + 1, n.y + 6, 2, 3); }
+    // zombies
+    for (const z of G.zs) drawZ(z);
+    // player (Buffadamus with a squirt gun)
+    if (p.inv <= 0 || ((p.inv * 12) | 0) % 2) {
+      gx.fillStyle = '#3a2a4a'; gx.fillRect(p.x - 5, p.y - 2, 10, 10);
+      gx.fillStyle = '#f2f2f2'; gx.fillRect(p.x - 6, p.y - 4, 12, 3);
+      gx.fillStyle = '#e9b48a'; gx.fillRect(p.x - 4, p.y - 11, 8, 7);
+      gx.fillStyle = '#c0582a'; gx.fillRect(p.x - 4, p.y - 6, 8, 2);
+      gx.fillStyle = '#111'; gx.fillRect(p.x - 6, p.y - 14, 12, 4); gx.fillStyle = '#c9a227'; gx.fillRect(p.x - 6, p.y - 11, 12, 1);
+      if (document.body.classList.contains('shades')) { gx.fillStyle = '#000'; gx.fillRect(p.x - 4, p.y - 9, 8, 2); }
+      gx.fillStyle = '#4df3e6'; gx.fillRect(p.x + p.dx * 8 - 2, p.y + p.dy * 8 - 1, 4, 3);
+      gx.fillStyle = '#222'; gx.fillRect(p.x - 4, p.y + 8, 3, 3); gx.fillRect(p.x + 1, p.y + 8, 3, 3);
+    }
+    gx.fillStyle = '#8fe8ff'; for (const s of G.shots) gx.fillRect(s.x - 2, s.y - 2, 4, 4);
+    for (const f of G.fx) { gx.fillStyle = f.c; gx.fillRect(f.x, f.y, f.s, f.s); }
+    // speech bubbles
+    gx.font = 'bold 8px monospace'; gx.textAlign = 'center';
+    for (const b of G.bub) { const bx = b.o.x, by = b.o.y - 22 - (1.6 - b.life) * 8; gx.globalAlpha = Math.min(1, b.life * 2); const w = gx.measureText(b.t).width + 6; gx.fillStyle = 'rgba(0,0,0,.75)'; gx.fillRect(bx - w / 2, by - 8, w, 11); gx.fillStyle = b.c; gx.fillText(b.t, bx, by); gx.globalAlpha = 1; }
+    gx.restore();
+    if (G.slow > 0) { gx.fillStyle = 'rgba(255,40,40,.08)'; gx.fillRect(0, 0, GW, GH); }
+    if (G.ban) { gx.fillStyle = 'rgba(0,0,0,.6)'; gx.fillRect(0, 150, GW, 76); gx.fillStyle = '#ffb547'; gx.font = 'bold 18px monospace'; gx.textAlign = 'center'; gx.fillText(G.ban.t, GW / 2, 176); gx.fillStyle = '#fff'; gx.font = 'bold 10px monospace'; G.ban.s.split('\n').forEach((ln, k) => gx.fillText(ln, GW / 2, 196 + k * 13)); }
+  }
+  function drawZ(z) {
+    const T = z.T, s = z.boss ? 3 : (z.type === 'fees' ? .8 : 1), x = z.x, y = z.y, bob = Math.sin(G.t * 6 + z.wob) * 1;
+    gx.save(); gx.translate(x, y + bob); gx.scale(s, s);
+    if (z.rise > 0) { gx.globalAlpha = 1 - z.rise / .6; gx.translate(0, z.rise * 10); }
+    gx.fillStyle = z.hit > 0 ? '#fff' : T.suit; gx.fillRect(-5, -3, 10, 11);
+    if (T.vest) { gx.fillStyle = T.vest; gx.fillRect(-5, -3, 3, 9); gx.fillRect(2, -3, 3, 9); }
+    if (T.tie === 'split') { gx.fillStyle = '#d33'; gx.fillRect(-1, -3, 1, 7); gx.fillStyle = '#36f'; gx.fillRect(0, -3, 1, 7); } else { gx.fillStyle = T.tie; gx.fillRect(-1, -3, 2, 7); }
+    gx.fillStyle = z.hit > 0 ? '#fff' : '#9fbf8f'; gx.fillRect(-4, -11, 8, 8);
+    gx.fillStyle = T.eyes ? '#ff2020' : '#2a1a1a'; gx.fillRect(-3, -9, 2, 2); gx.fillRect(1, -9, 2, 2);
+    gx.fillStyle = '#2a1a1a'; gx.fillRect(-4, -12, 8, 2);
+    gx.fillStyle = '#9fbf8f'; gx.fillRect(-9, -2, 4, 2); gx.fillRect(5, -2, 4, 2);
+    if (T.prop === 'case') { gx.fillStyle = '#3a2410'; gx.fillRect(5, 3, 6, 5); }
+    if (T.prop === 'bag') { gx.fillStyle = '#7fae4f'; gx.fillRect(5, 2, 6, 6); gx.fillStyle = '#20301a'; gx.fillRect(7, 4, 2, 2); }
+    if (T.prop === 'clip') { gx.fillStyle = '#eee'; gx.fillRect(-11, 1, 5, 7); gx.fillStyle = '#d33'; gx.fillRect(-11, 3, 5, 1); }
+    if (T.prop === 'pin') { gx.fillStyle = '#fff'; gx.fillRect(-4, -1, 2, 2); }
+    gx.fillStyle = '#111'; gx.fillRect(-4, 8, 3, 3); gx.fillRect(1, 8, 3, 3);
+    gx.restore();
+    if (z.boss) { gx.fillStyle = '#300'; gx.fillRect(x - 24, y - 50, 48, 4); gx.fillStyle = '#ff3d8b'; gx.fillRect(x - 24, y - 50, 48 * Math.max(0, z.hp) / T.hp, 4); gx.fillStyle = '#ffd23f'; gx.font = 'bold 8px monospace'; gx.textAlign = 'center'; gx.fillText('TOO BIG TO FAIL', x, y - 54); }
+  }
+  // ---- loop + screens ----
+  function hud() { $('#gScore').textContent = G.score; $('#gTime').textContent = 'LV' + (G.lv + 1) + ' NB ' + G.ns.length; $('#gLives').innerHTML = G.lives > 5 ? '&#9829;x' + G.lives : '&#9829;'.repeat(Math.max(0, G.lives)); }
+  function tick(now) {
+    if (!G || G.over) return;
+    const dt = Math.min(.05, (now - G.last) / 1000); G.last = now;
+    if (!G.paused) update(dt);
+    if (!G || G.over) return;
+    draw(); hud();
     gRaf = requestAnimationFrame(tick);
   }
-  function drawShip(g, py) {
-    if (g.hurt > 0 && ((g.hurt * 10) | 0) % 2) return;
-    gx.strokeStyle = '#ffb547'; gx.lineWidth = 2; gx.beginPath(); gx.arc(g.x, py, 13, 0, Math.PI * 2); gx.stroke();
-    gx.beginPath(); gx.ellipse(g.x, py, 13, 5, .6, 0, Math.PI * 2); gx.stroke();
-    gx.fillStyle = '#4df3e6'; gx.fillRect(g.x - 3, py - 3, 6, 6);
+  let konamiArc = 0, bonusLives = 0;
+  function showMsg(title, html, btn) { const m = $('#gMsg'); m.hidden = false; m.querySelector('b').textContent = title; m.querySelector('p').innerHTML = html; $('#gStart').textContent = btn; }
+  function openArcade() { arc.hidden = false; showMsg('ZOMBIES ATE MY 401(K)', 'They have suits. They have fees.<br>They want your neighbors\' savings.<br>Move: arrows / WASD. Squirt: space.', 'Insert $1.50'); $('#gStart').focus(); drawTitle(); }
+  function closeArcade() { arc.hidden = true; stopGame(); if (G) G.over = true; $('#arcadeBtn').focus(); }
+  function drawTitle() { gx.fillStyle = '#0b0716'; gx.fillRect(0, 0, GW, GH); for (let i = 0; i < 40; i++) { gx.fillStyle = i % 2 ? '#1d3b1f' : '#244a26'; gx.fillRect((i * 37) % GW, 300 + (i * 13) % 100, 16, 16); } }
+  function startGame() { $('#gMsg').hidden = true; stopGame(); newGame(3 + bonusLives); if (bonusLives) { banner('30 LIVES', 'That is called leverage.', 2); } bonusLives = 0; beep(880, .08, 'square', .04); setTimeout(() => beep(1320, .1, 'square', .04), 90); G.last = performance.now(); gRaf = requestAnimationFrame(tick); }
+  function stopGame() { cancelAnimationFrame(gRaf); gRaf = 0; }
+  function endGame(won, title, sub) {
+    G.over = true; stopGame(); draw();
+    const sc = G.score, hi = Math.max(sc, store.get('high', 0)); store.set('high', hi); $('#gHigh').textContent = hi;
+    showMsg(won ? title : title, `${sub}<br>Score ${sc}. Neighbors saved this level: ${G.saved}.${won ? '<br>Something shiny is stuck in the coin slot.' : ''}`, 'Play again');
+    if (won) grantKey('crystal');
+    if (sc >= 15550) setTimeout(() => unlock('highscore'), won ? 4300 : 300);
   }
+  $('#arcadeBtn').onclick = openArcade;
+  $('#gClose').onclick = closeArcade;
   $('#gStart').onclick = startGame;
-  const hold = (el, k) => { const on = e => { e.preventDefault(); keysDown[k] = true; }, off = () => { keysDown[k] = false; }; el.addEventListener('pointerdown', on); ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => el.addEventListener(ev, off)); };
-  hold($('#gLeft'), 'l'); hold($('#gRight'), 'r');
-  cv2.addEventListener('pointermove', e => { if (!game || game.over || e.pointerType === 'mouse' && !e.buttons) return; const r = cv2.getBoundingClientRect(); game.x = (e.clientX - r.left) / r.width * GW; });
-  cv2.addEventListener('pointerdown', e => { if (!game || game.over) return; const r = cv2.getBoundingClientRect(); game.x = (e.clientX - r.left) / r.width * GW; });
+  arc.addEventListener('click', e => { if (e.target === arc) closeArcade(); });
+  // keyboard
+  const KMAP = { ArrowUp: 'u', w: 'u', W: 'u', ArrowDown: 'd', s: 'd', S: 'd', ArrowLeft: 'l', a: 'l', A: 'l', ArrowRight: 'r', d: 'r', D: 'r', ' ': 'f', j: 'f', J: 'f', k: 'f', K: 'f' };
+  const KON = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
   addEventListener('keydown', e => {
     if (arc.hidden) return;
     if (e.key === 'Escape') { closeArcade(); return; }
-    if (['ArrowLeft', 'a', 'A'].includes(e.key)) { keysDown.l = true; e.preventDefault(); }
-    if (['ArrowRight', 'd', 'D'].includes(e.key)) { keysDown.r = true; e.preventDefault(); }
-    if ((e.key === ' ' || e.key === 'Enter') && (!game || game.over) && document.activeElement !== $('#gClose')) { e.preventDefault(); startGame(); }
+    const playing = G && !G.over;
+    if (!playing) { konamiArc = (e.key === KON[konamiArc] || e.key.toLowerCase() === KON[konamiArc]) ? konamiArc + 1 : (e.key === KON[0] ? 1 : 0); if (konamiArc === KON.length) { konamiArc = 0; bonusLives = 27; flash(); say('<b>30 LIVES.</b> That is called leverage.', 3000); } }
+    if (playing && (e.key === 'p' || e.key === 'P')) { G.paused = !G.paused; if (G.paused) banner('PAUSED', 'Even zombies take a lunch break.', 99); else G.ban = null; return; }
+    if (KMAP[e.key] && playing) { keysDown[KMAP[e.key]] = 1; e.preventDefault(); }
+    else if (KMAP[e.key]) e.preventDefault();
+    if ((e.key === 'Enter') && !playing && document.activeElement !== $('#gClose')) { e.preventDefault(); startGame(); }
   });
-  addEventListener('keyup', e => { if (['ArrowLeft', 'a', 'A'].includes(e.key)) keysDown.l = false; if (['ArrowRight', 'd', 'D'].includes(e.key)) keysDown.r = false; });
-  document.addEventListener('visibilitychange', () => { if (document.hidden && game && !game.over) { stopGame(); game.over = true; $('#gMsg').hidden = false; $('#gMsg').querySelector('b').textContent = 'PAUSED'; $('#gMsg').querySelector('p').textContent = 'You looked away. History did not.'; $('#gStart').textContent = 'Start over'; } });
+  addEventListener('keyup', e => { if (KMAP[e.key]) keysDown[KMAP[e.key]] = 0; });
+  // touch: drag on the screen to move, hold FIRE to squirt; mouse click aims
+  const joy = { on: false, x: 0, y: 0, ox: 0, oy: 0 }; let fireHeld = false;
+  cv2.addEventListener('pointerdown', e => {
+    if (!G || G.over) return; if (G.paused) { G.paused = false; G.ban = null; return; } const r = cv2.getBoundingClientRect();
+    if (e.pointerType === 'mouse') { const wx = (e.clientX - r.left) / r.width * GW, wy = (e.clientY - r.top) / r.height * GH, cx = Math.max(0, Math.min(MW - GW, G.p.x - GW / 2)), cy = Math.max(0, Math.min(MH - GH, G.p.y - GH / 2)); const dx = wx + cx - G.p.x, dy = wy + cy - G.p.y, d = Math.hypot(dx, dy) || 1; G.p.dx = dx / d; G.p.dy = dy / d; fireHeld = true; return; }
+    joy.on = true; joy.ox = e.clientX; joy.oy = e.clientY; joy.x = joy.y = 0; try { cv2.setPointerCapture(e.pointerId); } catch {}
+  });
+  cv2.addEventListener('pointermove', e => { if (!joy.on) return; const dx = e.clientX - joy.ox, dy = e.clientY - joy.oy, d = Math.hypot(dx, dy); joy.x = d > 6 ? dx / Math.max(d, 30) : 0; joy.y = d > 6 ? dy / Math.max(d, 30) : 0; });
+  ['pointerup', 'pointercancel', 'pointerleave'].forEach(ev => cv2.addEventListener(ev, () => { joy.on = false; joy.x = joy.y = 0; fireHeld = false; }));
+  const holdBtn = (el, on, off) => { el.addEventListener('pointerdown', e => { e.preventDefault(); on(); }); ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => el.addEventListener(ev, off)); };
+  holdBtn($('#gFire'), () => { fireHeld = true; }, () => { fireHeld = false; });
+  document.addEventListener('visibilitychange', () => { if (document.hidden && G && !G.over && !G.paused) { G.paused = true; banner('PAUSED', 'You looked away. The fees did not.', 99); } });
 
   // ---------- shades (player one mode) ----------
   const LOOT = [
     ['#dial', 'Copper turns at 20 + the minute on your clock.', 'left:12px;bottom:12px'],
     ['#workshop', 'His first machine: the oldest movie machine, 1.21 gigawatts and the book you should not read aloud. No curio.', 'right:12px;top:12px'],
     ['#ask', 'The terminal answers to: riddle', 'right:12px;top:12px'],
-    ['#gate', 'Crystal: survive 60 seconds in the cabinet below.', 'left:12px;top:12px'],
+    ['#gate', 'Crystal: clear all three levels in the cabinet below.', 'left:12px;top:12px'],
     ['#anomalies', 'A white rabbit hides in a corner. It moves.', 'right:12px;top:12px']
   ];
   let xp = store.get('xp', 0), lootTaken = new Set(store.get('loot', []));
