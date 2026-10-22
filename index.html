@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=JetBrains+Mono:wght@400;600&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=6">
+<link rel="stylesheet" href="style.css?v=9">
 </head>
 <body>
 <canvas id="tunnel" aria-hidden="true"></canvas>
@@ -53,7 +53,9 @@
       <span class="ring r1"></span><span class="ring r2"></span><span class="ring r3"></span>
       <span class="layer c"></span><span class="layer m"></span><span class="layer base"></span>
       <span class="speech" id="speech" aria-live="polite"></span>
+      <span class="shades-on" aria-hidden="true"><svg viewBox="0 0 64 14" shape-rendering="crispEdges"><path fill="#050505" d="M0 0h64v3H0zM4 3h24v8H4zM36 3h24v8H36zM6 11h20v2H6zM38 11h20v2H38zM28 3h8v3h-8z"/><path fill="#fff" d="M8 5h3v2H8zM11 7h3v2h-3zM40 5h3v2h-3zM43 7h3v2h-3z"/></svg></span>
     </button>
+    <button class="shades-btn" id="shadesBtn" aria-label="A pair of sunglasses"><svg viewBox="0 0 64 14" shape-rendering="crispEdges"><path fill="currentColor" d="M0 0h64v3H0zM4 3h24v8H4zM36 3h24v8H36zM28 3h8v3h-8z"/></svg></button>
   </section>
 
   <section class="panel" id="dial">
@@ -106,8 +108,21 @@
     <p class="more"><a href="https://x.com/Buffadamus" target="_blank" rel="noopener">All transmissions on X &rarr;</a></p>
   </section>
 
+  <section class="panel" id="workshop">
+    <div class="phead"><span class="num">03</span><h2>Time machine workshop</h2><span class="hint">He has tried a DeLorean and a hot tub. Build him something better: pick up to three parts, then launch.</span></div>
+    <div class="shop">
+      <div class="parts" id="parts" role="list" aria-label="Parts"></div>
+      <div class="rig" id="rig">
+        <div class="slots" id="slots"></div>
+        <div class="rigbtns"><button class="btn" id="launch" type="button">Launch</button><button class="ghost" id="clearRig" type="button">Clear</button></div>
+        <div class="result" id="rigOut" aria-live="polite"><span class="lbl">DESTINATION</span><b id="rigYear">----</b><p id="rigLine">Add a part. Even he needed candles.</p></div>
+        <div class="rigact" id="rigAct" hidden><button class="ghost" id="rigShare" type="button">Send it to @Buffadamus</button><button class="ghost" id="rigTune" type="button">Tune the dial there</button></div>
+      </div>
+    </div>
+  </section>
+
   <section class="panel" id="ask">
-    <div class="phead"><span class="num">03</span><h2>Ask the machine</h2><span class="hint">One question per century. We are not strict about it.</span></div>
+    <div class="phead"><span class="num">04</span><h2>Ask the machine</h2><span class="hint">One question per century. We are not strict about it.</span></div>
     <form id="askForm" class="ask">
       <label for="q" class="sr">Your question</label>
       <span class="prompt" aria-hidden="true">&gt;</span>
@@ -117,8 +132,24 @@
     <p class="answer" id="answer" aria-live="polite">Type a question. The answer left 1555 a while ago. It should be here any minute.</p>
   </section>
 
+  <section class="panel" id="gate">
+    <div class="phead"><span class="num">05</span><h2>The gate to 1555</h2><span class="hint">Three keys are hidden on this site. Find all three and the gate opens. Nobody has made it through. Almost nobody.</span></div>
+    <div class="gatebox">
+      <div class="keys">
+        <div class="key" data-key="copper"><svg viewBox="0 0 48 20" aria-hidden="true"><circle cx="9" cy="10" r="7"/><path d="M16 10h30M38 10v7M44 10v5"/></svg><b>Copper key</b><p>Copper sleeps in this century, at the minute on your clock.</p></div>
+        <div class="key" data-key="jade"><svg viewBox="0 0 48 20" aria-hidden="true"><circle cx="9" cy="10" r="7"/><path d="M16 10h30M38 10v7M44 10v5"/></svg><b>Jade key</b><p>Jade is spoken, not found. The terminal knows three riddles.</p></div>
+        <div class="key" data-key="crystal"><svg viewBox="0 0 48 20" aria-hidden="true"><circle cx="9" cy="10" r="7"/><path d="M16 10h30M38 10v7M44 10v5"/></svg><b>Crystal key</b><p>Crystal sits inside a machine that eats quarters. Look down.</p></div>
+      </div>
+      <div class="door" id="door">
+        <div class="beyond" id="beyond"><span class="lbl">ESCAPE CODE</span><b id="escCode">----</b><p>You step through. It is 1555. It smells incredible, in a bad way. You step back out. You were here.</p><div class="rigact"><button class="btn" id="gateShare" type="button">Share on X</button><button class="ghost" id="gateCopy" type="button">Copy code</button></div></div>
+        <div class="leaf l"><span>15</span></div><div class="leaf r"><span>55</span></div>
+        <p class="doorlbl" id="doorLbl">LOCKED. 0 OF 3 KEYS.</p>
+      </div>
+    </div>
+  </section>
+
   <section class="panel" id="anomalies">
-    <div class="phead"><span class="num">04</span><h2>Timeline anomalies</h2><span class="hint" id="anomHint">Twelve are hidden on this site. Find them all to repair the timeline.</span></div>
+    <div class="phead"><span class="num">06</span><h2>Timeline anomalies</h2><span class="hint" id="anomHint">Twelve are hidden on this site. Find them all to repair the timeline.</span></div>
     <ol class="anoms" id="anomList"></ol>
   </section>
 </main>
@@ -133,7 +164,7 @@
     <a href="https://www.twitch.tv/buffadamus" target="_blank" rel="noopener">Twitch</a>
   </nav>
   <p class="fine">Buffadamus is a parody character. He is not Warren Buffett, not Nostradamus, and not financial advice. His time machine is also not real. Probably.</p>
-  <p class="fine">hello@buffadamus.com <button id="termBtn" class="tiny" aria-label="Open the terminal">&gt;_</button></p>
+  <p class="fine">hello@buffadamus.com <button id="termBtn" class="tiny" aria-label="Open the terminal">&gt;_</button> <button id="arcadeBtn" class="tiny cab" aria-label="Arcade cabinet. Insert coin."><svg viewBox="0 0 12 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="currentColor" d="M2 0h8v2H2zM1 2h10v14H1z"/><path fill="#06070c" d="M3 3h6v5H3zM3 10h2v2H3zM7 10h1v1H7zM9 11h1v1H9z"/></svg></button></p>
 </footer>
 
 <div id="term" role="dialog" aria-label="Chrono terminal" hidden>
@@ -143,9 +174,17 @@
 </div>
 
 <button id="hotdog" type="button" aria-label="A hot dog drifting through time. Catch it." hidden><svg viewBox="0 0 120 56" aria-hidden="true"><rect x="6" y="20" width="108" height="30" rx="15" fill="#e2a55a"/><rect x="2" y="14" width="116" height="20" rx="10" fill="#b8432f"/><path d="M14 22 q8 -8 16 0 t16 0 t16 0 t16 0 t16 0 t16 0" fill="none" stroke="#ffd23f" stroke-width="4" stroke-linecap="round"/><rect x="10" y="30" width="100" height="18" rx="9" fill="#f0bd73"/><text x="60" y="45" text-anchor="middle" font-family="monospace" font-weight="700" font-size="12" fill="#5a3412">$1.50</text></svg></button>
+<div id="arcade" role="dialog" aria-label="Arcade: Escape 2026" hidden>
+  <div class="cabinet">
+    <div class="marquee">ESCAPE 2026</div>
+    <div class="screen"><canvas id="game" width="320" height="400"></canvas><div class="ghud"><span id="gScore">0</span><span id="gTime">60</span><span id="gLives">&#9829;&#9829;&#9829;</span></div><div class="gmsg" id="gMsg"><b>ESCAPE 2026</b><p>Dodge the crash years. Grab the parts.<br>Survive 60 seconds.</p><button class="btn" id="gStart" type="button">Insert coin</button><p class="hs">HIGH SCORE <span id="gHigh">0</span></p></div></div>
+    <div class="pad"><button id="gLeft" type="button" aria-label="Left">&#9664;</button><button id="gClose" type="button" class="ghost">Exit</button><button id="gRight" type="button" aria-label="Right">&#9654;</button></div>
+  </div>
+</div>
+<div id="hud" aria-hidden="true"><i class="c tl"></i><i class="c tr"></i><i class="c bl"></i><i class="c br"></i><div class="hud-top"><span>PLAYER ONE</span><span id="hudXp">XP 0</span><span id="hudKeys">KEYS 0/3</span></div><div class="hud-bot">QUEST: GET BACK TO 1555 &middot; ESC TO TAKE OFF THE SHADES</div></div>
 <div id="toast" class="toast" role="status" hidden></div>
 <div id="flash" aria-hidden="true"></div>
 
-<script src="app.js?v=8" defer></script>
+<script src="app.js?v=9" defer></script>
 </body>
 </html>

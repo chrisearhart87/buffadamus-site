@@ -83,9 +83,15 @@
     ['yearzero', 'Year zero', 'Dial a year that never happened.'],
     ['forever', 'Holding period: forever', 'Do nothing. Seriously. Nothing.'],
     ['witchcraft', 'Witchcraft', 'Open the witchcraft window. Say his name.'],
-    ['onhold', 'Please continue to hold', 'He has been on hold since 1556. Hold him.']
+    ['onhold', 'Please continue to hold', 'He has been on hold since 1556. Hold him.'],
+    ['recipe', 'Original recipe', 'Build the first machine he ever built.'],
+    ['shades', 'Player one', 'Some people can see the game. Put something on his face.'],
+    ['highscore', 'High score', 'Score 1555 in the machine that eats quarters.'],
+    ['gate', 'The gate', 'Find all three keys.'],
+    ['rabbit', 'Down the rabbit hole', 'Follow the white rabbit. It does not stay put.'],
+    ['guestbook', 'Sign my guestbook', 'Leave a note in 1999.']
   ];
-  const WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty', 'Twenty-one', 'Twenty-two', 'Twenty-three', 'Twenty-four', 'Twenty-five'];
+  const WORDS = ['Zero', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty', 'Twenty-one', 'Twenty-two', 'Twenty-three', 'Twenty-four', 'Twenty-five', 'Twenty-six', 'Twenty-seven', 'Twenty-eight', 'Twenty-nine', 'Thirty'];
   $('#anomTotal').textContent = ANOMS.length;
   $('#anomHint').textContent = `${WORDS[ANOMS.length] || ANOMS.length} are hidden on this site. Find them all to repair the timeline.`;
   let found = new Set(store.get('anoms', []));
@@ -270,7 +276,7 @@
 
   function onYear(y, settled) {
     if (y === cur && (!settled || locked === y)) return;
-    const changed = y !== cur; cur = y;
+    const changed = y !== cur; cur = y; copperCheck(y, settled);
     if (changed) {
       if (!anim && !booting) beep(180 + (y - MIN) * 1.1, .015, 'sawtooth', .008);
       if (+yr.value !== y) yr.value = y;
@@ -599,6 +605,10 @@
     else if (/(matrix|red pill|blue pill|neo|spoon)/.test(q)) a = 'There is no spoon. There is also no warranty. Ask the terminal about pills.';
     else if (/(wen moon|to the moon|wen lambo|lambo)/.test(q)) a = 'The moon was 1969. Check the dial. You missed it by a little.';
     else if (/stonks/.test(q)) a = 'Stonks only go up. In exactly one timeline. Not this one.';
+    else if (/(sunglasses|shades)/.test(q)) { a = 'Put them on him. You will see what he sees.'; toggleShades(true); }
+    else if (/time machine/.test(q)) a = 'Build one in the workshop. Then send it to me. The DeLorean and the hot tub did not work.';
+    else if (/\bkeys?\b|gate/.test(q)) a = 'Three keys. Copper, jade, crystal. The gate does not take cards.';
+    else if (/white rabbit|rabbit/.test(q)) a = 'It hides in corners. It does not like being looked at directly.';
     else if (/(skynet|terminator|judgment day)/.test(q)) a = 'August 29, 1997. Tune there. The machines were very relaxed about it.';
     else if (/(wargames|joshua|tic.?tac.?toe|global thermonuclear)/.test(q)) a = 'A strange game. The terminal still remembers his name.';
     else { let i; do { i = (Math.random() * ANS.length) | 0; } while (i === lastA); lastA = i; a = ANS[i]; }
@@ -650,6 +660,7 @@
     if (e.key.length === 1) {
       typed = (typed + e.key.toLowerCase()).slice(-20);
       if (typed.endsWith('barrel roll')) barrelRoll();
+      if (typed.endsWith('sunglasses') || typed.endsWith('shades')) toggleShades();
       if (typed.endsWith('great scott')) { flash(); say('<b>GREAT SCOTT.</b> Wrong movie, right energy. Try 1955, 1985, 2015.'); }
       if (typed.endsWith('hello friend')) say('Hello, friend. <b>ls -a</b>');
       if (typed.endsWith('1555')) { unlock('origin'); say('<b>ORIGIN PING.</b> 1555 answers: "who is this".'); }
@@ -719,7 +730,7 @@
     else if (c === '1555') { unlock('origin'); r = 'origin ping returned: "who is this"'; }
     else if (c === 'buffett') { unlock('oracle'); r = 'rule no. 1: never lose money. rule no. 2: never trust a time machine.'; }
     else if (c.startsWith('rm ')) r = 'nice try. the timeline is read-only.';
-    else r = 'command not found. it may not be invented yet.';
+    else { const x = termExtra(c); r = x === undefined ? 'command not found. it may not be invented yet.' : x; }
     if (r) tprint(r);
     beep(700, .03);
   });
@@ -766,6 +777,282 @@
     say('<b>RULE NO. 3:</b> our favorite holding period is forever. You held for 75 seconds. Close enough.', 4200);
     setTimeout(() => unlock('forever'), 4300);
   }, 5000);
+
+  // ================= v10: workshop, three keys, arcade, shades, rabbit =================
+  var v10 = false;
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  // ---------- time machine workshop ----------
+  const PARTS = [
+    ['delorean', '\u{1F697}', 'DeLorean'], ['hottub', '\u{1F6C1}', 'Hot tub'], ['booth', '☎️', 'Phone booth'],
+    ['box', '\u{1F7E6}', 'Blue police box'], ['astrolabe', '\u{1F9ED}', 'Astrolabe'], ['candles', '\u{1F56F}️', 'Two candles'],
+    ['confidence', '\u{1F4AA}', 'Confidence'], ['lightning', '⚡', '1.21 gigawatts'], ['microwave', '\u{1F372}', 'Microwave'],
+    ['goat', '\u{1F410}', 'Goat'], ['hotdog', '\u{1F32D}', '$1.50 hot dog'], ['fax', '\u{1F4E0}', 'Fax machine'],
+    ['fridge', '\u{1F9CA}', 'Lead-lined fridge'], ['cat', '\u{1F408}‍⬛', 'Black cat']
+  ];
+  const PART = Object.fromEntries(PARTS.map(p => [p[0], p]));
+  const partsEl = $('#parts'), slotsEl = $('#slots'), rigEl = $('#rig');
+  let rig = [null, null, null], lastRig = null;
+  partsEl.innerHTML = PARTS.map(([id, ic, name]) => `<button type="button" class="part" role="listitem" draggable="true" data-part="${id}"><span class="ic" aria-hidden="true">${ic}</span>${esc(name)}</button>`).join('');
+  function paintRig() {
+    slotsEl.innerHTML = rig.map((id, i) => id
+      ? `<button type="button" class="slot full" data-i="${i}" aria-label="Remove ${esc(PART[id][2])}"><span class="ic" aria-hidden="true">${PART[id][1]}</span>${esc(PART[id][2])}</button>`
+      : `<button type="button" class="slot" data-i="${i}" aria-label="Empty slot">EMPTY<br>SLOT ${i + 1}</button>`).join('');
+    partsEl.querySelectorAll('.part').forEach(b => b.classList.toggle('used', rig.includes(b.dataset.part)));
+  }
+  function addPart(id, at) {
+    if (rig.includes(id)) { rig[rig.indexOf(id)] = null; paintRig(); return; }
+    const i = at != null ? at : rig.indexOf(null);
+    if (i < 0) { say('Three parts max. He is building a time machine, not a garage.'); return; }
+    rig[i] = id; beep(500 + i * 120, .05, 'triangle', .03); paintRig();
+  }
+  partsEl.addEventListener('click', e => { const b = e.target.closest('.part'); if (b) addPart(b.dataset.part); });
+  partsEl.addEventListener('dragstart', e => { const b = e.target.closest('.part'); if (b) e.dataTransfer.setData('text/plain', b.dataset.part); });
+  slotsEl.addEventListener('click', e => { const b = e.target.closest('.slot'); if (b && rig[+b.dataset.i]) { rig[+b.dataset.i] = null; paintRig(); } });
+  slotsEl.addEventListener('dragover', e => { const b = e.target.closest('.slot'); if (b) { e.preventDefault(); b.classList.add('over'); } });
+  slotsEl.addEventListener('dragleave', e => { const b = e.target.closest('.slot'); if (b) b.classList.remove('over'); });
+  slotsEl.addEventListener('drop', e => { const b = e.target.closest('.slot'); if (!b) return; e.preventDefault(); const id = e.dataTransfer.getData('text/plain'); if (PART[id]) { if (rig.includes(id)) rig[rig.indexOf(id)] = null; addPart(id, +b.dataset.i); } });
+  $('#clearRig').onclick = () => { rig = [null, null, null]; paintRig(); };
+  const hashStr = s => { let h = 2166136261; for (const c of s) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
+  function machineResult(set) {
+    const has = id => set.includes(id), key = [...set].sort().join('+');
+    if (key === 'astrolabe+candles+confidence') return [1555, 'ORIGINAL RECIPE. The exact machine he built in 1555.\nYou arrive in 1555 for one second. Then the warranty expires again.', 'recipe'];
+    if (has('goat')) return [2026, 'The goat refuses. You stay in 2026.\nThe goat is now in charge of the workshop.'];
+    if (has('hotdog') && has('delorean')) return [1985, 'You land in 1985. The hot dog is still $1.50.\nYou decide this is close enough.'];
+    if (has('delorean') && has('lightning')) return [1955, 'November 12, 10:04 PM. A clock tower gets struck by lightning.\nYou were aiming for 1555. Close. Wrong digit.'];
+    if (has('hottub')) return [1986, 'You arrive in 1986 with three friends, a headache and no memory of the trip.'];
+    if (has('booth')) return [1988, 'You land in the middle of a history report. It goes most excellently.\nThe phone booth wants its quarter back.'];
+    if (has('box')) return [2077, 'Bigger on the inside. So is the rent.\nYou arrive in 2077 and still cannot afford it.'];
+    if (has('fridge')) return [1957, 'You survive. Nobody knows how. Least of all the fridge.'];
+    if (has('cat')) return [new Date().getFullYear(), 'You see the same black cat twice.\nDeja vu. You arrive exactly where you started. Someone changed something.'];
+    if (has('fax')) return [1997, 'You arrive in 1997 in three pieces, slightly blurry, with a cover sheet.'];
+    if (has('microwave')) return [new Date().getFullYear(), 'You arrive 30 seconds later.\nStill cold in the middle.'];
+    if (has('hotdog')) return [1985, 'Runs forever on $1.50. Only goes to 1985. Never leaves.'];
+    if (has('confidence') && set.length === 1) return [1999, 'Confidence alone gets you to 1999.\nIt got everybody to 1999.'];
+    if (has('lightning')) return [2008, 'Too much power. You arrive everywhen at once.\nMostly 2008. Sorry.'];
+    const h = hashStr(key), y = 1556 + (h % 543);
+    const how = ['sideways', 'upside down', 'two days early', 'in a fountain', 'during a meeting', 'mid-sneeze'][h % 6];
+    return [y, `You arrive in ${y}, ${how}.\nThe ${PART[set[h % set.length]][2].toLowerCase()} did most of the work.`];
+  }
+  $('#launch').onclick = () => {
+    const set = rig.filter(Boolean);
+    if (!set.length) { scramble($('#rigLine'), 'Add a part. Even he needed candles.', 10); return; }
+    const [y, line, an] = machineResult(set);
+    lastRig = { set, y, line };
+    rigEl.classList.remove('go'); void rigEl.offsetWidth; rigEl.classList.add('go');
+    sweep(120, 1600, .6, 'sawtooth', .025); fx.warp = 1;
+    $('#rigAct').hidden = true;
+    const yb = $('#rigYear'); let n = 0;
+    const roll = setInterval(() => { yb.textContent = 1555 + ((Math.random() * 545) | 0); if (++n > 12 || reduce) { clearInterval(roll); yb.textContent = y; flash(); scramble($('#rigLine'), line, 10); $('#rigAct').hidden = false; if (an) setTimeout(() => unlock(an), 1600); } }, 60);
+  };
+  $('#rigShare').onclick = () => {
+    if (!lastRig) return;
+    let t = `I built @Buffadamus a time machine: ${lastRig.set.map(id => PART[id][2]).join(' + ')}.\nResult: ${lastRig.line.replace(/\n/g, ' ')}`;
+    if (t.length > 230) t = t.slice(0, 227) + '...';
+    window.open('https://x.com/intent/post?text=' + encodeURIComponent(t + '\n#TimeMachineTips') + '&url=' + encodeURIComponent('https://buffadamus.com/#workshop'), '_blank', 'noopener');
+  };
+  $('#rigTune').onclick = () => { if (!lastRig) return; $('#dial').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); setTimeout(() => jumpTo(lastRig.y), reduce ? 0 : 500); };
+  paintRig();
+
+  // ---------- the three keys + the gate ----------
+  const KEYS = ['copper', 'jade', 'crystal'];
+  let keys = new Set(store.get('keys', []).filter(k => KEYS.includes(k)));
+  function paintKeys(opening) {
+    document.querySelectorAll('.key').forEach(k => k.classList.toggle('got', keys.has(k.dataset.key)));
+    $('#hudKeys').textContent = `KEYS ${keys.size}/3`;
+    $('#doorLbl').textContent = `LOCKED. ${keys.size} OF 3 KEYS.`;
+    if (keys.size === 3) {
+      let code = store.get('escCode', null);
+      if (!code) { const r = new Uint32Array(1); (crypto.getRandomValues ? crypto.getRandomValues(r) : (r[0] = Math.random() * 4294967295)); code = 'BFD-' + (r[0] >>> 0).toString(16).toUpperCase().padStart(8, '0').replace(/(.{4})/, '$1-'); store.set('escCode', code); }
+      $('#escCode').textContent = code;
+      const d = $('#door');
+      if (opening && !reduce) setTimeout(() => d.classList.add('open'), 400); else d.classList.add('open');
+    }
+  }
+  function grantKey(k) {
+    if (keys.has(k)) return;
+    keys.add(k); store.set('keys', [...keys]);
+    const name = k[0].toUpperCase() + k.slice(1);
+    flash(); beep(660, .1, 'triangle', .05); setTimeout(() => beep(990, .16, 'triangle', .05), 110);
+    say(`<b>${name.toUpperCase()} KEY.</b> ${keys.size} of 3. The gate to 1555 heard that.`, 4000);
+    paintKeys(true);
+    if (keys.size === 3) setTimeout(() => { $('#gate').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); sweep(80, 900, 1.4, 'sawtooth', .03); unlock('gate'); }, 2200);
+  }
+  $('#gateShare').onclick = () => {
+    const code = $('#escCode').textContent;
+    window.open('https://x.com/intent/post?text=' + encodeURIComponent(`I found all three keys on buffadamus.com and opened the gate to 1555.\nEscape code: ${code}\n@Buffadamus`) + '&url=' + encodeURIComponent('https://buffadamus.com/#gate'), '_blank', 'noopener');
+  };
+  $('#gateCopy').onclick = () => { const c = $('#escCode').textContent; (navigator.clipboard ? navigator.clipboard.writeText(c) : Promise.reject()).then(() => say('Copied: <b>' + c + '</b>'), () => say(c, 6000)); };
+  // copper: tune to 20 + the current minute, in that minute
+  let copperT = 0;
+  function copperCheck(y, settled) {
+    if (!v10) return;
+    clearTimeout(copperT);
+    if (keys.has('copper') || y !== 2000 + new Date().getMinutes()) return;
+    copperT = setTimeout(() => { if (cur === y && !anim && y === 2000 + new Date().getMinutes()) { setState('KEY', 'anom'); body.textContent = 'A copper key falls out of the static.\nThe clock and the dial agree, for one minute.'; grantKey('copper'); } }, settled ? 350 : 900);
+  }
+  // jade: three riddles in the terminal
+  const RIDDLES = [
+    ['I have hands but hold nothing, a face but never smile, and I run all day without legs.', /^(a )?clocks?$/],
+    ['I bloomed in 1637 and cost more than a canal house. By spring I was worth nothing.', /^(a )?tulips?( bulbs?)?$/],
+    ['I expired in 1556 and nobody has renewed me since.', /^(the |a )?warrant(y|ies)$/]
+  ];
+  function termExtra(c) {
+    let st = store.get('jade', 0);
+    if (c === 'riddle' || c === 'riddles') {
+      if (keys.has('jade')) return 'you already hold the jade key. the terminal has no more riddles. it is a little sad about it.';
+      return `riddle ${st + 1} of 3:\n${RIDDLES[st][0]}\nreply with: answer <word>`;
+    }
+    if (c.startsWith('answer ')) {
+      if (keys.has('jade')) return 'the jade key is already yours.';
+      const a = c.slice(7).trim();
+      if (!RIDDLES[st][1].test(a)) { beep(140, .2, 'square', .03); return 'wrong. the terminal sighs in binary. type riddle to hear it again.'; }
+      st++; store.set('jade', st);
+      if (st >= 3) { grantKey('jade'); return 'correct. a jade key slides out of the disk drive.'; }
+      return `correct.\nriddle ${st + 1} of 3:\n${RIDDLES[st][0]}`;
+    }
+    if (c === 'arcade' || c === 'insert coin') { toggleTerm(false); openArcade(); return null; }
+    if (c === 'sunglasses' || c === 'shades') { toggleShades(); return document.body.classList.contains('shades') ? 'you put on the shades. you can see the game now.' : 'shades off.'; }
+    if (c === 'keys') return KEYS.map(k => (keys.has(k) ? '[x] ' : '[ ] ') + k).join('\n');
+    if (c === 'follow the white rabbit' || c === 'white rabbit') return 'it does not come when called. watch the corners.';
+    return undefined;
+  }
+
+  // ---------- arcade: Escape 2026 ----------
+  const arc = $('#arcade'), cv2 = $('#game'), gx = cv2.getContext('2d');
+  const GW = 320, GH = 400;
+  let game = null, gRaf = 0, keysDown = { l: false, r: false };
+  $('#gHigh').textContent = store.get('high', 0);
+  function openArcade() { arc.hidden = false; $('#gMsg').hidden = false; $('#gStart').focus(); drawIdle(); }
+  function closeArcade() { arc.hidden = true; stopGame(); $('#arcadeBtn').focus(); }
+  $('#arcadeBtn').onclick = openArcade;
+  $('#gClose').onclick = closeArcade;
+  arc.addEventListener('click', e => { if (e.target === arc) closeArcade(); });
+  function drawIdle() {
+    gx.fillStyle = '#05030c'; gx.fillRect(0, 0, GW, GH);
+    for (let i = 0; i < 60; i++) { gx.fillStyle = i % 3 ? '#2a2050' : '#4df3e6'; gx.fillRect((i * 97) % GW, (i * 53) % GH, 2, 2); }
+  }
+  const CRASH = ['1929', '1637', '1720', '1987', '2000', '2008', 'Y2K', '2038'];
+  const PICK = [['⚙', '#4df3e6', 100], ['⚡', '#ffb547', 100], ['\u{1F32D}', '#ff7a59', 150]];
+  function startGame() {
+    $('#gMsg').hidden = true; stopGame();
+    game = { x: GW / 2, items: [], t0: performance.now(), last: performance.now(), spawn: 0, score: 0, lives: 3, hurt: 0, over: false, won: false, stars: Array.from({ length: 50 }, (_, i) => ({ x: (i * 97) % GW, y: (i * 53) % GH, s: 1 + (i % 3) })) };
+    beep(880, .08, 'square', .04); setTimeout(() => beep(1320, .1, 'square', .04), 90);
+    gRaf = requestAnimationFrame(tick);
+  }
+  function stopGame() { cancelAnimationFrame(gRaf); gRaf = 0; }
+  function endGame(won) {
+    game.over = true; stopGame();
+    const sc = Math.round(game.score), hi = Math.max(sc, store.get('high', 0)); store.set('high', hi); $('#gHigh').textContent = hi;
+    const m = $('#gMsg'); m.hidden = false;
+    m.querySelector('b').textContent = won ? 'ESCAPED' : 'GAME OVER';
+    m.querySelector('p').innerHTML = won ? `Score ${sc}. You escaped 2026 for 0.4 seconds.<br>Something shiny is stuck in the coin slot.` : `Score ${sc}. Crushed by ${game.killer || 'history'}.<br>Survive 60 seconds to escape.`;
+    $('#gStart').textContent = 'Play again';
+    if (won) { grantKey('crystal'); }
+    if (sc >= 1555) setTimeout(() => unlock('highscore'), won ? 4200 : 300);
+  }
+  function tick(now) {
+    const g = game; if (!g || g.over) return;
+    const dt = Math.min(50, now - g.last) / 1000; g.last = now;
+    const el = (now - g.t0) / 1000, left = Math.max(0, 60 - el), speed = 110 + el * 3.6;
+    if (keysDown.l) g.x -= 230 * dt; if (keysDown.r) g.x += 230 * dt; g.x = Math.max(16, Math.min(GW - 16, g.x));
+    g.spawn -= dt;
+    if (g.spawn <= 0) {
+      g.spawn = Math.max(.3, .66 - el * .006);
+      const bad = Math.random() < .56;
+      g.items.push(bad ? { bad: true, x: 20 + Math.random() * (GW - 40), y: -20, w: 44, t: CRASH[(Math.random() * CRASH.length) | 0] } : { bad: false, x: 14 + Math.random() * (GW - 28), y: -16, p: PICK[Math.random() < .15 ? 2 : (Math.random() * 2) | 0] });
+    }
+    g.score += dt * 10;
+    // draw
+    gx.fillStyle = '#05030c'; gx.fillRect(0, 0, GW, GH);
+    for (const s of g.stars) { s.y += s.s * speed * dt * .25; if (s.y > GH) s.y = 0; gx.fillStyle = s.s === 3 ? '#4df3e6' : '#3a2f6a'; gx.fillRect(s.x, s.y, s.s, s.s * 2); }
+    gx.font = 'bold 14px monospace'; gx.textAlign = 'center'; gx.textBaseline = 'middle';
+    const py = GH - 34;
+    for (const it of g.items) {
+      it.y += speed * dt;
+      if (it.bad) { gx.fillStyle = '#ff3d8b'; gx.fillRect(it.x - it.w / 2, it.y - 10, it.w, 20); gx.fillStyle = '#05030c'; gx.fillText(it.t, it.x, it.y + 1); }
+      else { gx.font = '20px serif'; gx.fillText(it.p[0], it.x, it.y); gx.font = 'bold 14px monospace'; }
+      const hit = it.bad ? Math.abs(it.x - g.x) < it.w / 2 + 12 && Math.abs(it.y - py) < 20 : Math.abs(it.x - g.x) < 22 && Math.abs(it.y - py) < 22;
+      if (hit && !it.gone) {
+        it.gone = true;
+        if (it.bad) { if (g.hurt <= 0) { g.lives--; g.hurt = 1; g.killer = it.t; beep(110, .25, 'sawtooth', .05); if (g.lives <= 0) { drawShip(g, py); return endGame(false); } } }
+        else { g.score += it.p[2]; beep(1200, .05, 'square', .03); }
+      }
+    }
+    g.items = g.items.filter(it => it.y < GH + 30 && !it.gone);
+    g.hurt -= dt;
+    drawShip(g, py);
+    $('#gScore').textContent = Math.round(g.score); $('#gTime').textContent = Math.ceil(left); $('#gLives').innerHTML = '&#9829;'.repeat(Math.max(0, g.lives));
+    if (left <= 0) { g.won = true; return endGame(true); }
+    gRaf = requestAnimationFrame(tick);
+  }
+  function drawShip(g, py) {
+    if (g.hurt > 0 && ((g.hurt * 10) | 0) % 2) return;
+    gx.strokeStyle = '#ffb547'; gx.lineWidth = 2; gx.beginPath(); gx.arc(g.x, py, 13, 0, Math.PI * 2); gx.stroke();
+    gx.beginPath(); gx.ellipse(g.x, py, 13, 5, .6, 0, Math.PI * 2); gx.stroke();
+    gx.fillStyle = '#4df3e6'; gx.fillRect(g.x - 3, py - 3, 6, 6);
+  }
+  $('#gStart').onclick = startGame;
+  const hold = (el, k) => { const on = e => { e.preventDefault(); keysDown[k] = true; }, off = () => { keysDown[k] = false; }; el.addEventListener('pointerdown', on); ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => el.addEventListener(ev, off)); };
+  hold($('#gLeft'), 'l'); hold($('#gRight'), 'r');
+  cv2.addEventListener('pointermove', e => { if (!game || game.over || e.pointerType === 'mouse' && !e.buttons) return; const r = cv2.getBoundingClientRect(); game.x = (e.clientX - r.left) / r.width * GW; });
+  cv2.addEventListener('pointerdown', e => { if (!game || game.over) return; const r = cv2.getBoundingClientRect(); game.x = (e.clientX - r.left) / r.width * GW; });
+  addEventListener('keydown', e => {
+    if (arc.hidden) return;
+    if (e.key === 'Escape') { closeArcade(); return; }
+    if (['ArrowLeft', 'a', 'A'].includes(e.key)) { keysDown.l = true; e.preventDefault(); }
+    if (['ArrowRight', 'd', 'D'].includes(e.key)) { keysDown.r = true; e.preventDefault(); }
+    if ((e.key === ' ' || e.key === 'Enter') && (!game || game.over) && document.activeElement !== $('#gClose')) { e.preventDefault(); startGame(); }
+  });
+  addEventListener('keyup', e => { if (['ArrowLeft', 'a', 'A'].includes(e.key)) keysDown.l = false; if (['ArrowRight', 'd', 'D'].includes(e.key)) keysDown.r = false; });
+  document.addEventListener('visibilitychange', () => { if (document.hidden && game && !game.over) { stopGame(); game.over = true; $('#gMsg').hidden = false; $('#gMsg').querySelector('b').textContent = 'PAUSED'; $('#gMsg').querySelector('p').textContent = 'You looked away. History did not.'; $('#gStart').textContent = 'Start over'; } });
+
+  // ---------- shades (player one mode) ----------
+  const LOOT = [
+    ['#dial', 'Copper turns at 20 + the minute on your clock.', 'left:12px;bottom:12px'],
+    ['#workshop', 'His first machine: astrolabe, two candles, confidence.', 'right:12px;top:12px'],
+    ['#ask', 'The terminal answers to: riddle', 'right:12px;top:12px'],
+    ['#gate', 'Crystal: survive 60 seconds in the cabinet below.', 'left:12px;top:12px'],
+    ['#anomalies', 'A white rabbit hides in a corner. It moves.', 'right:12px;top:12px']
+  ];
+  let xp = store.get('xp', 0), lootTaken = new Set(store.get('loot', []));
+  LOOT.forEach(([sel, hint, pos], i) => {
+    const sec = $(sel); if (!sec) return;
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'loot' + (lootTaken.has(i) ? ' taken' : ''); b.style.cssText = pos; b.textContent = '+100 XP';
+    b.onclick = () => { lootTaken.add(i); store.set('loot', [...lootTaken]); xp += 100; store.set('xp', xp); $('#hudXp').textContent = 'XP ' + xp; b.classList.add('taken'); beep(1400, .06, 'square', .04); say('<b>LOOT:</b> ' + esc(hint), 5000); };
+    sec.appendChild(b);
+  });
+  const npc = document.createElement('span'); npc.className = 'npc'; npc.textContent = 'NPC: BUFFADAMUS  LVL 471  STATUS: STUCK'; $('#face').appendChild(npc);
+  $('#hudXp').textContent = 'XP ' + xp;
+  function toggleShades(force) {
+    const on = document.body.classList.toggle('shades', force);
+    document.querySelectorAll('#wheel, #parts, .door, #askForm, #anomList').forEach(el => el.classList.toggle('tagged', on));
+    if (on) { flash(); sweep(300, 1200, .35, 'square', .02); say('<b>SHADES ON.</b> You can see the game now. Look for loot. Esc takes them off.', 4200); unlock('shades'); }
+  }
+  $('#shadesBtn').onclick = () => toggleShades();
+  addEventListener('keydown', e => { if (e.key === 'Escape' && document.body.classList.contains('shades') && arc.hidden && term.hidden) toggleShades(false); });
+
+  // ---------- follow the white rabbit ----------
+  const SPOTS = [['#dial', 'right:0;top:74px'], ['#intercepts', 'right:4px;top:70px'], ['.foot', 'left:12px;bottom:12px']];
+  const RABBIT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 1c1.4 0 2 2.6 2 6l-.1 1.3C10.6 8.1 11.3 8 12 8s1.4.1 2.1.3L14 7c0-3.4.6-6 2-6s1.5 3.5.6 7.2C18.6 9.6 20 12 20 14.6 20 19 16.4 22 12 22s-8-3-8-7.4c0-2.6 1.4-5 3.4-6.4C6.5 4.5 6.6 1 8 1zm1.8 13.2a1.1 1.1 0 1 0 0-2.2 1.1 1.1 0 0 0 0 2.2zm4.4 0a1.1 1.1 0 1 0 0-2.2 1.1 1.1 0 0 0 0 2.2zM12 17.6c.8 0 1.4-.4 1.4-.9s-.6-.7-1.4-.7-1.4.2-1.4.7.6.9 1.4.9z"/></svg>';
+  let rStage = Math.min(2, store.get('rabbitStage', 0)), rEl = null;
+  function placeRabbit() {
+    if (rEl) rEl.remove();
+    const [sel, pos] = SPOTS[rStage], host = $(sel); if (!host) return;
+    if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
+    rEl = document.createElement('button'); rEl.type = 'button'; rEl.className = 'rabbit'; rEl.style.cssText = pos; rEl.setAttribute('aria-label', 'A white rabbit'); rEl.innerHTML = RABBIT;
+    rEl.onclick = () => {
+      rEl.classList.add('hop'); beep(900, .05, 'triangle', .03);
+      if (rStage < 2) { rStage++; store.set('rabbitStage', rStage); say(`The rabbit runs. <b>${rStage}/3</b>`, 2200); setTimeout(placeRabbit, 550); }
+      else { say('<b>Knock, knock.</b>', 1600); flash(); setTimeout(() => { location.href = '1999.html'; }, 1300); }
+    };
+    host.appendChild(rEl);
+  }
+  placeRabbit();
+  if (store.get('rabbit', false)) unlock('rabbit');
+  if (store.get('guestbook', false)) unlock('guestbook');
+  paintKeys(false);
+  v10 = true;
 
   // ---------- console egg ----------
   try {
