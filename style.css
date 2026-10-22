@@ -444,7 +444,7 @@ body.shades .panel{position:relative}
 @media (hover:hover) and (pointer:fine){ .padhint .pk{display:inline} }
 
 /* ===== v18: phone, pills, wonderland, shades extras ===== */
-#phone{position:absolute;left:0;bottom:-8px;width:30px;height:30px;padding:4px;border:0;background:none;color:var(--mute);opacity:.3;cursor:pointer;z-index:4}
+#phone{position:relative;display:inline-flex;align-self:center;vertical-align:middle;width:24px;height:24px;padding:3px;border:0;background:none;color:var(--mute);opacity:.3;cursor:pointer}
 #phone svg{display:block;width:100%;height:100%}
 #phone:hover{opacity:.9}
 #phone.ringing{opacity:1;color:#46ff8c;filter:drop-shadow(0 0 8px rgba(70,255,140,.8));animation:ring .16s linear infinite}
@@ -496,3 +496,21 @@ body.shades .coin{display:flex;align-items:center;justify-content:center;positio
 @keyframes coin{0%,100%{transform:scaleX(1)}50%{transform:scaleX(.15)}}
 @media (prefers-reduced-motion:reduce){ .cat,.agent,#phone.ringing,body.shades .coin,#bluetick span{animation:none} .cat{left:20px} }
 @media (max-width:560px){ #hudFps,#hudPos{display:none} }
+
+/* v20 shades floaters */
+#floaters{position:fixed;inset:0;z-index:59;pointer-events:none;overflow:hidden;display:none}
+body.shades #floaters{display:block}
+.fl{position:absolute;left:0;top:0;padding:0;border:0;background:none;cursor:pointer;pointer-events:auto;filter:drop-shadow(0 0 6px rgba(255,210,63,.55)) drop-shadow(0 2px 0 rgba(0,0,0,.6));will-change:transform}
+.fl svg{display:block;width:100%;height:auto;image-rendering:pixelated}
+.fl::after{content:"";position:absolute;inset:-8px}
+.fl-coin svg{animation:coin 1s linear infinite}
+.fl-star svg{animation:starglow .5s steps(2) infinite}
+@keyframes starglow{50%{filter:brightness(1.4) hue-rotate(-20deg)}}
+.fl.got{pointer-events:none}
+.fl.got svg{animation:got .38s ease-out forwards}
+@keyframes got{to{transform:translateY(-34px) scale(1.6);opacity:0}}
+.hero .face{transition:scale .45s cubic-bezier(.3,1.5,.5,1)}
+body.grown .hero .face{scale:1.18}
+body.starman main,body.starman .bar{animation:starman .6s linear infinite}
+@keyframes starman{to{filter:hue-rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){ .fl-coin svg,.fl-star svg,body.starman main,body.starman .bar{animation:none} }

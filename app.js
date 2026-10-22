@@ -1970,7 +1970,7 @@
   // ---------- the phone: red pill or blue pill ----------
   const PHONE = '<svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true"><path fill="currentColor" d="M2 3h12v3h-3V5H5v1H2zM4 7h8l2 7H2zM6 9h1v1H6zM9 9h1v1H9zM6 11h1v1H6zM9 11h1v1H9zM7.5 10h1v1h-1z"/></svg>';
   const phone = document.createElement('button'); phone.type = 'button'; phone.id = 'phone'; phone.setAttribute('aria-label', 'An old phone. It rings sometimes.'); phone.innerHTML = PHONE;
-  $('.hero').appendChild(phone);
+  $('.foot .social').appendChild(phone);
   const pillDlg = document.createElement('div'); pillDlg.id = 'pills'; pillDlg.hidden = true; pillDlg.setAttribute('role', 'dialog'); pillDlg.setAttribute('aria-label', 'Choose a pill');
   pillDlg.innerHTML = '<div class="pillbox"><p class="pk">INCOMING CALL &middot; ORIGIN UNKNOWN &middot; 1999</p><p class="pq" id="pillText"></p><div class="pillrow"><button class="pill red" type="button" data-p="red"><i></i><span>RED</span></button><button class="pill blue" type="button" data-p="blue"><i></i><span>BLUE</span></button></div><button class="ghost" type="button" id="pillHang">Hang up</button></div>';
   document.body.appendChild(pillDlg);
@@ -2066,6 +2066,73 @@
   if (coins.size >= 5) unlock('sidequest');
   const hudTop = $('.hud-top'); hudTop.insertAdjacentHTML('beforeend', '<span id="hudFps">FPS --</span><span id="hudPos">X 0 Y 0</span>');
   addEventListener('pointermove', e => { if (document.body.classList.contains('shades')) $('#hudPos').textContent = `X ${Math.round(e.pageX)} Y ${Math.round(e.pageY)}`; }, { passive: true });
+  // ---------- shades: floating power-ups ----------
+  const PX = (w, h, body) => `<svg viewBox="0 0 ${w} ${h}" shape-rendering="crispEdges" aria-hidden="true">${body}</svg>`;
+  const SPR = {
+    coin: PX(10, 12, '<path fill="#7a5a10" d="M3 0h4v1h1v1h1v8H8v1H7v1H3v-1H2v-1H1V2h1V1h1z"/><path fill="#ffd23f" d="M3 1h4v1h1v8H7v1H3v-1H2V2h1z"/><path fill="#fff6c0" d="M3 2h1v7H3z"/><path fill="#c9a227" d="M5 3h1v6H5z"/>'),
+    dog: PX(16, 8, '<path fill="#5a3412" d="M2 1h12v1h1v4h-1v1H2V6H1V2h1z"/><path fill="#f0bd73" d="M2 2h12v4H2z"/><path fill="#b8432f" d="M1 3h14v2H1z"/><path fill="#ffd23f" d="M3 3h1v1H3zM5 4h1v1H5zM7 3h1v1H7zM9 4h1v1H9zM11 3h1v1h-1z"/>'),
+    shroom: PX(14, 14, '<path fill="#1a1a1a" d="M4 0h6v1h2v1h1v2h1v4h-1v1H1V8H0V4h1V2h1V1h2zM3 9h8v4h-1v1H4v-1H3z"/><path fill="#c9a227" d="M4 1h6v1h2v2h1v4H1V4h1V2h2z"/><path fill="#4ddf5a" d="M3 3h2v2H3zM9 3h2v2H9zM6 1h2v2H6zM6 6h2v1H6z"/><path fill="#f2ead2" d="M4 9h6v4H4z"/><path fill="#c8bfa4" d="M8 9h2v4H8z"/>'),
+    star: PX(13, 13, '<path fill="#8a6a10" d="M6 0h1v3h1v1h5v1h-1v1h-1v1h-1v2h1v3h-1v1h-1v-1H8v-1H5v1H4v1H3v-1H2V9h1V7H2V6H1V5H0V4h5V3h1z"/><path fill="#ffe14a" d="M6 1h1v3h1v1h4l-1 1h-1v1H9v2h1v2H9v-1H8V9H5v1H4v1H3V9h1V7H3V6H2V5h3V4h1z"/><path fill="#fff" d="M5 5h1v2H5zM7 5h1v2H7z"/>'),
+    heart: PX(11, 10, '<path fill="#5a0a14" d="M1 0h3v1h1v1h1V1h1V0h3v1h1v4h-1v1H9v1H8v1H7v1H6v1H5V9H4V8H3V7H2V6H1V5H0V1h1z"/><path fill="#ff3d5a" d="M1 1h3v1h1v1h1V2h1V1h3v4H9v1H8v1H7v1H6v1H5V8H4V7H3V6H2V5H1z"/><path fill="#ffb0bc" d="M2 2h1v1H2z"/>'),
+    floppy: PX(12, 12, '<path fill="#111" d="M0 0h11l1 1v11H0z"/><path fill="#3a5aa6" d="M1 1h10v10H1z"/><path fill="#c8cdd4" d="M3 1h6v4H3z"/><path fill="#3a5aa6" d="M7 2h1v2H7z"/><path fill="#f4f4f4" d="M2 7h8v4H2z"/><path fill="#9aa4ac" d="M3 8h6v1H3z"/>'),
+    cherry: PX(12, 12, '<path fill="#2e7d32" d="M6 0h2v1h1v1H8v2H7v2H6V3H5V2h1zM9 1h2v1H9z"/><path fill="#5a0a14" d="M1 5h4v1h1v4H5v1H1v-1H0V6h1zM6 7h4v1h1v3h-1v1H6v-1H5V8h1z"/><path fill="#e8213a" d="M1 6h4v4H1zM6 8h4v3H6z"/><path fill="#ffb0bc" d="M2 7h1v1H2zM7 9h1v1H7z"/>'),
+    gem: PX(12, 10, '<path fill="#0a3a5a" d="M3 0h6l3 3v1l-6 6L0 4V3z"/><path fill="#4df3e6" d="M3 1h6l2 2-5 6-5-6z"/><path fill="#c8fffa" d="M3 1h3v2H1zM6 3h1v4H6z"/><path fill="#1fb8c8" d="M8 3h3l-4 5z"/>'),
+    cart: PX(12, 12, '<path fill="#111" d="M1 0h10v12H1z"/><path fill="#6a6a74" d="M2 1h8v10H2z"/><path fill="#ff3d8b" d="M3 2h6v5H3z"/><path fill="#ffd23f" d="M4 3h4v1H4zM4 5h2v1H4z"/><path fill="#c9a227" d="M3 9h1v2H3zM5 9h1v2H5zM7 9h1v2H7z"/>'),
+    key: PX(14, 7, '<path fill="#7a5a10" d="M0 1h1V0h4v1h1v1h8v3h-2v2h-1V5H9v1H8V5H6v1H5v1H1V6H0z"/><path fill="#ffd23f" d="M1 1h4v1h1v1h7v1H6v1H5v1H1zM9 4h2v1H9z"/><path fill="#5a3412" d="M2 3h2v1H2z"/>')
+  };
+  const PICKS = [ // kind, weight, size px, xp, line
+    ['coin', 46, 30, 10, null],
+    ['dog', 11, 56, 50, '<b>$1.50 HOT DOG.</b> Same price since 1985. The only stable asset left.'],
+    ['shroom', 9, 42, 75, '<b>GROWTH STOCK.</b> You got bigger. Your returns did not.'],
+    ['star', 5, 40, 150, '<b>STAR POWER.</b> Invincible for six seconds. Like a bank in 2008.'],
+    ['heart', 6, 36, 100, '<b>EXTRA LIFE.</b> Still stuck in the present day, but now twice.'],
+    ['floppy', 5, 36, 60, '<b>GAME SAVED.</b> 1.44 MB. In 1555 you saved with a quill.'],
+    ['cherry', 7, 36, 100, '<b>BONUS FRUIT.</b> 100 points. Nobody knows why fruit is worth points.'],
+    ['gem', 5, 38, 200, '<b>DIAMOND HANDS.</b> You will never sell this gem. You cannot. It is a picture.'],
+    ['cart', 3, 38, 120, '<b>MYSTERY CARTRIDGE.</b> You blow on it. It works now. Science.'],
+    ['key', 3, 48, 80, '<b>SKELETON KEY.</b> Opens nothing. Very satisfying though.']
+  ];
+  const WSUM = PICKS.reduce((a, p) => a + p[1], 0);
+  const layer = document.createElement('div'); layer.id = 'floaters'; layer.setAttribute('aria-hidden', 'true'); document.body.appendChild(layer);
+  $('#hudXp').insertAdjacentHTML('afterend', '<span id="hudCoins">COINS 0</span>');
+  let fl = [], fCoins = store.get('fcoins', 0), fSeen = new Set(store.get('fseen', []));
+  $('#hudCoins').textContent = 'COINS ' + fCoins;
+  function addXp(n) { xp += n; store.set('xp', xp); $('#hudXp').textContent = 'XP ' + xp; }
+  function spawnFloater() {
+    if (!document.body.classList.contains('shades') || document.hidden || fl.length >= 14 || !arc.hidden) return;
+    let r = Math.random() * WSUM, P = PICKS[0]; for (const p of PICKS) { r -= p[1]; if (r <= 0) { P = p; break; } }
+    const [kind, , sz] = P, el = document.createElement('button'); el.type = 'button'; el.className = 'fl fl-' + kind; el.style.width = sz + 'px'; el.innerHTML = SPR[kind]; el.tabIndex = -1;
+    const fromL = Math.random() < .5, f = { el, P, x: fromL ? -sz : innerWidth + sz, y: 90 + Math.random() * (innerHeight - 200), vx: (fromL ? 1 : -1) * (28 + Math.random() * 46), amp: 10 + Math.random() * 26, ph: Math.random() * 6, sp: 1 + Math.random() * 1.6, born: performance.now() };
+    if (reduce) { f.x = 40 + Math.random() * (innerWidth - 80); f.vx = 0; f.amp = 0; }
+    el.onclick = e => { e.stopPropagation(); grab(f); };
+    layer.appendChild(el); fl.push(f);
+  }
+  function grab(f) {
+    const [kind, , , pts, line] = f.P; f.dead = 1; f.el.classList.add('got'); setTimeout(() => f.el.remove(), 380);
+    addXp(pts); const first = !fSeen.has(kind); fSeen.add(kind); store.set('fseen', [...fSeen]);
+    if (kind === 'coin') { fCoins++; store.set('fcoins', fCoins); $('#hudCoins').textContent = 'COINS ' + fCoins; [988, 1319].forEach((q, k) => setTimeout(() => beep(q, .06, 'square', .03), k * 60));
+      if (fCoins % 100 === 0) { flash(); say(`<b>${fCoins} COINS = 1UP.</b> In this economy that buys about half a coffee.`, 4000); } else say(`COIN &middot; ${fCoins}`, 900, true); }
+    else { [523, 659, 784, 1047].forEach((q, k) => setTimeout(() => beep(q, .07, 'square', .03), k * 70)); say(line + (first ? ` &middot; <b>${fSeen.size}/${PICKS.length}</b> found` : ''), 3600); }
+    if (kind === 'shroom') { document.body.classList.add('grown'); clearTimeout(grab._g); grab._g = setTimeout(() => document.body.classList.remove('grown'), 8000); }
+    if (kind === 'star') { document.body.classList.add('starman'); clearTimeout(grab._s); grab._s = setTimeout(() => document.body.classList.remove('starman'), 6000); }
+    if (kind === 'floppy') store.set('saved', new Date().toISOString());
+    if (first && fSeen.size === PICKS.length) setTimeout(() => { flash(); addXp(1555); say('<b>COMPLETIONIST.</b> Every power-up in the present day. +1555 XP. Still no way back to 1555.', 6000); }, 1800);
+  }
+  let flLast = 0;
+  function flTick(t) {
+    const dt = Math.min(.05, (t - (flLast || t)) / 1000); flLast = t;
+    if (!document.body.classList.contains('shades')) { if (fl.length) { fl.forEach(f => f.el.remove()); fl = []; } }
+    else for (const f of fl) {
+      if (f.dead) continue;
+      f.x += f.vx * dt; const y = f.y + Math.sin((t / 1000) * f.sp + f.ph) * f.amp;
+      f.el.style.transform = `translate(${f.x}px,${y}px)`;
+      if (f.x < -120 || f.x > innerWidth + 120 || (reduce && t - f.born > 9000)) { f.dead = 1; f.el.remove(); }
+    }
+    fl = fl.filter(f => !f.dead || f.el.isConnected);
+    requestAnimationFrame(flTick);
+  }
+  requestAnimationFrame(flTick);
+  setInterval(spawnFloater, 1300);
   if (store.get('rabbit', false)) unlock('rabbit');
   if (store.get('guestbook', false)) unlock('guestbook');
   paintKeys(false);
