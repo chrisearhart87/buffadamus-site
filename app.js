@@ -85,7 +85,7 @@
     ['witchcraft', 'Witchcraft', 'Open the witchcraft window. Say his name.'],
     ['onhold', 'Please continue to hold', 'He has been on hold since 1556. Hold him.'],
     ['recipe', 'Original recipe', 'Build the first machine he ever built.'],
-    ['shades', 'Player one', 'Some people can see the game. Put something on his face.'],
+    ['shades', 'Player one', 'Bring something back from the future. Then make him wear it.'],
     ['highscore', 'High score', 'Score 1555 in the machine that eats quarters.'],
     ['gate', 'The gate', 'Find all three keys.'],
     ['rabbit', 'Down the rabbit hole', 'Follow the white rabbit. It does not stay put.'],
@@ -607,7 +607,7 @@
     else if (/(matrix|red pill|blue pill|neo|spoon)/.test(q)) a = 'There is no spoon. There is also no warranty. Ask the terminal about pills.';
     else if (/(wen moon|to the moon|wen lambo|lambo)/.test(q)) a = 'The moon was 1969. Check the dial. You missed it by a little.';
     else if (/stonks/.test(q)) a = 'Stonks only go up. In exactly one timeline. Not this one.';
-    else if (/(sunglasses|shades)/.test(q)) { a = 'Put them on him. You will see what he sees.'; toggleShades(true); }
+    else if (/(sunglasses|shades)/.test(q)) a = 'He does not own any. Yet. Things sometimes come back from the future.';
     else if (/time machine/.test(q)) a = 'Build one in the workshop. Then send it to me. The DeLorean and the hot tub did not work.';
     else if (/\bkeys?\b|gate/.test(q)) a = 'Three keys. Copper, jade, crystal. The gate does not take cards.';
     else if (/white rabbit|rabbit/.test(q)) a = 'It hides in corners. It does not like being looked at directly.';
@@ -662,7 +662,6 @@
     if (e.key.length === 1) {
       typed = (typed + e.key.toLowerCase()).slice(-20);
       if (typed.endsWith('barrel roll')) barrelRoll();
-      if (typed.endsWith('sunglasses') || typed.endsWith('shades')) toggleShades();
       if (typed.endsWith('great scott')) { flash(); say('<b>GREAT SCOTT.</b> Wrong movie, right energy. Try 1955, 1985, 2015.'); }
       if (typed.endsWith('hello friend')) say('Hello, friend. <b>ls -a</b>');
       if (typed.endsWith('1555')) { unlock('origin'); say('<b>ORIGIN PING.</b> 1555 answers: "who is this".'); }
@@ -784,77 +783,192 @@
   var v10 = false;
   const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-  // ---------- time machine workshop ----------
-  const PARTS = [
-    ['delorean', '\u{1F697}', 'DeLorean'], ['hottub', '\u{1F6C1}', 'Hot tub'], ['booth', '☎️', 'Phone booth'],
-    ['box', '\u{1F7E6}', 'Blue police box'], ['astrolabe', '\u{1F9ED}', 'Astrolabe'], ['candles', '\u{1F56F}️', 'Two candles'],
-    ['confidence', '\u{1F4AA}', 'Confidence'], ['lightning', '⚡', '1.21 gigawatts'], ['microwave', '\u{1F372}', 'Microwave'],
-    ['goat', '\u{1F410}', 'Goat'], ['hotdog', '\u{1F32D}', '$1.50 hot dog'], ['fax', '\u{1F4E0}', 'Fax machine'],
-    ['fridge', '\u{1F9CA}', 'Lead-lined fridge'], ['cat', '\u{1F408}‍⬛', 'Black cat']
-  ];
-  const PART = Object.fromEntries(PARTS.map(p => [p[0], p]));
-  const partsEl = $('#parts'), slotsEl = $('#slots'), rigEl = $('#rig');
-  let rig = [null, null, null], lastRig = null;
-  partsEl.innerHTML = PARTS.map(([id, ic, name]) => `<button type="button" class="part" role="listitem" draggable="true" data-part="${id}"><span class="ic" aria-hidden="true">${ic}</span>${esc(name)}</button>`).join('');
-  function paintRig() {
-    slotsEl.innerHTML = rig.map((id, i) => id
-      ? `<button type="button" class="slot full" data-i="${i}" aria-label="Remove ${esc(PART[id][2])}"><span class="ic" aria-hidden="true">${PART[id][1]}</span>${esc(PART[id][2])}</button>`
-      : `<button type="button" class="slot" data-i="${i}" aria-label="Empty slot">EMPTY<br>SLOT ${i + 1}</button>`).join('');
-    partsEl.querySelectorAll('.part').forEach(b => b.classList.toggle('used', rig.includes(b.dataset.part)));
-  }
-  function addPart(id, at) {
-    if (rig.includes(id)) { rig[rig.indexOf(id)] = null; paintRig(); return; }
-    const i = at != null ? at : rig.indexOf(null);
-    if (i < 0) { say('Three parts max. He is building a time machine, not a garage.'); return; }
-    rig[i] = id; beep(500 + i * 120, .05, 'triangle', .03); paintRig();
-  }
-  partsEl.addEventListener('click', e => { const b = e.target.closest('.part'); if (b) addPart(b.dataset.part); });
-  partsEl.addEventListener('dragstart', e => { const b = e.target.closest('.part'); if (b) e.dataTransfer.setData('text/plain', b.dataset.part); });
-  slotsEl.addEventListener('click', e => { const b = e.target.closest('.slot'); if (b && rig[+b.dataset.i]) { rig[+b.dataset.i] = null; paintRig(); } });
-  slotsEl.addEventListener('dragover', e => { const b = e.target.closest('.slot'); if (b) { e.preventDefault(); b.classList.add('over'); } });
-  slotsEl.addEventListener('dragleave', e => { const b = e.target.closest('.slot'); if (b) b.classList.remove('over'); });
-  slotsEl.addEventListener('drop', e => { const b = e.target.closest('.slot'); if (!b) return; e.preventDefault(); const id = e.dataTransfer.getData('text/plain'); if (PART[id]) { if (rig.includes(id)) rig[rig.indexOf(id)] = null; addPart(id, +b.dataset.i); } });
-  $('#clearRig').onclick = () => { rig = [null, null, null]; paintRig(); };
   const hashStr = s => { let h = 2166136261; for (const c of s) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
-  function machineResult(set) {
-    const has = id => set.includes(id), key = [...set].sort().join('+');
-    if (key === 'astrolabe+candles+confidence') return [1555, 'ORIGINAL RECIPE. The exact machine he built in 1555.\nYou arrive in 1555 for one second. Then the warranty expires again.', 'recipe'];
-    if (has('goat')) return [2026, 'The goat refuses. You stay in 2026.\nThe goat is now in charge of the workshop.'];
-    if (has('hotdog') && has('delorean')) return [1985, 'You land in 1985. The hot dog is still $1.50.\nYou decide this is close enough.'];
-    if (has('delorean') && has('lightning')) return [1955, 'November 12, 10:04 PM. A clock tower gets struck by lightning.\nYou were aiming for 1555. Close. Wrong digit.'];
-    if (has('hottub')) return [1986, 'You arrive in 1986 with three friends, a headache and no memory of the trip.'];
-    if (has('booth')) return [1988, 'You land in the middle of a history report. It goes most excellently.\nThe phone booth wants its quarter back.'];
-    if (has('box')) return [2077, 'Bigger on the inside. So is the rent.\nYou arrive in 2077 and still cannot afford it.'];
-    if (has('fridge')) return [1957, 'You survive. Nobody knows how. Least of all the fridge.'];
-    if (has('cat')) return [new Date().getFullYear(), 'You see the same black cat twice.\nDeja vu. You arrive exactly where you started. Someone changed something.'];
-    if (has('fax')) return [1997, 'You arrive in 1997 in three pieces, slightly blurry, with a cover sheet.'];
-    if (has('microwave')) return [new Date().getFullYear(), 'You arrive 30 seconds later.\nStill cold in the middle.'];
-    if (has('hotdog')) return [1985, 'Runs forever on $1.50. Only goes to 1985. Never leaves.'];
-    if (has('confidence') && set.length === 1) return [1999, 'Confidence alone gets you to 1999.\nIt got everybody to 1999.'];
-    if (has('lightning')) return [2008, 'Too much power. You arrive everywhen at once.\nMostly 2008. Sorry.'];
-    const h = hashStr(key), y = 1556 + (h % 543);
-    const how = ['sideways', 'upside down', 'two days early', 'in a fountain', 'during a meeting', 'mid-sneeze'][h % 6];
-    return [y, `You arrive in ${y}, ${how}.\nThe ${PART[set[h % set.length]][2].toLowerCase()} did most of the work.`];
-  }
-  $('#launch').onclick = () => {
-    const set = rig.filter(Boolean);
-    if (!set.length) { scramble($('#rigLine'), 'Add a part. Even he needed candles.', 10); return; }
-    const [y, line, an] = machineResult(set);
-    lastRig = { set, y, line };
-    rigEl.classList.remove('go'); void rigEl.offsetWidth; rigEl.classList.add('go');
-    sweep(120, 1600, .6, 'sawtooth', .025); fx.warp = 1;
-    $('#rigAct').hidden = true;
-    const yb = $('#rigYear'); let n = 0;
-    const roll = setInterval(() => { yb.textContent = 1555 + ((Math.random() * 545) | 0); if (++n > 12 || reduce) { clearInterval(roll); yb.textContent = y; flash(); scramble($('#rigLine'), line, 10); $('#rigAct').hidden = false; if (an) setTimeout(() => unlock(an), 1600); } }, 60);
+  // ---------- time machine workshop v2: chassis + power + navigation + a curio ----------
+  // line-art icons, 64x64, stroke = currentColor
+  const ICON = {
+    gullwing: '<path d="M4 44h56l-3-9-13-5H23l-12 6-7 2z"/><circle cx="17" cy="45" r="6"/><circle cx="47" cy="45" r="6"/><path d="M26 30l6-16 11 4-4 12M8 40h8M50 36h6"/>',
+    hottub: '<path d="M7 30h50v15a7 7 0 0 1-7 7H14a7 7 0 0 1-7-7z"/><path d="M7 36h50M14 52v5M50 52v5"/><circle cx="20" cy="24" r="3"/><circle cx="31" cy="18" r="4"/><circle cx="43" cy="24" r="3"/><path d="M24 12c-2-3 2-5 0-8M38 12c-2-3 2-5 0-8"/>',
+    booth: '<path d="M18 10h28v48H18zM16 10h32M24 6h16v4M18 18h28"/><path d="M22 22h9v12h-9zM33 22h9v12h-9zM22 38h9v12h-9zM33 38h9v12h-9z"/><path d="M27 14h10"/>',
+    policebox: '<path d="M16 16h32v42H16zM14 16h36M20 11h24v5M30 4h4v7h-4z"/><path d="M20 22h24M32 22v36M21 27h9v8h-9zM34 27h9v8h-9zM21 39h9v8h-9zM34 39h9v8h-9z"/>',
+    locomotive: '<path d="M8 40V24h22v16M30 30h20l6 10H8"/><path d="M14 24v-9h6v9M40 30v-8h8v8"/><circle cx="16" cy="46" r="6"/><circle cx="34" cy="46" r="6"/><circle cx="50" cy="47" r="4"/><path d="M15 12c-3-2 1-5-2-8M22 10c3-2-1-5 2-7"/>',
+    chair: '<path d="M20 6v52M20 32h24v26M20 32h26M44 32v-4M20 12h4M20 20h4M20 26h4"/><path d="M46 14l4-4M50 18l5-2" opacity=".6"/>',
+    lightning: '<path d="M36 4L16 36h14l-4 24 22-34H34z"/><text x="50" y="58" font-size="10" text-anchor="middle" fill="currentColor" stroke="none">1.21</text>',
+    plutonium: '<path d="M20 14h24v40H20zM18 14h28M18 54h28M24 8h16v6"/><circle cx="32" cy="34" r="3"/><path d="M32 31l-5-9a11 11 0 0 1 10 0zM29 36l-10 1a11 11 0 0 0 5 9zM35 36l5 9a11 11 0 0 0 5-9z"/>',
+    candles: '<path d="M18 26h10v30H18zM36 22h10v34H36zM14 56h36"/><path d="M23 26v-4M41 22v-4"/><path d="M23 20c-4-4 0-9 0-12 2 4 4 7 0 12zM41 16c-4-4 0-9 0-12 2 4 4 7 0 12z"/>',
+    fusion: '<path d="M20 22h24l-2 34H22zM18 22h28M26 22v-6h12v6"/><path d="M38 16c2-6 8-9 14-8-3 2-6 4-8 8M38 16c-2-3-6-4-10-3"/><circle cx="32" cy="40" r="5"/>',
+    hamster: '<circle cx="30" cy="32" r="22"/><circle cx="30" cy="32" r="3"/><path d="M30 10v44M8 32h44M14 16l32 32M46 16L14 48"/><path d="M40 46c2-5 9-5 11 0 1 4-3 6-6 6s-6-2-5-6z"/><path d="M30 54l-6 6M30 54l6 6"/>',
+    astrolabe: '<circle cx="32" cy="34" r="22"/><circle cx="32" cy="34" r="14"/><path d="M32 4v8M10 34h44M32 12v44M18 20l28 28"/><circle cx="32" cy="8" r="3"/>',
+    flux: '<path d="M10 10h44v44H10z"/><path d="M32 34L18 18M32 34L46 18M32 34v16"/><circle cx="18" cy="18" r="3"/><circle cx="46" cy="18" r="3"/><circle cx="32" cy="50" r="3"/><circle cx="32" cy="34" r="4"/>',
+    sundial: '<ellipse cx="32" cy="46" rx="26" ry="10"/><path d="M32 46L32 14 50 46"/><path d="M10 44l-2 2M16 39l-2-2M24 37v-2M40 37v-2M48 39l2-2M54 44l2 2"/><path d="M6 46v6c0 6 12 10 26 10s26-4 26-10v-6"/>',
+    crystal: '<circle cx="32" cy="28" r="18"/><path d="M18 50h28l4 8H14zM22 44l-4 6M42 44l4 6"/><path d="M24 20c3-4 7-5 11-4M44 26l3-1M42 14l2-3M47 20l3-1"/>',
+    gps: '<path d="M14 8h36v48H14z"/><path d="M18 14h28v24H18z"/><path d="M32 18l6 14-6-3-6 3z"/><path d="M20 44h24M20 50h14"/>',
+    almanac: '<path d="M14 8h30a6 6 0 0 1 6 6v42H20a6 6 0 0 1-6-6z"/><path d="M14 50a6 6 0 0 1 6-6h30"/><path d="M22 16h20M22 22h20M24 30h16"/><text x="32" y="40" font-size="8" text-anchor="middle" fill="currentColor" stroke="none">1950-2000</text>',
+    top: '<path d="M32 4v12M18 22h28l-14 34z"/><path d="M18 22c0-4 6-6 14-6s14 2 14 6"/><path d="M50 30c4 2 4 6 0 8M14 30c-4 2-4 6 0 8"/><ellipse cx="32" cy="58" rx="8" ry="2"/>',
+    alarm: '<path d="M8 26h48v24H8z"/><path d="M14 32h18v12H14z"/><text x="23" y="42" font-size="9" text-anchor="middle" fill="currentColor" stroke="none">6:00</text><circle cx="46" cy="38" r="6"/><path d="M12 50l-2 6M52 50l2 6M20 26l6-10h12l6 10"/>',
+    hoverboard: '<path d="M6 34c0-6 4-8 10-8h32c6 0 10 2 10 8s-4 8-10 8H16c-6 0-10-2-10-8z"/><path d="M14 34h36M18 46l-4 6M32 46v6M46 46l4 6" opacity=".7"/>',
+    hourglass: '<path d="M20 10h24M20 54h24M22 10c0 14 20 16 20 22s-20 8-20 22M42 10c0 14-20 16-20 22s20 8 20 22"/><path d="M32 4c-4 0-8 3-8 6M32 4c4 0 8 3 8 6"/><path d="M28 50h8"/>',
+    redpill: '<path d="M14 40l18-18a8 8 0 0 1 12 12L26 52a8 8 0 0 1-12-12z"/><path d="M23 31l12 12"/><circle cx="48" cy="14" r="3"/><path d="M48 20v8"/>',
+    ticket: '<path d="M6 18h52v8a6 6 0 0 0 0 12v8H6v-8a6 6 0 0 0 0-12z"/><path d="M16 24h32M16 32h20M16 40h26"/><path d="M46 30l2 4 4 1-3 3 1 4-4-2-4 2 1-4-3-3 4-1z"/>',
+    slippers: '<path d="M6 44c0-8 6-12 14-12h8c4 0 6 4 6 8v6c0 4-4 6-8 6H12c-4 0-6-4-6-8z"/><path d="M32 40c0-8 6-12 14-12h6c4 0 6 4 6 8v4c0 4-4 6-8 6H38"/><path d="M14 38l2 2M20 36l2 2M26 38l-2 2M40 34l2 2M46 32l2 2M52 34l-2 2"/>',
+    pocketwatch: '<circle cx="32" cy="36" r="20"/><circle cx="32" cy="36" r="16"/><path d="M32 36V24M32 36l8 6M28 10h8v6h-8zM32 4v6"/>'
   };
+  const icon = (id, cls) => `<svg viewBox="0 0 64 64" class="ico ${cls || ''}" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${ICON[id]}</svg>`;
+  // [id, name, note, stats]
+  const PARTS2 = {
+    chassis: [
+      ['gullwing', 'Gullwing coupe', 'Stainless steel. Doors open up, like your expectations.', { s: 70, a: 60 }],
+      ['hottub', 'Hot tub', 'Seats four. Previously owned. Do not ask.', { s: 35, a: 25 }],
+      ['booth', 'Phone booth', 'Takes quarters. Historians love it.', { s: 60, a: 55 }],
+      ['policebox', 'Blue police box', 'Bigger on the inside. So is the rent.', { s: 90, a: 40 }],
+      ['locomotive', 'Steam locomotive', 'Will not go back once it leaves.', { s: 80, a: 55 }],
+      ['chair', 'Wooden chair', 'His original chassis. Mostly confidence.', { s: 15, a: 95 }]
+    ],
+    power: [
+      ['lightning', '1.21 gigawatts', 'Requires a clock tower and perfect timing.', { p: 100 }],
+      ['plutonium', 'Plutonium', 'Borrowed. Do not ask from whom.', { p: 92 }],
+      ['fusion', 'Kitchen fusion', 'Runs on banana peels and old coffee.', { p: 85 }],
+      ['candles', 'Two candles', 'The 1555 standard. Bring a spare.', { p: 8 }],
+      ['hamster', 'Hamster wheel', 'One hamster. Unionized.', { p: 3 }]
+    ],
+    nav: [
+      ['flux', 'Flux capacitor', 'Shaped like a Y. Nobody knows why.', { a: 85 }],
+      ['astrolabe', 'Astrolabe', 'Points at the stars. Mostly the past.', { a: 92 }],
+      ['sundial', 'Sundial', 'Accurate on sunny days. Oregon: not accurate.', { a: 30 }],
+      ['crystal', 'Crystal ball', 'Foggy. Leans toward the future.', { a: 25 }],
+      ['gps', 'GPS from 2009', 'Recalculating. Recalculating.', { a: 35 }]
+    ]
+  };
+  const CURIOS = [
+    ['almanac', 'Sports almanac', 'Covers 1950 to 2000. Do not tell the SEC.'],
+    ['top', 'Spinning top', 'If it keeps spinning, you are dreaming.'],
+    ['alarm', 'Clock radio', 'Set to 6:00 AM. Forever.'],
+    ['hoverboard', 'Hoverboard', 'Pink. Does not work on water.'],
+    ['hourglass', 'Hourglass necklace', 'Three turns. Three hours. No more.'],
+    ['redpill', 'Red pill', 'Or was it blue. It was red.'],
+    ['ticket', 'Golden ticket', 'Admits one. Tour includes a river of chocolate.'],
+    ['slippers', 'Ruby slippers', 'Click three times. Results vary.'],
+    ['pocketwatch', 'Pocket watch', 'Perfect time. Wrong year.']
+  ];
+  const ALLP = Object.fromEntries([...PARTS2.chassis, ...PARTS2.power, ...PARTS2.nav, ...CURIOS].map(p => [p[0], p]));
+  const pick = { chassis: null, power: null, nav: null, curio: null };
+  let curioShown = [];
+  const shopEl = $('#shop2');
+  function shuffleCurios() { curioShown = CURIOS.map(c => c[0]).sort(() => Math.random() - .5).slice(0, 4); if (!curioShown.includes(pick.curio)) pick.curio = null; }
+  function cardHtml(cat, [id, name, note]) {
+    return `<button type="button" class="pc${pick[cat] === id ? ' on' : ''}" data-cat="${cat}" data-id="${id}" aria-pressed="${pick[cat] === id}" title="${esc(note)}">${icon(id)}<span class="pn">${esc(name)}</span></button>`;
+  }
+  function paintShop() {
+    const row = (cat, label, list, opt) => `<div class="prow"><div class="plbl">${label}${opt ? ' <i>optional</i>' : ''}</div><div class="pcs">${list.map(p => cardHtml(cat, p)).join('')}</div></div>`;
+    $('#partRows').innerHTML = row('chassis', 'CHASSIS', PARTS2.chassis) + row('power', 'POWER', PARTS2.power) + row('nav', 'NAVIGATION', PARTS2.nav)
+      + row('curio', 'CURIO DRAWER', CURIOS.filter(c => curioShown.includes(c[0])), true);
+    const slots = ['chassis', 'power', 'nav', 'curio'].map(cat => {
+      const id = pick[cat];
+      return `<div class="bp-slot${id ? ' full' : ''}">${id ? icon(id, 'big') : '<span class="q">?</span>'}<span class="bp-lbl">${cat === 'nav' ? 'NAV' : cat.toUpperCase()}</span></div>`;
+    }).join('<span class="bp-plus">+</span>');
+    $('#blueprint').innerHTML = slots;
+    const c = pick.chassis && PARTS2.chassis.find(x => x[0] === pick.chassis)[3], pw = pick.power && PARTS2.power.find(x => x[0] === pick.power)[3], nv = pick.nav && PARTS2.nav.find(x => x[0] === pick.nav)[3];
+    const bar = (n, v) => `<div class="stat"><span>${n}</span><i><b style="width:${v || 0}%"></b></i><em>${v == null ? '--' : v}</em></div>`;
+    $('#stats').innerHTML = bar('POWER', pw ? pw.p : null) + bar('STABILITY', c ? c.s : null) + bar('ACCURACY', c && nv ? Math.round((c.a + nv.a) / 2) : null);
+    const note = pick.curio || pick.nav || pick.power || pick.chassis;
+    $('#partNote').textContent = note ? ALLP[note][1] + ': ' + ALLP[note][2] : 'Pick a chassis, a power source and a way to steer. The curio is optional and usually a mistake.';
+    $('#launch').disabled = !(pick.chassis && pick.power && pick.nav);
+  }
+  $('#partRows').addEventListener('click', e => {
+    const b = e.target.closest('.pc'); if (!b) return;
+    const { cat, id } = b.dataset; pick[cat] = pick[cat] === id ? null : id;
+    beep(420 + Object.keys(pick).indexOf(cat) * 140, .05, 'triangle', .03); paintShop();
+  });
+  const PRESENT = new Date().getFullYear();
+  function machineRun() {
+    const { chassis: c, power: p, nav: n, curio: x } = pick, h = hashStr(c + p + n + (x || ''));
+    let y, line;
+    if (c === 'chair' && p === 'candles' && n === 'astrolabe') { y = 1555; line = 'ORIGINAL RECIPE. A wooden chair, two candles, an astrolabe and a lot of confidence.\nYou arrive in 1555 for one second. Then the warranty expires again.'; }
+    else if (p === 'hamster') { y = PRESENT; line = 'The hamster gives it everything. You arrive last Tuesday.\nThe hamster demands a pension.'; }
+    else if (c === 'hottub') { y = 1986; line = 'You arrive in 1986 with three friends, a headache and no memory of the trip.'; }
+    else if (c === 'booth') { y = 1988; line = 'You land in the middle of a history report. It goes most excellently.\nThe booth wants its quarter back.'; }
+    else if (c === 'policebox') { y = 2077; line = 'Bigger on the inside. So is the rent.\nYou arrive in 2077 and still cannot afford it.'; }
+    else if (c === 'locomotive' && n === 'flux') { y = 1885; line = 'The Old West. The train refuses to go back.\nSomeone named Mad Dog is already annoyed with you.'; }
+    else if (c === 'gullwing' && n === 'flux' && p === 'lightning') { y = 1955; line = 'November 12, 10:04 PM. Lightning hits a clock tower.\nYou were aiming for 1555. One digit off. So close.'; }
+    else if (c === 'gullwing' && n === 'flux' && p === 'plutonium') { y = 1985; line = 'You arrive in 1985 at 88 miles per hour.\nThe hot dog is $1.50. You consider staying.'; }
+    else if (c === 'gullwing' && n === 'flux' && p === 'fusion') { y = 2015; line = 'October 21, 2015. No flying cars.\nThe self-lacing shoes, weirdly, happened.'; }
+    else if (p === 'candles') { y = PRESENT - 1 - (h % 30); line = `Two candles get you as far as ${y}. One of them goes out.\nYou walk the rest of the way.`; }
+    else if (n === 'gps') { y = 2009; line = 'Recalculating. Recalculating.\nYou arrive in 2009 in a parking lot behind a video store.'; }
+    else if (n === 'crystal') { y = 2050 + (h % 49); line = `The crystal ball clears for one second. You arrive in ${y}.\nEverything is very shiny.`; }
+    else if (n === 'sundial') { y = 1600 + (h % 200); line = `It was cloudy. The sundial guessed. You arrive in ${y}, damp.`; }
+    else if (n === 'astrolabe') { y = 1556 + (h % 120); line = `The astrolabe points you toward home and misses by ${y - 1555} years.\nCloser than the DeLorean.`; }
+    else { y = 1900 + (h % 199); line = `The flux capacitor fluxes. You arrive in ${y}, slightly sideways.`; }
+    // curio twists
+    if (x === 'almanac') line += '\nYou brought back a sports almanac. Buffett would call it insider trading. Nostradamus would call it Tuesday.';
+    if (x === 'top') line += '\nThe top is still spinning. None of this happened.';
+    if (x === 'alarm') { y = PRESENT; line = '6:00 AM. The clock radio plays the same song.\nIt is the same day again. And again.'; }
+    if (x === 'hoverboard') { y = 2015; line = 'The hoverboard takes over. You arrive in 2015, over a pond.\nIt does not work on water.'; }
+    if (x === 'hourglass') { y = PRESENT; line = 'Three turns. You arrive three hours ago and watch yourself build this machine.\nYou both pretend not to notice.'; }
+    if (x === 'redpill') { y = null; line = 'You wake up in a pod. The year is unclear.\nThe pod is very sticky.'; }
+    if (x === 'ticket') { y = 1971; line = 'A chocolate factory. Do not touch anything.\nDo not chew the gum. Do not sing along.'; }
+    if (x === 'slippers') { y = 1939; line = 'You click your heels three times and arrive in 1939, in color.\nThere is no place like 1555. You are not in 1555.'; }
+    if (x === 'pocketwatch') line += '\nThe pocket watch kept perfect time. The wrong time.';
+    return { y, line, recipe: y === 1555 && !x };
+  }
+  let lastRig = null;
+  $('#launch').onclick = () => {
+    if ($('#launch').disabled) return;
+    const r = machineRun(); lastRig = { ...r, parts: ['chassis', 'power', 'nav', 'curio'].map(k => pick[k]).filter(Boolean) };
+    const rigEl = $('#rig2'), gauge = $('#charge'), yb = $('#rigYear');
+    $('#rigAct').hidden = true; $('#launch').disabled = true;
+    rigEl.classList.remove('go'); void rigEl.offsetWidth; rigEl.classList.add('go');
+    sweep(90, 1800, 1.1, 'sawtooth', .025);
+    let k = 0; const total = reduce ? 1 : 22;
+    const t = setInterval(() => {
+      k++; gauge.style.width = Math.min(100, k / total * 100) + '%'; yb.textContent = 1555 + ((Math.random() * 545) | 0);
+      if (k >= total) {
+        clearInterval(t); flash(); fx.warp = 1; gauge.style.width = '0%';
+        yb.textContent = r.y == null ? '????' : r.y; scramble($('#rigLine'), r.line, 9);
+        $('#rigAct').hidden = false; $('#rigTune').hidden = r.y == null; $('#launch').disabled = false;
+        if (r.recipe) setTimeout(() => unlock('recipe'), 1800);
+        if (r.y != null && r.y >= 2050 && !store.get('shadesFound', false)) setTimeout(() => {
+          store.set('shadesFound', true); paintDrawer(true);
+          say('<b>SOUVENIR.</b> Something came back from the future with you. It is in the drawer under the test pilot.', 5200);
+        }, 2600);
+        shuffleCurios(); paintShop();
+      }
+    }, 55);
+  };
+  $('#clearRig').onclick = () => { Object.keys(pick).forEach(k => pick[k] = null); paintShop(); };
   $('#rigShare').onclick = () => {
     if (!lastRig) return;
-    let t = `I built @Buffadamus a time machine: ${lastRig.set.map(id => PART[id][2]).join(' + ')}.\nResult: ${lastRig.line.replace(/\n/g, ' ')}`;
+    let t = `I built @Buffadamus a time machine: ${lastRig.parts.map(id => ALLP[id][1]).join(' + ')}.\nResult: ${lastRig.line.replace(/\n/g, ' ')}`;
     if (t.length > 230) t = t.slice(0, 227) + '...';
     window.open('https://x.com/intent/post?text=' + encodeURIComponent(t + '\n#TimeMachineTips') + '&url=' + encodeURIComponent('https://buffadamus.com/#workshop'), '_blank', 'noopener');
   };
-  $('#rigTune').onclick = () => { if (!lastRig) return; $('#dial').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); setTimeout(() => jumpTo(lastRig.y), reduce ? 0 : 500); };
-  paintRig();
+  $('#rigTune').onclick = () => { if (!lastRig || lastRig.y == null) return; $('#dial').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); setTimeout(() => jumpTo(lastRig.y), reduce ? 0 : 500); };
+
+  // test pilot + the drawer (the sunglasses live here once you bring them back)
+  const drawer = $('#drawer'), pilot = $('#pilot');
+  function paintDrawer(fresh) {
+    const has = store.get('shadesFound', false), worn = document.body.classList.contains('shades');
+    drawer.classList.toggle('has', has && !worn);
+    drawer.innerHTML = has && !worn
+      ? `<button type="button" class="shades-item${fresh ? ' fresh' : ''}" id="shadesItem" aria-label="Sunglasses from the future. Drag them onto the test pilot's face, or press Enter to put them on him."><svg viewBox="0 0 64 14" shape-rendering="crispEdges"><path fill="#050505" stroke="#7dff9a" stroke-width=".6" d="M0 0h64v3H0zM4 3h24v8H4zM36 3h24v8H36zM6 11h20v2H6zM38 11h20v2H38zM28 3h8v3h-8z"/><path fill="#fff" d="M8 5h3v2H8zM11 7h3v2h-3zM40 5h3v2h-3zM43 7h3v2h-3z"/></svg></button><span class="dlbl">From the future. Drag them onto his face.</span>`
+      : `<span class="dlbl">${worn ? 'Drawer empty. He is wearing them.' : 'Drawer: empty. Bring something back from the future.'}</span>`;
+    pilot.classList.toggle('worn', worn);
+    const it = $('#shadesItem'); if (it) wireDrag(it);
+  }
+  function wireDrag(it) {
+    it.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); wearShades(); } });
+    it.addEventListener('pointerdown', e => {
+      e.preventDefault();
+      const ghost = it.cloneNode(true); ghost.classList.add('ghost-drag'); document.body.appendChild(ghost);
+      const move = ev => { ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px'; pilot.classList.toggle('target', overFace(ev)); };
+      const overFace = ev => { const r = pilot.querySelector('.pface').getBoundingClientRect(); return ev.clientX > r.left && ev.clientX < r.right && ev.clientY > r.top && ev.clientY < r.bottom; };
+      const up = ev => { removeEventListener('pointermove', move); removeEventListener('pointerup', up); removeEventListener('pointercancel', up); ghost.remove(); pilot.classList.remove('target'); if (ev.type === 'pointerup' && overFace(ev)) wearShades(); else beep(200, .06, 'square', .02); };
+      move(e); addEventListener('pointermove', move); addEventListener('pointerup', up); addEventListener('pointercancel', up);
+    });
+  }
+  function wearShades() { toggleShades(true); paintDrawer(); }
+  pilot.addEventListener('click', () => { if (document.body.classList.contains('shades')) { toggleShades(false); paintDrawer(); } });
+
+  shuffleCurios(); paintShop(); paintDrawer();
 
   // ---------- the three keys + the gate ----------
   const KEYS = ['copper', 'jade', 'crystal'];
@@ -914,7 +1028,7 @@
       return `correct.\nriddle ${st + 1} of 3:\n${RIDDLES[st][0]}`;
     }
     if (c === 'arcade' || c === 'insert coin') { toggleTerm(false); openArcade(); return null; }
-    if (c === 'sunglasses' || c === 'shades') { toggleShades(); return document.body.classList.contains('shades') ? 'you put on the shades. you can see the game now.' : 'shades off.'; }
+    if (c === 'sunglasses' || c === 'shades') return 'nice try. you have to find them. try the future.';
     if (c === 'keys') return KEYS.map(k => (keys.has(k) ? '[x] ' : '[ ] ') + k).join('\n');
     if (c === 'follow the white rabbit' || c === 'white rabbit') return 'it does not come when called. watch the corners.';
     return undefined;
@@ -956,13 +1070,13 @@
   function tick(now) {
     const g = game; if (!g || g.over) return;
     const dt = Math.min(50, now - g.last) / 1000; g.last = now;
-    const el = (now - g.t0) / 1000, left = Math.max(0, 60 - el), speed = 110 + el * 3.6;
+    const el = (now - g.t0) / 1000, left = Math.max(0, 60 - el), speed = 140 + el * 5.5;
     if (keysDown.l) g.x -= 230 * dt; if (keysDown.r) g.x += 230 * dt; g.x = Math.max(16, Math.min(GW - 16, g.x));
     g.spawn -= dt;
     if (g.spawn <= 0) {
-      g.spawn = Math.max(.3, .66 - el * .006);
-      const bad = Math.random() < .56;
-      g.items.push(bad ? { bad: true, x: 20 + Math.random() * (GW - 40), y: -20, w: 44, t: CRASH[(Math.random() * CRASH.length) | 0] } : { bad: false, x: 14 + Math.random() * (GW - 28), y: -16, p: PICK[Math.random() < .15 ? 2 : (Math.random() * 2) | 0] });
+      g.spawn = Math.max(.19, .5 - el * .0055);
+      const bad = Math.random() < .68;
+      g.items.push(bad ? { bad: true, x: 20 + Math.random() * (GW - 40), y: -20, w: 44 + ((Math.random() * 3) | 0) * 10, vx: el > 25 && Math.random() < .45 ? (Math.random() < .5 ? -1 : 1) * (40 + el) : 0, t: CRASH[(Math.random() * CRASH.length) | 0] } : { bad: false, x: 14 + Math.random() * (GW - 28), y: -16, p: PICK[Math.random() < .15 ? 2 : (Math.random() * 2) | 0] });
     }
     g.score += dt * 10;
     // draw
@@ -971,7 +1085,7 @@
     gx.font = 'bold 14px monospace'; gx.textAlign = 'center'; gx.textBaseline = 'middle';
     const py = GH - 34;
     for (const it of g.items) {
-      it.y += speed * dt;
+      it.y += speed * dt; if (it.vx) { it.x += it.vx * dt; if (it.x < it.w / 2 || it.x > GW - it.w / 2) it.vx = -it.vx; }
       if (it.bad) { gx.fillStyle = '#ff3d8b'; gx.fillRect(it.x - it.w / 2, it.y - 10, it.w, 20); gx.fillStyle = '#05030c'; gx.fillText(it.t, it.x, it.y + 1); }
       else { gx.font = '20px serif'; gx.fillText(it.p[0], it.x, it.y); gx.font = 'bold 14px monospace'; }
       const hit = it.bad ? Math.abs(it.x - g.x) < it.w / 2 + 12 && Math.abs(it.y - py) < 20 : Math.abs(it.x - g.x) < 22 && Math.abs(it.y - py) < 22;
@@ -1012,7 +1126,7 @@
   // ---------- shades (player one mode) ----------
   const LOOT = [
     ['#dial', 'Copper turns at 20 + the minute on your clock.', 'left:12px;bottom:12px'],
-    ['#workshop', 'His first machine: astrolabe, two candles, confidence.', 'right:12px;top:12px'],
+    ['#workshop', 'His first machine: a wooden chair, two candles and an astrolabe. No curio.', 'right:12px;top:12px'],
     ['#ask', 'The terminal answers to: riddle', 'right:12px;top:12px'],
     ['#gate', 'Crystal: survive 60 seconds in the cabinet below.', 'left:12px;top:12px'],
     ['#anomalies', 'A white rabbit hides in a corner. It moves.', 'right:12px;top:12px']
@@ -1028,10 +1142,10 @@
   $('#hudXp').textContent = 'XP ' + xp;
   function toggleShades(force) {
     const on = document.body.classList.toggle('shades', force);
-    document.querySelectorAll('#wheel, #parts, .door, #askForm, #anomList').forEach(el => el.classList.toggle('tagged', on));
-    if (on) { flash(); sweep(300, 1200, .35, 'square', .02); say('<b>SHADES ON.</b> You can see the game now. Look for loot. Esc takes them off.', 4200); unlock('shades'); }
+    document.querySelectorAll('#wheel, #partRows, .door, #askForm, #anomList').forEach(el => el.classList.toggle('tagged', on));
+    if (on) { flash(); sweep(300, 1200, .35, 'square', .02); say('<b>SHADES ON.</b> He can see the game now. So can you. Look for loot. Esc or tap the test pilot to take them off.', 5000); unlock('shades'); }
+    paintDrawer();
   }
-  $('#shadesBtn').onclick = () => toggleShades();
   addEventListener('keydown', e => { if (e.key === 'Escape' && document.body.classList.contains('shades') && arc.hidden && term.hidden) toggleShades(false); });
 
   // ---------- follow the white rabbit ----------

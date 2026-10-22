@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=JetBrains+Mono:wght@400;600&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=9">
+<link rel="stylesheet" href="style.css?v=12">
 </head>
 <body>
 <canvas id="tunnel" aria-hidden="true"></canvas>
@@ -55,7 +55,6 @@
       <span class="speech" id="speech" aria-live="polite"></span>
       <span class="shades-on" aria-hidden="true"><svg viewBox="0 0 64 14" shape-rendering="crispEdges"><path fill="#050505" d="M0 0h64v3H0zM4 3h24v8H4zM36 3h24v8H36zM6 11h20v2H6zM38 11h20v2H38zM28 3h8v3h-8z"/><path fill="#fff" d="M8 5h3v2H8zM11 7h3v2h-3zM40 5h3v2h-3zM43 7h3v2h-3z"/></svg></span>
     </button>
-    <button class="shades-btn" id="shadesBtn" aria-label="A pair of sunglasses"><svg viewBox="0 0 64 14" shape-rendering="crispEdges"><path fill="currentColor" d="M0 0h64v3H0zM4 3h24v8H4zM36 3h24v8H36zM28 3h8v3h-8z"/></svg></button>
   </section>
 
   <section class="panel" id="dial">
@@ -109,14 +108,20 @@
   </section>
 
   <section class="panel" id="workshop">
-    <div class="phead"><span class="num">03</span><h2>Time machine workshop</h2><span class="hint">He has tried a DeLorean and a hot tub. Build him something better: pick up to three parts, then launch.</span></div>
-    <div class="shop">
-      <div class="parts" id="parts" role="list" aria-label="Parts"></div>
-      <div class="rig" id="rig">
-        <div class="slots" id="slots"></div>
-        <div class="rigbtns"><button class="btn" id="launch" type="button">Launch</button><button class="ghost" id="clearRig" type="button">Clear</button></div>
-        <div class="result" id="rigOut" aria-live="polite"><span class="lbl">DESTINATION</span><b id="rigYear">----</b><p id="rigLine">Add a part. Even he needed candles.</p></div>
+    <div class="phead"><span class="num">03</span><h2>Time machine workshop</h2><span class="hint">He has tried a DeLorean and a hot tub. Build him something better: one chassis, one power source, one way to steer. The curio drawer changes every launch.</span></div>
+    <div class="shop2" id="shop2">
+      <div class="partcol"><div id="partRows"></div><p class="pnote" id="partNote"></p></div>
+      <div class="rig2" id="rig2">
+        <div class="bp" id="blueprint"></div>
+        <div class="stats" id="stats"></div>
+        <div class="charge"><i id="charge"></i></div>
+        <div class="rigbtns"><button class="btn" id="launch" type="button" disabled>Launch</button><button class="ghost" id="clearRig" type="button">Clear</button></div>
+        <div class="result" aria-live="polite"><span class="lbl">DESTINATION</span><b id="rigYear">----</b><p id="rigLine">Waiting for a machine. Even he needed candles.</p></div>
         <div class="rigact" id="rigAct" hidden><button class="ghost" id="rigShare" type="button">Send it to @Buffadamus</button><button class="ghost" id="rigTune" type="button">Tune the dial there</button></div>
+        <div class="pilotbox">
+          <button type="button" class="pilot" id="pilot" aria-label="Test pilot Buffadamus"><span class="pface"><span class="pimg"></span><span class="pshades"><svg viewBox="0 0 64 14" shape-rendering="crispEdges"><path fill="#050505" d="M0 0h64v3H0zM4 3h24v8H4zM36 3h24v8H36zM6 11h20v2H6zM38 11h20v2H38zM28 3h8v3h-8z"/><path fill="#fff" d="M8 5h3v2H8zM11 7h3v2h-3zM40 5h3v2h-3zM43 7h3v2h-3z"/></svg></span></span><span class="plabel">TEST PILOT</span></button>
+          <div class="drawer" id="drawer"></div>
+        </div>
       </div>
     </div>
   </section>
@@ -185,6 +190,6 @@
 <div id="toast" class="toast" role="status" hidden></div>
 <div id="flash" aria-hidden="true"></div>
 
-<script src="app.js?v=11" defer></script>
+<script src="app.js?v=12" defer></script>
 </body>
 </html>
