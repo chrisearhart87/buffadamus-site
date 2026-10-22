@@ -334,7 +334,7 @@ body.shades .panel{position:relative}
 .tiny.cab{display:inline-flex;align-items:center;vertical-align:middle;padding:3px 7px}
 #arcade{position:fixed;inset:0;z-index:92;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.78);padding:16px}
 #arcade[hidden]{display:none}
-.cabinet{width:min(620px,100%);background:linear-gradient(#1a1030,#0b0716);border:2px solid var(--mag);border-radius:14px 14px 6px 6px;padding:12px;box-shadow:0 0 40px rgba(255,61,139,.35)}
+.cabinet{width:min(1040px,100%,calc((100vh - 150px) * 4 / 3 + 28px));background:linear-gradient(#1a1030,#0b0716);border:2px solid var(--mag);border-radius:14px 14px 6px 6px;padding:12px;box-shadow:0 0 40px rgba(255,61,139,.35)}
 .cabinet .marquee{font:800 20px var(--display);text-align:center;color:var(--amber);letter-spacing:.08em;padding:6px 0 10px;text-shadow:0 0 12px rgba(255,181,71,.6)}
 .screen{position:relative;border:3px solid #000;background:#000}
 #game{display:block;width:100%;height:auto;image-rendering:pixelated;touch-action:none}
@@ -514,3 +514,9 @@ body.grown .hero .face{scale:1.18}
 body.starman main,body.starman .bar{animation:starman .6s linear infinite}
 @keyframes starman{to{filter:hue-rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){ .fl-coin svg,.fl-star svg,body.starman main,body.starman .bar{animation:none} }
+
+/* v21 arcade: bigger screen */
+#arcade{padding:10px}
+.cabinet{padding:10px 12px}
+.cabinet .marquee{padding:2px 0 8px}
+@media (max-width:520px){ #arcade{padding:6px} .cabinet{padding:8px} }
