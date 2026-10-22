@@ -413,3 +413,10 @@ body.shades .rabbit{opacity:1;outline:2px dashed #7dff9a;outline-offset:4px}
 
 #term.root{border-color:#ff3d3d;box-shadow:0 0 40px rgba(255,61,61,.25)} #term.root #termForm span{color:#ff5a5a} #term.root #termOut{color:#ffb3b3}
 #termIn:disabled{opacity:.5}
+
+.result b{overflow-wrap:anywhere}
+
+.pilotbox{grid-template-columns:1fr}
+.ghost-drag{width:96px}
+.ghost-drag svg{display:block;width:100%;filter:drop-shadow(0 0 8px rgba(125,255,154,.7))}
+.face.target{outline:3px solid #7dff9a;outline-offset:6px;border-radius:50%}

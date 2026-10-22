@@ -84,7 +84,7 @@
     ['forever', 'Holding period: forever', 'Do nothing. Seriously. Nothing.'],
     ['witchcraft', 'Witchcraft', 'Open the witchcraft window. Say his name.'],
     ['onhold', 'Please continue to hold', 'He has been on hold since 1556. Hold him.'],
-    ['recipe', 'Original recipe', 'Build the first machine he ever built.'],
+    ['recipe', 'Original recipe', 'Build the machine that lands exactly in 1555.'],
     ['shades', 'Player one', 'Bring something back from the future. Then make him wear it.'],
     ['highscore', 'High score', 'Score 1555 in the machine that eats quarters.'],
     ['gate', 'The gate', 'Find all three keys.'],
@@ -936,65 +936,71 @@
     gullwing: '<path d="M4 44h56l-3-9-13-5H23l-12 6-7 2z"/><circle cx="17" cy="45" r="6"/><circle cx="47" cy="45" r="6"/><path d="M26 30l6-16 11 4-4 12M8 40h8M50 36h6"/>',
     hottub: '<path d="M7 30h50v15a7 7 0 0 1-7 7H14a7 7 0 0 1-7-7z"/><path d="M7 36h50M14 52v5M50 52v5"/><circle cx="20" cy="24" r="3"/><circle cx="31" cy="18" r="4"/><circle cx="43" cy="24" r="3"/><path d="M24 12c-2-3 2-5 0-8M38 12c-2-3 2-5 0-8"/>',
     booth: '<path d="M18 10h28v48H18zM16 10h32M24 6h16v4M18 18h28"/><path d="M22 22h9v12h-9zM33 22h9v12h-9zM22 38h9v12h-9zM33 38h9v12h-9z"/><path d="M27 14h10"/>',
-    policebox: '<path d="M16 16h32v42H16zM14 16h36M20 11h24v5M30 4h4v7h-4z"/><path d="M20 22h24M32 22v36M21 27h9v8h-9zM34 27h9v8h-9zM21 39h9v8h-9zM34 39h9v8h-9z"/>',
+    sled: '<circle cx="42" cy="26" r="16"/><path d="M42 10v32M26 26h32M31 15l22 22M53 15L31 37"/><path d="M10 52h40M14 52c-4 0-6-4-4-6M14 30h12v14H14zM14 30v-8h4M18 44l-2 8M24 44l2 8"/>',
     locomotive: '<path d="M8 40V24h22v16M30 30h20l6 10H8"/><path d="M14 24v-9h6v9M40 30v-8h8v8"/><circle cx="16" cy="46" r="6"/><circle cx="34" cy="46" r="6"/><circle cx="50" cy="47" r="4"/><path d="M15 12c-3-2 1-5-2-8M22 10c3-2-1-5 2-7"/>',
-    chair: '<path d="M20 6v52M20 32h24v26M20 32h26M44 32v-4M20 12h4M20 20h4M20 26h4"/><path d="M46 14l4-4M50 18l5-2" opacity=".6"/>',
+    rico: '<path d="M12 22h40v26H12z"/><path d="M18 28h14v14H18z"/><circle cx="44" cy="32" r="3"/><circle cx="44" cy="42" r="2"/><path d="M12 30H6v24M52 30h6v24M6 54h8M50 54h8"/><path d="M30 10l-4 8h6l-4 8" />',
     lightning: '<path d="M36 4L16 36h14l-4 24 22-34H34z"/><text x="50" y="58" font-size="10" text-anchor="middle" fill="currentColor" stroke="none">1.21</text>',
     plutonium: '<path d="M20 14h24v40H20zM18 14h28M18 54h28M24 8h16v6"/><circle cx="32" cy="34" r="3"/><path d="M32 31l-5-9a11 11 0 0 1 10 0zM29 36l-10 1a11 11 0 0 0 5 9zM35 36l5 9a11 11 0 0 0 5-9z"/>',
-    candles: '<path d="M18 26h10v30H18zM36 22h10v34H36zM14 56h36"/><path d="M23 26v-4M41 22v-4"/><path d="M23 20c-4-4 0-9 0-12 2 4 4 7 0 12zM41 16c-4-4 0-9 0-12 2 4 4 7 0 12z"/>',
-    fusion: '<path d="M20 22h24l-2 34H22zM18 22h28M26 22v-6h12v6"/><path d="M38 16c2-6 8-9 14-8-3 2-6 4-8 8M38 16c-2-3-6-4-10-3"/><circle cx="32" cy="40" r="5"/>',
-    hamster: '<circle cx="30" cy="32" r="22"/><circle cx="30" cy="32" r="3"/><path d="M30 10v44M8 32h44M14 16l32 32M46 16L14 48"/><path d="M40 46c2-5 9-5 11 0 1 4-3 6-6 6s-6-2-5-6z"/><path d="M30 54l-6 6M30 54l6 6"/>',
-    astrolabe: '<circle cx="32" cy="34" r="22"/><circle cx="32" cy="34" r="14"/><path d="M32 4v8M10 34h44M32 12v44M18 20l28 28"/><circle cx="32" cy="8" r="3"/>',
+    chernobly: '<path d="M22 12h20v44H22z"/><path d="M22 12c0-3 4-5 10-5s10 2 10 5M22 56c0 2 4 3 10 3s10-1 10-3"/><path d="M34 20l-6 12h6l-4 12" /><path d="M24 48h16"/><path d="M46 20c4-2 8 0 10-4M46 28c5 0 8 3 12 1" opacity=".7"/>',
+    proton: '<path d="M14 10h22v40H14z"/><path d="M18 16h14v8H18zM18 30h14M18 36h14M18 42h14"/><path d="M36 30h8l10-10M44 30l4 6M54 20l6-6"/><path d="M58 10l-3 6 5-1-2 6" />',
+    mogwai: '<path d="M32 8c-8 10-14 18-14 26a14 14 0 0 0 28 0c0-8-6-16-14-26z"/><path d="M48 46a14 14 0 1 1-8-22 11 11 0 0 0 8 22z" transform="translate(4 6) scale(.6)"/><path d="M8 54l48-44"/>',
     flux: '<path d="M10 10h44v44H10z"/><path d="M32 34L18 18M32 34L46 18M32 34v16"/><circle cx="18" cy="18" r="3"/><circle cx="46" cy="18" r="3"/><circle cx="32" cy="50" r="3"/><circle cx="32" cy="34" r="4"/>',
-    sundial: '<ellipse cx="32" cy="46" rx="26" ry="10"/><path d="M32 46L32 14 50 46"/><path d="M10 44l-2 2M16 39l-2-2M24 37v-2M40 37v-2M48 39l2-2M54 44l2 2"/><path d="M6 46v6c0 6 12 10 26 10s26-4 26-10v-6"/>',
-    crystal: '<circle cx="32" cy="28" r="18"/><path d="M18 50h28l4 8H14zM22 44l-4 6M42 44l4 6"/><path d="M24 20c3-4 7-5 11-4M44 26l3-1M42 14l2-3M47 20l3-1"/>',
-    gps: '<path d="M14 8h36v48H14z"/><path d="M18 14h28v24H18z"/><path d="M32 18l6 14-6-3-6 3z"/><path d="M20 44h24M20 50h14"/>',
+    timemap: '<path d="M8 12l14-4 20 6 14-4v42l-14 4-20-6-14 4z"/><path d="M22 8v42M42 14v42"/><circle cx="30" cy="28" r="4"/><circle cx="48" cy="40" r="3"/><circle cx="14" cy="36" r="3"/><path d="M30 28l18 12M30 28L14 36" stroke-dasharray="2 3"/>',
+    necro: '<path d="M14 8h34a4 4 0 0 1 4 4v44H18a4 4 0 0 1-4-4z"/><path d="M14 52a4 4 0 0 1 4-4h34"/><circle cx="33" cy="26" r="9"/><path d="M29 24h1M36 24h1M29 31c2 2 6 2 8 0"/><path d="M20 14l4 4M46 14l-4 4M20 40l4-4M46 40l-4-4"/>',
+    omega: '<path d="M10 18h44v32H10z"/><path d="M24 44c-6-2-8-8-6-14 2-5 7-8 14-8s12 3 14 8c2 6 0 12-6 14M22 44h6M36 44h6"/><text x="32" y="14" font-size="8" text-anchor="middle" fill="currentColor" stroke="none">13</text>',
+    countdown: '<path d="M10 22c0-6 10-10 22-10s22 4 22 10v22c0 6-10 10-22 10s-22-4-22-10z"/><ellipse cx="32" cy="22" rx="16" ry="5"/><path d="M32 17v10M27 22h10"/><text x="32" y="44" font-size="9" text-anchor="middle" fill="currentColor" stroke="none">28:06:42</text>',
     almanac: '<path d="M14 8h30a6 6 0 0 1 6 6v42H20a6 6 0 0 1-6-6z"/><path d="M14 50a6 6 0 0 1 6-6h30"/><path d="M22 16h20M22 22h20M24 30h16"/><text x="32" y="40" font-size="8" text-anchor="middle" fill="currentColor" stroke="none">1950-2000</text>',
     top: '<path d="M32 4v12M18 22h28l-14 34z"/><path d="M18 22c0-4 6-6 14-6s14 2 14 6"/><path d="M50 30c4 2 4 6 0 8M14 30c-4 2-4 6 0 8"/><ellipse cx="32" cy="58" rx="8" ry="2"/>',
     alarm: '<path d="M8 26h48v24H8z"/><path d="M14 32h18v12H14z"/><text x="23" y="42" font-size="9" text-anchor="middle" fill="currentColor" stroke="none">6:00</text><circle cx="46" cy="38" r="6"/><path d="M12 50l-2 6M52 50l2 6M20 26l6-10h12l6 10"/>',
     hoverboard: '<path d="M6 34c0-6 4-8 10-8h32c6 0 10 2 10 8s-4 8-10 8H16c-6 0-10-2-10-8z"/><path d="M14 34h36M18 46l-4 6M32 46v6M46 46l4 6" opacity=".7"/>',
-    hourglass: '<path d="M20 10h24M20 54h24M22 10c0 14 20 16 20 22s-20 8-20 22M42 10c0 14-20 16-20 22s20 8 20 22"/><path d="M32 4c-4 0-8 3-8 6M32 4c4 0 8 3 8 6"/><path d="M28 50h8"/>',
+    rug: '<path d="M8 14h48v36H8z"/><path d="M14 20h36v24H14z"/><path d="M32 22l8 10-8 10-8-10z"/><path d="M8 18H4M8 26H4M8 34H4M8 42H4M56 18h4M56 26h4M56 34h4M56 42h4"/>',
     redpill: '<path d="M14 40l18-18a8 8 0 0 1 12 12L26 52a8 8 0 0 1-12-12z"/><path d="M23 31l12 12"/><circle cx="48" cy="14" r="3"/><path d="M48 20v8"/>',
     ticket: '<path d="M6 18h52v8a6 6 0 0 0 0 12v8H6v-8a6 6 0 0 0 0-12z"/><path d="M16 24h32M16 32h20M16 40h26"/><path d="M46 30l2 4 4 1-3 3 1 4-4-2-4 2 1-4-3-3 4-1z"/>',
     slippers: '<path d="M6 44c0-8 6-12 14-12h8c4 0 6 4 6 8v6c0 4-4 6-8 6H12c-4 0-6-4-6-8z"/><path d="M32 40c0-8 6-12 14-12h6c4 0 6 4 6 8v4c0 4-4 6-8 6H38"/><path d="M14 38l2 2M20 36l2 2M26 38l-2 2M40 34l2 2M46 32l2 2M52 34l-2 2"/>',
-    pocketwatch: '<circle cx="32" cy="36" r="20"/><circle cx="32" cy="36" r="16"/><path d="M32 36V24M32 36l8 6M28 10h8v6h-8zM32 4v6"/>'
+    pocketwatch: '<circle cx="32" cy="36" r="20"/><circle cx="32" cy="36" r="16"/><path d="M32 36V24M32 36l8 6M28 10h8v6h-8zM32 4v6"/>',
+    boombox: '<path d="M6 22h52v30H6z"/><circle cx="18" cy="38" r="8"/><circle cx="46" cy="38" r="8"/><path d="M26 28h12M26 34h12M18 22V12h28v10"/><circle cx="18" cy="38" r="3"/><circle cx="46" cy="38" r="3"/>',
+    eyepatch: '<path d="M4 20c12 4 44 4 56 0"/><path d="M20 22c0 10 4 16 12 16s12-6 12-16"/><path d="M22 46c4 4 16 4 20 0" opacity=".6"/>',
+    twinkie: '<path d="M8 30c0-8 10-12 24-12s24 4 24 12v6c0 8-10 12-24 12S8 44 8 36z"/><path d="M8 33c6 4 14 5 24 5s18-1 24-5"/><circle cx="20" cy="28" r="1.5"/><circle cx="32" cy="26" r="1.5"/><circle cx="44" cy="28" r="1.5"/>'
   };
   const icon = (id, cls) => `<svg viewBox="0 0 64 64" class="ico ${cls || ''}" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${ICON[id]}</svg>`;
-  // [id, name, note, stats]
+  // [id, name, note (with the movie), stats]
   const PARTS2 = {
     chassis: [
-      ['gullwing', 'Gullwing coupe', 'Stainless steel. Doors open up, like your expectations.', { s: 70, a: 60 }],
-      ['hottub', 'Hot tub', 'Seats four. Previously owned. Do not ask.', { s: 35, a: 25 }],
-      ['booth', 'Phone booth', 'Takes quarters. Historians love it.', { s: 60, a: 55 }],
-      ['policebox', 'Blue police box', 'Bigger on the inside. So is the rent.', { s: 90, a: 40 }],
-      ['locomotive', 'Steam locomotive', 'Will not go back once it leaves.', { s: 80, a: 55 }],
-      ['chair', 'Wooden chair', 'His original chassis. Mostly confidence.', { s: 15, a: 95 }]
+      ['gullwing', 'Gullwing coupe', 'Back to the Future (1985). Stainless steel. Needs 88 mph.', { s: 70, a: 60 }],
+      ['hottub', 'Hot tub', 'Hot Tub Time Machine (2010). Seats four. Previously owned.', { s: 35, a: 25 }],
+      ['booth', 'Phone booth', "Bill & Ted's Excellent Adventure (1989). Takes quarters. Excellent.", { s: 60, a: 55 }],
+      ['sled', 'Victorian time sled', 'The Time Machine (1960). Red velvet seat. Only goes far. Very far.', { s: 75, a: 50 }],
+      ['locomotive', 'Steam locomotive', 'Back to the Future Part III (1990). Will not go back once it leaves.', { s: 80, a: 55 }],
+      ['rico', 'Internet time machine', 'Napoleon Dynamite (2004). Ordered online. Mostly zaps you.', { s: 10, a: 5 }]
     ],
     power: [
-      ['lightning', '1.21 gigawatts', 'Requires a clock tower and perfect timing.', { p: 100 }],
-      ['plutonium', 'Plutonium', 'Borrowed. Do not ask from whom.', { p: 92 }],
-      ['fusion', 'Kitchen fusion', 'Runs on banana peels and old coffee.', { p: 85 }],
-      ['candles', 'Two candles', 'The 1555 standard. Bring a spare.', { p: 8 }],
-      ['hamster', 'Hamster wheel', 'One hamster. Unionized.', { p: 3 }]
+      ['lightning', '1.21 gigawatts', 'Back to the Future (1985). Requires a clock tower and perfect timing.', { p: 100 }],
+      ['plutonium', 'Plutonium', 'Back to the Future (1985). Borrowed. Do not ask from whom.', { p: 92 }],
+      ['chernobly', 'Chernobly', 'Hot Tub Time Machine (2010). Illegal Russian energy drink. Spill it on the controls.', { p: 88 }],
+      ['proton', 'Proton pack', 'Ghostbusters (1984). Unlicensed nuclear accelerator. Do not cross the streams.', { p: 95 }],
+      ['mogwai', 'A mogwai', 'Gremlins (1984). Never get it wet. Never feed it after midnight.', { p: 40 }]
     ],
     nav: [
-      ['flux', 'Flux capacitor', 'Shaped like a Y. Nobody knows why.', { a: 85 }],
-      ['astrolabe', 'Astrolabe', 'Points at the stars. Mostly the past.', { a: 92 }],
-      ['sundial', 'Sundial', 'Accurate on sunny days. Oregon: not accurate.', { a: 30 }],
-      ['crystal', 'Crystal ball', 'Foggy. Leans toward the future.', { a: 25 }],
-      ['gps', 'GPS from 2009', 'Recalculating. Recalculating.', { a: 35 }]
+      ['flux', 'Flux capacitor', 'Back to the Future (1985). Shaped like a Y. Nobody knows why.', { a: 85 }],
+      ['necro', 'Necronomicon', 'Army of Darkness (1992). Say the words exactly. Klaatu barada nikto.', { a: 70 }],
+      ['timemap', 'Map of time holes', 'Time Bandits (1981). Stolen from the Supreme Being. He wants it back.', { a: 45 }],
+      ['omega', 'Omega 13', 'Galaxy Quest (1999). Rewinds exactly 13 seconds. Enough to fix one mistake.', { a: 99 }],
+      ['countdown', 'The countdown', 'Donnie Darko (2001). 28 days, 6 hours, 42 minutes, 12 seconds.', { a: 60 }]
     ]
   };
   const CURIOS = [
-    ['almanac', 'Sports almanac', 'Covers 1950 to 2000. Do not tell the SEC.'],
-    ['top', 'Spinning top', 'If it keeps spinning, you are dreaming.'],
-    ['alarm', 'Clock radio', 'Set to 6:00 AM. Forever.'],
-    ['hoverboard', 'Hoverboard', 'Pink. Does not work on water.'],
-    ['hourglass', 'Hourglass necklace', 'Three turns. Three hours. No more.'],
-    ['redpill', 'Red pill', 'Or was it blue. It was red.'],
-    ['ticket', 'Golden ticket', 'Admits one. Tour includes a river of chocolate.'],
-    ['slippers', 'Ruby slippers', 'Click three times. Results vary.'],
-    ['pocketwatch', 'Pocket watch', 'Perfect time. Wrong year.']
+    ['almanac', 'Sports almanac', 'Back to the Future Part II (1989). Covers 1950 to 2000.'],
+    ['top', 'Spinning top', 'Inception (2010). If it keeps spinning, you are dreaming.'],
+    ['alarm', 'Clock radio', 'Groundhog Day (1993). Set to 6:00 AM. Forever.'],
+    ['hoverboard', 'Hoverboard', 'Back to the Future Part II (1989). Does not work on water.'],
+    ['rug', 'The rug', 'The Big Lebowski (1998). It really tied the room together.'],
+    ['redpill', 'Red pill', 'The Matrix (1999). Shows you how deep the rabbit hole goes.'],
+    ['ticket', 'Golden ticket', 'Willy Wonka and the Chocolate Factory (1971). Admits one.'],
+    ['slippers', 'Ruby slippers', 'The Wizard of Oz (1939). Click three times.'],
+    ['pocketwatch', 'Pocket watch', 'Somewhere in Time (1980). Nobody knows where it came from.'],
+    ['boombox', 'Boombox', 'Say Anything (1989). Hold it over your head. Wait.'],
+    ['eyepatch', 'Eyepatch', 'Escape from New York (1981). Call him Snake.'],
+    ['twinkie', 'Twinkie', 'Ghostbusters (1984). Represents normal levels of psychokinetic energy.']
   ];
   const ALLP = Object.fromEntries([...PARTS2.chassis, ...PARTS2.power, ...PARTS2.nav, ...CURIOS].map(p => [p[0], p]));
   const pick = { chassis: null, power: null, nav: null, curio: null };
@@ -1029,31 +1035,36 @@
   function machineRun() {
     const { chassis: c, power: p, nav: n, curio: x } = pick, h = hashStr(c + p + n + (x || ''));
     let y, line;
-    if (c === 'chair' && p === 'candles' && n === 'astrolabe') { y = 1555; line = 'ORIGINAL RECIPE. A wooden chair, two candles, an astrolabe and a lot of confidence.\nYou arrive in 1555 for one second. Then the warranty expires again.'; }
-    else if (p === 'hamster') { y = PRESENT; line = 'The hamster gives it everything. You arrive last Tuesday.\nThe hamster demands a pension.'; }
-    else if (c === 'hottub') { y = 1986; line = 'You arrive in 1986 with three friends, a headache and no memory of the trip.'; }
+    if (c === 'sled' && p === 'lightning' && n === 'necro') { y = 1555; line = 'ORIGINAL RECIPE. The oldest machine, a bolt from the sky and a book you should not read aloud.\nYou arrive in 1555 for one second. Then the warranty expires again.'; }
+    else if (c === 'rico') { y = PRESENT; line = 'It zaps you. You do not move.\nYou are still in the present day. Your whole body hurts. Mostly one part.'; }
+    else if (n === 'omega') { y = PRESENT; line = 'Omega 13. You go back exactly 13 seconds.\nEnough time to fix one mistake. You use it to make the same mistake again.'; }
+    else if (n === 'countdown') { y = PRESENT; line = '28 days, 6 hours, 42 minutes, 12 seconds.\nThat is when the world ends, says a large rabbit. You set a reminder.'; }
+    else if (p === 'mogwai') { y = 1984; line = 'You got it wet. Now you have five time machines.\nAll of them are evil. They all go to 1984. One is wearing a hat.'; }
+    else if (p === 'proton') { y = 1984; line = 'You crossed the streams. Total protonic reversal.\nYou arrive in 1984, in New York, covered in marshmallow.'; }
+    else if (c === 'hottub' && p === 'chernobly') { y = 1986; line = 'You spill Chernobly on the controls.\nYou arrive in 1986 with three friends, a headache and a ski trip you do not remember.'; }
+    else if (c === 'hottub') { y = PRESENT; line = 'Without Chernobly the hot tub just gets warm.\nYou arrive nowhere. Relaxed, though.'; }
     else if (c === 'booth') { y = 1988; line = 'You land in the middle of a history report. It goes most excellently.\nThe booth wants its quarter back.'; }
-    else if (c === 'policebox') { y = 2077; line = 'Bigger on the inside. So is the rent.\nYou arrive in 2077 and still cannot afford it.'; }
+    else if (c === 'sled') { y = 802701; line = 'You pull the lever too far. You arrive in the year 802,701.\nThe people there have never heard of money. Or stocks. Or you.'; }
     else if (c === 'locomotive' && n === 'flux') { y = 1885; line = 'The Old West. The train refuses to go back.\nSomeone named Mad Dog is already annoyed with you.'; }
     else if (c === 'gullwing' && n === 'flux' && p === 'lightning') { y = 1955; line = 'November 12, 10:04 PM. Lightning hits a clock tower.\nYou were aiming for 1555. One digit off. So close.'; }
     else if (c === 'gullwing' && n === 'flux' && p === 'plutonium') { y = 1985; line = 'You arrive in 1985 at 88 miles per hour.\nThe hot dog is $1.50. You consider staying.'; }
-    else if (c === 'gullwing' && n === 'flux' && p === 'fusion') { y = 2015; line = 'October 21, 2015. No flying cars.\nThe self-lacing shoes, weirdly, happened.'; }
-    else if (p === 'candles') { y = PRESENT - 1 - (h % 30); line = `Two candles get you as far as ${y}. One of them goes out.\nYou walk the rest of the way.`; }
-    else if (n === 'gps') { y = 2009; line = 'Recalculating. Recalculating.\nYou arrive in 2009 in a parking lot behind a video store.'; }
-    else if (n === 'crystal') { y = 2050 + (h % 49); line = `The crystal ball clears for one second. You arrive in ${y}.\nEverything is very shiny.`; }
-    else if (n === 'sundial') { y = 1600 + (h % 200); line = `It was cloudy. The sundial guessed. You arrive in ${y}, damp.`; }
-    else if (n === 'astrolabe') { y = 1556 + (h % 120); line = `The astrolabe points you toward home and misses by ${y - 1555} years.\nCloser than the DeLorean.`; }
+    else if (c === 'gullwing' && n === 'flux') { y = 2015; line = 'October 21, 2015. No flying cars.\nThe self-lacing shoes, weirdly, happened.'; }
+    else if (n === 'necro') { y = 1300; line = 'You read the words. You did not say them exactly.\nYou arrive in 1300 AD with a chainsaw and a lot of explaining to do.'; }
+    else if (n === 'timemap') { y = (h % 3 === 0) ? 2101 + (h % 300) : 1100 + (h % 800); line = `You fall through a hole in time into ${y}.\nA very small man steals your map. You have no idea where you are.`; }
     else { y = 1900 + (h % 199); line = `The flux capacitor fluxes. You arrive in ${y}, slightly sideways.`; }
     // curio twists
     if (x === 'almanac') line += '\nYou brought back a sports almanac. Buffett would call it insider trading. Nostradamus would call it Tuesday.';
     if (x === 'top') line += '\nThe top is still spinning. None of this happened.';
     if (x === 'alarm') { y = PRESENT; line = '6:00 AM. The clock radio plays the same song.\nIt is the same day again. And again.'; }
     if (x === 'hoverboard') { y = 2015; line = 'The hoverboard takes over. You arrive in 2015, over a pond.\nIt does not work on water.'; }
-    if (x === 'hourglass') { y = PRESENT; line = 'Three turns. You arrive three hours ago and watch yourself build this machine.\nYou both pretend not to notice.'; }
+    if (x === 'rug') line += '\nThe rug really tied the machine together. Then someone ruined it.';
     if (x === 'redpill') { y = null; line = 'You wake up in a pod. The year is unclear.\nThe pod is very sticky.'; }
     if (x === 'ticket') { y = 1971; line = 'A chocolate factory. Do not touch anything.\nDo not chew the gum. Do not sing along.'; }
     if (x === 'slippers') { y = 1939; line = 'You click your heels three times and arrive in 1939, in color.\nThere is no place like 1555. You are not in 1555.'; }
-    if (x === 'pocketwatch') line += '\nThe pocket watch kept perfect time. The wrong time.';
+    if (x === 'pocketwatch') line += '\nYou find a pocket watch. You give it to yourself. Nobody knows where it came from. Do not think about it.';
+    if (x === 'boombox') line += '\nYou hold a boombox over your head outside 1555. 1555 does not open the window.';
+    if (x === 'eyepatch') { y = 1997; line = 'Call him Snake. You arrive in 1997.\nNew York is a prison now. The rent is somehow still high.'; }
+    if (x === 'twinkie') line += '\nThe machine eats your Twinkie. It is 35 feet long now. That is a big Twinkie.';
     return { y, line, recipe: y === 1555 && !x };
   }
   let lastRig = null;
@@ -1074,7 +1085,7 @@
         if (r.recipe) setTimeout(() => unlock('recipe'), 1800);
         if (r.y != null && r.y >= 2050 && !store.get('shadesFound', false)) setTimeout(() => {
           store.set('shadesFound', true); paintDrawer(true);
-          say('<b>SOUVENIR.</b> Something came back from the future with you. It is in the drawer under the test pilot.', 5200);
+          say('<b>SOUVENIR.</b> Something came back from the future with you.', 5200);
         }, 2600);
         shuffleCurios(); paintShop();
       }
@@ -1089,30 +1100,38 @@
   };
   $('#rigTune').onclick = () => { if (!lastRig || lastRig.y == null) return; $('#dial').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); setTimeout(() => jumpTo(lastRig.y), reduce ? 0 : 500); };
 
-  // test pilot + the drawer (the sunglasses live here once you bring them back)
-  const drawer = $('#drawer'), pilot = $('#pilot');
+  // the drawer: the sunglasses live here once they come back from the future
+  const drawer = $('#drawer'), heroFace = $('#face');
+  const SHADES_SVG = '<svg viewBox="0 0 64 14" shape-rendering="crispEdges"><path fill="#050505" stroke="#7dff9a" stroke-width=".6" d="M0 0h64v3H0zM4 3h24v8H4zM36 3h24v8H36zM6 11h20v2H6zM38 11h20v2H38zM28 3h8v3h-8z"/><path fill="#fff" d="M8 5h3v2H8zM11 7h3v2h-3zM40 5h3v2h-3zM43 7h3v2h-3z"/></svg>';
   function paintDrawer(fresh) {
     const has = store.get('shadesFound', false), worn = document.body.classList.contains('shades');
     drawer.classList.toggle('has', has && !worn);
     drawer.innerHTML = has && !worn
-      ? `<button type="button" class="shades-item${fresh ? ' fresh' : ''}" id="shadesItem" aria-label="Sunglasses from the future. Drag them onto the test pilot's face, or press Enter to put them on him."><svg viewBox="0 0 64 14" shape-rendering="crispEdges"><path fill="#050505" stroke="#7dff9a" stroke-width=".6" d="M0 0h64v3H0zM4 3h24v8H4zM36 3h24v8H36zM6 11h20v2H6zM38 11h20v2H38zM28 3h8v3h-8z"/><path fill="#fff" d="M8 5h3v2H8zM11 7h3v2h-3zM40 5h3v2h-3zM43 7h3v2h-3z"/></svg></button><span class="dlbl">From the future. Drag them onto his face.</span>`
-      : `<span class="dlbl">${worn ? 'Drawer empty. He is wearing them.' : 'Drawer: empty. Bring something back from the future.'}</span>`;
-    pilot.classList.toggle('worn', worn);
+      ? `<button type="button" class="shades-item${fresh ? ' fresh' : ''}" id="shadesItem" aria-label="Sunglasses from the future">${SHADES_SVG}</button><span class="dlbl">Souvenir from the future.</span>`
+      : '<span class="dlbl">Drawer: empty.</span>';
     const it = $('#shadesItem'); if (it) wireDrag(it);
   }
   function wireDrag(it) {
     it.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); wearShades(); } });
     it.addEventListener('pointerdown', e => {
       e.preventDefault();
-      const ghost = it.cloneNode(true); ghost.classList.add('ghost-drag'); document.body.appendChild(ghost);
-      const move = ev => { ghost.style.left = ev.clientX + 'px'; ghost.style.top = ev.clientY + 'px'; pilot.classList.toggle('target', overFace(ev)); };
-      const overFace = ev => { const r = pilot.querySelector('.pface').getBoundingClientRect(); return ev.clientX > r.left && ev.clientX < r.right && ev.clientY > r.top && ev.clientY < r.bottom; };
-      const up = ev => { removeEventListener('pointermove', move); removeEventListener('pointerup', up); removeEventListener('pointercancel', up); ghost.remove(); pilot.classList.remove('target'); if (ev.type === 'pointerup' && overFace(ev)) wearShades(); else beep(200, .06, 'square', .02); };
-      move(e); addEventListener('pointermove', move); addEventListener('pointerup', up); addEventListener('pointercancel', up);
+      const ghost = document.createElement('div'); ghost.className = 'ghost-drag'; ghost.innerHTML = SHADES_SVG; document.body.appendChild(ghost);
+      let px = e.clientX, py = e.clientY, raf = 0, live = true;
+      const overFace = () => { const r = heroFace.getBoundingClientRect(); return px > r.left + r.width * .15 && px < r.right - r.width * .15 && py > r.top + r.height * .2 && py < r.bottom - r.height * .1; };
+      const place = () => { ghost.style.left = px + 'px'; ghost.style.top = py + 'px'; heroFace.classList.toggle('target', overFace()); };
+      const scroll = () => { if (!live) return; const edge = 90; if (py < edge) scrollBy({ top: -Math.ceil((edge - py) / 3), behavior: 'instant' }); else if (py > innerHeight - edge) scrollBy({ top: Math.ceil((py - innerHeight + edge) / 3), behavior: 'instant' }); place(); raf = requestAnimationFrame(scroll); };
+      const move = ev => { px = ev.clientX; py = ev.clientY; place(); };
+      const up = ev => {
+        live = false; cancelAnimationFrame(raf);
+        removeEventListener('pointermove', move); removeEventListener('pointerup', up); removeEventListener('pointercancel', up);
+        ghost.remove(); heroFace.classList.remove('target');
+        if (ev.type === 'pointerup' && overFace()) wearShades(); else beep(200, .06, 'square', .02);
+      };
+      place(); raf = requestAnimationFrame(scroll);
+      addEventListener('pointermove', move); addEventListener('pointerup', up); addEventListener('pointercancel', up);
     });
   }
   function wearShades() { toggleShades(true); paintDrawer(); }
-  pilot.addEventListener('click', () => { if (document.body.classList.contains('shades')) { toggleShades(false); paintDrawer(); } });
 
   shuffleCurios(); paintShop(); paintDrawer();
 
@@ -1272,7 +1291,7 @@
   // ---------- shades (player one mode) ----------
   const LOOT = [
     ['#dial', 'Copper turns at 20 + the minute on your clock.', 'left:12px;bottom:12px'],
-    ['#workshop', 'His first machine: a wooden chair, two candles and an astrolabe. No curio.', 'right:12px;top:12px'],
+    ['#workshop', 'His first machine: the oldest movie machine, 1.21 gigawatts and the book you should not read aloud. No curio.', 'right:12px;top:12px'],
     ['#ask', 'The terminal answers to: riddle', 'right:12px;top:12px'],
     ['#gate', 'Crystal: survive 60 seconds in the cabinet below.', 'left:12px;top:12px'],
     ['#anomalies', 'A white rabbit hides in a corner. It moves.', 'right:12px;top:12px']
@@ -1289,7 +1308,7 @@
   function toggleShades(force) {
     const on = document.body.classList.toggle('shades', force);
     document.querySelectorAll('#wheel, #partRows, .door, #askForm, #anomList').forEach(el => el.classList.toggle('tagged', on));
-    if (on) { flash(); sweep(300, 1200, .35, 'square', .02); say('<b>SHADES ON.</b> He can see the game now. So can you. Look for loot. Esc or tap the test pilot to take them off.', 5000); unlock('shades'); }
+    if (on) { flash(); sweep(300, 1200, .35, 'square', .02); say('<b>SHADES ON.</b> He can see the game now. So can you. Look for loot. Esc takes them off.', 5000); unlock('shades'); }
     paintDrawer();
   }
   addEventListener('keydown', e => { if (e.key === 'Escape' && document.body.classList.contains('shades') && arc.hidden && term.hidden) toggleShades(false); });
