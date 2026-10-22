@@ -1,24 +1,24 @@
 {
- "updated": "2026-10-20 22:50 PT",
- "note": "Live @Buffadamus posts shown as intercepted transmissions. Source: content/posted/LOG.md.",
+ "updated": "2026-10-21 20:00 PT",
+ "note": "Chris deleted the old X posts (2026-10-21). Until new posts exist these are site-only transmissions linking to the profile. When new posts go live, add them here with their x.com/Buffadamus/status URLs.",
  "posts": [
   {
-   "id": "M3",
-   "date": "Oct 8",
-   "text": "The Fed released its minutes yesterday.\nStill no word on the seconds.\nWhat are they hiding.",
-   "url": "https://x.com/Buffadamus/status/2108364958396506210"
+   "id": "T1",
+   "date": "TX-2031",
+   "text": "TRANSMISSION // 2031\nThe robots unionize. Their first demand is weekends.\nTheir second demand is [SIGNAL LOST]",
+   "url": "https://x.com/Buffadamus"
   },
   {
-   "id": "S9",
-   "date": "Oct 4",
-   "text": "Rejected by Delta Force.\nRejected by Space Force.\nTrying my luck with the Super Intelligence Force.",
-   "url": "https://x.com/Buffadamus/status/2106731642719252956"
+   "id": "T2",
+   "date": "FIELD NOTE",
+   "text": "Field note from the present day:\nYou pay a monthly fee to keep a song you already bought.\nIn 1555 we called this a curse.",
+   "url": "https://x.com/Buffadamus"
   },
   {
-   "id": "S7",
-   "date": "Oct 4",
-   "text": "They renamed AI to super intelligence\nand now mine wants a raise.",
-   "url": "https://x.com/Buffadamus/status/2106799420335607838"
+   "id": "T3",
+   "date": "TX-2044",
+   "text": "TRANSMISSION // 2044\nThe market finally does exactly what everyone predicted.\nNobody believes it. They [SIGNAL LOST]",
+   "url": "https://x.com/Buffadamus"
   }
  ]
 }

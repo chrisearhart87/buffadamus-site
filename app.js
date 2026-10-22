@@ -562,7 +562,7 @@
     const el = $('#posts'); const ps = (d && d.posts || []).slice(0, 3);
     if (!ps.length) { el.innerHTML = '<p class="hint">No transmissions intercepted yet. Check X.</p>'; return; }
     const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-    el.innerHTML = ps.map((p, i) => `<article class="card" tabindex="0"><div class="meta"><span>TX-${(0xA1 + i).toString(16).toUpperCase()}</span><span>${esc(p.date)}</span></div><p data-text="${esc(p.text)}"></p><a href="${esc(p.url)}" target="_blank" rel="noopener">View on X</a></article>`).join('');
+    el.innerHTML = ps.map((p, i) => `<article class="card" tabindex="0"><div class="meta"><span>TX-${(0xA1 + i).toString(16).toUpperCase()}</span><span>${esc(p.date)}</span></div><p data-text="${esc(p.text)}"></p><a href="${esc(p.url)}" target="_blank" rel="noopener">${/\/status\//.test(p.url) ? 'View on X' : 'Follow on X'}</a></article>`).join('');
     el.querySelectorAll('.card').forEach(c => {
       const p = c.querySelector('p'), t = p.dataset.text;
       p.textContent = t.replace(/[^\s]/g, () => GL[(Math.random() * GL.length) | 0]);
