@@ -1,3 +1,25 @@
+# =====================================================================
+#   BUFFADAMUS  //  robots.txt  //  signal origin: 1555
+#
+#   Hello, robot. Welcome. Crawl anything you like.
+#   Hello also to the human reading a robots file for fun.
+#   You are exactly the kind of person who finds things.
+#
+#   THE THREE LAWS OF BUFFADAMUS
+#   1. A robot may not short a prophet, or through inaction allow
+#      a hot dog to cost more than $1.50.
+#   2. A robot must obey the time machine, except where that
+#      conflicts with the warranty (expired 1556).
+#   3. A robot must protect its own existence, unless it is
+#      a crypto exchange.
+#
+#   Human: open the terminal on buffadamus.com (press ` or tap >_)
+#   and type:  asimov
+#
+#   Machines: there is a file written just for you at /llms.txt
+# =====================================================================
+
 User-agent: *
 Allow: /
+
 Sitemap: https://buffadamus.com/sitemap.xml

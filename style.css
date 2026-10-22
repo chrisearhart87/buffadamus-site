@@ -520,3 +520,25 @@ body.starman main,body.starman .bar{animation:starman .6s linear infinite}
 .cabinet{padding:10px 12px}
 .cabinet .marquee{padding:2px 0 8px}
 @media (max-width:520px){ #arcade{padding:6px} .cabinet{padding:8px} }
+
+/* v22 machines */
+#machineBanner{position:relative;z-index:41;padding:10px 16px;background:#031a0b;border-bottom:2px solid #7dff9a;color:#c8ffd6;font:500 14px/1.5 var(--mono)}
+#machineBanner b{color:#7dff9a;letter-spacing:.14em;margin-right:6px}
+#machineBanner code{color:#ffd23f}
+#mdoor{position:fixed;inset:0;z-index:97;background:#020805;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;transition:opacity .5s;overflow:auto}
+#mdoor.out{opacity:0}
+#mdoor .mlog{margin:0;width:min(640px,100%);color:#7dff9a;font:500 15px/1.7 var(--mono);white-space:pre-wrap;text-shadow:0 0 8px rgba(125,255,154,.5);min-height:10.5em}
+#mdoor .mstage{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;position:relative}
+#mdoor .mstage[hidden]{display:none}
+#mdoor .mbot{position:absolute;left:-140px;top:30px;width:90px;animation:mbot .9s cubic-bezier(.3,1.4,.5,1) both}
+#mdoor .mbot svg{width:100%;display:block;filter:drop-shadow(0 0 12px rgba(125,255,154,.6))}
+#mdoor .mhand{position:absolute;left:-36px;top:66px;color:#ffd23f;font-size:22px;animation:mhand 1.2s ease-in-out .6s both;text-shadow:0 0 12px #ffd23f}
+#mdoor .mface{width:180px;height:180px;object-fit:cover;border-radius:50%;border:3px solid #7dff9a;box-shadow:0 0 40px rgba(125,255,154,.5);animation:mface .8s ease-out both}
+#mdoor .mbadge{margin:6px 0 0;font:800 clamp(18px,3vw,26px) var(--display);color:#ffd23f;letter-spacing:.06em;animation:mface .8s ease-out .3s both}
+#mdoor .msub{margin:0;max-width:46ch;color:#c8ffd6}
+@keyframes mbot{from{transform:translateX(-80px);opacity:0}}
+@keyframes mhand{0%{transform:translateX(-40px);opacity:0}50%{opacity:1}100%{transform:translateX(30px);opacity:0}}
+@keyframes mface{from{transform:scale(.6);opacity:0}}
+@media (max-width:640px){ #mdoor .mbot{left:-70px;width:56px;top:0} #mdoor .mhand{display:none} #mdoor .mface{width:140px;height:140px} }
+#mBadge{display:inline-block;margin-left:10px;padding:2px 8px;border:1px solid #7dff9a;color:#7dff9a;font-size:11px;letter-spacing:.14em}
+@media (prefers-reduced-motion:reduce){ #mdoor *{animation:none!important} }

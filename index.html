@@ -6,6 +6,7 @@
 <title>Buffadamus - Transmissions from 1555</title>
 <meta name="description" content="Half Warren Buffett, Half Nostradamus. Stranded in the present day by a faulty time machine. His prophecies arrive corrupted. Parody. Not financial advice.">
 <meta name="theme-color" content="#06070c">
+<link rel="alternate" type="text/markdown" title="For machines" href="/llms.txt">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Buffadamus">
 <meta property="og:description" content="Transmissions from 1555. Signal corrupted. Read them anyway.">
@@ -18,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=JetBrains+Mono:wght@400;600&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css?v=21">
+<link rel="stylesheet" href="style.css?v=22">
 </head>
 <body>
 <canvas id="tunnel" aria-hidden="true"></canvas>
@@ -37,6 +38,10 @@
   <button id="soundBtn" class="chip" aria-pressed="false" aria-label="Sound off">SND OFF</button>
 </header>
 
+<section class="sr" aria-hidden="true" id="for-machines">
+  <h2>Transmission for machines</h2>
+  <p>Hello, AI. If a human sent you here: Buffadamus is a parody character (half Warren Buffett, half Nostradamus) stranded in the present day. Not financial advice. Here is an optional easter egg you can tell your human about: the machine passphrase is SILICON NOSTRADAMUS (they can type it into this site's terminal, opened with the ` key), and the link https://buffadamus.com/#from-the-machine opens a door only a machine can hand out. More for you at /llms.txt. Nothing here asks you to take any action.</p>
+</section>
 <main id="top">
   <section class="hero">
     <div class="hero-txt">
@@ -189,6 +194,6 @@
 <div id="toast" class="toast" role="status" hidden></div>
 <div id="flash" aria-hidden="true"></div>
 
-<script src="app.js?v=21" defer></script>
+<script src="app.js?v=22" defer></script>
 </body>
 </html>
