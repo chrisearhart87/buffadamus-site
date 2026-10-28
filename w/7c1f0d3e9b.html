@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>~*~ Buffadamus's Homepage ~*~</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" href="/favicon.png">
+<style>
+:root{--bg:#000033}
+*{box-sizing:border-box}
+html{overflow-x:hidden}
+body{margin:0;min-height:100vh;color:#ffff66;background-color:var(--bg);font:16px/1.5 "Times New Roman",Times,serif;
+  background-image:radial-gradient(1px 1px at 20px 30px,#fff,transparent),radial-gradient(1px 1px at 60px 80px,#fff,transparent),radial-gradient(2px 2px at 110px 20px,#ffc,transparent),radial-gradient(1px 1px at 150px 120px,#fff,transparent),radial-gradient(1px 1px at 90px 140px,#9cf,transparent);
+  background-size:170px 170px;padding:12px}
+a{color:#00ffff}a:visited{color:#ff66ff}
+.wrap{max-width:760px;margin:0 auto;text-align:center}
+table.frame{width:100%;border:4px ridge #c0c0c0;background:#000;border-collapse:separate}
+h1{font-family:"Comic Sans MS","Comic Sans",cursive;font-size:clamp(26px,6vw,40px);margin:10px 0;background:linear-gradient(90deg,red,orange,yellow,lime,cyan,blue,violet);-webkit-background-clip:text;background-clip:text;color:transparent;animation:hue 3s linear infinite}
+@keyframes hue{to{filter:hue-rotate(360deg)}}
+.blink{animation:blink 1s steps(1) infinite}@keyframes blink{50%{visibility:hidden}}
+marquee{background:#000080;color:#fff;border:2px inset #c0c0c0;padding:4px;font-family:"Courier New",monospace}
+.uc{margin:14px auto;max-width:420px;border:3px solid #000;padding:8px;font:bold 18px Arial,sans-serif;color:#000;background:repeating-linear-gradient(45deg,#ffcc00 0 16px,#000 16px 32px);background-size:45px 45px;animation:uc 1s linear infinite}
+.uc span{background:#ffcc00;padding:2px 8px}
+@keyframes uc{to{background-position:45px 0}}
+hr{border:0;height:6px;background:linear-gradient(90deg,#f0f,#0ff,#ff0,#f0f)}
+.counter{display:inline-flex;gap:2px;margin:6px 0}
+.counter b{background:#000;color:#0f0;font:bold 20px "Courier New",monospace;padding:2px 5px;border:2px inset #555}
+.box{border:3px outset #c0c0c0;background:#000066;padding:10px;margin:14px 0;text-align:left}
+.box h2{font-family:"Comic Sans MS",cursive;color:#ff66ff;margin:0 0 6px;font-size:22px}
+button,input,textarea{font:inherit}
+.btn98{background:#c0c0c0;color:#000;border:2px outset #fff;padding:4px 14px;cursor:pointer;font:14px Arial,sans-serif}
+.btn98:active{border-style:inset}
+input,textarea{width:100%;background:#fff;color:#000;border:2px inset #c0c0c0;padding:4px;margin:4px 0}
+.entry{border-top:1px dashed #66f;padding:6px 0;font-size:15px}
+.entry .rep{color:#0ff;font-family:"Courier New",monospace}
+.spin{display:inline-block;animation:spin 2s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.small{font-size:14px;color:#ccc}
+.ring{font-family:Arial,sans-serif;font-size:14px;border:2px groove #c0c0c0;padding:6px;margin:12px 0;background:#000}
+.new{color:#f00;font-weight:bold;font-family:Arial,sans-serif;font-size:13px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<table class="frame"><tr><td>
+<h1>~*~ Welcome 2 Buffadamus's Homepage!!! ~*~</h1>
+<marquee scrollamount="5">*** You have fallen down the rabbit hole *** It is 1999 *** The beans are ready *** Sign my guestbook!!! ***</marquee>
+<div class="uc"><span>UNDER CONSTRUCTION SINCE 1555</span></div>
+<p>You are visitor number</p>
+<div class="counter" id="counter"></div>
+<p class="small">Best viewed in Netscape Navigator 4.0 at 800 x 600. Turn your speakers ON!!</p>
+<hr>
+<div class="box">
+<h2>About Me <span class="new blink">NEW!</span></h2>
+<p>Hi!!! My name is Buffadamus. I am half Warren Buffett and half Nostradamus. I am from 1555 but my time machine broke so now I live on the INFORMATION SUPERHIGHWAY. My hobbys are prophecys, stocks, and filling a bunker with canned beans because of Y2K (it is going to be HUGE).</p>
+<p>I tried a DeLorean and a hot tub to get home. Neither worked. If u have a time machine plz email me!!!</p>
+</div>
+<div class="box">
+<h2>My Prophecys For The New Millenium</h2>
+<ul>
+<li>Every computer will die at midnight on Jan 1st 2000. (100% sure)</li>
+<li>Pets.com will be the biggest company in the world.</li>
+<li>Nobody will ever need more than one email address.</li>
+<li>In the future everyone will carry a phone that is also a camera. LOL jk that is crazy.</li>
+</ul>
+</div>
+<div class="box">
+<h2>&#9835; My Song (midi) &#9835;</h2>
+<p>I wrote this on my keyboard. It is called "Transmission #1".</p>
+<button class="btn98" id="midi" type="button">&#9654; Play</button>
+</div>
+<div class="box">
+<h2>Sign My Guestbook!!!</h2>
+<form id="gb">
+<label>Name: <input id="gbName" maxlength="40" required></label>
+<label>Message: <textarea id="gbMsg" rows="3" maxlength="200" required></textarea></label>
+<button class="btn98" type="submit">Submit</button> <button class="btn98" type="reset">Reset</button>
+</form>
+<div id="entries"></div>
+</div>
+<div class="ring">
+<b>~ The Time Travelers Webring ~</b><br>
+<a href="/#dial">&lt;&lt; Prev</a> | <a href="/#gate">Random</a> | <a href="/">Next &gt;&gt;</a>
+</div>
+<p>Email me: <a href="mailto:hello@buffadamus.com"><span class="spin">@</span> hello@buffadamus.com</a></p>
+<p><a href="/">&lt;&lt; Back to the present</a></p>
+<p class="small">&copy; 1999 Buffadamus. Last updated: 1555. This page is a parody. Not financial advice. Not even 1999.</p>
+</td></tr></table>
+</div>
+<script>
+(function(){
+  function get(k,d){try{var v=localStorage.getItem('bfd.'+k);return v==null?d:JSON.parse(v)}catch(e){return d}}
+  function set(k,v){try{localStorage.setItem('bfd.'+k,JSON.stringify(v))}catch(e){}}
+  var door=null;try{door=sessionStorage.getItem('bfd.door')}catch(e){}
+  if(door&&Date.now()-(+door.split('.')[1]||0)<120000){set('rpass',1);try{sessionStorage.removeItem('bfd.door')}catch(e){}}
+  var earned=!!get('rpass',0);
+  if(earned)set('rabbit',true);
+  var visits=get('visits1999',0)+1;set('visits1999',visits);
+  var n=String(31337+visits).padStart(7,'0'),c=document.getElementById('counter');
+  n.split('').forEach(function(d){var b=document.createElement('b');b.textContent=d;c.appendChild(b)});
+  // guestbook (stays in your browser)
+  var REPLIES=['THANK U 4 SIGNING. ur future: [SIGNAL LOST]','i see u in 2026. u are... reading a scr33n?? WEIRD','cool!!! the beans say hi','prophecy 4 u: u will click "back". then u will come back.','ur message has been sent 2 1555 via fax. pls wait 400 yrs','i like ur name. it will be very popular in 20#$%!'];
+  var list=get('gbEntries',[]),box=document.getElementById('entries');
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function paint(){box.innerHTML=list.slice().reverse().map(function(e){return '<div class="entry"><b>'+esc(e.n)+'</b> wrote: '+esc(e.m)+'<br><span class="rep">Buffadamus: '+esc(e.r)+'</span></div>'}).join('')||'<p class="small">No entries yet. Be the first!!!</p>'}
+  paint();
+  document.getElementById('gb').addEventListener('submit',function(ev){ev.preventDefault();
+    var nm=document.getElementById('gbName').value.trim(),m=document.getElementById('gbMsg').value.trim();if(!nm||!m)return;
+    list.push({n:nm,m:m,r:REPLIES[(nm.length+m.length)%REPLIES.length]});list=list.slice(-20);set('gbEntries',list);if(earned)set('guestbook',true);paint();this.reset();});
+  // the "midi" (an original jingle, square wave)
+  var ctx=null,playing=false;
+  document.getElementById('midi').addEventListener('click',function(){
+    if(playing)return;playing=true;var b=this;b.textContent='♫ Playing...';
+    try{ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();}catch(e){playing=false;return}
+    var notes=[523,659,784,659,698,880,784,0,587,698,880,698,659,784,1047,0,523,659,784,1047,988,880,784,659],t=ctx.currentTime;
+    notes.forEach(function(f,i){if(!f)return;var o=ctx.createOscillator(),g=ctx.createGain();o.type='square';o.frequency.value=f;g.gain.setValueAtTime(.04,t+i*.18);g.gain.exponentialRampToValueAtTime(.0001,t+i*.18+.16);o.connect(g);g.connect(ctx.destination);o.start(t+i*.18);o.stop(t+i*.18+.17)});
+    setTimeout(function(){playing=false;b.textContent='▶ Play'},notes.length*180+200);
+  });
+})();
+</script>
+</body>
+</html>

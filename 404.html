@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Buffadamus - No such year</title>
+<meta name="theme-color" content="#06070c">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--void:#06070c;--text:#e9ecf2;--mute:#97a1b3;--cyan:#4df3e6;--mag:#ff3d8b;--amber:#ffb547}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--void);color:var(--text);font:16px/1.6 "JetBrains Mono",ui-monospace,monospace;padding:24px max(16px,env(safe-area-inset-right)) 24px max(16px,env(safe-area-inset-left));text-align:center}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.2) 0 1px,transparent 1px 3px)}
+h1{font:800 clamp(64px,16vw,180px)/1 Unbounded,system-ui,sans-serif;margin:0;color:var(--amber);text-shadow:-4px 0 var(--cyan),4px 0 var(--mag)}
+p{max-width:44ch;margin:14px auto;color:var(--mute)} b{color:var(--mag)}
+a{display:inline-block;margin-top:14px;color:var(--void);background:var(--cyan);padding:12px 20px;text-decoration:none;font-weight:600;letter-spacing:.06em}
+</style>
+</head>
+<body>
+<main>
+  <h1 id="y">404</h1>
+  <p>You have reached a year that does not exist. Buffadamus checked. He has been to most of them.</p>
+  <p><b>ANOMALY FOUND:</b> page from no year. It now counts on the home page.</p>
+  <a href="/">Return to the present</a>
+</main>
+<script>
+try{localStorage.setItem('bfd.lost','true')}catch(e){}
+(function(){var el=document.getElementById('y'),n=0;if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;var t=setInterval(function(){el.textContent=String(1555+Math.floor(Math.random()*545));if(++n>16){clearInterval(t);el.textContent='404';}},70);})();
+</script>
+</body>
+</html>
